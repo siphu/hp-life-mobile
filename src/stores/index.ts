@@ -20,6 +20,12 @@ const persistAppConfig = {
   whitelist: ['language'],
 };
 
+const persistUserConfig = {
+  key: 'user',
+  storage: AsyncStorage,
+  whitelist: ['token', 'profile'],
+};
+
 const persistRootConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -28,7 +34,7 @@ const persistRootConfig = {
 
 const rootReducer = combineReducers({
   app: persistReducer(persistAppConfig, reducerApp),
-  user: reducerUser,
+  user: persistReducer(persistUserConfig, reducerUser),
 });
 
 //@ts-ignore

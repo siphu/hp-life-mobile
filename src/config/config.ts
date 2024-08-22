@@ -1,31 +1,8 @@
 import {Platform} from 'react-native';
+import hp from './config.hplife';
 
 export const config = {
-  api: {
-    endpoint: 'https://api.scottreadrx.com',
-  },
-  storeInfo: {
-    label: 'Scott Read Pharmacy',
-    url: 'https://scottreadrx.com',
-    email: 'contactus@scottreadrx.com',
-    address: {
-      line1: '536 Waugh Dr',
-      line2: 'Houston, TX 77019',
-    },
-    latitude: '29.760364',
-    longitude: '-95.398617',
-    phone: {
-      full: '+18326493142',
-      friendly: '(832) 649-3142',
-    },
-    social: {
-      facebook: 'ScottReadPharmacy',
-      instagram: 'scottreadpharmacy',
-    },
-  },
-  feature: {
-    backgroundGracePeriod: 30, //in seconds. duration a person can close the application for and re-open without logging out
-  },
+  ...hp,
   font: Platform.select({
     ios: 'Forma DJR Micro',
     android: 'FormaDJRMicro-Regular',

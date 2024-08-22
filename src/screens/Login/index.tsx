@@ -10,8 +10,10 @@ import Text from "~/components/Text";
 import _ from 'lodash';
 import { t } from "~/translations";
 import Button from "~/components/Button";
-import { openBrowser, urlWithLocale } from "./helper";
-import { setLogin } from "~/stores/user/actions";
+import { extractToken, openBrowser, urlWithLocale } from "./helper";
+import { setProfile, setToken } from "~/stores/user/actions";
+import { getUserProfile, refreshToken } from "~/api/rest/user";
+import { config } from "~/config/config";
 
 const Login = () => {
     const appState = useSelector((state: RootState) => state.app);
@@ -28,8 +30,15 @@ const Login = () => {
 
     const signIn = async () => {
         const ts = new Date().getTime();
-        const url = urlWithLocale('https://auth.hplife-test.dyd.solutions/mobile/login', appState.language) + `?ts=${ts}`;
-        openBrowser(url).then(setLogin).then(dispatch);
+        const url = urlWithLocale(config.api.signIn, appState.language) + `?ts=${ts}`;
+        openBrowser(url)
+            .then(extractToken)
+            .then(refreshToken)
+            .then(setToken)
+            .then(dispatch)
+            .then(getUserProfile)
+            .then(setProfile)
+            .then(dispatch).catch((e) => console.error('e', e));
     }
 
     return (

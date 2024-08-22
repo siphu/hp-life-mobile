@@ -14,7 +14,6 @@ interface MenuHeaderProp {
     onPress?: () => void;
 }
 export const HeaderMenuIcon = (props: MenuHeaderProp) => {
-    const navigation = useNavigation();
     return (
         <TouchableOpacity onPress={props.onPress} style={styles.touchableArea}>
             <MaterialIcons name='menu' size={30} color={'black'} />

@@ -23,10 +23,7 @@ const Screen = createStackNavigator();
  * @returns
  */
 export const UnAuthenticatedStack = () => {
-
     const insets = useSafeAreaInsets();
-    const navigation = useNavigation();
-
     const screenOptions: StackNavigationOptions = {
         headerShown: true,
         headerStyle: {

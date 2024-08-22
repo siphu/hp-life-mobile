@@ -1,5 +1,7 @@
 import {InAppBrowser} from 'react-native-inappbrowser-reborn';
 import {Linking} from 'react-native';
+import {GlobalStyles} from '~/config/styles';
+import {AuthToken} from '~/api/model';
 
 export function urlWithLocale(url: string, language?: string): string {
   const locale = language || 'en';
@@ -17,7 +19,7 @@ export const openBrowser = async (
       InAppBrowser.openAuth(url, returnUrl, {
         // iOS Properties
         dismissButtonStyle: 'done',
-        preferredBarTintColor: 'purple',
+        preferredBarTintColor: GlobalStyles.header.backgroundColor,
         preferredControlTintColor: 'white',
         readerMode: false,
         animated: true,
@@ -28,7 +30,7 @@ export const openBrowser = async (
         ephemeralWebSession: false, //incognito mode
         // Android Properties
         showTitle: false,
-        toolbarColor: 'purple',
+        toolbarColor: GlobalStyles.header.backgroundColor,
         secondaryToolbarColor: 'black',
         navigationBarColor: 'black',
         navigationBarDividerColor: 'white',
@@ -60,4 +62,21 @@ export const openBrowser = async (
       Linking.openURL(url);
     }
   });
+};
+
+export const extractToken = (path?: string): AuthToken => {
+  if (path) {
+    const url = new URL(path);
+    const access_token = url.searchParams.get('token');
+    const refresh_token = url.searchParams.get('refresh_token');
+    if (access_token && refresh_token) {
+      return {
+        access_token: access_token,
+        refresh_token: refresh_token,
+        expires_in: Number.parseInt(url.searchParams.get('expires_in') || '0'),
+        token_type: url.searchParams.get('token_type') ?? 'bearer',
+      };
+    }
+  }
+  throw new Error('Invalid Authentication URL');
 };

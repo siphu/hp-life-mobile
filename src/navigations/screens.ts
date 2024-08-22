@@ -13,6 +13,8 @@ export enum AuthenticatedScreens {
   Dashboard = 'My Dashboard',
   Explore = 'Explore',
 
+  Profile = 'Profile',
+
   CourseInformation = 'Course Information',
   CourseExecution = 'Course Execution',
 

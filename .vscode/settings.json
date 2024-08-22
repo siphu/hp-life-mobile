@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["persistor"],
+  "cSpell.words": ["hplife", "persistor"],
   "files.exclude": {
     "node_modules/": true,
     ".bundle": true,

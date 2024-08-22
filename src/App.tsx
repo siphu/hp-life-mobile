@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { stores, persistor } from './stores';
 import { PersistGate } from "redux-persist/integration/react";
 import './translations';
+import '~/api/interceptor';
 
 export const App = () => {
 

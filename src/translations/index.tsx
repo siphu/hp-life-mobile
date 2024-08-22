@@ -10,9 +10,8 @@ import pt from './locales/pt.json';
 import es from './locales/es.json';
 import zhHans from './locales/zh-Hans.json';
 import id from './locales/id.json';
-import { useDispatch } from 'react-redux';
 import { setLanguage } from '~/stores/app/actions';
-import { Dispatch, UnknownAction } from 'redux';
+import { Dispatch } from 'redux';
 
 
 I18n.translations = {
@@ -35,6 +34,7 @@ export function t(name: string, params = {}) {
 }
 
 const RestartApp = _.debounce(() => RNRestart.Restart(), 200);
+
 export const changeLocale = (locale: string) => (dispatch: Dispatch) => {
   const isRTL: boolean = locale.indexOf('ar') === 0;
   const restartApp = ReactNative.I18nManager.isRTL !== isRTL;
