@@ -10,7 +10,8 @@
     "test": "jest",
     "clean": "watchman watch-del-all && npm cache clean --force && npm cache verify && rm -fr $TMPDIR/react-* && react-native start --reset-cache",
     "pods": "cd ios && pod install && cd ..",
-    "postinstall": "patch-package && yarn pods"
+    "postinstall": "patch-package && yarn pods",
+    "audit-fix": "npx yarn-audit-fix"
   },
   "dependencies": {
     "@notifee/react-native": "^7.8.2",
@@ -51,10 +52,10 @@
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
-    "@react-native/babel-preset": "0.74.81",
-    "@react-native/eslint-config": "0.74.81",
-    "@react-native/metro-config": "0.74.81",
-    "@react-native/typescript-config": "0.74.81",
+    "@react-native/babel-preset": "0.75.2",
+    "@react-native/eslint-config": "0.75.2",
+    "@react-native/metro-config": "0.75.2",
+    "@react-native/typescript-config": "0.75.2",
     "@types/lodash": "^4.17.4",
     "@types/react": "^18.2.6",
     "@types/react-native-vector-icons": "^6.4.18",
@@ -69,8 +70,9 @@
     "patch-package": "^8.0.0",
     "prettier": "2.8.8",
     "react-native-dotenv": "^3.4.11",
-    "react-test-renderer": "18.2.0",
-    "typescript": "5.0.4"
+    "react-test-renderer": "18.3.1",
+    "typescript": "5.0.4",
+    "yarn-audit-fix": "^10.0.9"
   },
   "engines": {
     "node": ">=18"

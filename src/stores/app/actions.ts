@@ -1,8 +1,4 @@
-import {StoreAppState} from './state';
-
-export enum StoreAppType {
-  SET_LANGUAGE = 'SET_LANGUAGE',
-}
+import {StoreAppType} from './reducers';
 
 export const setLanguage = (locale: string) => {
   return {

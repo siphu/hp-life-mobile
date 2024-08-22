@@ -1,4 +1,3 @@
-import {URL} from 'react-native-url-polyfill';
 import {InAppBrowser} from 'react-native-inappbrowser-reborn';
 import {Linking} from 'react-native';
 
@@ -11,8 +10,8 @@ export function urlWithLocale(url: string, language?: string): string {
 
 export const openBrowser = async (
   url: string,
-  returnUrl: string = 'galilee://authentication/login',
-): Promise<void> => {
+  returnUrl: string = 'hplife://authentication/login',
+): Promise<string> => {
   return new Promise(async (resolve, reject) => {
     if (await InAppBrowser.isAvailable()) {
       InAppBrowser.openAuth(url, returnUrl, {
@@ -44,14 +43,19 @@ export const openBrowser = async (
           endEnter: 'slide_in_bottom',
           endExit: 'slide_out_bottom',
         },
-      }).then(async response => {
-        if (response.type === 'success') {
-          console.log(response);
-          resolve();
-        } else {
-          reject();
-        }
-      });
+      })
+        .then(async response => {
+          if (response.type === 'success') {
+            resolve(response.url);
+          } else {
+            InAppBrowser.closeAuth();
+            reject(response);
+          }
+        })
+        .catch(e => {
+          InAppBrowser.closeAuth();
+          reject(e);
+        });
     } else {
       Linking.openURL(url);
     }

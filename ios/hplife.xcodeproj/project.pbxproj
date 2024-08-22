@@ -64,7 +64,7 @@
 		00E356EE1AD99517003FC87E /* hplifeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hplifeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* hplifeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hplifeTests.m; sourceTree = "<group>"; };
-		11A7262C580B489A84A0DCD6 /* FormaDJRMicro-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-ExtraBold.ttf"; path = "../src/res/fonts/FormaDJRMicro-ExtraBold.ttf"; sourceTree = "<group>"; };
+		11A7262C580B489A84A0DCD6 /* FormaDJRMicro-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-ExtraBold.ttf"; path = "../src/res/fonts/FormaDJRMicro-ExtraBold.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* hplife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hplife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = hplife/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = hplife/AppDelegate.mm; sourceTree = "<group>"; };
@@ -72,22 +72,22 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = hplife/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = hplife/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = hplife/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		172F9AAA71204589888E99F3 /* FormaDJRMicro-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-ExtraLightItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		172F9AAA71204589888E99F3 /* FormaDJRMicro-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-ExtraLightItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-hplife-hplifeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hplife-hplifeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1DE0FBF2E59F4202B02B75C8 /* FormaDJRMicro-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-LightItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-LightItalic.ttf"; sourceTree = "<group>"; };
-		396EFC0C19B14FDBB1FB05A3 /* FormaDJRMicro-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-BlackItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-BlackItalic.ttf"; sourceTree = "<group>"; };
+		1DE0FBF2E59F4202B02B75C8 /* FormaDJRMicro-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-LightItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-LightItalic.ttf"; sourceTree = "<group>"; };
+		396EFC0C19B14FDBB1FB05A3 /* FormaDJRMicro-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-BlackItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-BlackItalic.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-hplife.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hplife.debug.xcconfig"; path = "Target Support Files/Pods-hplife/Pods-hplife.debug.xcconfig"; sourceTree = "<group>"; };
-		491AAA9878DF4DC3B160CA4C /* FormaDJRMicro-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Italic.ttf"; path = "../src/res/fonts/FormaDJRMicro-Italic.ttf"; sourceTree = "<group>"; };
+		491AAA9878DF4DC3B160CA4C /* FormaDJRMicro-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Italic.ttf"; path = "../src/res/fonts/FormaDJRMicro-Italic.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-hplife.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hplife.release.xcconfig"; path = "Target Support Files/Pods-hplife/Pods-hplife.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-hplife-hplifeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hplife-hplifeTests.debug.xcconfig"; path = "Target Support Files/Pods-hplife-hplifeTests/Pods-hplife-hplifeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-hplife.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hplife.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6BD22DFC668141FEB0B398A9 /* FormaDJRMicro-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-ExtraLight.ttf"; path = "../src/res/fonts/FormaDJRMicro-ExtraLight.ttf"; sourceTree = "<group>"; };
+		6BD22DFC668141FEB0B398A9 /* FormaDJRMicro-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-ExtraLight.ttf"; path = "../src/res/fonts/FormaDJRMicro-ExtraLight.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = hplife/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-hplife-hplifeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hplife-hplifeTests.release.xcconfig"; path = "Target Support Files/Pods-hplife-hplifeTests/Pods-hplife-hplifeTests.release.xcconfig"; sourceTree = "<group>"; };
-		959ECAB7AD3A4A41A667CC7A /* FormaDJRMicro-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-BoldItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-BoldItalic.ttf"; sourceTree = "<group>"; };
-		9A19D3FA11A248D1AFC968DB /* FormaDJRMicro-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-ExtraBoldItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		AB0C4A1C55CA46BD94CB485E /* FormaDJRMicro-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Medium.ttf"; path = "../src/res/fonts/FormaDJRMicro-Medium.ttf"; sourceTree = "<group>"; };
-		B26F63D7B86D42F3A72EA3DA /* FormaDJRMicro-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Regular.ttf"; path = "../src/res/fonts/FormaDJRMicro-Regular.ttf"; sourceTree = "<group>"; };
+		959ECAB7AD3A4A41A667CC7A /* FormaDJRMicro-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-BoldItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-BoldItalic.ttf"; sourceTree = "<group>"; };
+		9A19D3FA11A248D1AFC968DB /* FormaDJRMicro-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-ExtraBoldItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		AB0C4A1C55CA46BD94CB485E /* FormaDJRMicro-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Medium.ttf"; path = "../src/res/fonts/FormaDJRMicro-Medium.ttf"; sourceTree = "<group>"; };
+		B26F63D7B86D42F3A72EA3DA /* FormaDJRMicro-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Regular.ttf"; path = "../src/res/fonts/FormaDJRMicro-Regular.ttf"; sourceTree = "<group>"; };
 		BF01540E2BE3E6D5000A33BA /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
 		BF01540F2BE3E6D5000A33BA /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		BF0154102BE3E6D5000A33BA /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
@@ -107,12 +107,13 @@
 		BF01541E2BE3E6D5000A33BA /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		BF01541F2BE3E6D5000A33BA /* FontAwesome6_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome6_Brands.ttf; sourceTree = "<group>"; };
 		BF0154202BE3E6D5000A33BA /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
-		C2A4D61CA06A4FA782CEA5C8 /* FormaDJRMicro-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-MediumItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-MediumItalic.ttf"; sourceTree = "<group>"; };
-		D45C5F70EF8382BB0095FBD3 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = hplife/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		BF01841D2C779225001BA863 /* hplife.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = hplife.entitlements; path = hplife/hplife.entitlements; sourceTree = "<group>"; };
+		C2A4D61CA06A4FA782CEA5C8 /* FormaDJRMicro-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-MediumItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-MediumItalic.ttf"; sourceTree = "<group>"; };
+		D45C5F70EF8382BB0095FBD3 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = hplife/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		EE8425780BC94D27965C5C6D /* FormaDJRMicro-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Bold.ttf"; path = "../src/res/fonts/FormaDJRMicro-Bold.ttf"; sourceTree = "<group>"; };
-		F48C10BED7BF4CD5B88F432E /* FormaDJRMicro-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Black.ttf"; path = "../src/res/fonts/FormaDJRMicro-Black.ttf"; sourceTree = "<group>"; };
-		FBDF8CBB49614301AB25ACC9 /* FormaDJRMicro-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Light.ttf"; path = "../src/res/fonts/FormaDJRMicro-Light.ttf"; sourceTree = "<group>"; };
+		EE8425780BC94D27965C5C6D /* FormaDJRMicro-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Bold.ttf"; path = "../src/res/fonts/FormaDJRMicro-Bold.ttf"; sourceTree = "<group>"; };
+		F48C10BED7BF4CD5B88F432E /* FormaDJRMicro-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Black.ttf"; path = "../src/res/fonts/FormaDJRMicro-Black.ttf"; sourceTree = "<group>"; };
+		FBDF8CBB49614301AB25ACC9 /* FormaDJRMicro-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Light.ttf"; path = "../src/res/fonts/FormaDJRMicro-Light.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +156,7 @@
 		13B07FAE1A68108700A75B9A /* hplife */ = {
 			isa = PBXGroup;
 			children = (
+				BF01841D2C779225001BA863 /* hplife.entitlements */,
 				BF01540D2BE3E6D5000A33BA /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -197,7 +199,6 @@
 				B26F63D7B86D42F3A72EA3DA /* FormaDJRMicro-Regular.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -621,8 +622,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = hplife/hplife.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CHKDALZ2P6;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6HB5Y2QTA3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = hplife/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -635,8 +639,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hp.life;
 				PRODUCT_NAME = hplife;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "HP Life Development Provision";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -649,8 +655,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = hplife/hplife.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = CHKDALZ2P6;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6HB5Y2QTA3;
 				INFOPLIST_FILE = hplife/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -662,8 +671,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hp.life;
 				PRODUCT_NAME = hplife;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "HP Life Development Provision";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

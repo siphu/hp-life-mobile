@@ -1,9 +1,13 @@
-import {StoreUserAction} from './actions';
 import {StoreUserState, state as defaultState} from './state';
+
+export enum StoreUserAction {
+  SET_TOKEN = 'SET_TOKEN',
+  SET_PROFILE = 'SET_PROFILE',
+}
 
 interface ReducerAppAction {
   type: StoreUserAction;
-  payload: object;
+  payload: any;
 }
 
 export const reducers = (
@@ -14,12 +18,7 @@ export const reducers = (
     case StoreUserAction.SET_TOKEN:
       return {
         ...state,
-        token: action.payload as unknown as string,
-      };
-    case StoreUserAction.SET_REFRESH:
-      return {
-        ...state,
-        refresh_token: action.payload as unknown as string,
+        token: action.payload,
       };
     case StoreUserAction.SET_PROFILE:
       return {

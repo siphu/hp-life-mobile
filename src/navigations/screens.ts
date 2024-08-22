@@ -7,14 +7,14 @@ export enum UnAuthenticatedScreens {
 
 export enum AuthenticatedScreens {
   HomeDrawer = 'HomeDrawer',
+  HomeTabs = 'HomeTabs',
+
   Home = 'Home',
-  MyProfileStack = 'My Profile Stack',
-  MyPrescriptions = 'My Prescriptions',
-  PrescriptionDetail = 'Prescription Detail',
-  TransferPrescriptionStack = 'Transfer Prescription Stack',
+  Dashboard = 'My Dashboard',
+  Explore = 'Explore',
+
+  CourseInformation = 'Course Information',
+  CourseExecution = 'Course Execution',
+
   Setting = 'Settings & Notifications',
-  Contact = 'Contact Us',
-  About = 'About',
-  Onboarding = 'Onboard',
-  ChatWithPrescriber = 'Chat',
 }

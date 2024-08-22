@@ -1,7 +1,7 @@
 import { Image, ScrollView, View } from "react-native";
 import { styles } from "./styles";
 import images from "~/res/images";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "~/stores";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -11,10 +11,13 @@ import _ from 'lodash';
 import { t } from "~/translations";
 import Button from "~/components/Button";
 import { openBrowser, urlWithLocale } from "./helper";
+import { setLogin } from "~/stores/user/actions";
 
 const Login = () => {
     const appState = useSelector((state: RootState) => state.app);
+    const userState = useSelector((state: RootState) => state.user);
     const navigation = useNavigation();
+    const dispatch = useDispatch();
     const openLanguageSelector = _.debounce(() => navigation.navigate(UnAuthenticatedScreens.Language), 100);
 
     React.useEffect(() => {
@@ -24,19 +27,9 @@ const Login = () => {
     }, []);
 
     const signIn = async () => {
-
         const ts = new Date().getTime();
-        console.log('got herE?');
         const url = urlWithLocale('https://auth.hplife-test.dyd.solutions/mobile/login', appState.language) + `?ts=${ts}`;
-        console.log('url', url);
-
-
-        openBrowser(url)
-            .then(() => {
-
-            })
-
-
+        openBrowser(url).then(setLogin).then(dispatch);
     }
 
     return (

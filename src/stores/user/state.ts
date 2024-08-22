@@ -1,6 +1,7 @@
+import {AuthToken} from '~/types/auth';
+
 export interface StoreUserState {
-  token?: string;
-  refresh_token?: string;
+  token?: AuthToken;
   profile?: any;
 }
 

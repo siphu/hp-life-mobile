@@ -2,6 +2,7 @@ import I18n from 'react-native-i18n';
 import { useSelector } from "react-redux";
 import { UnAuthenticatedStack } from "./UnAuthenticatedStack";
 import { RootState } from "~/stores";
+import { AuthenticatedStack } from './AuthenticatedStack';
 
 
 /** this fixes the navigation.navigate() as never */
@@ -17,6 +18,7 @@ declare global {
 
 export const NavigationStacks = () => {
   const appState = useSelector((state: RootState) => state.app);
+  const userState = useSelector((state: RootState) => state.user);
   if (appState.language) I18n.locale = appState.language;
-  return <UnAuthenticatedStack />;
+  return userState.token ? <AuthenticatedStack /> : <UnAuthenticatedStack />;
 }

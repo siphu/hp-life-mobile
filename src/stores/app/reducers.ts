@@ -1,11 +1,12 @@
-import I18n from 'react-native-i18n';
-import ReactNative from 'react-native';
-import {StoreAppType} from './actions';
 import {StoreAppState, state as defaultState} from './state';
+
+export enum StoreAppType {
+  SET_LANGUAGE = 'SET_LANGUAGE',
+}
 
 interface ReducerAppAction {
   type: StoreAppType;
-  payload: object;
+  payload: any;
 }
 
 export const reducers = (
@@ -18,6 +19,7 @@ export const reducers = (
         ...state,
         language: action.payload as unknown as string,
       };
+
     default:
       return state;
   }
