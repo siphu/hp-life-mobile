@@ -1,0 +1,236 @@
+{
+  "accessibility": {
+    "menu": "Menu",
+    "close": "Close",
+    "back": "Go Back",
+    "next": "Go Next",
+    "checkbox": {
+      "label": "check box",
+      "checked": "checked",
+      "unchecked": "not checked",
+      "disabled": "dimmed"
+    },
+    "radiobox": {
+      "label": "radio button",
+      "checked": "selected",
+      "unchecked": "unselected",
+      "disabled": "dimmed"
+    },
+    "notification": "Notificações"
+  },
+  "gender": {
+    "male": "Masculino",
+    "female": "Feminino",
+    "notKnown": "Prefiro não responder"
+  },
+  "login": {
+    "login": "Entrar",
+    "join": "Registre-se gratuitamente",
+    "message": "Adquira habilidades e aprenda conceitos de negócios essenciais para se qualificar, abrir seu próprio negócio ou encontrar um emprego melhor com nossos cursos online gratuitos e acessíveis."
+  },
+  "sideMenu": {
+    "profile": "Meu perfil",
+    "logout": {
+      "label": "Sair",
+      "prompt": "Tem certeza de que deseja sair?",
+      "cancel": "Cancelar",
+      "yes": "Sim"
+    },
+    "manageAccount": "Gerenciar sua conta",
+    "certificate": "Certificados",
+    "badges": "Selos",
+    "links": {
+      "about": "Sobre",
+      "successStories": "Histórias de sucesso",
+      "partners": "Parceiros",
+      "news": "Notícias",
+      "help": "Ajuda",
+      "resources": "Recursos"
+    },
+    "hpFoundation": "Um programa da HP Foundation.",
+    "myBadges": "My Badges"
+  },
+  "menu": {
+    "home": "Página inicial",
+    "myCourse": "Meu painel",
+    "explore": "Explorar",
+    "redeem": "Redeem",
+    "message": "Message",
+    "searchPlaceholder": "Procurar"
+  },
+  "profile": {
+    "myProfile": "Meu perfil",
+    "fullName": "Nome completo",
+    "nameNote": "Obs.: o nome que você digitar aqui constará nos seus certificados de conclusão de curso.",
+    "email": "Email",
+    "country": "Fuso horário",
+    "gender": "Gênero",
+    "language": "Idioma",
+    "timeZone": "Fuso horário",
+    "edit": "Editar perfil",
+    "changePassword": "Alterar senha",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "newsletter": "Envie-me as notícias e os eventos do HP LIFE.",
+    "pushNotification": {
+      "message": "Ativar notificações push neste dispositivo.",
+      "noPermission": {
+        "title": "Permissão",
+        "body": "Ative as notificações push para usar este recurso.",
+        "cancel": "Cancelar",
+        "setting": "Abrir configurações"
+      }
+    },
+    "version": "Versão",
+    "deleteAccount": {
+      "label": "Solicitar a exclusão da conta",
+      "prompt": "Tem certeza de que deseja excluir sua conta?\n\nSeu histórico de cursos e seu(s) certificado(s) serão permanentemente excluídos.",
+      "submitted": "Sua solicitação foi enviada.",
+      "yes": "Sim",
+      "cancel": "Cancelar"
+    },
+    "password": {
+      "currentPassword": "Senha antiga",
+      "newPassword": "Crie uma nova senha (diferencia letras maiúsculas e minúsculas)",
+      "confirmPassword": "Confirme a senha",
+      "updatePassword": "Salvar",
+      "errors": {
+        "incorrectPassword": "Senha inválida.",
+        "tooShort": "A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, caracteres especiais e dígitos.",
+        "needSpecialCharacter": "A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, caracteres especiais e dígitos.",
+        "confirmPasswordNotMatching": "As senhas não correspondem."
+      }
+    }
+  },
+  "home": {
+    "latestCourse": "Cursos mais recentes"
+  },
+  "explore": {
+    "newest": "Mais recente",
+    "popular": "Mais popular",
+    "publishedDate": "Published Date",
+    "viewAll": "All Courses"
+  },
+  "courseWidget": {
+    "percentCompleted": "Concluído",
+    "notStarted": "Não iniciado",
+    "availableOffline": "Disponível offline",
+    "completed": "Concluído",
+    "inProgress": "Em progresso"
+  },
+  "courseInformation": {
+    "by": "por",
+    "or": "OU",
+    "startedDate": "Data de início",
+    "finishDate": "Data de término",
+    "percentCompleted": "Concluídos",
+    "neverDate": "Não iniciado",
+    "overview": "Visão geral",
+    "lessons": "Aulas",
+    "courseCertificate": "Certificado disponível ao concluir",
+    "enrollCourse": "Inscreva-se",
+    "startCourse": "Iniciar curso",
+    "continueCourse": "Continuar curso",
+    "viewCertificate": "Baixar certificado",
+    "verifyEmail": "Verifique seu e-mail",
+    "accessEbook": "Acesse o curso offline",
+    "downloadEbook": "Baixe o curso offline"
+  },
+  "courseExecution": {
+    "lessonMenu": "Aulas",
+    "yourProgress": "Progresso",
+    "submitAnswer": "Enviar",
+    "quizCompleted": "Quiz Completed!",
+    "quizFailed": "Quiz Failed",
+    "quizScorePrefix": "Score: ",
+    "answerRequired": "Resposta obrigatória."
+  },
+  "myCourse": {
+    "inProgress": "Em andamento",
+    "ebook": "Baixado",
+    "completed": "Certificados",
+    "archived": "Arquivados",
+    "badges": "Selos",
+    "download": "Baixar",
+    "downloadTranscript": "Baixar histórico de cursos",
+    "share": "Compartilhar",
+    "noCourse": "Você não está inscrito(a) em nenhum curso.",
+    "noEbookTitle": "Você não baixou nenhum curso offline.",
+    "noEbookMessage": "Os cursos indicados como “Disponível offline” podem ser baixados quando tiver uma conexão com a Internet, para estarem prontos para você os seguir sempre que estiver offline.",
+    "noCertificate": "Você não concluiu nenhum curso.",
+    "badgeShare": "Compartilhar selo",
+    "badgeDownload": "تنزيل الشارة",
+    "badgeEarnedOn": "Recebeu",
+    "badgeShareMessage": "Share What You Have Learned on HP LIFE.",
+    "badgeInformation": "Para receber um selo, você deverá concluir todos os cursos de uma categoria em um idioma. É possível receber selos para qualquer categoria que tenha dois ou mais cursos. Para saber mais sobre os selos disponíveis, <*>acesse esta página</*>.",
+    "ebookDelete": "Excluir",
+    "ebookDeletePrompt": {
+      "title": "xcluir este curso offline?",
+      "message": "Se não tiver completado este curso, ao excluí-lo, você perderá o progresso.",
+      "cancel": "Cancelar",
+      "ok": "Excluir"
+    }
+  },
+  "notification": {
+    "clearAll": "Limpar todos"
+  },
+  "others": {
+    "selection": {
+      "search": "Procurar"
+    },
+    "error": {
+      "unexpected": "Ocorreu um erro inesperado."
+    }
+  },
+  "onboarding": {
+    "pushNotification": {
+      "title": "Mantenha-se atualizado",
+      "body": "Receba notificações sempre que houver novidades do HP LIFE.",
+      "button": {
+        "no": "Não",
+        "yes": "Sim"
+      },
+      "permissionDenied": {
+        "title": "Ocorreu um erro inesperado.",
+        "body": "As notificações push não estão ativadas.",
+        "ok": "OK"
+      }
+    }
+  },
+  "update": {
+    "android": {
+      "title": "Uma nova versão do aplicativo HP LIFE está disponível.",
+      "message": "Atualize seu aplicativo agora acessando a Google Play Store.",
+      "button": "Atualizar o aplicativo",
+      "cancel": "Cancelar",
+      "store": "https://play.google.com/store/apps/details?id=com.hp.life"
+    },
+    "ios": {
+      "title": "Uma nova versão do aplicativo HP LIFE está disponível.",
+      "message": "Atualize seu aplicativo agora acessando a App Store.",
+      "button": "Atualizar o aplicativo",
+      "cancel": "Cancelar",
+      "store": "https://apps.apple.com/us/app/hp-life/id1605830167"
+    }
+  },
+  "offline": {
+    "bannerMessage": "Você está offline"
+  },
+  "bookExecution": {
+    "lessonMenu": "",
+    "by": "By",
+    "bookmarks": "Bookmarks",
+    "progressDifference": {
+      "title": "Reading Progress",
+      "message": "The save location on cloud does not match the location on your device. Please choose which save location you want to use."
+    },
+    "decreaseFontSize": "Diminuir o tamanho da fonte",
+    "increaseFontSize": "Aumentar o tamanho da fonte",
+    "switchViewingMode": "Alternar modo de visualização",
+    "takeSurvey": {
+      "title": "Parabéns!",
+      "message": "Você chegou ao fim deste curso. Para receber seu Certificado de Conclusão, responda à pesquisa do curso.",
+      "surveyButton": "Responder à pesquisa"
+    }
+  }
+}

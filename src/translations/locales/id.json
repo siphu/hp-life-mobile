@@ -1,0 +1,236 @@
+{
+  "accessibility": {
+    "menu": "Menu",
+    "close": "Close",
+    "back": "Go Back",
+    "next": "Go Next",
+    "checkbox": {
+      "label": "check box",
+      "checked": "checked",
+      "unchecked": "not checked",
+      "disabled": "dimmed"
+    },
+    "radiobox": {
+      "label": "radio button",
+      "checked": "selected",
+      "unchecked": "unselected",
+      "disabled": "dimmed"
+    },
+    "notification": "Notifikasi"
+  },
+  "gender": {
+    "male": "Laki-Laki",
+    "female": "Perempuan",
+    "notKnown": "Memilih tidak menjawab"
+  },
+  "login": {
+    "login": "Masuk",
+    "join": "Gabung secara gratis",
+    "message": "Pelajari keterampilan dan konsep bisnis inti untuk tingkatkan pendidikan, mulai bisnis sendiri, atau dapatkan pekerjaan bagus dengan kursus digital yang dapat diakses gratis."
+  },
+  "sideMenu": {
+    "profile": "Profil Saya",
+    "logout": {
+      "label": "Keluar",
+      "prompt": "Apakah Anda yakin ingin keluar?",
+      "cancel": "Batalkan",
+      "yes": "Ya"
+    },
+    "manageAccount": "Kelola akun Anda",
+    "certificate": "Sertifikat",
+    "badges": "Lencana",
+    "links": {
+      "about": "Tentang",
+      "successStories": "Kisah sukses",
+      "partners": "Mitra",
+      "news": "Berita",
+      "help": "Bantuan",
+      "resources": "Sumber Daya"
+    },
+    "hpFoundation": "Program HP Foundation.",
+    "myBadges": "My Badges"
+  },
+  "menu": {
+    "home": "Beranda",
+    "myCourse": "Dasbor Saya",
+    "explore": "Jelajahi",
+    "redeem": "Redeem",
+    "message": "Message",
+    "searchPlaceholder": "Mencari"
+  },
+  "profile": {
+    "myProfile": "Profil Saya",
+    "fullName": "Nama lengkap",
+    "nameNote": "Catatan: Nama yang Anda masukkan akan muncul di sertifikat penyelesaian yang Anda terima.",
+    "email": "Email",
+    "country": "Negara",
+    "gender": "Jenis kelamin",
+    "language": "Bahasa",
+    "timeZone": "Zona waktu",
+    "edit": "Edit profil",
+    "changePassword": "Ubah sandi",
+    "save": "Simpan",
+    "cancel": "Batalkan",
+    "newsletter": "Harap beri tahu saya tentang berita dan peristiwa terbaru HP LIFE.",
+    "pushNotification": {
+      "message": "Aktifkan notifikasi push di perangkat ini.",
+      "noPermission": {
+        "title": "Izin",
+        "body": "Harap aktifkan notifikasi push untuk menggunakan fitur ini.",
+        "cancel": "Batalkan",
+        "setting": "Buka pengaturan"
+      }
+    },
+    "version": "Versi",
+    "deleteAccount": {
+      "label": "Minta penghapusan akun",
+      "prompt": "Apakah Anda yakin ingin menghapus akun Anda?\n\nTranskrip dan sertifikat Anda akan dihapus secara permanen.",
+      "submitted": "Permintaan Anda telah dikirim.",
+      "yes": "Ya",
+      "cancel": "Batalkan"
+    },
+    "password": {
+      "currentPassword": "Sandi lama",
+      "newPassword": "Buat sandi baru (case sensitive)",
+      "confirmPassword": "Masukkan lagi sandi baru",
+      "updatePassword": "Simpan",
+      "errors": {
+        "incorrectPassword": "Kata sandi salah.",
+        "tooShort": "Sandi harus mencakup paling sedikit 8 karakter, paling sedikit satu huruf besar, angka dan simbol (#?!@$%^&*-).",
+        "needSpecialCharacter": "Sandi harus mencakup paling sedikit 8 karakter, paling sedikit satu huruf besar, angka dan simbol (#?!@$%^&*-).",
+        "confirmPasswordNotMatching": "Sandi tidak cocok."
+      }
+    }
+  },
+  "home": {
+    "latestCourse": "Kursus terbaru"
+  },
+  "explore": {
+    "newest": "Terbaru",
+    "popular": "Terpopuler",
+    "publishedDate": "Published Date",
+    "viewAll": "All Courses"
+  },
+  "courseWidget": {
+    "percentCompleted": "Selesai",
+    "notStarted": "Belum mulai",
+    "availableOffline": "Tersedia secara offline",
+    "completed": "Selesai",
+    "inProgress": "Dalam prores"
+  },
+  "courseInformation": {
+    "by": "By",
+    "or": "ATAU",
+    "startedDate": "Tanggal mulai",
+    "finishDate": "Tanggal selesai",
+    "percentCompleted": "Selesai",
+    "neverDate": "Belum mulai",
+    "overview": "Ikhtisar",
+    "lessons": "Pelajaran",
+    "courseCertificate": "Sertifikat tersedia setelah selesai",
+    "enrollCourse": "Daftar",
+    "startCourse": "Mulai kursus",
+    "continueCourse": "Lanjutkan kursus",
+    "viewCertificate": "Unduh sertifikat",
+    "verifyEmail": "Verifikasi email Anda",
+    "accessEbook": "Akses kursus offline",
+    "downloadEbook": "Unduh kursus offline"
+  },
+  "courseExecution": {
+    "lessonMenu": "Pelajaran",
+    "yourProgress": "Kemajuan",
+    "submitAnswer": "Kirim",
+    "quizCompleted": "Quiz Completed!",
+    "quizFailed": "Quiz Failed",
+    "quizScorePrefix": "Score: ",
+    "answerRequired": "Jawaban diperlukan."
+  },
+  "myCourse": {
+    "inProgress": "Dalam prores",
+    "ebook": "Diunduh",
+    "completed": "Sertifikat",
+    "archived": "Diarsipkan",
+    "badges": "Lencana",
+    "download": "Unduh",
+    "downloadTranscript": "Unduh transkrip",
+    "share": "Bagikan",
+    "noCourse": "Saat ini Anda tidak terdaftar dalam kursus apa pun.",
+    "noEbookTitle": "Anda belum mengunduh kursus offline.",
+    "noEbookMessage": "Kursus yang ditandai sebagai 'Tersedia secara offline' dapat diunduh saat Anda terhubung dengan internet sehingga Anda siap belajar kapan pun Anda offline.",
+    "noCertificate": "Anda belum menyelesaikan kursus apa pun.",
+    "badgeShare": "Bagikan lencana",
+    "badgeDownload": "下载徽章",
+    "badgeEarnedOn": "Diperoleh",
+    "badgeShareMessage": "Share What You Have Learned on HP LIFE.",
+    "badgeInformation": "Untuk mendapatkan lencana, Anda harus menyelesaikan semua kursus dalam satu bahasa di dalam satu kategori. Anda bisa mendapatkan lencana untuk setiap kategori yang menyediakan dua kursus atau lebih. Untuk mempelajari selengkapnya tentang lencana yang dapat Anda peroleh, silakan <*>kunjungi halaman ini</*>.",
+    "ebookDelete": "Hapus",
+    "ebookDeletePrompt": {
+      "title": "Hapus kursus offline ini?",
+      "message": "Jika Anda belum menyelesaikan kursus ini, menghapus kursus tersebut akan mengakibatkan progresnya hilang.",
+      "cancel": "Batalkan",
+      "ok": "Hapus"
+    }
+  },
+  "notification": {
+    "clearAll": "Hapus semua"
+  },
+  "others": {
+    "selection": {
+      "search": "Mencari"
+    },
+    "error": {
+      "unexpected": "Terjadi kesalahan tidak terduga."
+    }
+  },
+  "onboarding": {
+    "pushNotification": {
+      "title": "Dapatkan Info Terbaru",
+      "body": "Dapatkan notifikasi setiap kali ada berita HP LIFE. ",
+      "button": {
+        "no": "Tidak",
+        "yes": "Ya"
+      },
+      "permissionDenied": {
+        "title": "Terjadi kesalahan tidak terduga.",
+        "body": "Notifikasi push tidak diaktifkan.",
+        "ok": "OKE"
+      }
+    }
+  },
+  "update": {
+    "android": {
+      "title": "Terdapat versi baru aplikasi HP LIFE.",
+      "message": "Harap perbarui aplikasi Anda sekarang dengan membuka Google Play Store.",
+      "button": "Perbarui aplikasi",
+      "cancel": "Batalkan",
+      "store": "https://play.google.com/store/apps/details?id=com.hp.life"
+    },
+    "ios": {
+      "title": "Terdapat versi baru aplikasi HP LIFE.",
+      "message": "Harap perbarui aplikasi Anda sekarang dengan membuka App Store.",
+      "button": "Perbarui aplikasi",
+      "cancel": "Batalkan",
+      "store": "https://apps.apple.com/us/app/hp-life/id1605830167"
+    }
+  },
+  "offline": {
+    "bannerMessage": "Anda sedang offline"
+  },
+  "bookExecution": {
+    "lessonMenu": "",
+    "by": "By",
+    "bookmarks": "Bookmarks",
+    "progressDifference": {
+      "title": "Reading Progress",
+      "message": "The save location on cloud does not match the location on your device. Please choose which save location you want to use."
+    },
+    "decreaseFontSize": "Perkecil ukuran huruf",
+    "increaseFontSize": "Perbesar ukuran huruf",
+    "switchViewingMode": "Beralih mode tampilan",
+    "takeSurvey": {
+      "title": "Selamat!",
+      "message": "Anda telah mencapai akhir kursus ini. Untuk mendapatkan Sertifikat Penyelesaian, harap lengkapi survei kursus.",
+      "surveyButton": "Lengkapi surveinya"
+    }
+  }
+}

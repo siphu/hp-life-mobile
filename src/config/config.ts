@@ -1,0 +1,85 @@
+import {Platform} from 'react-native';
+
+export const config = {
+  api: {
+    endpoint: 'https://api.scottreadrx.com',
+  },
+  storeInfo: {
+    label: 'Scott Read Pharmacy',
+    url: 'https://scottreadrx.com',
+    email: 'contactus@scottreadrx.com',
+    address: {
+      line1: '536 Waugh Dr',
+      line2: 'Houston, TX 77019',
+    },
+    latitude: '29.760364',
+    longitude: '-95.398617',
+    phone: {
+      full: '+18326493142',
+      friendly: '(832) 649-3142',
+    },
+    social: {
+      facebook: 'ScottReadPharmacy',
+      instagram: 'scottreadpharmacy',
+    },
+  },
+  feature: {
+    backgroundGracePeriod: 30, //in seconds. duration a person can close the application for and re-open without logging out
+  },
+  font: Platform.select({
+    ios: 'Forma DJR Micro',
+    android: 'FormaDJRMicro-Regular',
+  }),
+  color: {
+    neutral: {
+      900: '#000',
+      800: '#1A1C1E',
+      700: '#36373B',
+      600: '#5B5C61',
+      500: '#8A8C91',
+      400: '#B8BCC0',
+      300: '#E8EAED',
+      200: '#F7F9FB',
+      50: '#FFFFFF',
+    },
+    blue: {
+      900: '#122133',
+      800: '#1e3755',
+      700: '#2b4c78',
+      600: '#37629a',
+      primary: '#4378bc',
+      500: '#4378bc',
+      400: '#6591c8',
+      300: '#87a9d4',
+      200: '#aac2e1',
+      100: '#ccdaed',
+      50: '#eef3f9',
+    },
+    danger: {
+      900: '#E94B00',
+      800: '#F26800',
+      700: '#F77900',
+      600: '#FC8A00',
+      primary: '#FC8A00',
+      500: '#FF9600',
+      400: '#FFA400',
+      300: '#FFB640',
+      200: '#FFCB78',
+      100: '#FFE0AE',
+      50: '#FFF3DE',
+    },
+    success: {
+      900: '#1b2d19',
+      800: '#2c4b29',
+      700: '#3e6939',
+      600: '#50874a',
+      primary: '#62a55a',
+      500: '#62a55a',
+      400: '#7eb578',
+      300: '#9bc696',
+      200: '#b7d6b4',
+      100: '#d4e6d2',
+      50: '#f1f7f0',
+    },
+  },
+};

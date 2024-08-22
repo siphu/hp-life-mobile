@@ -1,0 +1,236 @@
+{
+  "accessibility": {
+    "menu": "Menu",
+    "close": "Close",
+    "back": "Go Back",
+    "next": "Go Next",
+    "checkbox": {
+      "label": "check box",
+      "checked": "checked",
+      "unchecked": "not checked",
+      "disabled": "dimmed"
+    },
+    "radiobox": {
+      "label": "radio button",
+      "checked": "selected",
+      "unchecked": "unselected",
+      "disabled": "dimmed"
+    },
+    "notification": "अधिसूचनाएं"
+  },
+  "gender": {
+    "male": "पुरुष",
+    "female": "महिला",
+    "notKnown": "उत्तर नहीं देना चाहते"
+  },
+  "login": {
+    "login": "लॉग इन करें",
+    "join": "निःशुल्क शामिल हों",
+    "message": "अपनी शिक्षा को बढ़ाने, अपना खुद का व्यवसाय शुरू करने, या हमारे निःशुल्क, सुलभ डिजिटल अधिगम पाठ्यक्रमों के साथ बेहतर नौकरी सुरक्षित करने के लिए मांग वाले कौशल और मुख्य व्यापार अवधारणाएँ सीखें।"
+  },
+  "sideMenu": {
+    "profile": "मेरी प्रोफाइल",
+    "logout": {
+      "label": "लॉग आउट करें",
+      "prompt": "क्या आप वाकई लॉगआउट करना चाहते हैं?",
+      "cancel": "रद्द करें",
+      "yes": "हाँ"
+    },
+    "manageAccount": "अपना खाता मैनेज करें",
+    "certificate": "प्रमाणपत्र",
+    "badges": "बैज",
+    "links": {
+      "about": "के बारे में",
+      "successStories": "सफलता की कहानियां",
+      "partners": "भागीदारों",
+      "news": "समाचार",
+      "help": "मदद",
+      "resources": "साधन"
+    },
+    "hpFoundation": "एक HP Foundation प्रोग्राम",
+    "myBadges": "My Badges"
+  },
+  "menu": {
+    "home": "होम पेज",
+    "myCourse": "मेरा डैशबोर्ड",
+    "explore": "तलाशें",
+    "redeem": "Redeem",
+    "message": "Message",
+    "searchPlaceholder": "खोज"
+  },
+  "profile": {
+    "myProfile": "मेरी प्रोफाइल",
+    "fullName": "पूरा नाम",
+    "nameNote": "ध्यान दें: आप जो ईमेल डालते हैं, वह आपके पाठ्यक्रम के पूरा होने के प्रमाणपत्र पर दिखाई देगा।",
+    "email": "ईमेल",
+    "country": "देश",
+    "gender": "लिंग",
+    "language": "भाषा",
+    "timeZone": "समय क्षेत्र",
+    "edit": "प्रोफ़ाइल संपादित करें",
+    "changePassword": "पासवर्ड बदलें",
+    "save": "पासवर्ड बदलें",
+    "cancel": "रद्द करें",
+    "newsletter": "कृपया मुझे HP LIFE संबंधी समाचारों और ईवेंट के बारे में अपडेट करें।",
+    "pushNotification": {
+      "message": "इस डिवाइस पर पुश नोटिफिकेशन को सक्षम करें।",
+      "noPermission": {
+        "title": "अनुमति",
+        "body": "इस सुविधा का उपयोग करने के लिए कृपया पुश नोटिफिकेशन सक्षम करें।",
+        "cancel": "रद्द करें",
+        "setting": "सेटिंग्स खोलें"
+      }
+    },
+    "version": "संस्करण",
+    "deleteAccount": {
+      "label": "खाता हटाने का अनुरोध करें",
+      "prompt": "क्या आप वाकई अपना खाता हटाना चाहते हैं?\n\nआपका(के) ट्रांस्क्रिप्ट और प्रमाणपत्र स्थायी रूप से हटा दिया जाएगा।",
+      "submitted": "आपका अनुरोध सबमिट कर दिया गया है।",
+      "yes": "हाँ",
+      "cancel": "रद्द करें"
+    },
+    "password": {
+      "currentPassword": "पुराना पासवर्ड",
+      "newPassword": "नया पासवर्ड (केस-संवेदनशील) बनाएं",
+      "confirmPassword": "पासवर्ड की पुष्टि कीजिये",
+      "updatePassword": "सेव करें",
+      "errors": {
+        "incorrectPassword": "अवैध पासवर्ड।",
+        "tooShort": "पासवर्ड में अपरकेस, लोअरकेस, विशेष वर्ण और अंकों सहित कम से कम 8 वर्ण होने चाहिए।",
+        "needSpecialCharacter": "पासवर्ड में अपरकेस, लोअरकेस, विशेष वर्ण और अंकों सहित कम से कम 8 वर्ण होने चाहिए।",
+        "confirmPasswordNotMatching": "पासवर्ड बेमेल है।"
+      }
+    }
+  },
+  "home": {
+    "latestCourse": "बिल्कुल नए पाठ्यक्रम"
+  },
+  "explore": {
+    "newest": "नवीनतम",
+    "popular": "सबसे लोकप्रिय",
+    "publishedDate": "Published Date",
+    "viewAll": "All Courses"
+  },
+  "courseWidget": {
+    "percentCompleted": "पूर्ण",
+    "notStarted": "शुरू नहीं किया",
+    "availableOffline": "ऑफलाइन उपलब्ध",
+    "completed": "पूरा कर लिया है",
+    "inProgress": "चालू"
+  },
+  "courseInformation": {
+    "by": "कर्ता",
+    "or": "या",
+    "startedDate": "आरंभ करने की तिथि",
+    "finishDate": "समाप्ति दिनांक",
+    "percentCompleted": "पूर्ण",
+    "neverDate": "शुरू नहीं किया",
+    "overview": "अवलोकन",
+    "lessons": "पाठ",
+    "courseCertificate": "पूर्ण होने पर प्रमाण पत्र उपलब्ध",
+    "enrollCourse": "नामांकन करे",
+    "startCourse": "पाठ्यक्रम शुरू करें",
+    "continueCourse": "नामांकन करें",
+    "viewCertificate": "प्रमाणपत्र",
+    "verifyEmail": "अपना ई मेल सत्यापित करें",
+    "accessEbook": "ऑफलाइन पाठ्यक्रम एक्सेस करें",
+    "downloadEbook": "ऑफलाइन पाठ्यक्रम डाउनलोड करें"
+  },
+  "courseExecution": {
+    "lessonMenu": "पाठ",
+    "yourProgress": "प्रगति",
+    "submitAnswer": "प्रस्तुत",
+    "quizCompleted": "Quiz Completed!",
+    "quizFailed": "Quiz Failed",
+    "quizScorePrefix": "Score: ",
+    "answerRequired": " उत्तर आवश्यक है।"
+  },
+  "myCourse": {
+    "inProgress": "पप्रगति में",
+    "ebook": "डाउनलोड किया",
+    "completed": "प्रमाणपत्र",
+    "archived": "संगृहीत",
+    "badges": "बैज",
+    "download": "डाउनलोड करें",
+    "downloadTranscript": "ट्रांस्क्रिप्ट डाउनलोड करें",
+    "share": "शेयर करें",
+    "noCourse": "इस समय आपका किसी भी पाठ्यक्रम में नामांकन नहीं हुआ है।",
+    "noEbookTitle": "आपने किसी ऑफलाइन पाठ्यक्रम को पूरा नहीं किया।",
+    "noEbookMessage": "ऑफलाइन उपलब्ध' के रूप में चिह्नित पाठ्यक्रम तब डाउनलोड किए जा सकते हैं जब आपके पास इंटरनेट कनेक्शन हो ताकि जब भी आप ऑफलाइन हों तो वे आपके लिए तैयार हों।",
+    "noCertificate": "आपने किसी पाठ्यक्रम को पूरा नहीं किया।",
+    "badgeShare": "बैज साझा करें",
+    "badgeDownload": "تنزيل الشارة",
+    "badgeEarnedOn": "अर्जित",
+    "badgeShareMessage": "Share What You Have Learned on HP LIFE.",
+    "badgeInformation": "बैज हासिल करने के लिए, आपको किसी श्रेणी में किसी भाषा में सभी पाठ्यक्रम पूरे करने होंगे। आप ऐसी किसी भी श्रेणी के लिए बैज हासिल कर सकते हैं जिसमें दो या अधिक पाठ्यक्रम हैं। आप जिन बैज को हासिल कर सकते हैं, उनके बारे में अधिक जानकारी के लिए कृपया <*>इस पेज पर जाएं।</*>.",
+    "ebookDelete": "हटाएं",
+    "ebookDeletePrompt": {
+      "title": "इस ऑफलाइन पाठ्यक्रम को हटाएं?",
+      "message": "यदि आपने इस पाठ्यक्रम को पूरा नहीं किया तो इसे हटाने से प्रगति की हानि होगी।",
+      "cancel": "रद्द करें",
+      "ok": "हटाएं"
+    }
+  },
+  "notification": {
+    "clearAll": "सब साफ करें"
+  },
+  "others": {
+    "selection": {
+      "search": "खोज"
+    },
+    "error": {
+      "unexpected": "अनपेक्षित त्रुटि हुई है।"
+    }
+  },
+  "onboarding": {
+    "pushNotification": {
+      "title": "अपडेट रहें",
+      "body": "जब भी HP LIFE का कोई समाचार हो तो अधिसूचना पाएं।",
+      "button": {
+        "no": "नहीं",
+        "yes": "हाँ"
+      },
+      "permissionDenied": {
+        "title": "अनपेक्षित त्रुटि हुई है।",
+        "body": "पुश नोटिफिकेशन सक्षम नहीं।",
+        "ok": "ओके"
+      }
+    }
+  },
+  "update": {
+    "android": {
+      "title": "HP LIFE ऐप का नया संस्करण उपलब्ध है।",
+      "message": "कृपया Google Play स्टोर पर जाकर अपनी ऐप अभी अपडेट करें।",
+      "button": "ऐप अपडेट करें",
+      "cancel": "रद्द करें",
+      "store": "https://play.google.com/store/apps/details?id=com.hp.life"
+    },
+    "ios": {
+      "title": "HP LIFE ऐप का नया संस्करण उपलब्ध है।",
+      "message": "कृपया App Store पर जाकर अपनी ऐप अभी अपडेट करें।",
+      "button": "ऐप अपडेट करें",
+      "cancel": "रद्द करें",
+      "store": "https://apps.apple.com/us/app/hp-life/id1605830167"
+    }
+  },
+  "offline": {
+    "bannerMessage": "आप ऑफलाइन हैं"
+  },
+  "bookExecution": {
+    "lessonMenu": "",
+    "by": "By",
+    "bookmarks": "Bookmarks",
+    "progressDifference": {
+      "title": "Reading Progress",
+      "message": "The save location on cloud does not match the location on your device. Please choose which save location you want to use."
+    },
+    "decreaseFontSize": "फॉन्ट आकार घटाएं",
+    "increaseFontSize": "फॉन्ट आकार बढ़ाएं",
+    "switchViewingMode": "देखने का मोड स्विच करें",
+    "takeSurvey": {
+      "title": "बधाई!",
+      "message": "आप इस पाठ्यक्रम के अंत तक पहुंच गए(ई) हैं। अपना पाठ्यक्रम पूरा होने का प्रमाणपत्र हासिल करने के लिए कृपया इस पाठ्यक्रम सर्वेक्षण को पूरा करें।",
+      "surveyButton": "यह सर्वेक्षण पूर्ण करें"
+    }
+  }
+}

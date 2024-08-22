@@ -1,0 +1,236 @@
+{
+  "accessibility": {
+    "menu": "Menu",
+    "close": "Close",
+    "back": "Go Back",
+    "next": "Go Next",
+    "checkbox": {
+      "label": "check box",
+      "checked": "checked",
+      "unchecked": "not checked",
+      "disabled": "dimmed"
+    },
+    "radiobox": {
+      "label": "radio button",
+      "checked": "selected",
+      "unchecked": "unselected",
+      "disabled": "dimmed"
+    },
+    "notification": "الإعلامات"
+  },
+  "gender": {
+    "male": "ذكر",
+    "female": "أنثى",
+    "notKnown": "أفضل عدم الإجابة"
+  },
+  "login": {
+    "login": "تسجيل الدخول",
+    "join": "الانضمام مجانًا",
+    "message": "تعلّم المهارات المطلوبة ومفاهيم الأعمال الأساسية لتحسين تعليمك، أو ابدأ نشاطك التجاري، أو احصل على وظيفة أفضل من خلال دورات التعلّم الرقمية المجانية التي نقدمها."
+  },
+  "sideMenu": {
+    "profile": "ملفي",
+    "logout": {
+      "label": "تسجيل الخروج",
+      "prompt": "هل تريد بالتأكيد تسجيل الخروج؟",
+      "cancel": "إلغاء",
+      "yes": "نعم"
+    },
+    "manageAccount": "إدارة حسابك",
+    "certificate": "الشهادات",
+    "badges": "شارات",
+    "links": {
+      "about": "نبذة عنا",
+      "successStories": "قصص النجاح",
+      "partners": "الشركاء",
+      "news": "الأخبار",
+      "help": "المساعدة",
+      "resources": "الموارد"
+    },
+    "hpFoundation": "برنامج مؤسسة HP",
+    "myBadges": "My Badges"
+  },
+  "menu": {
+    "home": "الصفحة الرئيسية",
+    "myCourse": "لوحة المعلومات الخاصة بي",
+    "explore": "استكشاف",
+    "redeem": "Redeem",
+    "message": "Message",
+    "searchPlaceholder": "بحث"
+  },
+  "profile": {
+    "myProfile": "ملفي",
+    "fullName": "الاسم بالكامل",
+    "nameNote": "ملاحظة: سيظهر الاسم الذي تدخله في شهادات إكمال الدورة.",
+    "email": "البريد الإلكتروني",
+    "country": "البلد",
+    "gender": "الجنس",
+    "language": "اللغة",
+    "timeZone": "وحدة زمنية",
+    "edit": "تحرير ملف التعريف",
+    "changePassword": "تغيير كلمة السر",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "newsletter": "يرجى إطلاعي على آخر أخبار وأحداث HP LIFE.",
+    "pushNotification": {
+      "message": "تمكين الإشعارات الدفعية على هذا الجهاز.",
+      "noPermission": {
+        "title": "الإذن",
+        "body": "يرجى تمكين الإشعارات الدفعية لاستخدام هذه الميزة.",
+        "cancel": "إلغاء",
+        "setting": "فتح الإعدادات"
+      }
+    },
+    "version": "الإصدار",
+    "deleteAccount": {
+      "label": "طلب حذف الحساب",
+      "prompt": "هل تريد بالتأكيد حذف حسابك؟\n\nسيتم حذف سجلك الدراسي والشهادة (الشهادات) نهائيًا.",
+      "submitted": "لقد تم إرسال طلبك.",
+      "yes": "نعم",
+      "cancel": "إلغاء"
+    },
+    "password": {
+      "currentPassword": "كلمة المرور القديمة ",
+      "newPassword": "إنشاء كلمة مرور جديدة (حساسة لحالة الأحرف)",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "updatePassword": "حفظ",
+      "errors": {
+        "incorrectPassword": "رمز مرور خاطئ.",
+        "tooShort": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل بما في ذلك الأحرف الكبيرة والصغيرة والحرف الخاصة والأرقام.",
+        "needSpecialCharacter": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل بما في ذلك الأحرف الكبيرة والصغيرة والحرف الخاصة والأرقام.",
+        "confirmPasswordNotMatching": "كلمة المرور غير متطابقة."
+      }
+    }
+  },
+  "home": {
+    "latestCourse": "أحدث الدورات التدريبية"
+  },
+  "explore": {
+    "newest": "الأحدث",
+    "popular": "الأشهر",
+    "publishedDate": "Published Date",
+    "viewAll": "All Courses"
+  },
+  "courseWidget": {
+    "percentCompleted": "مكتمل",
+    "notStarted": "لم يبدأ",
+    "availableOffline": "متاحة دون اتصال بالإنترنت",
+    "completed": "منجز",
+    "inProgress": "في تقدم"
+  },
+  "courseInformation": {
+    "by": "بواسطة",
+    "or": "أو",
+    "startedDate": "تاريخ البدء",
+    "finishDate": "تاريخ الانتهاء",
+    "percentCompleted": "مكتمل",
+    "neverDate": "لم يبدأ",
+    "overview": "نظرة عامة",
+    "lessons": "الدروس",
+    "courseCertificate": "تتاح الشهادة فور إكمال الدورة",
+    "enrollCourse": "تسجيل",
+    "startCourse": "بدء الدورة التدريبية",
+    "continueCourse": "متابعة الدورة التدريبية",
+    "viewCertificate": "تنزيل الشهادة",
+    "verifyEmail": "قم بتأكيد بريدك الألكتروني",
+    "accessEbook": "الوصول إلى الدورة التدريبية دون اتصال بالإنترنت",
+    "downloadEbook": "تنزيل الدورة التدريبية دون اتصال بالإنترنت"
+  },
+  "courseExecution": {
+    "lessonMenu": "درس",
+    "yourProgress": "التقدم",
+    "submitAnswer": "إرسال",
+    "quizCompleted": "Quiz Completed!",
+    "quizFailed": "Quiz Failed",
+    "quizScorePrefix": "Score: ",
+    "answerRequired": "يلزم تقديم إجابة."
+  },
+  "myCourse": {
+    "inProgress": "قيد التقدم",
+    "ebook": "تم التنزيل",
+    "completed": "الشهادات",
+    "archived": "مؤرشف",
+    "badges": "شارات",
+    "download": "تنزيل",
+    "downloadTranscript": "تنزيل السجل الدراسي",
+    "share": "مشاركة",
+    "noCourse": "أنت غير مُسجل حاليًا في أي دورات تدريبية.",
+    "noEbookTitle": "لم تقم بتنزيل أي دورات تدريبية دون اتصال بالإنترنت.",
+    "noEbookMessage": "يمكن تنزيل الدورات التدريبية التي تم وضع علامة عليها بأنها \"متاحة دون اتصال بالإنترنت\" عندما يكون لديك اتصال بالإنترنت بحيث تكون جاهزة لتأخذها عندما تكون غير متصل بالإنترنت.",
+    "noCertificate": "أنت لم تكمِل أي دورات تدريبية.",
+    "badgeShare": "مشاركة الشارة",
+    "badgeDownload": "تنزيل الشارة",
+    "badgeEarnedOn": "تاريخ الاكتساب",
+    "badgeShareMessage": "Share What You Have Learned on HP LIFE.",
+    "badgeInformation": "للحصول على شارة، ستحتاج إلى إكمال جميع الدورات التدريبية بلغة واحدة ضمن فئة ما. يمكنك الحصول على شارة لأي فئة تتضمن دورتين تدريبيتين أو أكثر. لمعرفة المزيد حول الشارات التي يمكنك الحصول عليها، يُرجى <*>زيارة هذه الصفحة</*>.",
+    "ebookDelete": "حذف",
+    "ebookDeletePrompt": {
+      "title": "هل تريد حذف هذه الدورة التدريبية دون اتصال بالإنترنت؟",
+      "message": "إذا لم تكن قد أكملت هذه الدورة التدريبية، فسيؤدي حذفها إلى فقدان التقدُّم.",
+      "cancel": "إلغاء",
+      "ok": "حذف"
+    }
+  },
+  "notification": {
+    "clearAll": "مسح الكل"
+  },
+  "others": {
+    "selection": {
+      "search": "بحث"
+    },
+    "error": {
+      "unexpected": "حدث خطأ غير متوقع."
+    }
+  },
+  "onboarding": {
+    "pushNotification": {
+      "title": "البقاء على اطلاع",
+      "body": "احصل على إخطارات متى كانت هناك أخبار عن HP LIFE.",
+      "button": {
+        "no": "لا",
+        "yes": "نعم"
+      },
+      "permissionDenied": {
+        "title": "حدث خطأ غير متوقع.",
+        "body": "لم يتم تمكين الإشعارات الدفعية.",
+        "ok": "موافق"
+      }
+    }
+  },
+  "update": {
+    "android": {
+      "title": "يتوفر إصدار جديد من تطبيق HP LIFE.",
+      "message": "يُرجى تحديث تطبيقك الآن من خلال زيارة متجر Google.",
+      "button": "تحديث التطبيق",
+      "cancel": "إلغاء",
+      "store": "https://play.google.com/store/apps/details?id=com.hp.life"
+    },
+    "ios": {
+      "title": "يتوفر إصدار جديد من تطبيق HP LIFE.",
+      "message": "يُرجى تحديث تطبيقك الآن من خلال زيارة متجر App Store.",
+      "button": "تحديث التطبيق",
+      "cancel": "إلغاء",
+      "store": "https://apps.apple.com/us/app/hp-life/id1605830167"
+    }
+  },
+  "offline": {
+    "bannerMessage": "أنت غير متصل بالإنترنت"
+  },
+  "bookExecution": {
+    "lessonMenu": "",
+    "by": "By",
+    "bookmarks": "Bookmarks",
+    "progressDifference": {
+      "title": "Reading Progress",
+      "message": "The save location on cloud does not match the location on your device. Please choose which save location you want to use."
+    },
+    "decreaseFontSize": "تقليل حجم الخط",
+    "increaseFontSize": "زيادة حجم الخط",
+    "switchViewingMode": "تبديل وضع العرض",
+    "takeSurvey": {
+      "title": "تهانينا!",
+      "message": "لقد وصلت إلى نهاية هذه الدورة التدريبية. للحصول على شهادة الإكمال، يُرجى إكمال استبيان الدورة التدريبية.",
+      "surveyButton": "إكمال الاستبيان"
+    }
+  }
+}

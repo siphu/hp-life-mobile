@@ -1,0 +1,236 @@
+{
+  "accessibility": {
+    "menu": "Menu",
+    "close": "Close",
+    "back": "Go Back",
+    "next": "Go Next",
+    "checkbox": {
+      "label": "check box",
+      "checked": "以選",
+      "unchecked": "not checked",
+      "disabled": "dimmed"
+    },
+    "radiobox": {
+      "label": "radio button",
+      "checked": "selected",
+      "unchecked": "unselected",
+      "disabled": "dimmed"
+    },
+    "notification": "Notification"
+  },
+  "gender": {
+    "male": "男性",
+    "female": "女性",
+    "notKnown": "不想回答"
+  },
+  "login": {
+    "login": "登录",
+    "join": "免费参加",
+    "message": "借助我们免费提供的在线数字学习课程，掌握高需求的技能和核心业务理念，完成进一步深造、开创个人事业或获得更好的工作等。"
+  },
+  "sideMenu": {
+    "profile": "用户档案",
+    "logout": {
+      "label": "退出",
+      "prompt": "确定要退出吗？",
+      "cancel": "取消",
+      "yes": "是"
+    },
+    "manageAccount": "管理帐户",
+    "certificate": "证书",
+    "badges": "徽章",
+    "links": {
+      "about": "关于",
+      "successStories": "成功故事",
+      "partners": "合作伙伴",
+      "news": "最新消息",
+      "help": "帮助",
+      "resources": "资源"
+    },
+    "hpFoundation": "HP 基金会项目",
+    "myBadges": "My Badges"
+  },
+  "menu": {
+    "home": "主页",
+    "myCourse": "我的仪表板",
+    "explore": "探索",
+    "redeem": "Redeem",
+    "message": "Message",
+    "searchPlaceholder": "搜索"
+  },
+  "profile": {
+    "myProfile": "用户档案",
+    "fullName": "姓名",
+    "nameNote": "注意：您的结业证书将使用您在此处输入的姓名。",
+    "email": "电子邮箱",
+    "country": "国家/地区",
+    "gender": "性别",
+    "language": "语言",
+    "timeZone": "时区",
+    "edit": "编辑个人资料",
+    "changePassword": "变更密码",
+    "save": "保存",
+    "cancel": "取消",
+    "newsletter": "请向我发送有关 HP LIFE 的最新新闻和活动信息。",
+    "pushNotification": {
+      "message": "在此设备上启用推送通知。",
+      "noPermission": {
+        "title": "授权",
+        "body": "请启用推送通知以使用此功能。",
+        "cancel": "取消",
+        "setting": "打开设置"
+      }
+    },
+    "version": "版本",
+    "deleteAccount": {
+      "label": "请求删除帐户",
+      "prompt": "确定要删除帐户吗？\n\n您的成绩单和证书将被永久删除。",
+      "submitted": "您的请求已经提交。",
+      "yes": "是",
+      "cancel": "取消"
+    },
+    "password": {
+      "currentPassword": "旧密码",
+      "newPassword": "创建新密码（区分大小写）",
+      "confirmPassword": "再次输入新密码",
+      "updatePassword": "保存",
+      "errors": {
+        "incorrectPassword": "无效的密码。",
+        "tooShort": "密码长度至少必须为 8 个字符，其中需包含大写、小写、特殊字符和数字。",
+        "needSpecialCharacter": "密码长度至少必须为 8 个字符，其中需包含大写、小写、特殊字符和数字。",
+        "confirmPasswordNotMatching": "密码不匹配。"
+      }
+    }
+  },
+  "home": {
+    "latestCourse": "最新课程"
+  },
+  "explore": {
+    "newest": "最新",
+    "popular": "最热门",
+    "publishedDate": "Published Date",
+    "viewAll": "All Courses"
+  },
+  "courseWidget": {
+    "percentCompleted": "完成",
+    "notStarted": "未开始",
+    "availableOffline": "提供离线版本",
+    "completed": "已完成",
+    "inProgress": "进行中"
+  },
+  "courseInformation": {
+    "by": "按",
+    "or": "或",
+    "startedDate": "开始日期",
+    "finishDate": "结束日期",
+    "percentCompleted": "完成",
+    "neverDate": "未开始",
+    "overview": "概述",
+    "lessons": "课程",
+    "courseCertificate": "课程完成可颁发证书",
+    "enrollCourse": "注册",
+    "startCourse": "开始课程",
+    "continueCourse": "继续课程",
+    "viewCertificate": "下载证书",
+    "verifyEmail": "验证您的电子邮件",
+    "accessEbook": "访问离线课程",
+    "downloadEbook": "下载离线课程"
+  },
+  "courseExecution": {
+    "lessonMenu": "课程",
+    "yourProgress": "进度",
+    "submitAnswer": "提交",
+    "quizCompleted": "Quiz Completed!",
+    "quizFailed": "Quiz Failed",
+    "quizScorePrefix": "Score: ",
+    "answerRequired": " 必须回答。"
+  },
+  "myCourse": {
+    "inProgress": "进行中",
+    "ebook": "已下载",
+    "completed": "证书",
+    "archived": "已存档",
+    "badges": "徽章",
+    "download": "下载",
+    "downloadTranscript": "下载成绩单",
+    "share": "分享",
+    "noCourse": "您当前未注册任何课程。",
+    "noEbookTitle": "您尚未下载任何离线课程。",
+    "noEbookMessage": "标记有“提供离线版本”的课程可以在有互联网连接时下载，以便您在离线时随时学习这些课程。",
+    "noCertificate": "您尚未完成任何课程。",
+    "badgeShare": "分享徽章",
+    "badgeDownload": "下载徽章",
+    "badgeEarnedOn": "获取日期",
+    "badgeShareMessage": "Share What You Have Learned on HP LIFE.",
+    "badgeInformation": "要获得徽章，您需要完成某一语言版本下某一类别中的所有课程。完成任何含两个或两个以上课程的类别，即可获得徽章。如要了解有关您可以获得的徽章的更多信息，请<*>浏览此页面</*>。",
+    "ebookDelete": "删除",
+    "ebookDeletePrompt": {
+      "title": "要删除此离线课程吗？",
+      "message": "如果您尚未完成此课程，删除课程将导致学习进度丢失。",
+      "cancel": "取消",
+      "ok": "删除"
+    }
+  },
+  "notification": {
+    "clearAll": "全部清除"
+  },
+  "others": {
+    "selection": {
+      "search": "搜索"
+    },
+    "error": {
+      "unexpected": "出现意外错误。"
+    }
+  },
+  "onboarding": {
+    "pushNotification": {
+      "title": "了解最新资讯",
+      "body": "每当有 HP LIFE 最新消息时都收到通知。",
+      "button": {
+        "no": "否",
+        "yes": "是"
+      },
+      "permissionDenied": {
+        "title": "出现意外错误。",
+        "body": "推送通知未启用。",
+        "ok": "确定"
+      }
+    }
+  },
+  "update": {
+    "android": {
+      "title": "HP LIFE 应用程序有新版本可用。",
+      "message": "请立即访问 Google Play 商店更新此应用程序。",
+      "button": "更新应用程序",
+      "cancel": "取消",
+      "store": "https://play.google.com/store/apps/details?id=com.hp.life"
+    },
+    "ios": {
+      "title": "HP LIFE 应用程序有新版本可用。",
+      "message": "请立即访问 App Store 更新此应用程序。",
+      "button": "更新应用程序",
+      "cancel": "取消",
+      "store": "https://apps.apple.com/us/app/hp-life/id1605830167"
+    }
+  },
+  "offline": {
+    "bannerMessage": "您已离线"
+  },
+  "bookExecution": {
+    "lessonMenu": "",
+    "by": "By",
+    "bookmarks": "Bookmarks",
+    "progressDifference": {
+      "title": "Reading Progress",
+      "message": "The save location on cloud does not match the location on your device. Please choose which save location you want to use."
+    },
+    "decreaseFontSize": "缩小字体",
+    "increaseFontSize": "增大字体",
+    "switchViewingMode": "切换查看模式",
+    "takeSurvey": {
+      "title": "恭喜！ ",
+      "message": "您已完成本课程。要获得结业证书，请完成课程调查。",
+      "surveyButton": "完成调查"
+    }
+  }
+}

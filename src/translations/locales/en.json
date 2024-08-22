@@ -1,0 +1,237 @@
+{
+  "accessibility": {
+    "menu": "Menu",
+    "dropdownMenu": "Dropdown menu",
+    "close": "Close",
+    "back": "Go Back",
+    "next": "Go Next",
+    "checkbox": {
+      "label": "check box",
+      "checked": "checked",
+      "unchecked": "not checked",
+      "disabled": "dimmed"
+    },
+    "radiobox": {
+      "label": "radio button",
+      "checked": "selected",
+      "unchecked": "unselected",
+      "disabled": "dimmed"
+    },
+    "notification": "Notifications"
+  },
+  "gender": {
+    "male": "Male",
+    "female": "Female",
+    "notKnown": "Prefer not to answer"
+  },
+  "login": {
+    "login": "Log in",
+    "join": "Join for free",
+    "message": "Learn in-demand skills and core business concepts to enhance your education, start your own business, or secure a better job with our free, accessible digital learning courses."
+  },
+  "sideMenu": {
+    "profile": "My Profile",
+    "logout": {
+      "label": "Log out",
+      "prompt": "Are you sure you want to logout?",
+      "cancel": "Cancel",
+      "yes": "Yes"
+    },
+    "manageAccount": "Manage your account",
+    "certificate": "Certificates",
+    "badges": "Badges",
+    "links": {
+      "about": "About",
+      "successStories": "Success Stories",
+      "partners": "Partners",
+      "news": "News",
+      "help": "Help",
+      "resources": "Resources"
+    },
+    "hpFoundation": "A program of the HP Foundation.",
+    "myBadges": "My Badges"
+  },
+  "menu": {
+    "home": "Home",
+    "myCourse": "My Dashboard",
+    "explore": "Explore",
+    "redeem": "Redeem",
+    "message": "Message",
+    "searchPlaceholder": "Search"
+  },
+  "profile": {
+    "myProfile": "My Profile",
+    "fullName": "Full Name",
+    "nameNote": "Note: The name you enter will appear on certificates of completion you earn.",
+    "email": "Email",
+    "country": "Country",
+    "gender": "Gender",
+    "language": "Language",
+    "timeZone": "Time Zone",
+    "edit": "Edit profile",
+    "changePassword": "Change password",
+    "save": "Save",
+    "cancel": "Cancel",
+    "newsletter": "Please update me on HP LIFE news and events.",
+    "pushNotification": {
+      "message": "Enable push notifications on this device.",
+      "noPermission": {
+        "title": "Permission",
+        "body": "Please enable push notifications to use this feature.",
+        "cancel": "Cancel",
+        "setting": "Open settings"
+      }
+    },
+    "version": "Version",
+    "deleteAccount": {
+      "label": "Request account deletion",
+      "prompt": "Are you sure you want to delete account?\n\nYour transcript and certificate(s) will be permanently deleted.",
+      "submitted": "Your request has been submitted.",
+      "yes": "Yes",
+      "cancel": "Cancel"
+    },
+    "password": {
+      "currentPassword": "Old password",
+      "newPassword": "Create new password (case sensitive)",
+      "confirmPassword": "Re-enter new password",
+      "updatePassword": "Save",
+      "errors": {
+        "incorrectPassword": "Invalid Password",
+        "tooShort": "Password must contain atleast 8 characters including uppercase,lowercase,special character and digits.",
+        "needSpecialCharacter": "Password must contain atleast 8 characters including uppercase,lowercase,special character and digits.",
+        "confirmPasswordNotMatching": "Passwords mismatch."
+      }
+    }
+  },
+  "home": {
+    "latestCourse": "Latest courses"
+  },
+  "explore": {
+    "newest": "Newest",
+    "popular": "Most popular",
+    "publishedDate": "Published Date",
+    "viewAll": "All Courses"
+  },
+  "courseWidget": {
+    "percentCompleted": "Complete",
+    "notStarted": "Not started",
+    "availableOffline": "Available offline",
+    "completed": "Completed",
+    "inProgress": "In Progress"
+  },
+  "courseInformation": {
+    "by": "By",
+    "or": "OR",
+    "startedDate": "Start date",
+    "finishDate": "Finish date",
+    "percentCompleted": "Complete",
+    "neverDate": "Not started",
+    "overview": "Overview",
+    "lessons": "Lessons",
+    "courseCertificate": "Certificate available on completion",
+    "enrollCourse": "Enroll",
+    "startCourse": "Start course",
+    "continueCourse": "Continue course",
+    "viewCertificate": "Download certificate",
+    "verifyEmail": "Verify Your Email",
+    "accessEbook": "Access offline course",
+    "downloadEbook": "Download offline course"
+  },
+  "courseExecution": {
+    "lessonMenu": "Lesson",
+    "yourProgress": "Progress",
+    "submitAnswer": "Submit",
+    "quizCompleted": "Quiz Completed!",
+    "quizFailed": "Quiz Failed",
+    "quizScorePrefix": "Score: ",
+    "answerRequired": "Answer required."
+  },
+  "myCourse": {
+    "inProgress": "In progress",
+    "ebook": "Downloaded",
+    "completed": "Certificates",
+    "archived": "Archived",
+    "badges": "Badges",
+    "download": "Download",
+    "downloadTranscript": "Download transcript",
+    "share": "Share",
+    "noCourse": "You are not currently enrolled in any courses.",
+    "noEbookTitle": "You have not downloaded any offline courses.",
+    "noEbookMessage": "Courses marked as ‘Available offline’ can be downloaded when you have an internet connection so they are ready for you to take whenever you are offline.",
+    "noCertificate": "You have not completed any courses.",
+    "badgeShare": "Share badge",
+    "badgeDownload": "Download badge",
+    "badgeEarnedOn": "Earned",
+    "badgeShareMessage": "Share What You Have Learned on HP LIFE.",
+    "badgeInformation": "To earn a badge, you will need to complete all of the courses in one language within a category. You can earn a badge for any category that has two or more courses. To learn more about the badges you can earn, <*>please visit this page</*>.",
+    "ebookDelete": "Delete",
+    "ebookDeletePrompt": {
+      "title": "Delete this offline course?",
+      "message": "If you have not completed this course, deleting it will result in a loss of progress.",
+      "cancel": "Cancel",
+      "ok": "Delete"
+    }
+  },
+  "notification": {
+    "clearAll": "Clear all"
+  },
+  "others": {
+    "selection": {
+      "search": "Search"
+    },
+    "error": {
+      "unexpected": "An unexpected error has occurred."
+    }
+  },
+  "onboarding": {
+    "pushNotification": {
+      "title": "Stay Updated",
+      "body": "Get notified whenever there is HP LIFE news.",
+      "button": {
+        "no": "No",
+        "yes": "Yes"
+      },
+      "permissionDenied": {
+        "title": "An unexpected error has occurred.",
+        "body": "Push notifications not enabled.",
+        "ok": "OK"
+      }
+    }
+  },
+  "update": {
+    "android": {
+      "title": "There is a new version of the HP LIFE app.",
+      "message": "Please update your app now by visiting the Google Play Store.",
+      "button": "Update the app",
+      "cancel": "Cancel",
+      "store": "https://play.google.com/store/apps/details?id=com.hp.life"
+    },
+    "ios": {
+      "title": "There is a new version of the HP LIFE app.",
+      "message": "Please update your app now by visiting the App Store.",
+      "button": "Update the app",
+      "cancel": "Cancel",
+      "store": "https://apps.apple.com/us/app/hp-life/id1605830167"
+    }
+  },
+  "offline": {
+    "bannerMessage": "You're Offline"
+  },
+  "bookExecution": {
+    "lessonMenu": "",
+    "by": "By",
+    "bookmarks": "Bookmarks",
+    "progressDifference": {
+      "title": "Reading Progress",
+      "message": "The save location on cloud does not match the location on your device. Please choose which save location you want to use."
+    },
+    "decreaseFontSize": "Decrease font size",
+    "increaseFontSize": "Increase font size",
+    "switchViewingMode": "Switch viewing mode",
+    "takeSurvey": {
+      "title": "Congratulations!",
+      "message": "You have reached the end of this course. To earn your Certificate of Completion, please complete the course survey.",
+      "surveyButton": "Complete the survey"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/res/fonts/FormaDJRMicro-Black.ttf",
+      "sha1": "9a773b8a0f59cd130bb33e2afa43ddf16a49e5ad"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-BlackItalic.ttf",
+      "sha1": "9c6c511f8351362a42ff6a80e825ac3174471983"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-Bold.ttf",
+      "sha1": "607c874ec69e493593a97e4aae1047affc9e7a98"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-BoldItalic.ttf",
+      "sha1": "68e9ae1f98cbf25a3f834f9f45674c44867d8c3f"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-ExtraBold.ttf",
+      "sha1": "755862ec1472296dc723715705c47528b349ce42"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-ExtraBoldItalic.ttf",
+      "sha1": "bea5930b48fa881adcfc6db489f55435bf53f56e"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-ExtraLight.ttf",
+      "sha1": "2ff2f6c0667fcdc5b0a6abce2d213628106d6e0b"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-ExtraLightItalic.ttf",
+      "sha1": "6ef9c0daa0efa3c80a1b8fa23f4b1fb654638898"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-Italic.ttf",
+      "sha1": "1e0f9e58cac71bd687c338063130e6647d784635"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-Light.ttf",
+      "sha1": "f5f0e7df769eb8c28b1d14a9903764f1d9e7ace1"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-LightItalic.ttf",
+      "sha1": "811316c8e2b0d356e5f1d0f04db6909f4bfb26b7"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-Medium.ttf",
+      "sha1": "1c282ad029378ec696fbebbc80eb7652096cb094"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-MediumItalic.ttf",
+      "sha1": "a5474007fab787e634c519f8ba14349597d8d18e"
+    },
+    {
+      "path": "src/res/fonts/FormaDJRMicro-Regular.ttf",
+      "sha1": "a27e0ec0c5209c2c7266355ca65611f34bcd07ad"
+    }
+  ]
+}
