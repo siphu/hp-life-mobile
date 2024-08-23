@@ -6,10 +6,11 @@ import { config } from '~/config/config';
 import Images from '~/res/images';
 import { GlobalStyles } from '~/config/styles';
 import MaterialIconsOutlined from '~/components/MaterialIconsOutlined';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export interface MenuItemProps {
     label: string;
-    icon: any;
+    icon: string;
     style?: 'grey' | 'white';
     selected?: boolean;
     disabled?: boolean;
@@ -27,20 +28,16 @@ export default (props: MenuItemProps) => {
                 props.selected ? styles.selectedRow : {},
 
             ]}>
-            <props.icon
-                height={24}
-                width={24}
-                style={styles.linkIcon}
-                fill={props.disabled ? config.color.neutral[400] : config.color.neutral[900]}
-                fillOpacity={props.disabled ? .24 : 1}
-            />
+            {props.icon === 'help-outline' ?
+                <MaterialIcons style={styles.linkIcon} name={props.icon} size={24} color={props.disabled ? config.color.neutral[400] : config.color.neutral[900]} /> :
+                <MaterialIconsOutlined style={styles.linkIcon} name={props.icon} size={24} color={props.disabled ? config.color.neutral[400] : config.color.neutral[900]} />
+            }
             <Text
                 style={[styles.rowText, props.disabled ? styles.rowTextDisabled : props.selected ? styles.rowTextSelected : {}]}>
                 {props.label}
             </Text>
             <View style={GlobalStyles.flexGrow} />
-            <MaterialIconsOutlined name="13mp" />
-            {/* <Images.arrowForward height={24} width={24} fill={props.disabled ? config.color.grey400 : config.color.grey900} fillOpacity={props.disabled ? .24 : 1} /> */}
+            <MaterialIcons name='chevron-right' size={30} color={config.color.neutral[900]} />
         </ParentElement>
     );
 };

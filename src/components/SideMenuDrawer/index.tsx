@@ -14,17 +14,19 @@ import { AuthenticatedScreens } from '~/navigation/screens'
 import { setToken } from "~/stores/user/actions";
 import { t } from "~/translations";
 import MenuItem, { MenuItemProps } from "./components/MenuItem";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 
 const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
     const userState = useSelector((root: RootState) => root.user);
+    const appState = useSelector((root: RootState) => root.app);
     const dispatch = useDispatch();
 
 
     const menu: MenuItemProps[] = [
         {
             label: t('sideMenu.certificate'),
-            icon: Images.sideMenu.menuCertificate,
+            icon: 'verified',
             selected: false,
             click: () => {
 
@@ -33,7 +35,7 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
         },
         {
             label: t('sideMenu.badges'),
-            icon: Images.sideMenu.menuBadge,
+            icon: 'workspace_premium',
             selected: false,
             click: () => {
 
@@ -42,6 +44,14 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
         },
     ].filter(m => m !== undefined) as MenuItemProps[];
 
+
+    const browseInApp = (item: any) => {
+        navigation.navigate(AuthenticatedScreens.InAppBrowser, {
+            title: item.title,
+            url: item.url,
+            locale: appState.language
+        });
+    };
 
     return (
         <View style={GlobalStyles.flex}>
@@ -69,10 +79,42 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
                 {menu.map((m, i) => (
                     <MenuItem {...m} key={'menu_' + i.toString()} />
                 ))}
+                {config.externalLinks.map((m: any, i) => (
+                    <MenuItem
+                        label={t(m.title)}
+                        icon={m.icon}
+                        key={'external_' + i.toString()}
+                        click={() => {
+                            browseInApp({
+                                title: t(m.title),
+                                url: m.url,
+                            });
+                        }}
+                        disabled={!!!true}
+                    />
+                ))}
             </ScrollView>
-            <View style={{ flexGrow: 1 }} />
-            <View><TouchableOpacity onPress={() => dispatch(setToken())}><Text>Logout</Text></TouchableOpacity></View>
-            <SafeAreaView edges={['bottom']} />
+            <View>
+                <TouchableOpacity style={styles.logoutContainer} onPress={undefined} accessibilityRole='button'>
+                    <MaterialIcons style={styles.linkIcon} name={'logout'} size={24} color={config.color.neutral[900]} />
+                    <Text style={styles.rowText}>
+                        {t('sideMenu.logout.label')}
+                    </Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.hpFoundationContainer}>
+                <Images.logo.foundation
+                    height={60}
+                    style={{ aspectRatio: 125 / 59 }}
+                    fill={config.color.neutral[50]}
+                />
+                <View>
+                    <Text style={styles.hpFoundationText}>
+                        {t('sideMenu.hpFoundation')}
+                    </Text>
+                </View>
+            </View>
+            <SafeAreaView edges={['bottom']} style={styles.bottomSafeArea} />
         </View>);
 };
 

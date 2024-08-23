@@ -10,6 +10,7 @@ import Profile from '~/screens/Profile';
 import { HeaderBackIcon } from './components/HeaderBackIcon';
 import { GlobalStyles } from '~/config/styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import InAppBrowser from '~/screens/InAppBrowser';
 
 const Screen = createStackNavigator();
 
@@ -41,6 +42,17 @@ export const AuthenticatedStack = () => {
                 options={({ navigation }) => ({
                     headerShown: true,
                     headerLeft: () => <HeaderBackIcon onPress={navigation.goBack} />,
+                })}
+            />
+            <Screen.Screen
+                name={AuthenticatedScreens.InAppBrowser}
+                component={InAppBrowser}
+                options={({ navigation, route }) => ({
+                    headerShown: true,
+                    headerLeft: () => <HeaderBackIcon onPress={navigation.goBack} />,
+                    //@ts-ignore
+                    title: route.params?.title || '',
+
                 })}
             />
             <Screen.Screen

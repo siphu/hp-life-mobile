@@ -114,4 +114,23 @@ export const styles = StyleSheet.create({
   rowTextDisabled: {
     color: config.color.neutral[400],
   },
+  logoutContainer: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    height: 50,
+    paddingHorizontal: 20,
+  },
+  hpFoundationContainer: {
+    alignItems: 'center',
+    backgroundColor: config.color.neutral[700],
+    paddingVertical: 20,
+  },
+  hpFoundationText: {
+    color: config.color.neutral[50],
+    marginTop: 5,
+  },
+  bottomSafeArea: {
+    backgroundColor: config.color.neutral[700],
+  },
 });

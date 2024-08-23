@@ -49,36 +49,36 @@ export default {
     },
   },
   externalLinks: [
-    // {
-    //   title: 'sideMenu.links.about',
-    //   url: `${base.api.webUrl}/mobile/about`,
-    //   icon: Images.menuAbout,
-    // },
-    // {
-    //   title: 'sideMenu.links.successStories',
-    //   url: `${base.api.webUrl}/mobile/successstories`,
-    //   icon: Images.menuSuccessStory,
-    // },
-    // {
-    //   title: 'sideMenu.links.partners',
-    //   url: `${base.api.webUrl}/mobile/partners`,
-    //   icon: Images.menuPartners,
-    // },
-    // {
-    //   title: 'sideMenu.links.news',
-    //   url: `${base.api.webUrl}/mobile/news`,
-    //   icon: Images.menuNews,
-    // },
-    // {
-    //   title: 'sideMenu.links.help',
-    //   url: `${base.api.webUrl}/mobile/help`,
-    //   icon: Images.menuHelp,
-    // },
-    // {
-    //   title: 'sideMenu.links.resources',
-    //   url: `${base.api.webUrl}/mobile/resources`,
-    //   icon: Images.menuResearch,
-    // },
+    {
+      title: 'sideMenu.links.about',
+      url: `${base.api.webUrl}/mobile/about`,
+      icon: 'info',
+    },
+    {
+      title: 'sideMenu.links.successStories',
+      url: `${base.api.webUrl}/mobile/successstories`,
+      icon: 'comment',
+    },
+    {
+      title: 'sideMenu.links.partners',
+      url: `${base.api.webUrl}/mobile/partners`,
+      icon: 'group',
+    },
+    {
+      title: 'sideMenu.links.news',
+      url: `${base.api.webUrl}/mobile/news`,
+      icon: 'newspaper',
+    },
+    {
+      title: 'sideMenu.links.help',
+      url: `${base.api.webUrl}/mobile/help`,
+      icon: 'help-outline',
+    },
+    {
+      title: 'sideMenu.links.resources',
+      url: `${base.api.webUrl}/mobile/resources`,
+      icon: 'build',
+    },
   ],
   color: {
     button: {

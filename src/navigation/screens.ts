@@ -15,6 +15,8 @@ export enum AuthenticatedScreens {
 
   Profile = 'Profile',
 
+  InAppBrowser = 'External Content',
+
   CourseInformation = 'Course Information',
   CourseExecution = 'Course Execution',
 

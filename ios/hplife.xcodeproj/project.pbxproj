@@ -47,6 +47,7 @@
 		CA61CD53AA844E9F91E57EE4 /* FormaDJRMicro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB0C4A1C55CA46BD94CB485E /* FormaDJRMicro-Medium.ttf */; };
 		D0D5AD2A37BD401997353962 /* FormaDJRMicro-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A19D3FA11A248D1AFC968DB /* FormaDJRMicro-ExtraBoldItalic.ttf */; };
 		D7E4EBB8E3AB4EAD97F473D8 /* FormaDJRMicro-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11A7262C580B489A84A0DCD6 /* FormaDJRMicro-ExtraBold.ttf */; };
+		F37CCF2A795D40E7A1341075 /* MaterialIconsOutlined-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDF56133DC2D49C0B067A394 /* MaterialIconsOutlined-Regular.ttf */; };
 		F87644CE3542409892975EC6 /* FormaDJRMicro-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 959ECAB7AD3A4A41A667CC7A /* FormaDJRMicro-BoldItalic.ttf */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +112,7 @@
 		C2A4D61CA06A4FA782CEA5C8 /* FormaDJRMicro-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-MediumItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-MediumItalic.ttf"; sourceTree = "<group>"; };
 		D45C5F70EF8382BB0095FBD3 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = hplife/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EDF56133DC2D49C0B067A394 /* MaterialIconsOutlined-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "MaterialIconsOutlined-Regular.ttf"; path = "../src/res/fonts/MaterialIconsOutlined-Regular.ttf"; sourceTree = "<group>"; };
 		EE8425780BC94D27965C5C6D /* FormaDJRMicro-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Bold.ttf"; path = "../src/res/fonts/FormaDJRMicro-Bold.ttf"; sourceTree = "<group>"; };
 		F48C10BED7BF4CD5B88F432E /* FormaDJRMicro-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Black.ttf"; path = "../src/res/fonts/FormaDJRMicro-Black.ttf"; sourceTree = "<group>"; };
 		FBDF8CBB49614301AB25ACC9 /* FormaDJRMicro-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Light.ttf"; path = "../src/res/fonts/FormaDJRMicro-Light.ttf"; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				AB0C4A1C55CA46BD94CB485E /* FormaDJRMicro-Medium.ttf */,
 				C2A4D61CA06A4FA782CEA5C8 /* FormaDJRMicro-MediumItalic.ttf */,
 				B26F63D7B86D42F3A72EA3DA /* FormaDJRMicro-Regular.ttf */,
+				EDF56133DC2D49C0B067A394 /* MaterialIconsOutlined-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				87D59F4B46F84B7E88C43168 /* FormaDJRMicro-MediumItalic.ttf in Resources */,
 				4C4571B5E1964B7ABB1C9427 /* FormaDJRMicro-Regular.ttf in Resources */,
 				6851A27B2E7FE0C7F9185284 /* PrivacyInfo.xcprivacy in Resources */,
+				F37CCF2A795D40E7A1341075 /* MaterialIconsOutlined-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
