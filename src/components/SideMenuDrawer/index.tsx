@@ -15,13 +15,17 @@ import { setToken } from "~/stores/user/actions";
 import { t } from "~/translations";
 import MenuItem, { MenuItemProps } from "./components/MenuItem";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Alert from "../Alert";
+import React from "react";
+import Button from "../Button";
 
 
 const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
     const userState = useSelector((root: RootState) => root.user);
     const appState = useSelector((root: RootState) => root.app);
-    const dispatch = useDispatch();
+    const [showLogout, setShowLogout] = React.useState<boolean>(false);
 
+    const dispatch = useDispatch();
 
     const menu: MenuItemProps[] = [
         {
@@ -95,7 +99,30 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
                 ))}
             </ScrollView>
             <View>
-                <TouchableOpacity style={styles.logoutContainer} onPress={undefined} accessibilityRole='button'>
+                <Alert show={showLogout} position="Bottom" onRequestClose={() => setShowLogout(false)}>
+                    <View style={{
+                        rowGap: 12,
+                    }}>
+                        <View><Text style={{
+                            fontSize: 28,
+                            fontWeight: 500,
+                        }}>{t('sideMenu.logout.label')}</Text></View>
+                        <View>
+                            <Text style={{
+                                fontSize: 16,
+                            }}>{t('sideMenu.logout.prompt')}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', columnGap: 12 }}>
+                            <Button title={t('sideMenu.logout.cancel')} color={config.color.button.primary} style={{
+                                paddingHorizontal: 20,
+                            }} onPress={() => setShowLogout(false)}></Button>
+                            <Button onPress={() => { dispatch(setToken()) }} title={t('sideMenu.logout.yes')} color={config.color.button.secondary} style={{
+                                paddingHorizontal: 20,
+                            }}></Button>
+                        </View>
+                    </View>
+                </Alert>
+                <TouchableOpacity style={styles.logoutContainer} onPress={() => setShowLogout(true)} accessibilityRole='button'>
                     <MaterialIcons style={styles.linkIcon} name={'logout'} size={24} color={config.color.neutral[900]} />
                     <Text style={styles.rowText}>
                         {t('sideMenu.logout.label')}

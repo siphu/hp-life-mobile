@@ -4,8 +4,7 @@ import { UnAuthenticatedStack } from "./UnAuthenticatedStack";
 import { RootState } from "~/stores";
 import { AuthenticatedStack } from './AuthenticatedStack';
 
-
-/** this fixes the navigation.navigate() as never */
+/** This fixes the navigation.navigate() as never */
 export type RootStackParamList = { [key: string]: any };
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -14,7 +13,6 @@ declare global {
     interface RootParamList extends RootStackParamList { }
   }
 }
-
 
 export const NavigationStacks = () => {
   const appState = useSelector((state: RootState) => state.app);
