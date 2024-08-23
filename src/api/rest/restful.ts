@@ -43,6 +43,7 @@ export const processResponse = async function <R>(
       }
     })
     .catch(result => {
+      console.error('r', result);
       let timerEnd = moment();
       if (result.hasOwnProperty('config'))
         console.error(

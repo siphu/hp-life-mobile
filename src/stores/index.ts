@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {combineReducers} from 'redux';
 import {reducers as reducerApp} from './app/reducers';
 import {reducers as reducerUser} from './user/reducers';
+import {reducers as reducerCourse} from './course/reducers';
 import {configureStore} from '@reduxjs/toolkit';
 import {
   persistStore,
@@ -26,6 +27,12 @@ const persistUserConfig = {
   whitelist: ['token', 'profile'],
 };
 
+const persistCourseConfig = {
+  key: 'course',
+  storage: AsyncStorage,
+  whitelist: ['categories', 'latest'],
+};
+
 const persistRootConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -35,6 +42,7 @@ const persistRootConfig = {
 const rootReducer = combineReducers({
   app: persistReducer(persistAppConfig, reducerApp),
   user: persistReducer(persistUserConfig, reducerUser),
+  course: persistReducer(persistCourseConfig, reducerCourse),
 });
 
 //@ts-ignore

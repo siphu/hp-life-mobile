@@ -1,26 +1,26 @@
 import {StoreUserState, state as defaultState} from './state';
 
-export enum StoreUserAction {
+export enum UserAction {
   SET_TOKEN = 'SET_TOKEN',
   SET_PROFILE = 'SET_PROFILE',
 }
 
-interface ReducerAppAction {
-  type: StoreUserAction;
+interface ReducerAction {
+  type: UserAction;
   payload: any;
 }
 
 export const reducers = (
   state: StoreUserState = defaultState,
-  action: ReducerAppAction,
+  action: ReducerAction,
 ): StoreUserState => {
   switch (action.type) {
-    case StoreUserAction.SET_TOKEN:
+    case UserAction.SET_TOKEN:
       return {
         ...state,
         token: action.payload,
       };
-    case StoreUserAction.SET_PROFILE:
+    case UserAction.SET_PROFILE:
       return {
         ...state,
         profile: action.payload,

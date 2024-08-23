@@ -52,12 +52,15 @@ export const AuthenticatedStack = () => {
                     headerLeft: () => <HeaderBackIcon onPress={navigation.goBack} />,
                     //@ts-ignore
                     title: route.params?.title || '',
-
                 })}
             />
             <Screen.Screen
                 name={AuthenticatedScreens.CourseInformation}
                 component={CourseInformation}
+                options={({ navigation, route }) => ({
+                    headerShown: true,
+                    headerLeft: () => <HeaderBackIcon onPress={navigation.goBack} />
+                })}
             />
         </Screen.Navigator>
     );

@@ -1,5 +1,4 @@
-import {UserProfile} from '~/api/model';
-import {AuthToken} from '~/types/auth';
+import {AuthToken, UserProfile} from '~/api/model';
 
 export interface StoreUserState {
   token?: AuthToken;

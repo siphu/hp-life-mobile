@@ -1,18 +1,42 @@
 import React from "react";
-import { Pressable, View } from "react-native"
+import { FlatList, Pressable, RefreshControl, ScrollView, View } from "react-native"
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "~/api/rest/courses";
 import Alert from "~/components/Alert";
 import Text from "~/components/Text"
+import { RootState } from "~/stores";
+import { setCategory } from "~/stores/course/actions";
+import { getCourses, getLatestCourses } from "./helper";
+import { GlobalStyles } from "~/config/styles";
+import { styles } from "./styles";
+import Jumbotron from "./components/Jumbotron";
+import { t } from "~/translations";
 
 const Home = () => {
-    const [show, setShow] = React.useState(false);
+    const courseState = useSelector((root: RootState) => root.course);
+    const appState = useSelector((root: RootState) => root.app);
+
+    const onRefresh = (force?: boolean) => {
+        getLatestCourses(force);
+    }
+
+    React.useEffect(() => {
+        onRefresh();
+    }, []);
+
+    const latestCourses = courseState.latest[appState.language || 'en'];
     return (
-        <View>
-            <Alert position='Top' show={show} >
-                <Text>Alert Goes here</Text>
-            </Alert>
-            <Pressable style={{ padding: 20 }} onPress={() => setShow(true)}><Text>Show</Text></Pressable>
-        </View>
-    )
+        <View style={GlobalStyles.flex}>
+            <FlatList
+                style={styles.scrollStyle}
+                contentContainerStyle={styles.scrollContent}
+                ListHeaderComponent={<Text style={styles.textLatestCourseHeader}>{t('home.latestCourse')}</Text>}
+                refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh(true)} />}
+                data={latestCourses}
+                renderItem={({ item }) => <Jumbotron course={item} key={item.id.toString()} />}
+            />
+        </View >
+    );
 
 }
 
