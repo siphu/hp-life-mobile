@@ -1,4 +1,4 @@
-package com.hplife
+package com.hp.life
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

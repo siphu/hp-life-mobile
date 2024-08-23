@@ -10,12 +10,39 @@ import { styles } from "./styles";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Images from '~/res/images';
 import { ProfileItem } from "./components/ProfileItem";
-import { AuthenticatedScreens } from "~/navigations/screens";
+import { AuthenticatedScreens } from '~/navigation/screens'
 import { setToken } from "~/stores/user/actions";
+import { t } from "~/translations";
+import MenuItem, { MenuItemProps } from "./components/MenuItem";
 
-const SideMenuDrawer = (props: DrawerContentComponentProps) => {
+
+const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
     const userState = useSelector((root: RootState) => root.user);
     const dispatch = useDispatch();
+
+
+    const menu: MenuItemProps[] = [
+        {
+            label: t('sideMenu.certificate'),
+            icon: Images.sideMenu.menuCertificate,
+            selected: false,
+            click: () => {
+
+            },
+            disabled: false
+        },
+        {
+            label: t('sideMenu.badges'),
+            icon: Images.sideMenu.menuBadge,
+            selected: false,
+            click: () => {
+
+            },
+            disabled: false
+        },
+    ].filter(m => m !== undefined) as MenuItemProps[];
+
+
     return (
         <View style={GlobalStyles.flex}>
             <SafeAreaView edges={['top']} style={styles.topSafeArea} />
@@ -27,7 +54,7 @@ const SideMenuDrawer = (props: DrawerContentComponentProps) => {
                     <View>
                         <TouchableOpacity
                             accessibilityRole='button'
-                            onPress={props.navigation.closeDrawer}>
+                            onPress={navigation.closeDrawer}>
                             <Icon name="close" size={24} color={config.color.neutral[900]} />
                         </TouchableOpacity>
                     </View>
@@ -38,8 +65,10 @@ const SideMenuDrawer = (props: DrawerContentComponentProps) => {
                 accessibilityRole="menu"
                 style={GlobalStyles.flex}
                 showsVerticalScrollIndicator={false}>
-                <ProfileItem disabled={false} name={userState.profile?.fullName} click={() => props.navigation.navigate(AuthenticatedScreens.Profile)} />
-
+                <ProfileItem disabled={false} name={userState.profile?.fullName} click={() => navigation.navigate(AuthenticatedScreens.Profile)} />
+                {menu.map((m, i) => (
+                    <MenuItem {...m} key={'menu_' + i.toString()} />
+                ))}
             </ScrollView>
             <View style={{ flexGrow: 1 }} />
             <View><TouchableOpacity onPress={() => dispatch(setToken())}><Text>Logout</Text></TouchableOpacity></View>

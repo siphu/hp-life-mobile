@@ -2,7 +2,7 @@ import React from "react";
 import { StatusBar } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationStacks } from "./navigations";
+import { NavigationStacks } from "./navigation";
 import { OrientationLocker } from 'react-native-orientation-locker';
 import { Provider } from "react-redux";
 import { stores, persistor } from './stores';

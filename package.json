@@ -11,7 +11,9 @@
     "clean": "watchman watch-del-all && npm cache clean --force && npm cache verify && rm -fr $TMPDIR/react-* && react-native start --reset-cache",
     "pods": "cd ios && pod install && cd ..",
     "postinstall": "patch-package && yarn pods",
-    "audit-fix": "npx yarn-audit-fix"
+    "audit-fix": "npx yarn-audit-fix",
+    "android:bundleRelease": "cd android && ./gradlew bundleRelease",
+    "android:apkRelease": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@notifee/react-native": "^7.8.2",

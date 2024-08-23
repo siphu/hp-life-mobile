@@ -1,4 +1,4 @@
-package com.hplife
+package com.hp.life
 
 import android.app.Application
 import com.facebook.react.PackageList

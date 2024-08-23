@@ -7,7 +7,7 @@
     },
     "typeRoots": ["./typings/custom/"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "./typings"],
   "exclude": [
     "node_modules",
     "./node_modules",

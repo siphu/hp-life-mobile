@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "~/stores";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { UnAuthenticatedScreens } from "~/navigations/screens";
+import { UnAuthenticatedScreens } from "~/navigation/screens";
 import Text from "~/components/Text";
 import _ from 'lodash';
 import { t } from "~/translations";

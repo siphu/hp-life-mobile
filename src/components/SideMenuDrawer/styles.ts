@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 import {config} from '~/config/config';
 import {GlobalStyles} from '~/config/styles';
 import {StatusBar} from 'react-native';
+
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: config.color.neutral[50],
@@ -79,5 +80,38 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 17.16,
     justifyContent: 'center',
+  },
+  greyRow: {
+    alignItems: 'center',
+    backgroundColor: config.color.misc.border,
+    borderBottomColor: config.color.misc.borderLight,
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    height: 60,
+    justifyContent: 'flex-start',
+    paddingHorizontal: 20,
+  },
+  whiteRow: {
+    alignItems: 'center',
+    backgroundColor: config.color.neutral[50],
+    borderBottomColor: config.color.misc.border,
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    height: 60,
+    justifyContent: 'flex-start',
+    paddingHorizontal: 20,
+  },
+  selectedRow: {
+    backgroundColor: config.color.button.secondary,
+  },
+  linkIcon: {
+    marginRight: 10,
+  },
+  rowText: {
+    fontSize: 16,
+  },
+  rowTextSelected: {},
+  rowTextDisabled: {
+    color: config.color.neutral[400],
   },
 });

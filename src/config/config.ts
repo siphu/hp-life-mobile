@@ -8,6 +8,14 @@ export const config = {
     android: 'FormaDJRMicro-Regular',
   }),
   color: {
+    misc: {
+      border: '#e8e8e8',
+      borderLight: '#00000061',
+    },
+    button: {
+      primary: '#165dba',
+      secondary: '#f48751',
+    },
     neutral: {
       900: '#000',
       800: '#1A1C1E',
