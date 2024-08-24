@@ -12,48 +12,50 @@ import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
 import { t } from "~/translations";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { getEnrolledCourses } from "./helper";
-import { Course } from "~/api/model";
+import { Course, TraineeCourse } from "~/api/model";
+import { CourseItem } from "./components/CourseItem";
+import { debounce } from "lodash";
 
+const RENDER_PER_PAGE = 15;
 
 const mapStateToProps = (state: RootState) => ({
-    courseState: state.course,
-    appState: state.app,
+    data: state.course.enrolled
 });
 
 const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const Home: React.FC<PropsFromRedux> = ({ courseState, appState }) => {
-
+const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
+    const [displayedData, setDisplayedData] = React.useState<TraineeCourse[]>(data.slice(0, RENDER_PER_PAGE));
     const navigation = useNavigation<NavigationProp<any>>();
 
-    const onRefresh = (force?: boolean) => {
-        getEnrolledCourses(force);
-    }
+    const onRefresh = React.useCallback((async (force?: boolean) => {
+        const newData = await getEnrolledCourses(force);
+        setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
+    }), [data]);
+
 
     React.useEffect(() => {
-        onRefresh(true);
+        onRefresh();
     }, []);
 
-    const renderItem: ListRenderItem<Course> = ({ item }) => {
-        return (
-            <View style={styles.itemContainer}>
-                <Image src={item.imageUrl} style={{
-                    height: '100%',
-                    width: 100
-                }} />
-                <Text>{item.name}</Text>
-            </View>
-        );
-    }
+    const loadMore = () => {
+        const currentLength = displayedData.length;
+        if (currentLength < data.length) {
+            const nextData = data.slice(currentLength, currentLength + RENDER_PER_PAGE);
+            setDisplayedData(prevData => [...prevData, ...nextData]);
+        }
+    };
 
-    console.log('length', courseState.enrolled.length);
+    const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {
+        return <CourseItem item={item} />;
+    }, []);
 
     return (
         <View style={GlobalStyles.flex}>
             <FlatList
-                data={courseState.enrolled}
+                data={displayedData}
                 renderItem={renderItem}
                 ListHeaderComponent={<Text style={{}}>Header Text</Text>}
                 keyExtractor={(item: Course) => item.id.toString()}
@@ -65,14 +67,16 @@ const Home: React.FC<PropsFromRedux> = ({ courseState, appState }) => {
                     offset: (ITEM_HEIGHT + ITEM_SPACING) * index,
                     index,
                 })}
-                initialNumToRender={15} // Adjust based on your performance needs
-                maxToRenderPerBatch={15} // Adjust based on your performance needs
-                windowSize={10} // Adjust based on your performance needs
-                removeClippedSubviews={true} // Improves performance by removing items outside of view
+                initialNumToRender={RENDER_PER_PAGE}
+                maxToRenderPerBatch={RENDER_PER_PAGE}
+                windowSize={5}
+                removeClippedSubviews={true}
+                onEndReached={loadMore}
+                onEndReachedThreshold={0.5}
             />
         </View >
     );
 
 }
 
-export default connector(Home);
+export default connector(Dashboard);

@@ -1,5 +1,6 @@
 import {
   Category,
+  Course,
   CourseResult,
   CourseStatus,
   TraineeCourse,
@@ -8,7 +9,7 @@ import {
 import {config} from '~/config/config';
 import {get} from './restful';
 
-const PAGE_LIMIT = 500;
+const PAGE_LIMIT = 100;
 
 export async function getCategories(locale: string): Promise<Category[]> {
   return get<Category[]>(
@@ -36,40 +37,24 @@ export async function getTraineeCourses(
   );
 }
 
-export async function getAllTraineeCourses(): Promise<TraineeCourse[]> {
-  try {
-    const result = await getTraineeCourses(0);
+export async function getAvailableCourses(
+  categoryId?: number,
+  search?: string,
+  locale: string = 'en',
+  page: number = 0,
+  limit: number = PAGE_LIMIT,
+): Promise<CourseResult> {
+  const localeString = locale ? `language=${locale}` : '';
 
-    if (!result.hasOwnProperty('page')) {
-      throw new Error('Invalid response format');
-    }
-    const pageCount = result.pagesCount;
-    if (pageCount <= 1) {
-      return filterCourses(result.results);
-    }
+  let baseUrl = `${config.api.learning}/api/marketplace/courses?resultsPerPage=${limit}&sortBy=newest&${localeString}&page=${page}`;
 
-    const pageFetch: Array<Promise<TraineeCourseResult>> = [];
-    for (let i = 1; i <= pageCount; i++) {
-      pageFetch.push(getTraineeCourses(i));
-    }
-
-    const Results = await Promise.all(pageFetch);
-
-    Results.forEach(R => {
-      result.results = result.results.concat(R.results);
-    });
-
-    return filterCourses(result.results);
-  } catch (error) {
-    return Promise.reject(error);
+  if (categoryId) {
+    baseUrl += `&categoryId=${categoryId}`;
   }
-}
 
-function filterCourses(courses: TraineeCourse[]): TraineeCourse[] {
-  return courses.filter(
-    c =>
-      c.status === CourseStatus.Published ||
-      c.status === CourseStatus.Test ||
-      c.status === CourseStatus.Archived,
-  );
+  if (search) {
+    baseUrl += `&search=${encodeURIComponent(search)}`;
+  }
+
+  return get<CourseResult>(baseUrl);
 }
