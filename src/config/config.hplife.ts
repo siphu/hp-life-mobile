@@ -1,5 +1,4 @@
-import Images from '~/res/images';
-import {development as base} from './config.hplife.endpoint';
+import {production as base} from './config.hplife.endpoint';
 
 export default {
   api: {

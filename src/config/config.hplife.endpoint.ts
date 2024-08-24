@@ -78,7 +78,7 @@ export const production = {
     signUp: 'https://auth.life-global.org/mobile/signup',
     webUrl: 'https://www.life-global.org',
     auth: 'hplife://authentication/login',
-    client_id: 1,
+    client_id: 2,
   },
   remoteLanguage: {
     url: 'https://dydhplife.blob.core.windows.net/learning/app/language',

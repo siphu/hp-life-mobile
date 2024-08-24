@@ -1,7 +1,14 @@
+export enum CourseStatus {
+  Published = 'Published',
+  Draft = 'Draft',
+  Test = 'Test',
+  Archived = 'Archived',
+}
+
 export interface Pagination<T> {
   page: number;
   pagesCount: number;
-  results?: Array<T>;
+  results: Array<T>;
   resultsCount: number;
 }
 
@@ -60,9 +67,7 @@ export interface Course extends BasicModel {
   books?: ParticipantBookInfo[];
 }
 
-export interface CourseResult extends Pagination<Course> {
-  results: Course[];
-}
+export interface CourseResult extends Pagination<Course> {}
 
 export interface UserProfile {
   id: number;
@@ -79,3 +84,49 @@ export interface UserProfile {
   country: string;
   picture?: any;
 }
+export interface Task extends BasicModel {
+  type: string;
+  assignedTo: string;
+  status: string;
+  isEnabled: boolean;
+  title: string;
+  /**/
+  isRequired?: boolean;
+  score?: number;
+  coachValidationRequired?: boolean;
+  traineeBody?: string;
+  coachBody?: string;
+  level?: number;
+  order?: number;
+  isPrivate?: boolean;
+  isResponsePrivate?: boolean;
+  minPassingScore?: number;
+  isAutoCorrectionEnabled?: boolean;
+}
+
+export interface Lesson extends BasicModel {
+  id: number;
+  status: string;
+  level?: number;
+  isEnabled: boolean;
+  isRequired: boolean;
+  tasks: Task[];
+  order?: number;
+  title?: string;
+  /**/
+}
+export interface TraineeCourse extends Course {
+  lastAccessDate: any;
+  progress: number;
+  certificateUrl?: string;
+  lastLessonName?: string;
+  lastTaskAssignedTo?: string;
+  lastTaskName?: string;
+  lastTaskStatus?: string;
+  lastTaskType?: string;
+  certificateId?: string;
+  accountVerified?: boolean;
+  lessons: Lesson[];
+}
+
+export interface TraineeCourseResult extends Pagination<TraineeCourse> {}

@@ -30,7 +30,7 @@ const persistUserConfig = {
 const persistCourseConfig = {
   key: 'course',
   storage: AsyncStorage,
-  whitelist: ['categories', 'latest'],
+  whitelist: ['categories', 'latest', 'enrolled'],
 };
 
 const persistRootConfig = {

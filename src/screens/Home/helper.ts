@@ -1,15 +1,15 @@
 import {
-  getCategories,
+  getCategories as getRemoteCategories,
   getLatestCourses as getRemoteLatestCourses,
 } from '~/api/rest/courses';
 import {RootState, stores} from '~/stores';
 import {setCategory, setLatest} from '~/stores/course/actions';
 
-export const getCourses = async (force?: boolean) => {
+export const getCategories = async (force?: boolean) => {
   const store = stores.getState() as unknown as RootState;
   const lang = store.app.language || 'en';
   if (!store.course.categories[lang] || force) {
-    const categories = await getCategories(lang);
+    const categories = await getRemoteCategories(lang);
     stores.dispatch(setCategory(lang, categories));
     return categories;
   }
@@ -19,7 +19,7 @@ export const getCourses = async (force?: boolean) => {
 export const getLatestCourses = async (force?: boolean) => {
   const store = stores.getState() as unknown as RootState;
   const lang = store.app.language || 'en';
-  await getCourses(force);
+  await getCategories(force);
   if (!store.course.latest[lang] || force) {
     const courses = (await getRemoteLatestCourses(15, lang)).results;
     stores.dispatch(setLatest(lang, courses));

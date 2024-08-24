@@ -1,8 +1,11 @@
+import {Course} from '~/api/model';
 import {StoreCourseState, state as defaultState} from './state';
 
 export enum CourseAction {
   SET_CATEGORY = 'SET_CATEGORY',
   SET_LATEST = 'SET_LATEST',
+  SET_ENROLLED = 'SET_ENROLLED',
+  UPDATE_ENROLLED = 'UPDATE_ENROLLED',
 }
 
 interface ReducerAction {
@@ -28,6 +31,28 @@ export const reducers = (
       return {
         ...state,
         latest: newLatest,
+      };
+    case CourseAction.SET_ENROLLED:
+      return {
+        ...state,
+        enrolled: action.payload,
+      };
+    case CourseAction.UPDATE_ENROLLED:
+      let updatedEnrolledCourse = state.enrolled.map(
+        item =>
+          action.payload.find((updated: Course) => updated.id === item.id) ||
+          item,
+      );
+      let newCourses = action.payload.filter(
+        (newItem: Course) =>
+          !state.enrolled.some(
+            (existingItem: Course) => existingItem.id === newItem.id,
+          ),
+      );
+
+      return {
+        ...state,
+        enrolled: [...updatedEnrolledCourse, ...newCourses],
       };
     default:
       return state;
