@@ -32,7 +32,8 @@ const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
 
     const onRefresh = React.useCallback((async (force?: boolean) => {
         const newData = await getEnrolledCourses(force);
-        setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
+        const sortedData = newData.sort((a, b) => new Date(b.lastAccessDate).getTime() - new Date(a.lastAccessDate).getTime());
+        setDisplayedData(sortedData.slice(0, RENDER_PER_PAGE));
     }), [data]);
 
 
@@ -43,7 +44,8 @@ const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
     const loadMore = () => {
         const currentLength = displayedData.length;
         if (currentLength < data.length) {
-            const nextData = data.slice(currentLength, currentLength + RENDER_PER_PAGE);
+            const sortedData = data.sort((a, b) => new Date(b.lastAccessDate).getTime() - new Date(a.lastAccessDate).getTime());
+            const nextData = sortedData.slice(currentLength, currentLength + RENDER_PER_PAGE);
             setDisplayedData(prevData => [...prevData, ...nextData]);
         }
     };

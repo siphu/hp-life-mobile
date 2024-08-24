@@ -30,7 +30,7 @@ const persistUserConfig = {
 const persistCourseConfig = {
   key: 'course',
   storage: AsyncStorage,
-  whitelist: ['categories', 'latest', 'enrolled'],
+  whitelist: ['categories', 'latest', 'enrolled', 'available'],
 };
 
 const persistRootConfig = {
@@ -54,7 +54,11 @@ export const stores = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
+        warnAfter: 100,
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+      immutableCheck: {
+        warnAfter: 100,
       },
     }),
 });
