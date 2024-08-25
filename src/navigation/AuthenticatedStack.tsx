@@ -18,6 +18,7 @@ export const AuthenticatedStack = () => {
     const insets = useSafeAreaInsets();
     return (
         <Screen.Navigator
+            initialRouteName={AuthenticatedScreens.HomeDrawer}
             screenOptions={{
                 headerShown: false,
                 cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -30,7 +31,6 @@ export const AuthenticatedStack = () => {
                 headerBackTitleVisible: false,
                 title: '',
             }}
-            initialRouteName={AuthenticatedScreens.HomeDrawer}
         >
             <Screen.Screen
                 name={AuthenticatedScreens.HomeDrawer}

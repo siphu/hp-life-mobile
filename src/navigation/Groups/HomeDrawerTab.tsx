@@ -1,14 +1,10 @@
 import {
     createDrawerNavigator,
-    DrawerContentComponentProps,
-    DrawerContentScrollView,
-    DrawerNavigationOptions,
 } from '@react-navigation/drawer';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GlobalStyles } from '~/config/styles';
 import { AuthenticatedScreens } from '../screens';
 import Home from '~/screens/Home';
-import SideMenuDrawer from '~/components/SideMenuDrawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HeaderLogo } from '../components/HeaderLogo';
 import Dashboard from '~/screens/Dashboard';
@@ -18,7 +14,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { config } from '~/config/config';
 import { HeaderMenuIcon } from '../components/HeaderMenuIcon';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
-import { View } from 'react-native';
 import { DrawerContentWrapper } from '../components/DrawerContentWrapper';
 
 const HomeDrawerNavigation = createDrawerNavigator();
@@ -35,6 +30,7 @@ const HomeBottomTabs = createBottomTabNavigator();
 export const BottomTabs = () => {
     return (
         <HomeBottomTabs.Navigator
+            initialRouteName={AuthenticatedScreens.Home}
             screenOptions={({ route }) => ({
                 gestureDirection: 'horizontal-inverted',
                 headerShown: false,

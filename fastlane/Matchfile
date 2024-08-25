@@ -1,0 +1,6 @@
+git_url("https://d3a31703b9ee289f593deaea064b08e62a8398bb@github.com/dyd-creative/dyd-mobile-provisioning-profiles.git")
+git_branch("hp-life")
+app_identifier(["com.hp.life"])
+team_id("6HB5Y2QTA3")
+username(ENV["APPLE_ID"])
+verbose(true)

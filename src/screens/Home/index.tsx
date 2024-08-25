@@ -1,8 +1,6 @@
 import React from "react";
-import { FlatList, Pressable, RefreshControl, ScrollView, View } from "react-native"
-import { connect, ConnectedProps, useDispatch, useSelector } from "react-redux";
-import { getCategories } from "~/api/rest/courses";
-import Alert from "~/components/Alert";
+import { FlatList, RefreshControl, View } from "react-native"
+import { connect, ConnectedProps } from "react-redux";
 import Text from "~/components/Text"
 import { RootState } from "~/stores";
 import { setCategory } from "~/stores/course/actions";
@@ -13,9 +11,8 @@ import Jumbotron from "./components/Jumbotron";
 import { t } from "~/translations";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 
-
 const mapStateToProps = (state: RootState) => ({
-    data: (state.course.available[state.app.language])
+    data: (state.course.available[state.app.language] || [])
         .sort((a, b) => new Date(b.publishDate!).getTime() - new Date(a.publishDate!).getTime()).slice(0, 15) || [],
     language: state.app.language
 });
@@ -25,9 +22,7 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const Home: React.FC<PropsFromRedux> = ({ data }) => {
-
     const navigation = useNavigation<NavigationProp<any>>();
-
     const onRefresh = (force?: boolean) => {
         getAvailableCourses(force);
     }

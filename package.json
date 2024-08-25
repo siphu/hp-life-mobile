@@ -5,6 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios --simulator=\"iPhone 15\"",
+    "ios:release": "react-native run-ios --mode Release --simulator=\"iPhone 15\"",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
@@ -13,7 +14,9 @@
     "postinstall": "patch-package && yarn pods",
     "audit-fix": "npx yarn-audit-fix",
     "android:bundleRelease": "cd android && ./gradlew bundleRelease",
-    "android:apkRelease": "cd android && ./gradlew assembleRelease"
+    "android:apkRelease": "cd android && ./gradlew assembleRelease",
+    "firebase:ipa": "bundle exec fastlane buildIOSOnly",
+    "firebase:apk": "bundle exec fastlane buildAndroidOnly"
   },
   "dependencies": {
     "@notifee/react-native": "^7.8.2",
