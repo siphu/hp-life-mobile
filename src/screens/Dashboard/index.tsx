@@ -1,20 +1,15 @@
 import React from "react";
-import { Dimensions, FlatList, Image, ListRenderItem, Pressable, RefreshControl, ScrollView, View } from "react-native"
-import { connect, ConnectedProps, useDispatch, useSelector } from "react-redux";
-import { getCategories } from "~/api/rest/courses";
-import Alert from "~/components/Alert";
-import Text from "~/components/Text"
+import { FlatList, ListRenderItem, RefreshControl, View } from "react-native";
+import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "~/stores";
-import { setCategory } from "~/stores/course/actions";
 import { GlobalStyles } from "~/config/styles";
 import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
-
 import { t } from "~/translations";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { getEnrolledCourses } from "./helper";
-import { Course, TraineeCourse } from "~/api/model";
+import { Course, CourseStatus, TraineeCourse } from "~/api/model";
 import { CourseItem } from "./components/CourseItem";
-import { debounce } from "lodash";
+import HeaderComponent from "./components/HeaderComponent";
 
 const RENDER_PER_PAGE = 15;
 
@@ -27,58 +22,110 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
-    const [displayedData, setDisplayedData] = React.useState<TraineeCourse[]>(data.slice(0, RENDER_PER_PAGE));
+    const [displayedData, setDisplayedData] = React.useState<TraineeCourse[]>([]);
+    const [selectableOptions, setOptions] = React.useState<string[]>([
+        'myCourse.inProgress',
+        'myCourse.ebook',
+        'myCourse.completed',
+        'myCourse.badges',
+    ]);
+    const [selectedOptions, setSelectedOptions] = React.useState<string>('myCourse.inProgress');
     const navigation = useNavigation<NavigationProp<any>>();
 
-    const onRefresh = React.useCallback((async (force?: boolean) => {
-        const newData = await getEnrolledCourses(force);
-        const sortedData = newData.sort((a, b) => new Date(b.lastAccessDate).getTime() - new Date(a.lastAccessDate).getTime());
-        setDisplayedData(sortedData.slice(0, RENDER_PER_PAGE));
-    }), [data]);
+    // Memoize filtering logic
+    const filterDisplayData = React.useCallback((incomingData: TraineeCourse[], updateState: boolean = true) => {
+        let filteredData = [...incomingData];
+        if (selectedOptions === 'myCourse.inProgress') {
+            filteredData = filteredData.filter(C => C.enrollmentStatus === 'Enrolled' && ((C.progress && C.progress < 1) || !C.progress));
+        } else if (selectedOptions === 'myCourse.completed') {
+            filteredData = filteredData.filter(C => C.progress && C.progress >= 1);
+        } else if (selectedOptions === 'myCourse.archived') {
+            filteredData = filteredData.filter(C => C.status === CourseStatus.Archived);
+        }
+        const sortedData = filteredData.sort((a, b) => new Date(b.lastAccessDate).getTime() - new Date(a.lastAccessDate).getTime());
+        if (updateState) {
+            const newData = sortedData.slice(0, RENDER_PER_PAGE);
+            if (JSON.stringify(displayedData) !== JSON.stringify(newData)) {
+                setDisplayedData(newData);
+            }
+        }
+        return filteredData;
+    }, [selectedOptions]);
 
+    const fetchData = React.useCallback(async (force: boolean = false) => {
+        const newData = await getEnrolledCourses(force);
+        const newOptions = [
+            'myCourse.inProgress',
+            'myCourse.ebook',
+            'myCourse.completed',
+            'myCourse.badges',
+        ];
+        if (newData.some(C => C.status === CourseStatus.Archived)) {
+            newOptions.push('myCourse.archived');
+        }
+        setOptions(newOptions);
+        filterDisplayData(newData);
+    }, [filterDisplayData]);
 
     React.useEffect(() => {
-        onRefresh();
+        fetchData();
     }, []);
+
+    React.useEffect(() => {
+        filterDisplayData(data);
+    }, [selectedOptions, data, filterDisplayData]);
 
     const loadMore = () => {
         const currentLength = displayedData.length;
-        if (currentLength < data.length) {
-            const sortedData = data.sort((a, b) => new Date(b.lastAccessDate).getTime() - new Date(a.lastAccessDate).getTime());
-            const nextData = sortedData.slice(currentLength, currentLength + RENDER_PER_PAGE);
+        const filteredData = filterDisplayData(data, false); // Reuse filterDisplayData
+
+        if (currentLength < filteredData.length) {
+            const nextData = filteredData.slice(currentLength, currentLength + RENDER_PER_PAGE);
             setDisplayedData(prevData => [...prevData, ...nextData]);
         }
     };
+
+
+    const onRefresh = React.useCallback(() => {
+        fetchData(true);
+    }, [fetchData]);
 
     const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {
         return <CourseItem item={item} />;
     }, []);
 
+    const keyExtractor = (item: Course) => item.id.toString();
+
     return (
         <View style={GlobalStyles.flex}>
             <FlatList
-                data={displayedData}
+                data={displayedData}  // Ensure only filtered data is passed here
                 renderItem={renderItem}
-                ListHeaderComponent={<Text style={{}}>{t('myCourse.inProgress')}</Text>}
-                keyExtractor={(item: Course) => item.id.toString()}
+                ListHeaderComponent={
+                    <HeaderComponent
+                        categories={selectableOptions}
+                        selected={selectedOptions}
+                        onSelect={s => setSelectedOptions(s!)}
+                    />
+                }
+                keyExtractor={keyExtractor}
                 refreshControl={<RefreshControl refreshing={false} onRefresh={onRefresh} />}
                 contentContainerStyle={styles.contentContainer}
                 ItemSeparatorComponent={() => <View style={{ height: ITEM_SPACING }} />}
                 getItemLayout={(_, index) => ({
                     length: ITEM_HEIGHT,
-                    offset: (ITEM_HEIGHT + ITEM_SPACING) * index,
+                    offset: 70 + (ITEM_HEIGHT + ITEM_SPACING) * index,
                     index,
                 })}
                 initialNumToRender={RENDER_PER_PAGE}
                 maxToRenderPerBatch={RENDER_PER_PAGE}
-                windowSize={5}
+                windowSize={Math.ceil(RENDER_PER_PAGE / 2)}
                 removeClippedSubviews={true}
                 onEndReached={loadMore}
                 onEndReachedThreshold={0.5}
             />
-        </View >
+        </View>
     );
-
 }
 
 export default connector(Dashboard);

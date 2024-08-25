@@ -5,8 +5,15 @@ const screenWidth = Dimensions.get('window').width;
 const ITEM_HEIGHT = 150;
 const PADDING_HORIZONTAL = 20;
 const ITEM_SPACING = 20;
+const HEADER_HEIGHT = 50;
 
-export {screenWidth, ITEM_HEIGHT, PADDING_HORIZONTAL, ITEM_SPACING};
+export {
+  screenWidth,
+  ITEM_HEIGHT,
+  PADDING_HORIZONTAL,
+  ITEM_SPACING,
+  HEADER_HEIGHT,
+};
 
 export const styles = StyleSheet.create({
   container: {

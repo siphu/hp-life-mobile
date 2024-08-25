@@ -22,7 +22,7 @@ type TranslationPaths<T> = {
   : Extract<K, string | number>;
 }[keyof T];
 
-type TranslationsPaths = TranslationPaths<Translations>;
+export type TranslationsPaths = TranslationPaths<Translations>;
 
 I18n.translations = {
   en,

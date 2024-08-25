@@ -13,7 +13,10 @@ export class CourseItem extends React.PureComponent<{ item: Course }> {
                     source={{ uri: item.imageUrl }}
                     style={styles.image}
                 />
-                <Text>{item.name}</Text>
+                <View>
+                    <Text>{item.name}</Text>
+                    <Text>{item.status?.toString()}</Text>
+                </View>
             </View>
         );
     }
