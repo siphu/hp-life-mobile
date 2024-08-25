@@ -13,7 +13,12 @@ export class CourseItem extends React.PureComponent<{ item: Course }> {
                     source={{ uri: item.imageUrl }}
                     style={styles.image}
                 />
-                <Text>{item.name}</Text>
+                <View>
+                    <Text>{item.name}</Text>
+                    <Text>{item.status?.toString()}</Text>
+                    <Text>Progress: {item.progress?.toString()}</Text>
+                    <Text>Enrolled: {(item.traineeEnrollmentStatus === 'Enrolled' || item.enrollmentStatus === 'Enrolled') ? 'Yes' : 'No'}</Text>
+                </View>
             </View>
         );
     }

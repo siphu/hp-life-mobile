@@ -16,6 +16,8 @@ export class CourseItem extends React.PureComponent<{ item: Course }> {
                 <View>
                     <Text>{item.name}</Text>
                     <Text>{item.status?.toString()}</Text>
+                    <Text>Progress: {item.progress?.toString()}</Text>
+                    <Text>{item.enrollmentStatus}</Text>
                 </View>
             </View>
         );

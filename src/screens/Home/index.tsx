@@ -37,6 +37,8 @@ const Home: React.FC<PropsFromRedux> = ({ data }) => {
                 style={styles.scrollStyle}
                 contentContainerStyle={styles.scrollContent}
                 ListHeaderComponent={<Text style={styles.textLatestCourseHeader}>{t('home.latestCourse')}</Text>}
+                showsVerticalScrollIndicator={true}
+                indicatorStyle={'black'}
                 refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh(false)} />}
                 data={data}
                 renderItem={({ item }) => <Jumbotron course={item} key={item.id.toString()} navigation={navigation} />}

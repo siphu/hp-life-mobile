@@ -75,6 +75,8 @@ const Explore: React.FC<PropsFromRedux> = ({ data, categories }) => {
                     />
                 }
                 keyExtractor={(item: Course) => item.id.toString()}
+                showsVerticalScrollIndicator={true}
+                indicatorStyle={'black'}
                 refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh()} />}
                 contentContainerStyle={styles.contentContainer}
                 ItemSeparatorComponent={() => <View style={{ height: ITEM_SPACING }} />}

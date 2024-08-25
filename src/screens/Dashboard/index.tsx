@@ -80,7 +80,7 @@ const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
 
     const loadMore = () => {
         const currentLength = displayedData.length;
-        const filteredData = filterDisplayData(data, false); // Reuse filterDisplayData
+        const filteredData = filterDisplayData(data, false);
 
         if (currentLength < filteredData.length) {
             const nextData = filteredData.slice(currentLength, currentLength + RENDER_PER_PAGE);
@@ -113,6 +113,8 @@ const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
                 }
                 keyExtractor={keyExtractor}
                 refreshControl={<RefreshControl refreshing={false} onRefresh={onRefresh} />}
+                showsVerticalScrollIndicator={true}
+                indicatorStyle={'black'}
                 contentContainerStyle={styles.contentContainer}
                 ItemSeparatorComponent={() => <View style={{ height: ITEM_SPACING }} />}
                 getItemLayout={(_, index) => ({
