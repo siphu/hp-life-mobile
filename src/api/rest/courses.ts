@@ -9,7 +9,7 @@ import {
 import {config} from '~/config/config';
 import {get} from './restful';
 
-const PAGE_LIMIT = 100;
+const PAGE_LIMIT = 500;
 
 export async function getCategories(locale: string): Promise<Category[]> {
   return get<Category[]>(
@@ -38,11 +38,11 @@ export async function getTraineeCourses(
 }
 
 export async function getAvailableCourses(
-  categoryId?: number,
-  search?: string,
-  locale: string = 'en',
+  locale: string,
   page: number = 0,
   limit: number = PAGE_LIMIT,
+  categoryId?: number,
+  search?: string,
 ): Promise<CourseResult> {
   const localeString = locale ? `language=${locale}` : '';
 

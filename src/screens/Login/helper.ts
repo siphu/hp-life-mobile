@@ -4,7 +4,7 @@ import {GlobalStyles} from '~/config/styles';
 import {AuthToken} from '~/api/model';
 
 export function urlWithLocale(url: string, language?: string): string {
-  const locale = language || 'en';
+  const locale = language;
   const urlParser = new URL(url);
   const finalUrl = `${urlParser.protocol}//${urlParser.host}/${locale}${urlParser.pathname}`;
   return finalUrl;

@@ -1,11 +1,12 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
+    "types": ["jest", "react-native"],
     "baseUrl": "./src",
     "paths": {
       "~/*": ["*"]
     },
-    "typeRoots": ["./typings/custom/"]
+    "typeRoots": ["./typings/custom/", "./node_modules/@types"]
   },
   "include": ["src/**/*", "./typings"],
   "exclude": [

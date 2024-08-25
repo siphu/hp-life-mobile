@@ -1,5 +1,7 @@
 export interface StoreAppState {
-  language?: string;
+  language: string;
 }
 
-export const state: StoreAppState = {};
+export const state: StoreAppState = {
+  language: 'en',
+};

@@ -82,7 +82,7 @@ class Jumbotron extends React.PureComponent<JumbotronProps> {
 
 // Map state to props
 const mapStateToProps = (state: RootState) => ({
-    language: state.app.language || 'en',
+    language: state.app.language,
     categories: state.course.categories,
 });
 

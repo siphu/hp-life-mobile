@@ -6,7 +6,7 @@ import Alert from "~/components/Alert";
 import Text from "~/components/Text"
 import { RootState } from "~/stores";
 import { setCategory } from "~/stores/course/actions";
-import { getLatestCourses } from "./helper";
+import { getAvailableCourses } from "~/api/helper";
 import { GlobalStyles } from "~/config/styles";
 import { styles } from "./styles";
 import Jumbotron from "./components/Jumbotron";
@@ -15,35 +15,35 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 
 const mapStateToProps = (state: RootState) => ({
-    courseState: state.course,
-    appState: state.app,
+    data: (state.course.available[state.app.language])
+        .sort((a, b) => new Date(b.publishDate!).getTime() - new Date(a.publishDate!).getTime()).slice(0, 15) || [],
+    language: state.app.language
 });
 
 const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const Home: React.FC<PropsFromRedux> = ({ courseState, appState }) => {
+const Home: React.FC<PropsFromRedux> = ({ data }) => {
 
     const navigation = useNavigation<NavigationProp<any>>();
 
     const onRefresh = (force?: boolean) => {
-        getLatestCourses(force);
+        getAvailableCourses(force);
     }
 
     React.useEffect(() => {
         onRefresh();
     }, []);
 
-    const latestCourses = courseState.latest[appState.language || 'en'];
     return (
         <View style={GlobalStyles.flex}>
             <FlatList
                 style={styles.scrollStyle}
                 contentContainerStyle={styles.scrollContent}
                 ListHeaderComponent={<Text style={styles.textLatestCourseHeader}>{t('home.latestCourse')}</Text>}
-                refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh(true)} />}
-                data={latestCourses}
+                refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh(false)} />}
+                data={data}
                 renderItem={({ item }) => <Jumbotron course={item} key={item.id.toString()} navigation={navigation} />}
             />
         </View >

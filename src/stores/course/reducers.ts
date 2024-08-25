@@ -3,7 +3,6 @@ import {StoreCourseState, state as defaultState} from './state';
 
 export enum CourseAction {
   SET_CATEGORY = 'SET_CATEGORY',
-  SET_LATEST = 'SET_LATEST',
   SET_ENROLLED = 'SET_ENROLLED',
   UPDATE_ENROLLED = 'UPDATE_ENROLLED',
 
@@ -27,13 +26,6 @@ export const reducers = (
       return {
         ...state,
         categories: newCategories,
-      };
-    case CourseAction.SET_LATEST:
-      let newLatest = {...state.latest};
-      newLatest[action.payload.language] = action.payload.courses;
-      return {
-        ...state,
-        latest: newLatest,
       };
     case CourseAction.SET_ENROLLED:
       return {

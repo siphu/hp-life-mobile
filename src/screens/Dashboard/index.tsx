@@ -5,8 +5,8 @@ import { RootState } from "~/stores";
 import { GlobalStyles } from "~/config/styles";
 import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
 import { t } from "~/translations";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { getEnrolledCourses } from "./helper";
+import { NavigationProp, useFocusEffect, useNavigation } from "@react-navigation/native";
+import { getEnrolledCourses } from "~/api/helper";
 import { Course, CourseStatus, TraineeCourse } from "~/api/model";
 import { CourseItem } from "./components/CourseItem";
 import HeaderComponent from "./components/HeaderComponent";
@@ -67,9 +67,12 @@ const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
         filterDisplayData(newData);
     }, [filterDisplayData]);
 
-    React.useEffect(() => {
-        fetchData();
-    }, []);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            fetchData();
+        }, [fetchData]),
+    );
 
     React.useEffect(() => {
         filterDisplayData(data);
@@ -87,7 +90,7 @@ const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
 
 
     const onRefresh = React.useCallback(() => {
-        fetchData(true);
+        fetchData(false);
     }, [fetchData]);
 
     const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {

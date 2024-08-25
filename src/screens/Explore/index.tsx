@@ -7,13 +7,13 @@ import Text from "~/components/Text";
 import { GlobalStyles } from "~/config/styles";
 import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
 import { Course } from "~/api/model";
-import { getAvailableCourses } from "./helper";
+import { getAvailableCourses } from "~/api/helper";
 import { CourseItem } from "./components/CourseItem";
 
 const RENDER_PER_PAGE = 15;
 
 const mapStateToProps = (state: RootState) => ({
-    data: state.course.available[state.app.language || 'en'] || []
+    data: state.course.available[state.app.language] || []
 });
 
 const connector = connect(mapStateToProps);
@@ -25,6 +25,7 @@ const Explore: React.FC<PropsFromRedux> = ({ data }) => {
 
     const onRefresh = React.useCallback(async (force?: boolean) => {
         const newData = await getAvailableCourses(force);
+        console.log('newData', newData.length);
         setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
     }, [data]);
 
@@ -51,7 +52,7 @@ const Explore: React.FC<PropsFromRedux> = ({ data }) => {
                 renderItem={renderItem}
                 ListHeaderComponent={<Text style={{}}>Header Text</Text>}
                 keyExtractor={(item: Course) => item.id.toString()}
-                refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh(true)} />}
+                refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh()} />}
                 contentContainerStyle={styles.contentContainer}
                 ItemSeparatorComponent={() => <View style={{ height: ITEM_SPACING }} />}
                 getItemLayout={(_, index) => ({
