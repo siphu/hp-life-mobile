@@ -21,9 +21,11 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const Explore: React.FC<PropsFromRedux> = ({ data, categories }) => {
-    const [displayedData, setDisplayedData] = React.useState<Course[]>(data.slice(0, RENDER_PER_PAGE));
+    const [displayedData, setDisplayedData] = React.useState<Course[]>([]);
+    const [filteredData, setFilteredData] = React.useState<Course[]>([]);
     const [selectedCategory, setSelectedCategory] = React.useState<number>();
     const [selectedTab, setSelectedTab] = React.useState<number>(0);
+
 
     const onRefresh = React.useCallback(async (force?: boolean) => {
         const newData = await getAvailableCourses(force);
@@ -35,10 +37,14 @@ const Explore: React.FC<PropsFromRedux> = ({ data, categories }) => {
     }, []);
 
 
-    const filteredData = React.useMemo(() =>
-        data.filter(c => selectedCategory === undefined || c.categoryId === selectedCategory)
-            .sort((a, b) => selectedTab === 0 ? 0 : (b.traineeCount ?? 0) - (a.traineeCount ?? 0))
-        , [data, selectedCategory, selectedTab]);
+    React.useEffect(() => {
+        const newData = data.filter(c => selectedCategory === undefined || c.categoryId === selectedCategory)
+            .sort((a, b) => selectedTab === 0 ? 0 : (b.traineeCount ?? 0) - (a.traineeCount ?? 0));
+        setFilteredData(newData);
+        setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
+    }, [data, selectedCategory, selectedTab]);
+
+
 
 
     const loadMore = () => {
@@ -50,7 +56,6 @@ const Explore: React.FC<PropsFromRedux> = ({ data, categories }) => {
     };
 
 
-
     const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {
         return <CourseItem item={item} />;
     }, []);
@@ -58,7 +63,7 @@ const Explore: React.FC<PropsFromRedux> = ({ data, categories }) => {
     return (
         <View style={GlobalStyles.flex}>
             <FlatList
-                data={filteredData}
+                data={displayedData}
                 renderItem={renderItem}
                 ListHeaderComponent={
                     <HeaderComponent
