@@ -59,7 +59,7 @@ const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
             <FlatList
                 data={displayedData}
                 renderItem={renderItem}
-                ListHeaderComponent={<Text style={{}}>Header Text</Text>}
+                ListHeaderComponent={<Text style={{}}>{t('myCourse.inProgress')}</Text>}
                 keyExtractor={(item: Course) => item.id.toString()}
                 refreshControl={<RefreshControl refreshing={false} onRefresh={onRefresh} />}
                 contentContainerStyle={styles.contentContainer}
