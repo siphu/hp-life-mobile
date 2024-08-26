@@ -15,6 +15,17 @@ import {
 } from '~/stores/course/actions';
 import {StoreCourseState} from '~/stores/course/state';
 
+let lastCategoryFetchTime: number | null = null;
+let lastEnrolledCoursesFetchTime: number | null = null;
+let lastAvailableCoursesFetchTime: number | null = null;
+let lastRemoteMessageCalled: number | null = null;
+
+/* cache duration in seconds */
+const CATEGORY_CACHE_DURATION = 5;
+const ENROLLED_CACHE_DURATION = 5;
+const COURSE_CACHE_DURATION = 5;
+const MESSAGE_CACHE_DURATION = 10;
+
 const filterCourses = (courses: TraineeCourse[]): TraineeCourse[] => {
   return courses.filter(
     c =>
@@ -27,32 +38,65 @@ const filterCourses = (courses: TraineeCourse[]): TraineeCourse[] => {
 export const getCategories = async (force?: boolean) => {
   const appState: StoreAppState = stores.getState().app!;
   const courseState: StoreCourseState = stores.getState().course!;
-
   const lang = appState.language;
-  if (!courseState.categories[lang] || force) {
+
+  const currentTime = Date.now();
+  const cacheDuration = CATEGORY_CACHE_DURATION * 1000;
+
+  const cachedCategories = courseState.categories[lang];
+  const shouldUseCache =
+    cachedCategories &&
+    lastCategoryFetchTime &&
+    currentTime - lastCategoryFetchTime < cacheDuration &&
+    !force;
+
+  if (shouldUseCache) {
+    return cachedCategories!;
+  }
+
+  if (!cachedCategories || force) {
     const categories = await getRemoteCategories(lang);
     await stores.dispatch(setCategory(lang, categories));
+    lastCategoryFetchTime = currentTime;
     return categories;
   }
 
-  return courseState.categories[lang];
+  return cachedCategories!;
 };
 
 export const getEnrolledCourses = async (
   force?: boolean,
 ): Promise<TraineeCourse[]> => {
+  const courseState: StoreCourseState = stores.getState().course!;
+  const currentTime = Date.now();
+  const cacheDuration = ENROLLED_CACHE_DURATION * 1000;
+
+  const shouldUseCache =
+    lastEnrolledCoursesFetchTime &&
+    currentTime - lastEnrolledCoursesFetchTime < cacheDuration &&
+    !force;
+
+  if (shouldUseCache) {
+    return courseState.enrolled;
+  }
+
   if (force) {
     await stores.dispatch(setEnrolledCourses([]));
   }
+
   let page = 0;
   let finished = false;
+
   do {
     const result = await getTraineeCourses(page);
     await stores.dispatch(updateEnrolledCourses(filterCourses(result.results)));
     ++page;
     finished = page >= result.pagesCount - 1;
   } while (!finished);
-  return (stores.getState().course! as StoreCourseState).enrolled;
+
+  lastEnrolledCoursesFetchTime = currentTime;
+
+  return courseState.enrolled;
 };
 
 export const getAvailableCourses = async (
@@ -61,9 +105,23 @@ export const getAvailableCourses = async (
   const appState: StoreAppState = stores.getState().app!;
   const language = appState.language;
 
+  const currentTime = Date.now();
+  const cacheDuration = COURSE_CACHE_DURATION * 1000;
+
+  const shouldUseCache =
+    lastAvailableCoursesFetchTime &&
+    currentTime - lastAvailableCoursesFetchTime < cacheDuration &&
+    !force;
+
+  if (shouldUseCache) {
+    return (stores.getState().course! as StoreCourseState).available![language];
+  }
+
   await getCategories(force);
 
-  if (force) await stores.dispatch(setAvailableCourses(language, []));
+  if (force) {
+    await stores.dispatch(setAvailableCourses(language, []));
+  }
 
   let page = 0;
   let finished = false;
@@ -74,14 +132,19 @@ export const getAvailableCourses = async (
     finished = page >= result.pagesCount - 1;
   } while (!finished);
 
+  lastAvailableCoursesFetchTime = currentTime;
+
   return (stores.getState().course! as StoreCourseState).available![language];
 };
 
-let lastRemoteMessageCalled: number | null = null;
 export const getRemoteMessages = async () => {
-  const now = Date.now();
-  if (lastRemoteMessageCalled && now - lastRemoteMessageCalled < 10000) return;
-  lastRemoteMessageCalled = now;
+  const currentTime = Date.now();
+  if (
+    lastRemoteMessageCalled &&
+    currentTime - lastRemoteMessageCalled < MESSAGE_CACHE_DURATION * 1000
+  )
+    return;
+  lastRemoteMessageCalled = currentTime;
   fetchRemoteMessages();
 };
 

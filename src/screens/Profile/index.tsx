@@ -12,7 +12,7 @@ import Dropdown from "~/components/Dropdown";
 import { setLanguage } from "~/stores/app/actions";
 import { UnknownAction } from "redux";
 import { t, useTranslationContext } from "~/providers/TranslationProvider";
-import i18n, { TranslationsPaths } from "~/translations";
+import i18n, { getAvailableLanguages, TranslationsPaths } from "~/translations";
 
 
 const connector = connect((state: RootState) => ({
@@ -23,10 +23,8 @@ const connector = connect((state: RootState) => ({
 const Profile: React.FC<ConnectedProps<typeof connector>> = ({ language, userProfile }) => {
 
     const translationContext = useTranslationContext();
-
     const languageOptions = React.useMemo(() =>
-        Object.keys(i18n.store.data)
-            .map(locale => ({ value: locale, label: getLanguageNameFromCode(locale) }))
+        getAvailableLanguages().map(locale => ({ value: locale, label: getLanguageNameFromCode(locale) }))
         , [i18n.store.data]);
 
 

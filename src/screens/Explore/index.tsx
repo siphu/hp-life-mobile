@@ -5,10 +5,10 @@ import { RootState } from "~/stores";
 import { GlobalStyles } from "~/config/styles";
 import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
 import { Course } from "~/api/model";
-import { getAvailableCourses, getRemoteMessages } from "~/api/helper";
+import { getAvailableCourses } from "~/api/helper";
 import { CourseItem } from "./components/CourseItem";
 import HeaderComponent from "./components/HeaderComponent";
-import { useFocusEffect, useIsFocused } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 
 const RENDER_PER_PAGE = 15;
 
@@ -25,7 +25,6 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories 
 
 
     const onRefresh = React.useCallback(async (force?: boolean) => {
-        getRemoteMessages();
         const newData = await getAvailableCourses(force);
         setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
     }, []);
@@ -75,7 +74,7 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories 
                 keyExtractor={(item: Course) => item.id.toString()}
                 showsVerticalScrollIndicator={true}
                 indicatorStyle={'black'}
-                refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh()} />}
+                refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh(true)} />}
                 contentContainerStyle={styles.contentContainer}
                 ItemSeparatorComponent={() => <View style={{ height: ITEM_SPACING }} />}
                 getItemLayout={(_, index) => ({

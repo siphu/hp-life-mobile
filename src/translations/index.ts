@@ -29,12 +29,12 @@ const resources = {
   hi: {translation: hi},
   pt: {translation: pt},
   es: {translation: es},
-  'zh-CN': {translation: zhHans},
+  'zh-Hans': {translation: zhHans},
   id: {translation: id},
 };
 
-const languageMapping: {[key: string]: string} = {
-  zhHans: 'zh-CN',
+export const getAvailableLanguages = () => {
+  return Object.keys(resources);
 };
 
 export const rtlLanguages = [
@@ -71,29 +71,26 @@ export const rtlLanguages = [
 
 I18nManager.allowRTL(true);
 
+const languageMapping: {[key: string]: string} = {
+  'zh-CN': 'zh-Hans',
+};
+
 const languageDetector = {
   type: 'languageDetector' as const,
   async: true,
   detect: (callback: (languageTag: string) => void) => {
     const locales = Localization.getLocales();
-
     let selectedLanguage = locales.find(locale =>
       Object.keys(resources).includes(
-        languageMapping[locale.languageCode] || locale.languageCode,
+        languageMapping[locale.languageTag] || locale.languageTag,
       ),
-    )?.languageCode;
+    )?.languageTag;
 
-    // Map to internal i18next language code
-    selectedLanguage = selectedLanguage
-      ? languageMapping[selectedLanguage] || selectedLanguage
-      : 'en';
+    selectedLanguage =
+      languageMapping[selectedLanguage!] || selectedLanguage || 'en';
 
-    // Check if the selected language is RTL
     const isRTL = rtlLanguages.includes(selectedLanguage);
-
-    // Set the RTL layout direction
     I18nManager.forceRTL(isRTL);
-
     callback(selectedLanguage);
   },
   init: () => {},

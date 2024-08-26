@@ -115,7 +115,7 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
                             <Button title={t('sideMenu.logout.cancel')} color={config.color.button.primary} style={{
                                 paddingHorizontal: 20,
                             }} onPress={() => setShowLogout(false)}></Button>
-                            <Button onPress={() => { dispatch(setToken()) }} title={t('sideMenu.logout.yes')} color={config.color.button.secondary} style={{
+                            <Button onPress={() => { dispatch(setToken()) }} title={t('sideMenu.logout.yes')} color={config.color.misc.danger} style={{
                                 paddingHorizontal: 20,
                             }}></Button>
                         </View>

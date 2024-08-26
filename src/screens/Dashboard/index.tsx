@@ -5,11 +5,10 @@ import { RootState } from "~/stores";
 import { GlobalStyles } from "~/config/styles";
 import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
 import { NavigationProp, useFocusEffect, useIsFocused, useNavigation } from "@react-navigation/native";
-import { getEnrolledCourses, getRemoteMessages } from "~/api/helper";
+import { getEnrolledCourses } from "~/api/helper";
 import { Course, CourseStatus, TraineeCourse } from "~/api/model";
 import { CourseItem } from "./components/CourseItem";
 import HeaderComponent from "./components/HeaderComponent";
-import { t } from "~/providers/TranslationProvider";
 
 const RENDER_PER_PAGE = 15;
 
@@ -27,8 +26,8 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
     const [selectedOptions, setSelectedOptions] = React.useState<string>('myCourse.inProgress');
     const navigation = useNavigation<NavigationProp<any>>();
     const isFocused = useIsFocused();
+    const hasMounted = React.useRef(false);
 
-    // Memoize filtering logic
     const filterDisplayData = React.useCallback((incomingData: TraineeCourse[], updateState: boolean = true) => {
         let filteredData = [...incomingData];
         if (selectedOptions === 'myCourse.inProgress') {
@@ -39,6 +38,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
             filteredData = filteredData.filter(C => C.status === CourseStatus.Archived);
         } else filteredData = [];
         const sortedData = filteredData.sort((a, b) => new Date(b.lastAccessDate).getTime() - new Date(a.lastAccessDate).getTime());
+
         if (updateState) {
             const newData = sortedData.slice(0, RENDER_PER_PAGE);
             if (JSON.stringify(displayedData) !== JSON.stringify(newData)) {
@@ -49,7 +49,6 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
     }, [selectedOptions]);
 
     const onRefresh = React.useCallback(async (force: boolean = false) => {
-        getRemoteMessages();
         const newData = await getEnrolledCourses(force);
         const newOptions = [
             'myCourse.inProgress',
@@ -62,18 +61,23 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
         }
         setOptions(newOptions);
         filterDisplayData(newData);
-    }, [filterDisplayData]);
+    }, [selectedOptions]);
 
 
     React.useEffect(() => {
-        if (isFocused) {
-            onRefresh();
+        if (hasMounted.current) {
+            if (isFocused) {
+                onRefresh();
+            }
+        } else {
+            hasMounted.current = true;
         }
     }, [isFocused]);
 
     React.useEffect(() => {
         filterDisplayData(data);
-    }, [selectedOptions, data, filterDisplayData]);
+    }, [selectedOptions, data]);
+
 
     const loadMore = () => {
         const currentLength = displayedData.length;
@@ -105,7 +109,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
                     />
                 }
                 keyExtractor={keyExtractor}
-                refreshControl={<RefreshControl refreshing={false} onRefresh={onRefresh} />}
+                refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh(true)} />}
                 showsVerticalScrollIndicator={true}
                 indicatorStyle={'black'}
                 contentContainerStyle={styles.contentContainer}

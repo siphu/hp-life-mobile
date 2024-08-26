@@ -13,21 +13,22 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { config } from '~/config/config';
 import { HeaderMenuIcon } from '../components/HeaderMenuIcon';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { DrawerActions, useNavigation, useRoute } from '@react-navigation/native';
 import { DrawerContentWrapper } from '../components/DrawerContentWrapper';
 import { View } from 'react-native';
 import Text from '~/components/Text';
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/stores';
+import { getRemoteMessages } from '~/api/helper';
+import { t } from '~/providers/TranslationProvider';
 
 const HomeDrawerNavigation = createDrawerNavigator();
 const HomeBottomTabs = createBottomTabNavigator();
 
-
-
 const connector = connect((state: RootState) => ({
-    alert: state.user.alert
+    alert: state.user.alert,
+    language: state.app.language
 }));
 
 /**
@@ -35,9 +36,24 @@ const connector = connect((state: RootState) => ({
  * @returns
  */
 export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alert }) => {
+
     return (
         <HomeBottomTabs.Navigator
             initialRouteName={AuthenticatedScreens.Home}
+            screenListeners={{
+                state: (e) => {
+                    const state = e.data.state;
+                    const currentRoute = state.routes[state.index]?.name;
+                    switch (currentRoute) {
+                        case AuthenticatedScreens.Home:
+                        case AuthenticatedScreens.Dashboard:
+                        case AuthenticatedScreens.Explore:
+                            getRemoteMessages();
+                        default:
+                            break;
+                    }
+                }
+            }}
             screenOptions={({ route }) => ({
                 gestureDirection: 'horizontal-inverted',
                 headerShown: alert !== undefined,
@@ -45,8 +61,8 @@ export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alert }
                 headerTitle: '',
                 tabBarIcon: ({ focused, color, size }) => {
                     switch (route.name) {
-                        case AuthenticatedScreens.Home: return <MaterialCommunityIcons name="home-outline" size={24} color={focused ? config.color.blue.primary : color} />
-                        case AuthenticatedScreens.Dashboard: return <MaterialCommunityIcons name="school-outline" size={24} color={focused ? config.color.blue.primary : color} />
+                        case AuthenticatedScreens.Home: return <MaterialCommunityIcons name="home-outline" size={size} color={focused ? config.color.blue.primary : color} />
+                        case AuthenticatedScreens.Dashboard: return <MaterialCommunityIcons name="school-outline" size={size} color={focused ? config.color.blue.primary : color} />
                         case AuthenticatedScreens.Explore: return <MaterialIcons name="search" size={24} color={focused ? config.color.blue.primary : color} />
                         default: return null;
                     }
@@ -55,19 +71,27 @@ export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alert }
             <HomeBottomTabs.Screen
                 name={AuthenticatedScreens.Home}
                 component={Home}
+                options={({ route }) => ({
+                    tabBarLabel: t('menu.home'),
+                })}
             />
             <HomeBottomTabs.Screen
                 name={AuthenticatedScreens.Dashboard}
                 component={Dashboard}
+                options={({ route }) => ({
+                    tabBarLabel: t('menu.myCourse'),
+                })}
             />
             <HomeBottomTabs.Screen
                 name={AuthenticatedScreens.Explore}
                 component={Explore}
+                options={({ route }) => ({
+                    tabBarLabel: t('menu.explore'),
+                })}
             />
         </HomeBottomTabs.Navigator >);
 }
 const ConnectedBottomTabs = connector(BottomTabs);
-
 
 export const HomeDrawer = () => {
     const insets = useSafeAreaInsets();
