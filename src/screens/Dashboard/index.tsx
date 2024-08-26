@@ -5,7 +5,7 @@ import { RootState } from "~/stores";
 import { GlobalStyles } from "~/config/styles";
 import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
 import { t } from "~/translations";
-import { NavigationProp, useFocusEffect, useNavigation } from "@react-navigation/native";
+import { NavigationProp, useFocusEffect, useIsFocused, useNavigation } from "@react-navigation/native";
 import { getEnrolledCourses } from "~/api/helper";
 import { Course, CourseStatus, TraineeCourse } from "~/api/model";
 import { CourseItem } from "./components/CourseItem";
@@ -13,15 +13,10 @@ import HeaderComponent from "./components/HeaderComponent";
 
 const RENDER_PER_PAGE = 15;
 
-const mapStateToProps = (state: RootState) => ({
+const connector = connect((state: RootState) => ({
     data: state.course.enrolled
-});
-
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
+}));
+const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
     const [displayedData, setDisplayedData] = React.useState<TraineeCourse[]>([]);
     const [selectableOptions, setOptions] = React.useState<string[]>([
         'myCourse.inProgress',
@@ -31,6 +26,7 @@ const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
     ]);
     const [selectedOptions, setSelectedOptions] = React.useState<string>('myCourse.inProgress');
     const navigation = useNavigation<NavigationProp<any>>();
+    const isFocused = useIsFocused();
 
     // Memoize filtering logic
     const filterDisplayData = React.useCallback((incomingData: TraineeCourse[], updateState: boolean = true) => {
@@ -41,7 +37,7 @@ const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
             filteredData = filteredData.filter(C => C.progress && C.progress >= 1);
         } else if (selectedOptions === 'myCourse.archived') {
             filteredData = filteredData.filter(C => C.status === CourseStatus.Archived);
-        }
+        } else filteredData = [];
         const sortedData = filteredData.sort((a, b) => new Date(b.lastAccessDate).getTime() - new Date(a.lastAccessDate).getTime());
         if (updateState) {
             const newData = sortedData.slice(0, RENDER_PER_PAGE);
@@ -68,11 +64,11 @@ const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
     }, [filterDisplayData]);
 
 
-    useFocusEffect(
-        React.useCallback(() => {
+    React.useEffect(() => {
+        if (isFocused) {
             fetchData();
-        }, [fetchData]),
-    );
+        }
+    }, [isFocused]);
 
     React.useEffect(() => {
         filterDisplayData(data);
@@ -102,7 +98,7 @@ const Dashboard: React.FC<PropsFromRedux> = ({ data }) => {
     return (
         <View style={GlobalStyles.flex}>
             <FlatList
-                data={displayedData}  // Ensure only filtered data is passed here
+                data={displayedData}
                 renderItem={renderItem}
                 ListHeaderComponent={
                     <HeaderComponent

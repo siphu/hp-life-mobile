@@ -1,5 +1,5 @@
 import I18n from 'react-native-i18n';
-import { useSelector } from "react-redux";
+import { connect, ConnectedProps, useSelector } from "react-redux";
 import { UnAuthenticatedStack } from "./UnAuthenticatedStack";
 import { RootState } from "~/stores";
 import { AuthenticatedStack } from './AuthenticatedStack';
@@ -14,9 +14,14 @@ declare global {
   }
 }
 
-export const NavigationStacks = () => {
-  const appState = useSelector((state: RootState) => state.app);
-  const userState = useSelector((state: RootState) => state.user);
-  if (appState.language) I18n.locale = appState.language;
-  return userState.token ? <AuthenticatedStack /> : <UnAuthenticatedStack />;
-}
+
+const connector = connect((state: RootState) => ({
+  language: state.app.language,
+  token: state.user.token,
+}));
+const NavigationSwitch: React.FC<ConnectedProps<typeof connector>> = ({ language, token }) => {
+  if (language) I18n.locale = language;
+  return token ? <AuthenticatedStack /> : <UnAuthenticatedStack />;
+};
+
+export const NavigationStacks = connector(NavigationSwitch);

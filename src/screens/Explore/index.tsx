@@ -8,19 +8,16 @@ import { Course } from "~/api/model";
 import { getAvailableCourses } from "~/api/helper";
 import { CourseItem } from "./components/CourseItem";
 import HeaderComponent from "./components/HeaderComponent";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 
 const RENDER_PER_PAGE = 15;
 
-const mapStateToProps = (state: RootState) => ({
+const connector = connect((state: RootState) => ({
     categories: state.course.categories[state.app.language] || [],
     data: state.course.available[state.app.language] || []
-});
-
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-const Explore: React.FC<PropsFromRedux> = ({ data, categories }) => {
+}));
+const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories }) => {
+    const isFocused = useIsFocused();
     const [displayedData, setDisplayedData] = React.useState<Course[]>([]);
     const [filteredData, setFilteredData] = React.useState<Course[]>([]);
     const [selectedCategory, setSelectedCategory] = React.useState<number>();
@@ -30,12 +27,14 @@ const Explore: React.FC<PropsFromRedux> = ({ data, categories }) => {
     const onRefresh = React.useCallback(async (force?: boolean) => {
         const newData = await getAvailableCourses(force);
         setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
-    }, [data]);
-
-    React.useEffect(() => {
-        onRefresh();
     }, []);
 
+
+    React.useEffect(() => {
+        if (isFocused) {
+            onRefresh();
+        }
+    }, [isFocused]);
 
     React.useEffect(() => {
         const newData = data.filter(c => selectedCategory === undefined || c.categoryId === selectedCategory)
@@ -43,8 +42,6 @@ const Explore: React.FC<PropsFromRedux> = ({ data, categories }) => {
         setFilteredData(newData);
         setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
     }, [data, selectedCategory, selectedTab]);
-
-
 
 
     const loadMore = () => {

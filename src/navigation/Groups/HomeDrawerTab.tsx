@@ -15,25 +15,46 @@ import { config } from '~/config/config';
 import { HeaderMenuIcon } from '../components/HeaderMenuIcon';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { DrawerContentWrapper } from '../components/DrawerContentWrapper';
+import { View } from 'react-native';
+import Text from '~/components/Text';
+import React from 'react';
+import { connect, ConnectedProps } from 'react-redux';
+import { RootState } from '~/stores';
 
 const HomeDrawerNavigation = createDrawerNavigator();
 const HomeBottomTabs = createBottomTabNavigator();
 
 
 
+const connector = connect((state: RootState) => ({
+    alert: state.user.alert
+}));
 
 /**
  * Screens access via the Drawer Navigation (Side Menu)
  * @returns
  */
+export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alert }) => {
+    React.useEffect(() => {
+        const fetchAlert = async () => {
+            console.log('fetching alerts');
+        };
+        fetchAlert();
+        const intervalId = setInterval(fetchAlert, 20000);
+        return () => {
+            console.log('unhooking alert query')
+            clearInterval(intervalId);
+        }
+    }, []);
 
-export const BottomTabs = () => {
     return (
         <HomeBottomTabs.Navigator
             initialRouteName={AuthenticatedScreens.Home}
             screenOptions={({ route }) => ({
                 gestureDirection: 'horizontal-inverted',
-                headerShown: false,
+                headerShown: alert !== undefined,
+                header: () => null, /* display alert here */
+                headerTitle: '',
                 tabBarIcon: ({ focused, color, size }) => {
                     switch (route.name) {
                         case AuthenticatedScreens.Home: return <MaterialCommunityIcons name="home-outline" size={24} color={focused ? config.color.blue.primary : color} />
@@ -57,6 +78,8 @@ export const BottomTabs = () => {
             />
         </HomeBottomTabs.Navigator >);
 }
+const ConnectedBottomTabs = connector(BottomTabs);
+
 
 export const HomeDrawer = () => {
     const insets = useSafeAreaInsets();
@@ -83,7 +106,7 @@ export const HomeDrawer = () => {
             }}>
             <HomeDrawerNavigation.Screen
                 name={AuthenticatedScreens.HomeTabs}
-                component={BottomTabs}
+                component={ConnectedBottomTabs}
             />
         </HomeDrawerNavigation.Navigator>
     );
