@@ -11,6 +11,8 @@ import { AuthenticatedScreens } from "~/navigation/screens";
 import { t } from "~/translations";
 import { connect } from "react-redux";
 import { NavigationProp } from '@react-navigation/native';
+import FastImage from "@d11/react-native-fast-image";
+
 
 interface JumbotronProps {
     course: Course;
@@ -46,7 +48,7 @@ class Jumbotron extends React.PureComponent<JumbotronProps> {
                 onPress={() => { navigation.navigate(AuthenticatedScreens.CourseInformation, { id: course.id }) }}
             >
                 <View accessible={false}>
-                    <Image
+                    <FastImage
                         style={styles.backgroundImage}
                         accessibilityElementsHidden={true}
                         source={{
