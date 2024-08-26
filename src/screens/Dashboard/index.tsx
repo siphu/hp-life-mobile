@@ -5,7 +5,7 @@ import { RootState } from "~/stores";
 import { GlobalStyles } from "~/config/styles";
 import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
 import { NavigationProp, useFocusEffect, useIsFocused, useNavigation } from "@react-navigation/native";
-import { getEnrolledCourses } from "~/api/helper";
+import { getEnrolledCourses, getRemoteMessages } from "~/api/helper";
 import { Course, CourseStatus, TraineeCourse } from "~/api/model";
 import { CourseItem } from "./components/CourseItem";
 import HeaderComponent from "./components/HeaderComponent";
@@ -48,7 +48,8 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
         return filteredData;
     }, [selectedOptions]);
 
-    const fetchData = React.useCallback(async (force: boolean = false) => {
+    const onRefresh = React.useCallback(async (force: boolean = false) => {
+        getRemoteMessages();
         const newData = await getEnrolledCourses(force);
         const newOptions = [
             'myCourse.inProgress',
@@ -66,7 +67,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
 
     React.useEffect(() => {
         if (isFocused) {
-            fetchData();
+            onRefresh();
         }
     }, [isFocused]);
 
@@ -84,10 +85,6 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
         }
     };
 
-
-    const onRefresh = React.useCallback(() => {
-        fetchData(false);
-    }, [fetchData]);
 
     const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {
         return <CourseItem item={item} />;

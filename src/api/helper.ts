@@ -76,3 +76,19 @@ export const getAvailableCourses = async (
 
   return (stores.getState().course! as StoreCourseState).available![language];
 };
+
+let lastRemoteMessageCalled: number | null = null;
+export const getRemoteMessages = async () => {
+  const now = Date.now();
+  if (lastRemoteMessageCalled && now - lastRemoteMessageCalled < 10000) return;
+  lastRemoteMessageCalled = now;
+  fetchRemoteMessages();
+};
+
+async function fetchRemoteMessages() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(['Message 1', 'Message 2', 'Message 3']);
+    }, 250);
+  });
+}

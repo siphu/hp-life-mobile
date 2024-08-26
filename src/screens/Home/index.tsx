@@ -4,7 +4,7 @@ import { connect, ConnectedProps } from "react-redux";
 import Text from "~/components/Text"
 import { RootState } from "~/stores";
 import { setCategory } from "~/stores/course/actions";
-import { getAvailableCourses } from "~/api/helper";
+import { getAvailableCourses, getRemoteMessages } from "~/api/helper";
 import { GlobalStyles } from "~/config/styles";
 import { styles } from "./styles";
 import Jumbotron from "./components/Jumbotron";
@@ -21,6 +21,7 @@ const Home: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
     const navigation = useNavigation<NavigationProp<any>>();
 
     const onRefresh = (force?: boolean) => {
+        getRemoteMessages();
         getAvailableCourses(force);
     }
 

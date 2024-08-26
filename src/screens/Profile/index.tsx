@@ -11,29 +11,29 @@ import Text from "~/components/Text";
 import Dropdown from "~/components/Dropdown";
 import { setLanguage } from "~/stores/app/actions";
 import { UnknownAction } from "redux";
-import { t } from "~/providers/TranslationProvider";
-import { TranslationsPaths } from "~/translations";
+import { t, useTranslationContext } from "~/providers/TranslationProvider";
+import i18n, { TranslationsPaths } from "~/translations";
 
 
 const connector = connect((state: RootState) => ({
+    language: state.app.language,
     userProfile: state.user.profile!
 }));
 
-const Profile: React.FC<ConnectedProps<typeof connector>> = ({ userProfile }) => {
+const Profile: React.FC<ConnectedProps<typeof connector>> = ({ language, userProfile }) => {
 
-    const dispatch = useDispatch();
+    const translationContext = useTranslationContext();
 
-    const languageOptions: Array<{ label: string, value: string }> = [];
-    // const languageOptions = React.useMemo(() => Object.entries(I18n.translations)
-    //     .map(a => a[0])
-    //     .map(locale => ({ value: locale, label: getLanguageNameFromCode(locale) }))
-    //     , [I18n.translations]);
+    const languageOptions = React.useMemo(() =>
+        Object.keys(i18n.store.data)
+            .map(locale => ({ value: locale, label: getLanguageNameFromCode(locale) }))
+        , [i18n.store.data]);
 
 
     const genderOptions = React.useMemo(() => Object.entries(Gender).map(g => ({
         value: g[1].key,
         label: t(g[1].display as TranslationsPaths),
-    })), [Gender]);
+    })), [Gender, language]);
 
     const tzOptions = React.useMemo(() => Timezones.map(tz => ({
         value: tz,
@@ -84,7 +84,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({ userProfile }) =>
                 labelField={'label'}
                 valueField={'value'}
                 defaultValue={userProfile.language}
-                onSelect={(item) => { }}
+                onSelect={(item) => translationContext.changeLocale(item.value)}
                 disableAutoScroll
             />
             <Dropdown

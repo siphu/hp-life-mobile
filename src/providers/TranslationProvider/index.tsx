@@ -8,10 +8,11 @@ import RNRestart from 'react-native-restart';
 import _ from 'lodash';
 import { t as i18nextTranslation } from "i18next";
 
-export const t = (name: TranslationsPaths) => i18nextTranslation(name);
+
+export const t = (name: TranslationsPaths) => i18nextTranslation(name as string);
+
 
 interface LocaleContextProps {
-    locale: string;
     changeLocale: (newLocale: string) => void;
 }
 
@@ -68,13 +69,13 @@ class TranslationProvider extends React.Component<LocaleProviderProps, LocalePro
     };
 
     render() {
-        const { children, locale } = this.props;
+        const { children } = this.props;
         const { initialized } = this.state;
 
         if (!initialized) { return null; }
 
         return (
-            <LocaleContext.Provider value={{ locale, changeLocale: this.changeLocale }}>
+            <LocaleContext.Provider value={{ changeLocale: this.changeLocale }}>
                 {children}
             </LocaleContext.Provider>
         );
