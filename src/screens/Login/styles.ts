@@ -5,7 +5,6 @@ import {GlobalStyles} from '~/config/styles';
 export const styles = StyleSheet.create({
   ...GlobalStyles,
   container: {
-    backgroundColor: 'white',
     flex: 1,
   },
   welcomeBannerImage: {
