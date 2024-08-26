@@ -17,7 +17,7 @@ export const reducers = (
     case StoreAppType.SET_LANGUAGE:
       return {
         ...state,
-        language: action.payload as unknown as string,
+        language: action.payload,
       };
 
     default:

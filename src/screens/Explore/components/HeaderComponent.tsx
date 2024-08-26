@@ -1,11 +1,10 @@
 import { Dimensions, Platform, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Dropdown } from '~/components/react-native-element-dropdown';
+import { Dropdown } from '~/components/react-native-element-dropdown1';
 import React from "react";
 import { config } from "~/config/config";
-import { t, TranslationsPaths } from "~/translations";
-import Text from "~/components/Text";
 import TabIndicator from "~/components/TabIndicator";
 import { Category } from "~/api/model";
+import { t } from "~/providers/TranslationProvider";
 
 export interface FilterSelectionProps {
     categories: Category[];
@@ -16,7 +15,6 @@ export interface FilterSelectionProps {
 }
 
 const HeaderComponent = ({ categories, selectedCategory, onCategorySelect, selectedTab, onTabSelect }: FilterSelectionProps) => {
-
     const data = React.useMemo(
         () => {
             let map = categories.map(c => ({ label: c.name, value: c.id.toString() }));

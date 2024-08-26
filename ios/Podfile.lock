@@ -1569,9 +1569,9 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNI18n (2.0.15):
-    - React
   - RNInAppBrowser (3.7.0):
+    - React-Core
+  - RNLocalize (3.2.1):
     - React-Core
   - RNNotifee (7.8.2):
     - React-Core
@@ -1750,8 +1750,8 @@ DEPENDENCIES:
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - "RNFastImage (from `../node_modules/@d11/react-native-fast-image`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
-  - RNI18n (from `../node_modules/react-native-i18n`)
   - RNInAppBrowser (from `../node_modules/react-native-inappbrowser-reborn`)
+  - RNLocalize (from `../node_modules/react-native-localize`)
   - "RNNotifee (from `../node_modules/@notifee/react-native`)"
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -1909,10 +1909,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@d11/react-native-fast-image"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
-  RNI18n:
-    :path: "../node_modules/react-native-i18n"
   RNInAppBrowser:
     :path: "../node_modules/react-native-inappbrowser-reborn"
+  RNLocalize:
+    :path: "../node_modules/react-native-localize"
   RNNotifee:
     :path: "../node_modules/@notifee/react-native"
   RNReanimated:
@@ -1997,8 +1997,8 @@ SPEC CHECKSUMS:
   RNCPicker: b7873ba797dc586bfaf3307d737cbdc620a9ff3e
   RNFastImage: 0615ce5a0f40e620328abdc4fecdf8e087ab30d5
   RNGestureHandler: 939f21fabf5d45a725c0bf175eb819dd25cf2e70
-  RNI18n: e2f7e76389fcc6e84f2c8733ea89b92502351fd8
   RNInAppBrowser: e36d6935517101ccba0e875bac8ad7b0cb655364
+  RNLocalize: 4f22418187ecd5ca693231093ff1d912d1b3c9bc
   RNNotifee: 8e2d3df3f0e9ce8f5d1fe4c967431138190b6175
   RNReanimated: 74413c59c47123d7144db601d065627c75c746a3
   RNScreens: 19719a9c326e925498ac3b2d35c4e50fe87afc06

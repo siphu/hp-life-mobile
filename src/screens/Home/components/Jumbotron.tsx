@@ -8,11 +8,10 @@ import { RootState } from "~/stores";
 import { Completed } from "./Completed";
 import { InProgress } from "./InProgress";
 import { AuthenticatedScreens } from "~/navigation/screens";
-import { t } from "~/translations";
 import { connect } from "react-redux";
 import { NavigationProp } from '@react-navigation/native';
 import FastImage from "@d11/react-native-fast-image";
-
+import { t, useTranslationContext } from "~/providers/TranslationProvider";
 
 interface JumbotronProps {
     course: Course;

@@ -12,13 +12,12 @@ import Images from '~/res/images';
 import { ProfileItem } from "./components/ProfileItem";
 import { AuthenticatedScreens } from '~/navigation/screens'
 import { setToken } from "~/stores/user/actions";
-import { t } from "~/translations";
 import MenuItem, { MenuItemProps } from "./components/MenuItem";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Alert from "../Alert";
 import React from "react";
 import Button from "../Button";
-
+import { t } from "~/providers/TranslationProvider";
 
 const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
     const userState = useSelector((root: RootState) => root.user);

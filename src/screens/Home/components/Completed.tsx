@@ -1,7 +1,8 @@
 import { View } from "react-native"
 import Text from "~/components/Text"
-import { t } from "~/translations";
 import { styles } from "../styles";
+import { t } from "~/providers/TranslationProvider";
+
 export const Completed = () => {
     return (
         <View style={styles.tagCompleted}>

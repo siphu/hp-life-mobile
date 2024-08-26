@@ -35,18 +35,6 @@ const connector = connect((state: RootState) => ({
  * @returns
  */
 export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alert }) => {
-    React.useEffect(() => {
-        const fetchAlert = async () => {
-            console.log('fetching alerts');
-        };
-        fetchAlert();
-        const intervalId = setInterval(fetchAlert, 20000);
-        return () => {
-            console.log('unhooking alert query')
-            clearInterval(intervalId);
-        }
-    }, []);
-
     return (
         <HomeBottomTabs.Navigator
             initialRouteName={AuthenticatedScreens.Home}

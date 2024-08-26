@@ -8,7 +8,6 @@ import { useNavigation } from "@react-navigation/native";
 import { UnAuthenticatedScreens } from "~/navigation/screens";
 import Text from "~/components/Text";
 import _ from 'lodash';
-import { t } from "~/translations";
 import Button from "~/components/Button";
 import { extractToken, openBrowser, urlWithLocale } from "./helper";
 import { setProfile, setToken } from "~/stores/user/actions";
@@ -16,10 +15,11 @@ import { getUserProfile, refreshToken } from "~/api/rest/user";
 import { config } from "~/config/config";
 import { ScrollViewBackgroundLayer } from "~/components/ScrollViewBackgroundLayer";
 import { GlobalStyles } from "~/config/styles";
+import { t } from "~/providers/TranslationProvider";
 
 const Login = () => {
     const appState = useSelector((state: RootState) => state.app);
-    const userState = useSelector((state: RootState) => state.user);
+
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const openLanguageSelector = _.debounce(() => navigation.navigate(UnAuthenticatedScreens.Language), 100);

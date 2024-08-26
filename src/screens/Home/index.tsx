@@ -8,8 +8,8 @@ import { getAvailableCourses } from "~/api/helper";
 import { GlobalStyles } from "~/config/styles";
 import { styles } from "./styles";
 import Jumbotron from "./components/Jumbotron";
-import { t } from "~/translations";
 import { NavigationProp, useFocusEffect, useIsFocused, useNavigation } from "@react-navigation/native";
+import { t } from "~/providers/TranslationProvider";
 
 const connector = connect((state: RootState) => ({
     data: (state.course.available[state.app.language] || [])

@@ -1,8 +1,8 @@
-import I18n from 'react-native-i18n';
 import { connect, ConnectedProps, useSelector } from "react-redux";
 import { UnAuthenticatedStack } from "./UnAuthenticatedStack";
 import { RootState } from "~/stores";
 import { AuthenticatedStack } from './AuthenticatedStack';
+import { useTranslationContext } from "~/providers/TranslationProvider";
 
 /** This fixes the navigation.navigate() as never */
 export type RootStackParamList = { [key: string]: any };
@@ -16,11 +16,9 @@ declare global {
 
 
 const connector = connect((state: RootState) => ({
-  language: state.app.language,
   token: state.user.token,
 }));
-const NavigationSwitch: React.FC<ConnectedProps<typeof connector>> = ({ language, token }) => {
-  if (language) I18n.locale = language;
+const NavigationSwitch: React.FC<ConnectedProps<typeof connector>> = ({ token }) => {
   return token ? <AuthenticatedStack /> : <UnAuthenticatedStack />;
 };
 

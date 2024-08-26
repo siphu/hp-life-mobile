@@ -11,6 +11,8 @@ export const config = {
     misc: {
       border: '#e8e8e8',
       borderLight: '#00000061',
+      borderDark: '#9DA5B1',
+      danger: '#ff4400',
     },
     button: {
       primary: '#165dba',

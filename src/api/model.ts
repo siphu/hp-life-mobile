@@ -75,7 +75,7 @@ export interface UserProfile {
   preferredName: string;
   email: string;
   emailConfirmed: boolean;
-  gender: string | number;
+  gender: string;
   isNewsletterEnabled?: boolean;
   phoneNumber?: number;
   phoneNumberConfirmed: boolean;

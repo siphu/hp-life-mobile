@@ -4,6 +4,7 @@ import Images from '~/res/images';
 import { styles } from "../styles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { config } from "~/config/config";
+import { t } from "~/providers/TranslationProvider";
 
 export const ProfileItem = ({ name, click, disabled }: { name?: string; click: () => void, disabled?: boolean }) => {
     const userInitial =
@@ -13,6 +14,7 @@ export const ProfileItem = ({ name, click, disabled }: { name?: string; click: (
     const ParentElement: typeof View | typeof TouchableOpacity = disabled ? View : TouchableOpacity;
     return (<ParentElement
         accessibilityRole="button"
+        accessibilityLabel={t('sideMenu.manageAccount')}
         onPress={disabled ? undefined : click} style={styles.profileContainer}>
         <View style={styles.profileBox}>
             <View style={styles.profileRow}>
@@ -26,14 +28,13 @@ export const ProfileItem = ({ name, click, disabled }: { name?: string; click: (
                         {name}
                     </Text>
                     <Text style={styles.userEmail} numberOfLines={1}>
-                        {'Manage Account'}
+                        {t('sideMenu.manageAccount')}
                     </Text>
                 </View>
                 <View style={styles.profileArrowContainer}>
-                    <Icon name={'chevron-right'} color={config.color.neutral[900]} />
+                    <Icon name={'chevron-right'} color={config.color.neutral[900]} size={24} />
                 </View>
             </View>
-
         </View>
     </ParentElement>);
 }

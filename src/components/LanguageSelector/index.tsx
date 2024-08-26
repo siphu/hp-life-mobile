@@ -1,26 +1,19 @@
 import React from "react";
-import I18n from 'react-native-i18n';
 import { ScrollView, View } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
-import { getLanguageCodeFromName, getLanguageNameFromCode } from "~/translations/languages";
-import { changeLocale } from "~/translations";
-import { UnknownAction } from "redux";
+import { getLanguageNameFromCode } from "~/translations/languages";
+import i18n from '~/translations';
 import Images from "~/res/images";
 import Button from "../Button";
+import { useTranslationContext } from "~/providers/TranslationProvider";
 
 
-interface LanguageSelectorProps {
-    visible?: boolean;
-    onClose?: () => void;
-}
-
-const LanguageSelector = (props: LanguageSelectorProps) => {
-
+const LanguageSelector = () => {
+    const translation = useTranslationContext();
     const navigation = useNavigation();
-    const dispatch = useDispatch();
 
-    const LanguageButton = ({ locale }: { locale: string }) => {
+    const LanguageButton = ({ locale, name }: { locale: string, name: string }) => {
         return (
             <Button
                 textStyle={{
@@ -30,8 +23,8 @@ const LanguageSelector = (props: LanguageSelectorProps) => {
                 style={{
                     height: 80,
                     paddingVertical: 20,
-                }} title={locale} onPress={() => {
-                    dispatch(changeLocale(getLanguageCodeFromName(locale)) as unknown as UnknownAction);
+                }} title={name} onPress={() => {
+                    translation.changeLocale(locale);
                     navigation.goBack();
                 }} />
         );
@@ -49,10 +42,9 @@ const LanguageSelector = (props: LanguageSelectorProps) => {
                 <Images.logo.black width={'100%'} />
             </View>
             <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
-                {Object.entries(I18n.translations)
-                    .map(a => a[0])
-                    .map(getLanguageNameFromCode)
-                    .map(l => <LanguageButton locale={l as string} key={l as string} />)}
+                {Object.keys(i18n.store.data)
+                    .map(locale => ({ locale: locale, name: getLanguageNameFromCode(locale) }))
+                    .map(l => <LanguageButton locale={l.locale} key={l.locale} name={l.name!} />)}
             </ScrollView>
         </View >
     );

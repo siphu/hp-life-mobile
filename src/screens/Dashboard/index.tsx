@@ -4,12 +4,12 @@ import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "~/stores";
 import { GlobalStyles } from "~/config/styles";
 import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
-import { t } from "~/translations";
 import { NavigationProp, useFocusEffect, useIsFocused, useNavigation } from "@react-navigation/native";
 import { getEnrolledCourses } from "~/api/helper";
 import { Course, CourseStatus, TraineeCourse } from "~/api/model";
 import { CourseItem } from "./components/CourseItem";
 import HeaderComponent from "./components/HeaderComponent";
+import { t } from "~/providers/TranslationProvider";
 
 const RENDER_PER_PAGE = 15;
 

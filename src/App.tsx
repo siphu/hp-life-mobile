@@ -9,6 +9,7 @@ import { stores, persistor } from './stores';
 import { PersistGate } from "redux-persist/integration/react";
 import './translations';
 import '~/api/interceptor';
+import TranslationProvider from "./providers/TranslationProvider";
 
 export const App = () => {
 
@@ -20,17 +21,19 @@ export const App = () => {
         <SafeAreaProvider>
             <Provider store={stores}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <NavigationContainer onReady={onReady}>
-                        <OrientationLocker orientation="PORTRAIT" />
-                        <StatusBar
-                            animated={true}
-                            barStyle={'dark-content'}
-                            backgroundColor={'transparent'}
-                            translucent={true}
-                            hidden={false}
-                        />
-                        <NavigationStacks />
-                    </NavigationContainer>
+                    <TranslationProvider>
+                        <NavigationContainer onReady={onReady}>
+                            <OrientationLocker orientation="PORTRAIT" />
+                            <StatusBar
+                                animated={true}
+                                barStyle={'dark-content'}
+                                backgroundColor={'transparent'}
+                                translucent={true}
+                                hidden={false}
+                            />
+                            <NavigationStacks />
+                        </NavigationContainer>
+                    </TranslationProvider>
                 </PersistGate>
             </Provider>
         </SafeAreaProvider>

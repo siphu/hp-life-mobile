@@ -1,9 +1,9 @@
 import { Platform, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Dropdown } from '~/components/react-native-element-dropdown';
+import { Dropdown } from '~/components/react-native-element-dropdown1';
 import React from "react";
 import { config } from "~/config/config";
-import { t, TranslationsPaths } from "~/translations";
-
+import { t } from "~/providers/TranslationProvider";
+import { TranslationsPaths } from "~/translations";
 export interface FilterSelectionProps {
     categories: string[];
     selected?: string;

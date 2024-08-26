@@ -2,6 +2,7 @@
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
     "types": ["jest", "react-native"],
+    "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
       "~/*": ["*"]
@@ -16,6 +17,7 @@
     "./node_modules/@types/node/index.d.ts",
     "babel.config.js",
     "metro.config.js",
-    "jest.config.js"
+    "jest.config.js",
+    "node_modules/react-native-gesture-handler"
   ]
 }

@@ -1,13 +1,103 @@
 import React from "react";
-import { View } from "react-native"
-import Text from "~/components/Text"
+import { ScrollView, View } from "react-native"
+import { GlobalStyles } from "~/config/styles";
+import { styles } from "./styles";
+import Input from "./components/Input";
+import { connect, ConnectedProps, useDispatch } from "react-redux";
+import { RootState } from "~/stores";
+import { getLanguageNameFromCode } from "~/translations/languages";
+import { Countries, Gender, Timezones } from "~/api/dict";
+import Text from "~/components/Text";
+import Dropdown from "~/components/Dropdown";
+import { setLanguage } from "~/stores/app/actions";
+import { UnknownAction } from "redux";
+import { t } from "~/providers/TranslationProvider";
+import { TranslationsPaths } from "~/translations";
 
-class Profile extends React.Component {
-    render() {
-        return (
-            <View><Text>Profile</Text></View>
-        )
-    }
+
+const connector = connect((state: RootState) => ({
+    userProfile: state.user.profile!
+}));
+
+const Profile: React.FC<ConnectedProps<typeof connector>> = ({ userProfile }) => {
+
+    const dispatch = useDispatch();
+
+    const languageOptions: Array<{ label: string, value: string }> = [];
+    // const languageOptions = React.useMemo(() => Object.entries(I18n.translations)
+    //     .map(a => a[0])
+    //     .map(locale => ({ value: locale, label: getLanguageNameFromCode(locale) }))
+    //     , [I18n.translations]);
+
+
+    const genderOptions = React.useMemo(() => Object.entries(Gender).map(g => ({
+        value: g[1].key,
+        label: t(g[1].display as TranslationsPaths),
+    })), [Gender]);
+
+    const tzOptions = React.useMemo(() => Timezones.map(tz => ({
+        value: tz,
+        label: tz
+    })), [Timezones]);
+
+
+    return (
+        <ScrollView style={GlobalStyles.flex} contentContainerStyle={styles.scrollContainer}>
+            <Input
+                title={t('profile.email')}
+                required={true}
+                value={userProfile.email}
+                enabled={false}
+            />
+            <Input
+                title={t('profile.fullName')}
+                note={t('profile.nameNote')}
+                required={true}
+                value={userProfile.fullName}
+                style={{}}
+                enabled={true}
+                onChange={(t: string) => {
+                    // let profile = { ...userProfile };
+                    // profile.fullName = t;
+                    // setUserProfile(profile);
+                }}
+            />
+            <Dropdown
+                search={true}
+                data={genderOptions}
+                defaultValue={userProfile.gender}
+                labelField={'label'}
+                valueField={'value'}
+                onSelect={() => { }}
+            />
+            <Dropdown
+                search={true}
+                data={Countries}
+                defaultValue={userProfile.country}
+                labelField={'name'}
+                valueField={'code'}
+                onSelect={() => { }}
+                disableAutoScroll
+            />
+            <Dropdown
+                data={languageOptions}
+                labelField={'label'}
+                valueField={'value'}
+                defaultValue={userProfile.language}
+                onSelect={(item) => { }}
+                disableAutoScroll
+            />
+            <Dropdown
+                search={true}
+                data={tzOptions}
+                labelField={'label'}
+                valueField={'value'}
+                defaultValue={userProfile.timeZone}
+                onSelect={() => { }}
+                disableAutoScroll
+            />
+        </ScrollView>
+    )
 }
 
-export default Profile;
+export default connector(Profile);
