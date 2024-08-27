@@ -24,8 +24,8 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories 
 
 
     const onRefresh = React.useCallback(async (force?: boolean) => {
-        const newData = await getAvailableCourses(force);
-        setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
+        await getAvailableCourses(force);
+        // setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
     }, []);
 
 

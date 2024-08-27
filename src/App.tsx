@@ -14,7 +14,7 @@ import NetInfo from '@react-native-community/netinfo';
 import { setOnlineStatus } from "./stores/app/actions";
 import { getUserProfile, refreshToken } from "./api/helper";
 import { config } from "./config/config";
-
+import BootSplash from "react-native-bootsplash";
 
 NetInfo.configure({
     reachabilityUrl: config.api.learning,
@@ -33,7 +33,8 @@ const NetworkListener = () => {
 
     React.useEffect(() => {
         const unsubscribe = NetInfo.addEventListener((state) => {
-            const isNowOnline = (state.isConnected && state.isInternetReachable);
+            const isNowOnline = state.isConnected; //(state.isConnected && state.isInternetReachable);
+            //const isNowOnline = true;
 
             if (!isCurrentOnline && isNowOnline && token) {
                 refreshToken().catch(() => { }).then(getUserProfile);
@@ -61,7 +62,7 @@ export const App = () => {
 
     // persistor.purge();
     const onReady = () => {
-        //RNBootSplash.hide({ fade: true });
+        BootSplash.hide({ fade: true });
     };
 
     return (

@@ -35,8 +35,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options, 
 
 
     const onRefresh = React.useCallback(async (force?: boolean) => {
-        const newData = await getEnrolledCourses(force);
-        setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
+        await getEnrolledCourses(force);
     }, []);
 
     React.useEffect(() => {
