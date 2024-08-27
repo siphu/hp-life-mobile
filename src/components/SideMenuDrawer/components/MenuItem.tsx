@@ -28,7 +28,7 @@ export default (props: MenuItemProps) => {
                 props.selected ? styles.selectedRow : {},
 
             ]}>
-            {props.icon === 'help-outline' ?
+            {props.icon === 'help_outline' ?
                 <MaterialIcons style={styles.linkIcon} name={props.icon} size={24} color={props.disabled ? config.color.neutral[400] : config.color.neutral[900]} /> :
                 <MaterialIconsOutlined style={styles.linkIcon} name={props.icon} size={24} color={props.disabled ? config.color.neutral[400] : config.color.neutral[900]} />
             }
@@ -37,7 +37,7 @@ export default (props: MenuItemProps) => {
                 {props.label}
             </Text>
             <View style={GlobalStyles.flexGrow} />
-            <MaterialIcons name={I18nManager.isRTL ? 'chevron_left' : 'chevron_right'} size={30} color={config.color.neutral[900]} />
+            <MaterialIcons name={I18nManager.isRTL ? 'chevron_left' : 'chevron_right'} size={30} color={config.color.neutral[props.disabled ? 400 : 900]} />
         </ParentElement>
     );
 };

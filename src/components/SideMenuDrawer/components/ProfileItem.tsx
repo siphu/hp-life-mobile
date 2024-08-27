@@ -32,7 +32,7 @@ export const ProfileItem = ({ name, click, disabled }: { name?: string; click: (
                     </Text>
                 </View>
                 <View style={styles.profileArrowContainer}>
-                    <MaterialIcons name={I18nManager.isRTL ? 'chevron_left' : 'chevron_right'} color={config.color.neutral[900]} size={30} />
+                    <MaterialIcons name={I18nManager.isRTL ? 'chevron_left' : 'chevron_right'} color={config.color.neutral[disabled ? 400 : 900]} size={30} />
                 </View>
             </View>
         </View>

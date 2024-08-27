@@ -17,8 +17,8 @@ import { config } from "./config/config";
 
 
 NetInfo.configure({
-    reachabilityUrl: config.api.webUrl,
-    reachabilityTest: async (response) => response.status >= 200 && response.status < 300,
+    reachabilityUrl: config.api.learning,
+    reachabilityTest: async (response) => response.status >= 200 && response.status < 500,
     reachabilityLongTimeout: 60 * 1000,
     reachabilityShortTimeout: 5 * 1000,
     reachabilityRequestTimeout: 15 * 1000,

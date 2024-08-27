@@ -39,10 +39,10 @@ let lastAvailableCoursesFetchTime: number | null = null;
 let lastRemoteMessageCalled: number | null = null;
 
 /* cache duration in seconds */
-const CATEGORY_CACHE_DURATION = 60;
-const ENROLLED_CACHE_DURATION = 10;
-const COURSE_CACHE_DURATION = 30;
-const MESSAGE_CACHE_DURATION = 10;
+const CATEGORY_CACHE_DURATION = 3600;
+const ENROLLED_CACHE_DURATION = 60;
+const COURSE_CACHE_DURATION = 600;
+const MESSAGE_CACHE_DURATION = 600;
 
 const filterCourses = (courses: TraineeCourse[]): TraineeCourse[] => {
   return courses.filter(

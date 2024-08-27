@@ -66,7 +66,7 @@ export default React.memo((props: TabIndicatorProps) => {
                 {
                   backgroundColor: selected
                     ? props.selectedBackgroundColor || config.color.button.primary
-                    : props.backgroundColor || config.color.neutral[300],
+                    : props.backgroundColor || config.color.misc.border
                 },
               ]}
             />

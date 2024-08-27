@@ -13,6 +13,7 @@ export const config = {
       borderLight: '#00000061',
       borderDark: '#9DA5B1',
       danger: '#ff4400',
+      selected: '#EEF6FE',
     },
     button: {
       primary: '#165dba',

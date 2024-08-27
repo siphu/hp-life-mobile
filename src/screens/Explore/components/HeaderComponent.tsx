@@ -46,14 +46,14 @@ const HeaderComponent = ({ categories, selectedCategory, onCategorySelect, selec
                     selectedTextStyle={styles.selectedTextStyle}
                     itemTextStyle={styles.selectedTextStyle}
                     itemContainerStyle={{
-                        borderColor: config.color.neutral[500],
+                        borderColor: config.color.misc.border,
                     }}
                     inputSearchStyle={styles.inputSearchStyle}
                     iconStyle={styles.iconStyle}
                     containerStyle={{
                         borderColor: config.color.neutral[900],
                     }}
-                    activeColor={config.color.neutral[500]}
+                    activeColor={config.color.misc.selected}
                     data={data}
                     maxHeight={Dimensions.get('window').height * .75}
                     labelField="label"
@@ -65,12 +65,12 @@ const HeaderComponent = ({ categories, selectedCategory, onCategorySelect, selec
                     }}
                 />
             </View>
-            <View style={{ height: 60 }}>
+            <View style={{ height: 55 }}>
                 <TabIndicator
                     tabs={[t('explore.newest'), t('explore.popular')]}
                     style={styles.pagerTabIndicatorRow}
                     selected={selectedTab}
-                    selectedBackgroundColor={config.color.button.primary}
+                    selectedBackgroundColor={config.color.neutral[700]}
                     onTabSwitch={onTabSelect}
                 />
             </View>

@@ -33,14 +33,14 @@ const HeaderComponent = ({ categories, selected, onSelect }: FilterSelectionProp
                 selectedTextStyle={styles.selectedTextStyle}
                 itemTextStyle={styles.selectedTextStyle}
                 itemContainerStyle={{
-                    borderColor: config.color.neutral[500],
+                    borderColor: config.color.misc.border,
                 }}
                 inputSearchStyle={styles.inputSearchStyle}
                 iconStyle={styles.iconStyle}
                 containerStyle={{
                     borderColor: config.color.neutral[900],
                 }}
-                activeColor={config.color.neutral[500]}
+                activeColor={config.color.misc.selected}
                 data={data}
                 maxHeight={300}
                 labelField="label"

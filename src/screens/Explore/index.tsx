@@ -82,7 +82,7 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories 
                 ItemSeparatorComponent={() => <View style={{ height: ITEM_SPACING }} />}
                 getItemLayout={(_, index) => ({
                     length: ITEM_HEIGHT,
-                    offset: (ITEM_HEIGHT + ITEM_SPACING) * index,
+                    offset: 105 + (ITEM_HEIGHT + ITEM_SPACING) * index,
                     index,
                 })}
                 initialNumToRender={RENDER_PER_PAGE}

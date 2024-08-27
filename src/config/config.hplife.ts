@@ -71,7 +71,7 @@ export default {
     {
       title: 'sideMenu.links.help',
       url: `${base.api.webUrl}/mobile/help`,
-      icon: 'help-outline',
+      icon: 'help_outline',
     },
     {
       title: 'sideMenu.links.resources',

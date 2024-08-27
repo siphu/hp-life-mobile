@@ -43,6 +43,7 @@ const Home: React.FC<ConnectedProps<typeof connector>> = ({ data, online }) => {
                 refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh(true)} />}
                 data={data}
                 renderItem={React.useCallback(({ item }: { item: Course }) => <Jumbotron course={item} key={item.id.toString()} navigation={navigation} disabled={!online} />, [])}
+                removeClippedSubviews
             />
         </View >
     );

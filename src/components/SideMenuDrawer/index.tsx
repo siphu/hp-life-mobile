@@ -32,18 +32,22 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
             icon: 'verified',
             selected: false,
             click: () => {
-
+                navigation.navigate(AuthenticatedScreens.Dashboard, {
+                    category: 'Completed',
+                });
             },
-            disabled: false
+            disabled: !appState.online
         },
         {
             label: t('sideMenu.badges'),
             icon: 'workspace_premium',
             selected: false,
             click: () => {
-
+                navigation.navigate(AuthenticatedScreens.Dashboard, {
+                    category: 'Badges',
+                });
             },
-            disabled: false
+            disabled: !appState.online
         },
     ].filter(m => m !== undefined) as MenuItemProps[];
 
@@ -78,7 +82,7 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
                 accessibilityRole="menu"
                 style={GlobalStyles.flex}
                 showsVerticalScrollIndicator={false}>
-                <ProfileItem disabled={false} name={userState.profile?.fullName} click={() => navigation.navigate(AuthenticatedScreens.Profile)} />
+                <ProfileItem disabled={!appState.online} name={userState.profile?.fullName} click={() => navigation.navigate(AuthenticatedScreens.Profile)} />
                 {menu.map((m, i) => (
                     <MenuItem {...m} key={'menu_' + i.toString()} />
                 ))}
@@ -93,7 +97,7 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
                                 url: m.url,
                             });
                         }}
-                        disabled={!!!true}
+                        disabled={!appState.online}
                     />
                 ))}
             </ScrollView>
