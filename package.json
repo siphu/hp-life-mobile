@@ -17,7 +17,8 @@
     "android:bundleRelease": "cd android && ./gradlew bundleRelease",
     "android:apkRelease": "cd android && ./gradlew assembleRelease",
     "firebase:ipa": "bundle exec fastlane buildIOSOnly",
-    "firebase:apk": "bundle exec fastlane buildAndroidOnly"
+    "firebase:apk": "bundle exec fastlane buildAndroidOnly",
+    "bump": "bundle exec fastlane bumpVersion"
   },
   "dependencies": {
     "@d11/react-native-fast-image": "^8.6.10",
