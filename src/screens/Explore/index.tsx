@@ -3,12 +3,13 @@ import { FlatList, View, RefreshControl, ListRenderItem, Dimensions } from "reac
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "~/stores";
 import { GlobalStyles } from "~/config/styles";
-import { ITEM_SPACING, styles } from "./styles";
+import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
 import { Course } from "~/api/model";
 import { getAvailableCourses } from "~/api/helper";
 import { CourseItem } from "./components/CourseItem";
 import HeaderComponent from "./components/HeaderComponent";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { AuthenticatedScreens } from "~/navigation/screens";
 
 const RENDER_PER_PAGE = 8;
 
@@ -17,6 +18,7 @@ const connector = connect((state: RootState) => ({
     data: state.course.available[state.app.language] || []
 }));
 const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories }) => {
+    const navigation = useNavigation();
     const isFocused = useIsFocused();
     const [displayedData, setDisplayedData] = React.useState<Course[]>([]);
     const [selectedCategory, setSelectedCategory] = React.useState<number>();
@@ -24,8 +26,7 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories 
 
 
     const onRefresh = React.useCallback(async (force?: boolean) => {
-        await getAvailableCourses(force);
-        // setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
+        getAvailableCourses(force);
     }, []);
 
 
@@ -54,11 +55,9 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories 
     };
 
     const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {
-        return <CourseItem item={item} />;
+        return <CourseItem item={item} category={categories.find(v => v.id === item.categoryId)!.name} onClick={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { id: item.id })} />;
     }, []);
 
-
-    const ITEM_HEIGHT = React.useMemo(() => Dimensions.get('screen').width * .40, []);
 
     return (
         <View style={GlobalStyles.screenContainer}>

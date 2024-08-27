@@ -1,27 +1,80 @@
 import React from "react";
 import { Course } from "~/api/model";
 import { styles } from "../styles";
-import { Image, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 import Text from "~/components/Text";
 import FastImage from "@d11/react-native-fast-image";
+import { t } from "~/providers/TranslationProvider";
+import { date_to_str } from "~/api/util";
+import moment from "moment";
+import * as Progress from 'react-native-progress';
+import { config } from "~/config/config";
+import { InProgress } from "./InProgress";
+import { Completed } from "./Completed";
+import { AvailableOffline } from "./AvailableOffline";
 
-
-export class CourseItem extends React.PureComponent<{ item: Course }> {
+export class CourseItem extends React.PureComponent<{ item: Course, category: string, onClick: () => void }> {
     render() {
-        const { item } = this.props;
+        const { item, onClick, category } = this.props;
+
+        const extraTextInProgress =
+            t('courseInformation.startedDate') +
+            ': ' +
+            (item.startDate
+                ? date_to_str(moment(item.startDate))
+                : t('courseInformation.neverDate'));
+
+        const extraTextCompleted =
+            t('courseInformation.finishDate') +
+            ': ' +
+            date_to_str(moment(item.finishDate));
+
         return (
-            <View style={styles.itemContainer}>
-                <FastImage
-                    source={{ uri: item.imageUrl }}
-                    style={styles.image}
-                />
-                <View>
-                    <Text>{item.name}</Text>
-                    <Text>{item.status?.toString()}</Text>
-                    <Text>Progress: {item.progress?.toString()}</Text>
-                    <Text>Enrolled: {(item.traineeEnrollmentStatus === 'Enrolled' || item.enrollmentStatus === 'Enrolled') ? 'Yes' : 'No'}</Text>
+            <TouchableOpacity accessible={false} style={styles.itemContainer} onPress={onClick}>
+                <TouchableOpacity
+                    accessible={false}
+                    accessibilityElementsHidden={true}
+                    importantForAccessibility="no-hide-descendants"
+                    onPress={onClick}
+                    style={{
+                        height: '100%',
+                        overflow: 'hidden',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        paddingHorizontal: 5,
+                    }}>
+                    <FastImage
+                        accessibilityElementsHidden={true}
+                        importantForAccessibility="no-hide-descendants"
+                        accessible={false}
+                        accessibilityLabel={''}
+                        accessibilityHint={''}
+                        accessibilityRole={'none'}
+                        source={{ uri: item.imageUrl }}
+                        style={styles.image}
+                        resizeMode={FastImage.resizeMode.cover}
+                    />
+                </TouchableOpacity>
+                <View style={styles.rightContainer}>
+                    <View>
+                        <Text style={styles.categoryText}>{category}</Text>
+                        <TouchableOpacity onPress={onClick} accessibilityRole='button'>
+                            <Text style={styles.titleText} numberOfLines={2}>
+                                {item.name}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.outerTagContainer}>
+                        <View style={styles.tagContainer}>
+                            {(item.progress && item.progress >= 1) && (<Completed />) || null}
+                            {(item.progress && item.progress < 1) && (<InProgress />) || null}
+                        </View>
+                        <View style={styles.tagContainer}>
+                            {(item.books && Array.isArray(item.books) && item.books.length) && (<AvailableOffline />) || null}
+                        </View>
+                    </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     }
 }

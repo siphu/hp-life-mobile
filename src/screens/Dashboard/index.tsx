@@ -9,6 +9,7 @@ import { getEnrolledCourses } from "~/api/helper";
 import { Course, CourseStatus, TraineeCourse } from "~/api/model";
 import { CourseItem } from "./components/CourseItem";
 import HeaderComponent from "./components/HeaderComponent";
+import { AuthenticatedScreens } from "~/navigation/screens";
 
 const RENDER_PER_PAGE = 8;
 
@@ -22,6 +23,7 @@ const connector = connect((state: RootState) => ({
 }));
 
 const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options, online }) => {
+    const navigation = useNavigation();
     const route = useRoute<{
         key: string;
         name: string;
@@ -35,7 +37,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options, 
 
 
     const onRefresh = React.useCallback(async (force?: boolean) => {
-        await getEnrolledCourses(force);
+        getEnrolledCourses(force);
     }, []);
 
     React.useEffect(() => {
@@ -72,7 +74,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options, 
     };
 
     const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {
-        return <CourseItem item={item} />;
+        return <CourseItem item={item} onClick={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { id: item.id })} />;
     }, []);
 
     React.useEffect(() => {

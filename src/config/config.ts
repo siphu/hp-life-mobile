@@ -14,6 +14,7 @@ export const config = {
       borderDark: '#9DA5B1',
       danger: '#ff4400',
       selected: '#EEF6FE',
+      text: '#142341',
     },
     button: {
       primary: '#165dba',

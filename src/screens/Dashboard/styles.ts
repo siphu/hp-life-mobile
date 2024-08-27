@@ -2,9 +2,10 @@ import {Dimensions, StyleSheet} from 'react-native';
 import {config} from '~/config/config';
 
 const screenWidth = Dimensions.get('window').width;
-const ITEM_HEIGHT = 150;
+const ITEM_HEIGHT = Math.floor(screenWidth * 0.3);
+
 const PADDING_HORIZONTAL = 20;
-const ITEM_SPACING = 20;
+const ITEM_SPACING = 10;
 const HEADER_HEIGHT = 50;
 
 export {
@@ -26,15 +27,46 @@ export const styles = StyleSheet.create({
   },
   itemContainer: {
     height: ITEM_HEIGHT,
-    width: screenWidth - PADDING_HORIZONTAL * 2,
-    backgroundColor: 'lightgrey',
+    width: '100%',
+    backgroundColor: config.color.neutral[50],
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'stretch',
     flexDirection: 'row',
+    borderWidth: 1,
   },
   image: {
-    height: '100%',
-    width: 100,
-    marginRight: 10,
+    height: ITEM_HEIGHT - 10,
+    width: ITEM_HEIGHT - 10,
+  },
+  rightContainer: {
+    flexGrow: 1,
+    flex: 1,
+    paddingHorizontal: 10,
+    paddingTop: 5,
+    justifyContent: 'space-between',
+    display: 'flex',
+  },
+  titleText: {
+    color: config.color.misc.text,
+    fontSize: 18,
+    fontWeight: '500',
+    textAlign: 'left',
+  },
+  extraText: {
+    color: config.color.misc.text,
+    fontSize: 12,
+    textAlign: 'left',
+  },
+  progressBarContainer: {
+    height: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  progressBarText: {
+    alignSelf: 'center',
+    color: config.color.neutral[900],
+    fontSize: 12,
+    fontWeight: '500',
+    marginLeft: 8,
   },
 });
