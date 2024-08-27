@@ -46,7 +46,7 @@ export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alerts,
 
     React.useEffect(() => {
         if (offline && !AllowedOfflineScreens.includes(route.name as AuthenticatedScreens)) {
-            navigation.navigate(AuthenticatedScreens.Dashboard, { tab: 'offline' });
+            navigation.navigate(AuthenticatedScreens.Dashboard, { category: 'myCourse.ebook' });
         }
     }, [offline, route.name, navigation]);
 

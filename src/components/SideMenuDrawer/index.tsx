@@ -33,7 +33,7 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
             selected: false,
             click: () => {
                 navigation.navigate(AuthenticatedScreens.Dashboard, {
-                    category: 'Completed',
+                    category: 'myCourse.completed',
                 });
             },
             disabled: !appState.online
@@ -44,7 +44,7 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
             selected: false,
             click: () => {
                 navigation.navigate(AuthenticatedScreens.Dashboard, {
-                    category: 'Badges',
+                    category: 'myCourse.badges',
                 });
             },
             disabled: !appState.online

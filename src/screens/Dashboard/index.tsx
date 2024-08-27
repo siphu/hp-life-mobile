@@ -4,7 +4,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "~/stores";
 import { GlobalStyles } from "~/config/styles";
 import { ITEM_SPACING, styles } from "./styles";
-import { NavigationProp, useFocusEffect, useIsFocused, useNavigation } from "@react-navigation/native";
+import { NavigationProp, useFocusEffect, useIsFocused, useNavigation, useRoute } from "@react-navigation/native";
 import { getEnrolledCourses } from "~/api/helper";
 import { Course, CourseStatus, TraineeCourse } from "~/api/model";
 import { CourseItem } from "./components/CourseItem";
@@ -13,16 +13,26 @@ import HeaderComponent from "./components/HeaderComponent";
 const RENDER_PER_PAGE = 8;
 
 const connector = connect((state: RootState) => ({
+    online: state.app.online,
     data: state.course.enrolled.sort((a, b) => new Date(b.lastAccessDate).getTime() - new Date(a.lastAccessDate).getTime()),
-    options: state.course.enrolled.some(C => C.status === CourseStatus.Archived) ?
-        ['myCourse.inProgress', 'myCourse.ebook', 'myCourse.completed', 'myCourse.badges', 'myCourse.archived'] :
-        ['myCourse.inProgress', 'myCourse.ebook', 'myCourse.completed', 'myCourse.badges']
+    options: !state.app.online ? ['myCourse.ebook'] :
+        state.course.enrolled.some(C => C.status === CourseStatus.Archived) ?
+            ['myCourse.inProgress', 'myCourse.ebook', 'myCourse.completed', 'myCourse.badges', 'myCourse.archived'] :
+            ['myCourse.inProgress', 'myCourse.ebook', 'myCourse.completed', 'myCourse.badges']
 }));
 
-const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options }) => {
+const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options, online }) => {
+    const route = useRoute<{
+        key: string;
+        name: string;
+        params: {
+            category?: string;
+        };
+    }>();
     const isFocused = useIsFocused();
     const [displayedData, setDisplayedData] = React.useState<TraineeCourse[]>([]);
-    const [selectedOptions, setSelectedOptions] = React.useState<string>('myCourse.inProgress');
+    const [selectedOptions, setSelectedOptions] = React.useState<string>(!online ? 'myCourse.ebook' : (route.params?.category || 'myCourse.inProgress'));
+
 
     const onRefresh = React.useCallback(async (force?: boolean) => {
         const newData = await getEnrolledCourses(force);
@@ -65,6 +75,13 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options }
     const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {
         return <CourseItem item={item} />;
     }, []);
+
+    React.useEffect(() => {
+        if (route.params?.category && route.params?.category !== selectedOptions) {
+            setSelectedOptions(route.params?.category);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [route]);
 
     const ITEM_HEIGHT = React.useMemo(() => Dimensions.get('screen').width * .40, []);
     return (
