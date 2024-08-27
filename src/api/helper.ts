@@ -17,8 +17,10 @@ import {
   updateAvailableCourses,
   updateEnrolledCourses,
 } from '~/stores/course/actions';
+import {CourseAction} from '~/stores/course/reducers';
 import {StoreCourseState} from '~/stores/course/state';
 import {setProfile, setToken} from '~/stores/user/actions';
+import {UserAction} from '~/stores/user/reducers';
 
 let lastCategoryFetchTime: number | null = null;
 let lastEnrolledCoursesFetchTime: number | null = null;
@@ -181,5 +183,15 @@ export const refreshToken = (token?: AuthToken) => {
 };
 
 export const getUserProfile = () => {
-  return remoteGetUserProfile().then(setProfile).then(stores.dispatch);
+  return remoteGetUserProfile()
+    .then(setProfile)
+    .then(stores.dispatch)
+    .catch(() => {
+      signOut();
+    });
+};
+
+export const signOut = () => {
+  stores.dispatch({type: CourseAction.RESET_COURSE_STORE});
+  stores.dispatch({type: UserAction.SIGN_OUT});
 };

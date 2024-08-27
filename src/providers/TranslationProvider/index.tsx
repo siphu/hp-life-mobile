@@ -23,6 +23,7 @@ const RestartApp = _.debounce(() => { RNRestart.Restart(); }, 200);
 interface LocaleProviderProps {
     children: ReactNode;
     locale: string;
+    userLanguage?: string;
 }
 
 interface LocaleProviderState {
@@ -35,13 +36,16 @@ class TranslationProvider extends React.Component<LocaleProviderProps, LocalePro
     };
 
     async componentDidMount() {
-        const { locale } = this.props;
-        await this.setLanguage(locale);
+        const { userLanguage, locale } = this.props;
+        await this.setLanguage(userLanguage || locale);
         this.setState({ initialized: true });
     }
 
     componentDidUpdate(prevProps: LocaleProviderProps) {
-        if (prevProps.locale !== this.props.locale) {
+        if (this.props.userLanguage && prevProps.locale !== this.props.userLanguage) {
+            this.setLanguage(this.props.userLanguage);
+        }
+        else if (prevProps.locale !== this.props.locale) {
             this.setLanguage(this.props.locale);
         }
     }
@@ -84,6 +88,7 @@ class TranslationProvider extends React.Component<LocaleProviderProps, LocalePro
 
 const mapStateToProps = (state: RootState) => ({
     locale: state.app.language,
+    userLanguage: state.user.profile?.language
 });
 
 export default connect(mapStateToProps)(TranslationProvider);

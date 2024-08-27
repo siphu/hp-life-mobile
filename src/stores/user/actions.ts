@@ -1,7 +1,7 @@
 import {UserAction} from './reducers';
 import {AuthToken, UserProfile} from '~/api/model';
 
-export const setProfile = (profile: UserProfile) => {
+export const setProfile = (profile?: UserProfile) => {
   return {
     type: UserAction.SET_PROFILE,
     payload: profile,

@@ -2,10 +2,10 @@ import {Course} from '~/api/model';
 import {StoreCourseState, state as defaultState} from './state';
 
 export enum CourseAction {
+  RESET_COURSE_STORE = 'RESET_COURSE_STORE',
   SET_CATEGORY = 'SET_CATEGORY',
   SET_ENROLLED = 'SET_ENROLLED',
   UPDATE_ENROLLED = 'UPDATE_ENROLLED',
-
   SET_AVAILABLE_COURSES = 'SET_AVAILABLE_COURSES',
   UPDATE_AVAILABLE_COURSES = 'UPDATE_AVAILABLE_COURSES',
 }
@@ -20,6 +20,8 @@ export const reducers = (
   action: ReducerAction,
 ): StoreCourseState => {
   switch (action.type) {
+    case CourseAction.RESET_COURSE_STORE:
+      return defaultState;
     case CourseAction.SET_CATEGORY:
       let newCategories = {...state.categories};
       newCategories[action.payload.language] = action.payload.categories;

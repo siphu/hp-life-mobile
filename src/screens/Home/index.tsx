@@ -14,9 +14,10 @@ import { t } from "~/providers/TranslationProvider";
 const connector = connect((state: RootState) => ({
     data: (state.course.available[state.app.language] || [])
         .sort((a, b) => new Date(b.publishDate!).getTime() - new Date(a.publishDate!).getTime()).slice(0, 15) || [],
-    language: state.app.language
+    language: state.app.language,
+    online: state.app.online
 }));
-const Home: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
+const Home: React.FC<ConnectedProps<typeof connector>> = ({ data, online }) => {
     const isFocused = useIsFocused();
     const navigation = useNavigation<NavigationProp<any>>();
 
@@ -39,7 +40,7 @@ const Home: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
                 indicatorStyle={'black'}
                 refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh(true)} />}
                 data={data}
-                renderItem={({ item }) => <Jumbotron course={item} key={item.id.toString()} navigation={navigation} />}
+                renderItem={({ item }) => <Jumbotron course={item} key={item.id.toString()} navigation={navigation} disabled={!online} />}
             />
         </View >
     );

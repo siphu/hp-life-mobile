@@ -1,6 +1,7 @@
 import {StoreUserState, state as defaultState} from './state';
 
 export enum UserAction {
+  SIGN_OUT = 'SIGN_OUT',
   SET_TOKEN = 'SET_TOKEN',
   SET_PROFILE = 'SET_PROFILE',
 }
@@ -15,6 +16,13 @@ export const reducers = (
   action: ReducerAction,
 ): StoreUserState => {
   switch (action.type) {
+    case UserAction.SIGN_OUT:
+      return {
+        ...state,
+        token: undefined,
+        profile: undefined,
+        alert: undefined,
+      };
     case UserAction.SET_TOKEN:
       return {
         ...state,

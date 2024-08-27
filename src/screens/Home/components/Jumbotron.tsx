@@ -18,6 +18,7 @@ interface JumbotronProps {
     language: string;
     categories: RootState["course"]["categories"];
     navigation: NavigationProp<any>;
+    disabled?: boolean;
 }
 
 class Jumbotron extends React.PureComponent<JumbotronProps> {
