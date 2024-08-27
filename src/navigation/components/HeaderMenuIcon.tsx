@@ -1,7 +1,7 @@
 import React from 'react';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons } from "~/components/MaterialIcons";
 import { GlobalStyles } from '~/config/styles';
 
 const styles = StyleSheet.create({

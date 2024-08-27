@@ -10,7 +10,7 @@ import { HeaderLogo } from '../components/HeaderLogo';
 import Dashboard from '~/screens/Dashboard';
 import Explore from '~/screens/Explore';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons } from "~/components/MaterialIcons";
 import { config } from '~/config/config';
 import { HeaderMenuIcon } from '../components/HeaderMenuIcon';
 import { DrawerActions, useNavigation, useRoute } from '@react-navigation/native';

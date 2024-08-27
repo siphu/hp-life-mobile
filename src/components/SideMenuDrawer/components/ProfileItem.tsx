@@ -2,9 +2,9 @@ import { I18nManager, TouchableOpacity, View } from "react-native";
 import Text from "~/components/Text";
 import Images from '~/res/images';
 import { styles } from "../styles";
-import Icon from "react-native-vector-icons/MaterialIcons";
 import { config } from "~/config/config";
 import { t } from "~/providers/TranslationProvider";
+import { MaterialIcons } from "~/components/MaterialIcons";
 
 export const ProfileItem = ({ name, click, disabled }: { name?: string; click: () => void, disabled?: boolean }) => {
     const userInitial =
@@ -32,7 +32,7 @@ export const ProfileItem = ({ name, click, disabled }: { name?: string; click: (
                     </Text>
                 </View>
                 <View style={styles.profileArrowContainer}>
-                    <Icon name={I18nManager.isRTL ? 'chevron-left' : 'chevron-right'} color={config.color.neutral[900]} size={30} />
+                    <MaterialIcons name={I18nManager.isRTL ? 'chevron_left' : 'chevron_right'} color={config.color.neutral[900]} size={30} />
                 </View>
             </View>
         </View>

@@ -11,6 +11,7 @@
 		0C80B921A6F3F58F76C31292 /* libPods-hplife.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-hplife.a */; };
 		0CAD3694D4954E91B336BD6E /* FormaDJRMicro-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BD22DFC668141FEB0B398A9 /* FormaDJRMicro-ExtraLight.ttf */; };
 		0E6EC30766E1433BBA7D3F13 /* FormaDJRMicro-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 396EFC0C19B14FDBB1FB05A3 /* FormaDJRMicro-BlackItalic.ttf */; };
+		0E89C4F305734AE38D885712 /* MaterialIcons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D86F9BD395D64DF18290389A /* MaterialIcons-Regular.ttf */; };
 		0FDA4C3BB2BB47D682DD2889 /* FormaDJRMicro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBDF8CBB49614301AB25ACC9 /* FormaDJRMicro-Light.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -111,6 +112,7 @@
 		BF01841D2C779225001BA863 /* hplife.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = hplife.entitlements; path = hplife/hplife.entitlements; sourceTree = "<group>"; };
 		C2A4D61CA06A4FA782CEA5C8 /* FormaDJRMicro-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-MediumItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-MediumItalic.ttf"; sourceTree = "<group>"; };
 		D45C5F70EF8382BB0095FBD3 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = hplife/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		D86F9BD395D64DF18290389A /* MaterialIcons-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "MaterialIcons-Regular.ttf"; path = "../src/res/fonts/MaterialIcons-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EDF56133DC2D49C0B067A394 /* MaterialIconsOutlined-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "MaterialIconsOutlined-Regular.ttf"; path = "../src/res/fonts/MaterialIconsOutlined-Regular.ttf"; sourceTree = "<group>"; };
 		EE8425780BC94D27965C5C6D /* FormaDJRMicro-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-Bold.ttf"; path = "../src/res/fonts/FormaDJRMicro-Bold.ttf"; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				C2A4D61CA06A4FA782CEA5C8 /* FormaDJRMicro-MediumItalic.ttf */,
 				B26F63D7B86D42F3A72EA3DA /* FormaDJRMicro-Regular.ttf */,
 				EDF56133DC2D49C0B067A394 /* MaterialIconsOutlined-Regular.ttf */,
+				D86F9BD395D64DF18290389A /* MaterialIcons-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				4C4571B5E1964B7ABB1C9427 /* FormaDJRMicro-Regular.ttf in Resources */,
 				6851A27B2E7FE0C7F9185284 /* PrivacyInfo.xcprivacy in Resources */,
 				F37CCF2A795D40E7A1341075 /* MaterialIconsOutlined-Regular.ttf in Resources */,
+				0E89C4F305734AE38D885712 /* MaterialIcons-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

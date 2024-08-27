@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, RefreshControl, View } from "react-native"
+import { Dimensions, FlatList, ListRenderItem, RefreshControl, View } from "react-native"
 import { connect, ConnectedProps } from "react-redux";
 import Text from "~/components/Text"
 import { RootState } from "~/stores";
@@ -10,6 +10,7 @@ import { styles } from "./styles";
 import Jumbotron from "./components/Jumbotron";
 import { NavigationProp, useIsFocused, useNavigation } from "@react-navigation/native";
 import { t } from "~/providers/TranslationProvider";
+import { Course } from "~/api/model";
 
 const connector = connect((state: RootState) => ({
     data: (state.course.available[state.app.language] || [])
@@ -30,6 +31,7 @@ const Home: React.FC<ConnectedProps<typeof connector>> = ({ data, online }) => {
             onRefresh();
         }
     }, [isFocused]);
+
     return (
         <View style={GlobalStyles.screenContainer}>
             <FlatList
@@ -40,7 +42,7 @@ const Home: React.FC<ConnectedProps<typeof connector>> = ({ data, online }) => {
                 indicatorStyle={'black'}
                 refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh(true)} />}
                 data={data}
-                renderItem={({ item }) => <Jumbotron course={item} key={item.id.toString()} navigation={navigation} disabled={!online} />}
+                renderItem={React.useCallback(({ item }: { item: Course }) => <Jumbotron course={item} key={item.id.toString()} navigation={navigation} disabled={!online} />, [])}
             />
         </View >
     );

@@ -1,9 +1,9 @@
 import React from "react";
-import { FlatList, ListRenderItem, RefreshControl, View } from "react-native";
+import { Dimensions, FlatList, ListRenderItem, RefreshControl, View } from "react-native";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "~/stores";
 import { GlobalStyles } from "~/config/styles";
-import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
+import { ITEM_SPACING, styles } from "./styles";
 import { NavigationProp, useFocusEffect, useIsFocused, useNavigation } from "@react-navigation/native";
 import { getEnrolledCourses } from "~/api/helper";
 import { Course, CourseStatus, TraineeCourse } from "~/api/model";
@@ -66,6 +66,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options }
         return <CourseItem item={item} />;
     }, []);
 
+    const ITEM_HEIGHT = React.useMemo(() => Dimensions.get('screen').width * .40, []);
     return (
         <View style={GlobalStyles.screenContainer}>
             <FlatList

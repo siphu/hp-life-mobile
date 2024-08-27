@@ -58,6 +58,10 @@
       "sha1": "a27e0ec0c5209c2c7266355ca65611f34bcd07ad"
     },
     {
+      "path": "src/res/fonts/MaterialIcons-Regular.ttf",
+      "sha1": "7e02c3f005532ff4d24148567c84089756a7848a"
+    },
+    {
       "path": "src/res/fonts/MaterialIconsOutlined-Regular.ttf",
       "sha1": "6d72371912a5e7bcc156fa70ade2fd41124d6d96"
     }

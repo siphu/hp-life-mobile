@@ -1,9 +1,9 @@
 import React from "react";
-import { FlatList, View, RefreshControl, ListRenderItem } from "react-native";
+import { FlatList, View, RefreshControl, ListRenderItem, Dimensions } from "react-native";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "~/stores";
 import { GlobalStyles } from "~/config/styles";
-import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
+import { ITEM_SPACING, styles } from "./styles";
 import { Course } from "~/api/model";
 import { getAvailableCourses } from "~/api/helper";
 import { CourseItem } from "./components/CourseItem";
@@ -56,6 +56,9 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories 
     const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {
         return <CourseItem item={item} />;
     }, []);
+
+
+    const ITEM_HEIGHT = React.useMemo(() => Dimensions.get('screen').width * .40, []);
 
     return (
         <View style={GlobalStyles.screenContainer}>

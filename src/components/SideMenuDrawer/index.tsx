@@ -7,13 +7,12 @@ import { config } from "~/config/config";
 import { GlobalStyles } from "~/config/styles";
 import { RootState } from "~/stores";
 import { styles } from "./styles";
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import Images from '~/res/images';
 import { ProfileItem } from "./components/ProfileItem";
 import { AuthenticatedScreens } from '~/navigation/screens'
 import { setToken } from "~/stores/user/actions";
 import MenuItem, { MenuItemProps } from "./components/MenuItem";
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons } from "~/components/MaterialIcons";
 import Alert from "../Alert";
 import React from "react";
 import Button from "../Button";
@@ -69,7 +68,7 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
                         <TouchableOpacity
                             accessibilityRole='button'
                             onPress={navigation.closeDrawer}>
-                            <Icon name="close" size={24} color={config.color.neutral[900]} />
+                            <MaterialIcons name="close" size={24} color={config.color.neutral[900]} />
                         </TouchableOpacity>
                     </View>
                 </View>

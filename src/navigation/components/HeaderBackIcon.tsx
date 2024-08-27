@@ -1,7 +1,7 @@
 import React from 'react';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons } from "~/components/MaterialIcons";
 import { GlobalStyles } from '~/config/styles';
 import { config } from '~/config/config';
 
@@ -17,7 +17,7 @@ interface BackHeaderProp {
 export const HeaderBackIcon = (props: BackHeaderProp) => {
     return (
         <TouchableOpacity onPress={props.onPress} style={styles.touchableArea}>
-            <MaterialIcons name='arrow-back' size={30} color={config.color.neutral[900]} />
+            <MaterialIcons name='arrow_back' size={30} color={config.color.neutral[900]} />
         </TouchableOpacity>
     );
 };
