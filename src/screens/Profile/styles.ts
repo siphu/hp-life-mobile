@@ -2,6 +2,10 @@ import {StyleSheet} from 'react-native';
 import {config} from '~/config/config';
 
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: config.color.neutral[50],
+  },
   scrollContainer: {
     padding: 20,
     gap: 20,
@@ -37,5 +41,9 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     textAlign: 'left',
+  },
+  disabledButton: {
+    backgroundColor: '#E6E6E6',
+    color: '#475060',
   },
 });

@@ -13,29 +13,22 @@ import { styles } from './styles';
 
 const ic_close = require('../../assets/close.png');
 
-const defaultProps = {
-  style: {},
-  value: '',
-  showIcon: true,
-  currency: false,
-  numeric: false,
-};
-
-const TextInputComponent: CTextInput = (props) => {
-  const {
-    fontFamily,
-    style,
-    value,
-    placeholderTextColor = '#000',
-    placeholder = '',
-    showIcon,
-    inputStyle,
-    iconStyle,
-    onChangeText = (_value: string) => {},
-    renderLeftIcon,
-    renderRightIcon,
-  } = props;
-
+const TextInputComponent: CTextInput = ({
+  style = {},
+  value = '',
+  showIcon = true,
+  currency = false,
+  numeric = false,
+  fontFamily,
+  placeholderTextColor = '#000',
+  placeholder = '',
+  inputStyle,
+  iconStyle,
+  onChangeText = (_value: string) => { },
+  renderLeftIcon,
+  renderRightIcon,
+  ...props
+}) => {
   const [text, setText] = useState<string>('');
 
   useEffect(() => {
@@ -98,7 +91,5 @@ const TextInputComponent: CTextInput = (props) => {
     </TouchableWithoutFeedback>
   );
 };
-
-TextInputComponent.defaultProps = defaultProps;
 
 export default TextInputComponent;

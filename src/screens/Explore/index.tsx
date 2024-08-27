@@ -58,7 +58,7 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories 
     }, []);
 
     return (
-        <View style={GlobalStyles.flex}>
+        <View style={GlobalStyles.screenContainer}>
             <FlatList
                 data={displayedData}
                 renderItem={renderItem}

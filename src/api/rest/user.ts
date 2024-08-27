@@ -1,11 +1,39 @@
 import {config} from '~/config/config';
-import {AuthToken, CurrentAlertApiModel, UserProfile} from '../model';
+import {
+  AuthToken,
+  CurrentAlertApiModel,
+  EmailMarketingAccountSetting,
+  UserProfile,
+} from '../model';
 import {stores} from '~/stores';
-import {get, post} from './restful';
+import {get, post, put} from './restful';
 import {StoreUserState} from '~/stores/user/state';
 
 export async function getUserProfile(): Promise<UserProfile> {
   return get<UserProfile>(`${config.api.identity}/api/account/profile`);
+}
+
+export async function updateUserProfile(
+  profileData: UserProfile,
+): Promise<void> {
+  return await put<void>(
+    `${config.api.identity}/api/account/profile`,
+    profileData,
+  );
+}
+
+export async function getEmailMarketingSetting(): Promise<EmailMarketingAccountSetting> {
+  return get<EmailMarketingAccountSetting>(
+    `${config.api.marketing}/Account/settings`,
+  );
+}
+
+export async function setEmailMarketingSetting(
+  newsLetterEnabled?: boolean,
+): Promise<void> {
+  return put<void>(`${config.api.marketing}/Account/settings`, {
+    isNewsletterEnabled: newsLetterEnabled ?? true,
+  });
 }
 
 export async function refreshToken(token?: AuthToken): Promise<AuthToken> {

@@ -1,6 +1,11 @@
 import {StyleSheet} from 'react-native';
+import {config} from './config';
 
 export const GlobalStyles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    backgroundColor: config.color.neutral[50],
+  },
   flex: {
     flex: 1,
   },

@@ -1,4 +1,4 @@
-import { TouchableOpacity, View } from "react-native";
+import { I18nManager, TouchableOpacity, View } from "react-native";
 import Text from "~/components/Text";
 import Images from '~/res/images';
 import { styles } from "../styles";
@@ -32,7 +32,7 @@ export const ProfileItem = ({ name, click, disabled }: { name?: string; click: (
                     </Text>
                 </View>
                 <View style={styles.profileArrowContainer}>
-                    <Icon name={'chevron-right'} color={config.color.neutral[900]} size={24} />
+                    <Icon name={I18nManager.isRTL ? 'chevron-left' : 'chevron-right'} color={config.color.neutral[900]} size={30} />
                 </View>
             </View>
         </View>

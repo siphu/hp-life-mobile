@@ -18,6 +18,7 @@
     "babel.config.js",
     "metro.config.js",
     "jest.config.js",
-    "node_modules/react-native-gesture-handler"
+    "node_modules/react-native-gesture-handler",
+    "src/components/react-native-element-dropdown/**/*.*"
   ]
 }

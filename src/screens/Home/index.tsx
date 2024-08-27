@@ -31,7 +31,7 @@ const Home: React.FC<ConnectedProps<typeof connector>> = ({ data, online }) => {
         }
     }, [isFocused]);
     return (
-        <View style={GlobalStyles.flex}>
+        <View style={GlobalStyles.screenContainer}>
             <FlatList
                 style={styles.scrollStyle}
                 contentContainerStyle={styles.scrollContent}

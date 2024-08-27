@@ -1,5 +1,5 @@
 import { Platform, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Dropdown } from '~/components/react-native-element-dropdown1';
+import { Dropdown } from '~/components/react-native-element-dropdown';
 import React from "react";
 import { config } from "~/config/config";
 import { t } from "~/providers/TranslationProvider";

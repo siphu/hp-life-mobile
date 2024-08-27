@@ -1,6 +1,6 @@
 import React from 'react';
 import { styles } from '../styles'
-import { TouchableOpacity, View } from 'react-native';
+import { I18nManager, TouchableOpacity, View } from 'react-native';
 import { Text } from '~/components/Text';
 import { config } from '~/config/config';
 import Images from '~/res/images';
@@ -37,7 +37,7 @@ export default (props: MenuItemProps) => {
                 {props.label}
             </Text>
             <View style={GlobalStyles.flexGrow} />
-            <MaterialIcons name='chevron-right' size={30} color={config.color.neutral[900]} />
+            <MaterialIcons name={I18nManager.isRTL ? 'chevron-left' : 'chevron-right'} size={30} color={config.color.neutral[900]} />
         </ParentElement>
     );
 };

@@ -67,7 +67,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options }
     }, []);
 
     return (
-        <View style={GlobalStyles.flex}>
+        <View style={GlobalStyles.screenContainer}>
             <FlatList
                 data={displayedData}
                 renderItem={renderItem}

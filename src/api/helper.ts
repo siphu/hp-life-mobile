@@ -1,4 +1,10 @@
-import {AuthToken, Course, CourseStatus, TraineeCourse} from '~/api/model';
+import {
+  AuthToken,
+  Course,
+  CourseStatus,
+  TraineeCourse,
+  UserProfile,
+} from '~/api/model';
 import {
   getAvailableCourses as getRemoteAvailableCourses,
   getCategories as getRemoteCategories,
@@ -7,7 +13,10 @@ import {
 import {
   refreshToken as remoteRefreshToken,
   getUserProfile as remoteGetUserProfile,
+  updateUserProfile as remoteUpdateUserProfile,
   getCurrentAlert as remoteGetAlert,
+  getEmailMarketingSetting,
+  setEmailMarketingSetting,
 } from '~/api/rest/user';
 import {stores} from '~/stores';
 import {StoreAppState} from '~/stores/app/state';
@@ -178,12 +187,29 @@ export const refreshToken = (token?: AuthToken) => {
 };
 
 export const getUserProfile = () => {
-  return remoteGetUserProfile()
+  return Promise.all([
+    remoteGetUserProfile(),
+    getEmailMarketingSetting().catch(e => null),
+  ])
+    .then(([profile, marketing]) => {
+      profile.isNewsletterEnabled =
+        (marketing && marketing.isNewsletterEnabled) || false;
+      return profile;
+    })
     .then(setProfile)
     .then(stores.dispatch)
     .catch(() => {
       signOut();
     });
+};
+
+export const updateUserProfile = (userProfile: UserProfile) => {
+  remoteUpdateUserProfile(userProfile)
+    .then(() => setProfile(userProfile))
+    .then(stores.dispatch)
+    .then(() =>
+      setEmailMarketingSetting(userProfile.isNewsletterEnabled).catch(() => {}),
+    );
 };
 
 export const signOut = () => {

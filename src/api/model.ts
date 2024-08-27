@@ -140,3 +140,7 @@ export interface CurrentAlertApiModel {
   type: AlertType;
   message: string;
 }
+
+export interface EmailMarketingAccountSetting {
+  isNewsletterEnabled: boolean;
+}

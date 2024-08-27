@@ -42,8 +42,8 @@ class TranslationProvider extends React.Component<LocaleProviderProps, LocalePro
     }
 
     componentDidUpdate(prevProps: LocaleProviderProps) {
-        if (this.props.userLanguage && prevProps.locale !== this.props.userLanguage) {
-            this.setLanguage(this.props.userLanguage);
+        if (this.props.userLanguage && prevProps.userLanguage !== this.props.userLanguage) {
+            this.changeLocale(this.props.userLanguage);
         }
         else if (prevProps.locale !== this.props.locale) {
             this.setLanguage(this.props.locale);
@@ -60,14 +60,12 @@ class TranslationProvider extends React.Component<LocaleProviderProps, LocalePro
         const newIsRTL = rtlLanguages.includes(newLocale);
         const currentIsRTL = I18nManager.isRTL;
 
-        await stores.dispatch(setLanguage(newLocale));
+        I18nManager.forceRTL(newIsRTL);
 
-        i18n.changeLanguage(newLocale).then(() => {
+        await i18n.changeLanguage(newLocale).then(async () => {
+            await stores.dispatch(setLanguage(newLocale));
             if (newIsRTL !== currentIsRTL) {
-                I18nManager.forceRTL(newIsRTL);
                 RestartApp();
-            } else {
-                I18nManager.forceRTL(newIsRTL);
             }
         });
     };
