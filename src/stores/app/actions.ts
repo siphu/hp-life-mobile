@@ -10,3 +10,8 @@ export const setLanguage = (locale: string) => {
     return Promise.resolve(locale);
   };
 };
+
+export const setOnlineStatus = (isOnline: boolean | null) => ({
+  type: StoreAppType.SET_ONLINE_STATUS,
+  payload: isOnline,
+});

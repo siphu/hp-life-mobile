@@ -36,7 +36,7 @@ const persistCourseConfig = {
 const persistRootConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['app', 'user'],
+  whitelist: ['app', 'user', 'course'],
 };
 
 const rootReducer = combineReducers({

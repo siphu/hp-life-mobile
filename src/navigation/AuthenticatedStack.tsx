@@ -15,6 +15,7 @@ import InAppBrowser from '~/screens/InAppBrowser';
 const Screen = createStackNavigator();
 
 export const AuthenticatedStack = () => {
+
     const insets = useSafeAreaInsets();
     return (
         <Screen.Navigator

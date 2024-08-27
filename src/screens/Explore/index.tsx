@@ -10,7 +10,7 @@ import { CourseItem } from "./components/CourseItem";
 import HeaderComponent from "./components/HeaderComponent";
 import { useIsFocused } from "@react-navigation/native";
 
-const RENDER_PER_PAGE = 15;
+const RENDER_PER_PAGE = 8;
 
 const connector = connect((state: RootState) => ({
     categories: state.course.categories[state.app.language] || [],

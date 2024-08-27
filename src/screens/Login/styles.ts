@@ -15,4 +15,19 @@ export const styles = StyleSheet.create({
     flexGrow: 1,
     alignContent: 'stretch',
   },
+  mainContentContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+  },
+  loginMessage: {
+    textAlign: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+  },
+  buttonContainer: {
+    alignSelf: 'stretch',
+    paddingHorizontal: 20,
+    rowGap: 10,
+  },
 });

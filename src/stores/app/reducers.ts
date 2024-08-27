@@ -2,6 +2,7 @@ import {StoreAppState, state as defaultState} from './state';
 
 export enum StoreAppType {
   SET_LANGUAGE = 'SET_LANGUAGE',
+  SET_ONLINE_STATUS = 'SET_ONLINE_STATUS',
 }
 
 interface ReducerAppAction {
@@ -19,7 +20,11 @@ export const reducers = (
         ...state,
         language: action.payload,
       };
-
+    case StoreAppType.SET_ONLINE_STATUS:
+      return {
+        ...state,
+        online: action.payload,
+      };
     default:
       return state;
   }

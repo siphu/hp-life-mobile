@@ -10,91 +10,57 @@ import { Course, CourseStatus, TraineeCourse } from "~/api/model";
 import { CourseItem } from "./components/CourseItem";
 import HeaderComponent from "./components/HeaderComponent";
 
-const RENDER_PER_PAGE = 15;
+const RENDER_PER_PAGE = 8;
 
 const connector = connect((state: RootState) => ({
-    data: state.course.enrolled
+    data: state.course.enrolled.sort((a, b) => new Date(b.lastAccessDate).getTime() - new Date(a.lastAccessDate).getTime()),
+    options: state.course.enrolled.some(C => C.status === CourseStatus.Archived) ?
+        ['myCourse.inProgress', 'myCourse.ebook', 'myCourse.completed', 'myCourse.badges', 'myCourse.archived'] :
+        ['myCourse.inProgress', 'myCourse.ebook', 'myCourse.completed', 'myCourse.badges']
 }));
-const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
-    const [displayedData, setDisplayedData] = React.useState<TraineeCourse[]>([]);
-    const [selectableOptions, setOptions] = React.useState<string[]>([
-        'myCourse.inProgress',
-        'myCourse.ebook',
-        'myCourse.completed',
-        'myCourse.badges',
-    ]);
-    const [selectedOptions, setSelectedOptions] = React.useState<string>('myCourse.inProgress');
-    const navigation = useNavigation<NavigationProp<any>>();
+
+const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options }) => {
     const isFocused = useIsFocused();
-    const hasMounted = React.useRef(false);
+    const [displayedData, setDisplayedData] = React.useState<TraineeCourse[]>([]);
+    const [filteredData, setFilteredData] = React.useState<TraineeCourse[]>([]);
+    const [selectedOptions, setSelectedOptions] = React.useState<string>('myCourse.inProgress');
 
-    const filterDisplayData = React.useCallback((incomingData: TraineeCourse[], updateState: boolean = true) => {
-        let filteredData = [...incomingData];
-        if (selectedOptions === 'myCourse.inProgress') {
-            filteredData = filteredData.filter(C => C.enrollmentStatus === 'Enrolled' && ((C.progress && C.progress < 1) || !C.progress));
-        } else if (selectedOptions === 'myCourse.completed') {
-            filteredData = filteredData.filter(C => C.progress && C.progress >= 1);
-        } else if (selectedOptions === 'myCourse.archived') {
-            filteredData = filteredData.filter(C => C.status === CourseStatus.Archived);
-        } else filteredData = [];
-        const sortedData = filteredData.sort((a, b) => new Date(b.lastAccessDate).getTime() - new Date(a.lastAccessDate).getTime());
-
-        if (updateState) {
-            const newData = sortedData.slice(0, RENDER_PER_PAGE);
-            if (JSON.stringify(displayedData) !== JSON.stringify(newData)) {
-                setDisplayedData(newData);
-            }
-        }
-        return filteredData;
-    }, [selectedOptions]);
-
-    const onRefresh = React.useCallback(async (force: boolean = false) => {
+    const onRefresh = React.useCallback(async (force?: boolean) => {
         const newData = await getEnrolledCourses(force);
-        const newOptions = [
-            'myCourse.inProgress',
-            'myCourse.ebook',
-            'myCourse.completed',
-            'myCourse.badges',
-        ];
-        if (newData.some(C => C.status === CourseStatus.Archived)) {
-            newOptions.push('myCourse.archived');
-        }
-        setOptions(newOptions);
-        filterDisplayData(newData);
-    }, [selectedOptions]);
-
+        setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
+    }, []);
 
     React.useEffect(() => {
-        if (hasMounted.current) {
-            if (isFocused) {
-                onRefresh();
-            }
-        } else {
-            hasMounted.current = true;
+        if (isFocused) {
+            onRefresh();
         }
     }, [isFocused]);
 
     React.useEffect(() => {
-        filterDisplayData(data);
-    }, [selectedOptions, data]);
+        let newData = [...data];
+        if (selectedOptions === 'myCourse.inProgress') {
+            newData = newData.filter(C => C.enrollmentStatus === 'Enrolled' && ((C.progress && C.progress < 1) || !C.progress));
+        } else if (selectedOptions === 'myCourse.completed') {
+            newData = newData.filter(C => C.progress && C.progress >= 1);
+        } else if (selectedOptions === 'myCourse.archived') {
+            newData = newData.filter(C => C.status === CourseStatus.Archived);
+        } else newData = [];
+        setFilteredData(newData);
+        setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
+    }, [data, selectedOptions]);
 
 
     const loadMore = () => {
         const currentLength = displayedData.length;
-        const filteredData = filterDisplayData(data, false);
-
         if (currentLength < filteredData.length) {
             const nextData = filteredData.slice(currentLength, currentLength + RENDER_PER_PAGE);
             setDisplayedData(prevData => [...prevData, ...nextData]);
         }
     };
 
-
     const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {
         return <CourseItem item={item} />;
     }, []);
-
-    const keyExtractor = (item: Course) => item.id.toString();
 
     return (
         <View style={GlobalStyles.flex}>
@@ -103,12 +69,12 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data }) => {
                 renderItem={renderItem}
                 ListHeaderComponent={
                     <HeaderComponent
-                        categories={selectableOptions}
+                        categories={options}
                         selected={selectedOptions}
                         onSelect={s => setSelectedOptions(s!)}
                     />
                 }
-                keyExtractor={keyExtractor}
+                keyExtractor={(item: Course) => item.id.toString()}
                 refreshControl={<RefreshControl refreshing={false} onRefresh={() => onRefresh(true)} />}
                 showsVerticalScrollIndicator={true}
                 indicatorStyle={'black'}

@@ -22,20 +22,23 @@ import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/stores';
 import { getRemoteMessages } from '~/api/helper';
 import { t } from '~/providers/TranslationProvider';
+import AlertBanner from '~/components/AlertBanner';
+import OfflineBanner from '~/components/OfflineBanner';
 
 const HomeDrawerNavigation = createDrawerNavigator();
 const HomeBottomTabs = createBottomTabNavigator();
 
 const connector = connect((state: RootState) => ({
     alert: state.user.alert,
-    language: state.app.language
+    language: state.app.language,
+    offline: state.app.online === false
 }));
 
 /**
  * Screens access via the Drawer Navigation (Side Menu)
  * @returns
  */
-export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alert }) => {
+export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alert, offline }) => {
 
     return (
         <HomeBottomTabs.Navigator
@@ -56,8 +59,8 @@ export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alert }
             }}
             screenOptions={({ route }) => ({
                 gestureDirection: 'horizontal-inverted',
-                headerShown: alert !== undefined,
-                header: () => null, /* display alert here */
+                headerShown: offline,
+                header: () => offline && <OfflineBanner />,
                 headerTitle: '',
                 tabBarIcon: ({ focused, color, size }) => {
                     switch (route.name) {

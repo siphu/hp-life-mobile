@@ -1,9 +1,13 @@
-import {Course, CourseStatus, TraineeCourse} from '~/api/model';
+import {AuthToken, Course, CourseStatus, TraineeCourse} from '~/api/model';
 import {
   getAvailableCourses as getRemoteAvailableCourses,
   getCategories as getRemoteCategories,
   getTraineeCourses,
 } from '~/api/rest/courses';
+import {
+  refreshToken as remoteRefreshToken,
+  getUserProfile as remoteGetUserProfile,
+} from '~/api/rest/user';
 import {stores} from '~/stores';
 import {StoreAppState} from '~/stores/app/state';
 import {
@@ -14,6 +18,7 @@ import {
   updateEnrolledCourses,
 } from '~/stores/course/actions';
 import {StoreCourseState} from '~/stores/course/state';
+import {setProfile, setToken} from '~/stores/user/actions';
 
 let lastCategoryFetchTime: number | null = null;
 let lastEnrolledCoursesFetchTime: number | null = null;
@@ -21,9 +26,9 @@ let lastAvailableCoursesFetchTime: number | null = null;
 let lastRemoteMessageCalled: number | null = null;
 
 /* cache duration in seconds */
-const CATEGORY_CACHE_DURATION = 5;
-const ENROLLED_CACHE_DURATION = 5;
-const COURSE_CACHE_DURATION = 5;
+const CATEGORY_CACHE_DURATION = 60;
+const ENROLLED_CACHE_DURATION = 10;
+const COURSE_CACHE_DURATION = 30;
 const MESSAGE_CACHE_DURATION = 10;
 
 const filterCourses = (courses: TraineeCourse[]): TraineeCourse[] => {
@@ -45,10 +50,11 @@ export const getCategories = async (force?: boolean) => {
 
   const cachedCategories = courseState.categories[lang];
   const shouldUseCache =
-    cachedCategories &&
-    lastCategoryFetchTime &&
-    currentTime - lastCategoryFetchTime < cacheDuration &&
-    !force;
+    appState.online !== true ||
+    (cachedCategories &&
+      lastCategoryFetchTime &&
+      currentTime - lastCategoryFetchTime < cacheDuration &&
+      !force);
 
   if (shouldUseCache) {
     return cachedCategories!;
@@ -67,14 +73,16 @@ export const getCategories = async (force?: boolean) => {
 export const getEnrolledCourses = async (
   force?: boolean,
 ): Promise<TraineeCourse[]> => {
+  const appState: StoreAppState = stores.getState().app!;
   const courseState: StoreCourseState = stores.getState().course!;
   const currentTime = Date.now();
   const cacheDuration = ENROLLED_CACHE_DURATION * 1000;
 
   const shouldUseCache =
-    lastEnrolledCoursesFetchTime &&
-    currentTime - lastEnrolledCoursesFetchTime < cacheDuration &&
-    !force;
+    appState.online !== true ||
+    (lastEnrolledCoursesFetchTime &&
+      currentTime - lastEnrolledCoursesFetchTime < cacheDuration &&
+      !force);
 
   if (shouldUseCache) {
     return courseState.enrolled;
@@ -109,9 +117,10 @@ export const getAvailableCourses = async (
   const cacheDuration = COURSE_CACHE_DURATION * 1000;
 
   const shouldUseCache =
-    lastAvailableCoursesFetchTime &&
-    currentTime - lastAvailableCoursesFetchTime < cacheDuration &&
-    !force;
+    appState.online !== true ||
+    (lastAvailableCoursesFetchTime &&
+      currentTime - lastAvailableCoursesFetchTime < cacheDuration &&
+      !force);
 
   if (shouldUseCache) {
     return (stores.getState().course! as StoreCourseState).available![language];
@@ -137,15 +146,26 @@ export const getAvailableCourses = async (
   return (stores.getState().course! as StoreCourseState).available![language];
 };
 
-export const getRemoteMessages = async () => {
+export const getRemoteMessages = async (force?: boolean) => {
+  const appState: StoreAppState = stores.getState().app!;
+
   const currentTime = Date.now();
-  if (
-    lastRemoteMessageCalled &&
-    currentTime - lastRemoteMessageCalled < MESSAGE_CACHE_DURATION * 1000
-  )
-    return;
+  const cacheDuration = MESSAGE_CACHE_DURATION * 1000;
+
+  const shouldUseCache =
+    appState.online !== true ||
+    (lastRemoteMessageCalled &&
+      currentTime - lastRemoteMessageCalled < cacheDuration &&
+      !force);
+
+  if (shouldUseCache) {
+    return ['abc'];
+  }
+
+  await fetchRemoteMessages();
   lastRemoteMessageCalled = currentTime;
-  fetchRemoteMessages();
+
+  return ['abc'];
 };
 
 async function fetchRemoteMessages() {
@@ -155,3 +175,11 @@ async function fetchRemoteMessages() {
     }, 250);
   });
 }
+
+export const refreshToken = (token?: AuthToken) => {
+  return remoteRefreshToken(token).then(setToken).then(stores.dispatch);
+};
+
+export const getUserProfile = () => {
+  return remoteGetUserProfile().then(setProfile).then(stores.dispatch);
+};

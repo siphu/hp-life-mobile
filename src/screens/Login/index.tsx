@@ -1,7 +1,7 @@
 import { Image, ScrollView, View } from "react-native";
 import { styles } from "./styles";
 import images from "~/res/images";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "~/stores";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -10,18 +10,15 @@ import Text from "~/components/Text";
 import _ from 'lodash';
 import Button from "~/components/Button";
 import { extractToken, openBrowser, urlWithLocale } from "./helper";
-import { setProfile, setToken } from "~/stores/user/actions";
-import { getUserProfile, refreshToken } from "~/api/rest/user";
 import { config } from "~/config/config";
 import { ScrollViewBackgroundLayer } from "~/components/ScrollViewBackgroundLayer";
 import { GlobalStyles } from "~/config/styles";
 import { t } from "~/providers/TranslationProvider";
+import { getUserProfile, refreshToken } from "~/api/helper";
 
 const Login = () => {
     const appState = useSelector((state: RootState) => state.app);
-
     const navigation = useNavigation();
-    const dispatch = useDispatch();
     const openLanguageSelector = _.debounce(() => navigation.navigate(UnAuthenticatedScreens.Language), 100);
 
     React.useEffect(() => {
@@ -33,14 +30,12 @@ const Login = () => {
     const signIn = async () => {
         const ts = new Date().getTime();
         const url = urlWithLocale(config.api.signIn, appState.language) + `?ts=${ts}`;
+
         openBrowser(url)
             .then(extractToken)
-            .then(refreshToken)
-            .then(setToken)
-            .then(dispatch)
+            .then((token) => refreshToken(token).catch(() => { }))
             .then(getUserProfile)
-            .then(setProfile)
-            .then(dispatch).catch((e) => console.error('e', e));
+            .catch((e) => console.error('e', e));
     }
 
     return (
@@ -49,34 +44,13 @@ const Login = () => {
             <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
                 <Image source={images.welcome.png} style={styles.welcomeBannerImage} />
                 <View style={styles.flexGrow}>
-                    <View style={{
-                        flex: 1,
-                        backgroundColor: 'white',
-                        alignItems: 'center',
-                    }}>
-                        <Text style={{
-                            textAlign: 'center',
-                            paddingHorizontal: 20,
-                            paddingVertical: 20,
-                        }}>{t('login.message')}</Text>
-                        <View style={{
-                            alignSelf: 'stretch',
-                            paddingHorizontal: 20,
-                            rowGap: 10,
-                        }}>
-                            <Button
-                                style={{
-                                }}
-                                color={'black'}
+                    <View style={styles.mainContentContainer}>
+                        <Text style={styles.loginMessage}>{t('login.message')}</Text>
+                        <View style={styles.buttonContainer}>
+                            <Button color={config.color.neutral[900]}
                                 title={t('login.login')} onPress={signIn} />
-                            <Button
-                                style={{
-                                    borderWidth: 1,
-                                }}
-                                textStyle={{
-                                    color: 'black'
-                                }}
-                                color={'white'}
+                            <Button style={{ borderWidth: 1, }} textStyle={{ color: config.color.neutral[900] }}
+                                color={config.color.neutral[50]}
                                 title={t('login.join')} onPress={signIn} />
                         </View>
                     </View>
