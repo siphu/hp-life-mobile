@@ -58,3 +58,9 @@ export async function getAvailableCourses(
 
   return get<CourseResult>(baseUrl);
 }
+
+export async function getParticipantCourse(courseId: number): Promise<Course> {
+  return get<Course>(
+    `${config.api.learning}/api/marketplace/courses/${courseId}`,
+  );
+}
