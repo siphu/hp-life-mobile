@@ -19,7 +19,6 @@ const connector = connect((state: RootState) => ({
 const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories }) => {
     const isFocused = useIsFocused();
     const [displayedData, setDisplayedData] = React.useState<Course[]>([]);
-    const [filteredData, setFilteredData] = React.useState<Course[]>([]);
     const [selectedCategory, setSelectedCategory] = React.useState<number>();
     const [selectedTab, setSelectedTab] = React.useState<number>(0);
 
@@ -36,13 +35,15 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories 
         }
     }, [isFocused]);
 
-    React.useEffect(() => {
-        const newData = data.filter(c => selectedCategory === undefined || c.categoryId === selectedCategory)
+    const filteredData = React.useMemo(() => {
+        return data
+            .filter(c => selectedCategory === undefined || c.categoryId === selectedCategory)
             .sort((a, b) => selectedTab === 0 ? 0 : (b.traineeCount ?? 0) - (a.traineeCount ?? 0));
-        setFilteredData(newData);
-        setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
     }, [data, selectedCategory, selectedTab]);
 
+    React.useEffect(() => {
+        setDisplayedData(filteredData.slice(0, RENDER_PER_PAGE));
+    }, [filteredData]);
 
     const loadMore = () => {
         const currentLength = displayedData.length;
@@ -51,7 +52,6 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories 
             setDisplayedData(prevData => [...prevData, ...nextData]);
         }
     };
-
 
     const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {
         return <CourseItem item={item} />;

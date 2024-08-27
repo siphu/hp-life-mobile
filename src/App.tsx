@@ -13,6 +13,18 @@ import TranslationProvider from "./providers/TranslationProvider";
 import NetInfo from '@react-native-community/netinfo';
 import { setOnlineStatus } from "./stores/app/actions";
 import { getUserProfile, refreshToken } from "./api/helper";
+import { config } from "./config/config";
+
+
+NetInfo.configure({
+    reachabilityUrl: config.api.webUrl,
+    reachabilityTest: async (response) => response.status >= 200 && response.status < 300,
+    reachabilityLongTimeout: 60 * 1000,
+    reachabilityShortTimeout: 5 * 1000,
+    reachabilityRequestTimeout: 15 * 1000,
+    reachabilityShouldRun: () => true
+});
+
 
 const NetworkListener = () => {
     const isCurrentOnline = useSelector((state: RootState) => state.app.online);
@@ -27,7 +39,7 @@ const NetworkListener = () => {
                 refreshToken().catch(() => { }).then(getUserProfile);
             }
             if (isNowOnline !== isCurrentOnline)
-                console.log('[STATE CHANGE]', isCurrentOnline, isNowOnline);
+                console.log('[NetInfo State Change]', isCurrentOnline, isNowOnline);
             dispatch(setOnlineStatus(isNowOnline));
         });
 
@@ -75,4 +87,3 @@ export const App = () => {
         </SafeAreaProvider>
     );
 }
-

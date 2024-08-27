@@ -22,7 +22,6 @@ const connector = connect((state: RootState) => ({
 const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options }) => {
     const isFocused = useIsFocused();
     const [displayedData, setDisplayedData] = React.useState<TraineeCourse[]>([]);
-    const [filteredData, setFilteredData] = React.useState<TraineeCourse[]>([]);
     const [selectedOptions, setSelectedOptions] = React.useState<string>('myCourse.inProgress');
 
     const onRefresh = React.useCallback(async (force?: boolean) => {
@@ -36,7 +35,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options }
         }
     }, [isFocused]);
 
-    React.useEffect(() => {
+    const filteredData = React.useMemo(() => {
         let newData = [...data];
         if (selectedOptions === 'myCourse.inProgress') {
             newData = newData.filter(C => C.enrollmentStatus === 'Enrolled' && ((C.progress && C.progress < 1) || !C.progress));
@@ -44,10 +43,15 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ data, options }
             newData = newData.filter(C => C.progress && C.progress >= 1);
         } else if (selectedOptions === 'myCourse.archived') {
             newData = newData.filter(C => C.status === CourseStatus.Archived);
-        } else newData = [];
-        setFilteredData(newData);
-        setDisplayedData(newData.slice(0, RENDER_PER_PAGE));
+        } else {
+            newData = [];
+        }
+        return newData;
     }, [data, selectedOptions]);
+
+    React.useEffect(() => {
+        setDisplayedData(filteredData.slice(0, RENDER_PER_PAGE));
+    }, [filteredData]);
 
 
     const loadMore = () => {
