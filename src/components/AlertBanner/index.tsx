@@ -1,5 +1,6 @@
 import { ColorValue, View } from "react-native";
 import Text from "../Text";
+import styles from "./styles";
 
 interface AlertBannerProp {
     backgroundColor: ColorValue;
@@ -8,7 +9,7 @@ interface AlertBannerProp {
 
 const AlertBanner = ({ backgroundColor, children }: AlertBannerProp) => {
     return (
-        <View style={{ backgroundColor: backgroundColor, padding: 8 }}>
+        <View style={[styles.container, { backgroundColor: backgroundColor }]}>
             {children}
         </View>
     );

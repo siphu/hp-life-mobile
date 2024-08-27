@@ -1,9 +1,11 @@
-import {AuthToken, UserProfile} from '~/api/model';
+import {AuthToken, CurrentAlertApiModel, UserProfile} from '~/api/model';
 
 export interface StoreUserState {
   token?: AuthToken;
   profile?: UserProfile;
-  alert?: string;
+  alerts: CurrentAlertApiModel[];
 }
 
-export const state: StoreUserState = {};
+export const state: StoreUserState = {
+  alerts: [],
+};

@@ -24,12 +24,13 @@ import { getRemoteMessages } from '~/api/helper';
 import { t } from '~/providers/TranslationProvider';
 import AlertBanner from '~/components/AlertBanner';
 import OfflineBanner from '~/components/OfflineBanner';
+import RemoteAlertBanner from '~/components/RemoteAlertBanner';
 
 const HomeDrawerNavigation = createDrawerNavigator();
 const HomeBottomTabs = createBottomTabNavigator();
 
 const connector = connect((state: RootState) => ({
-    alert: state.user.alert,
+    alerts: state.user.alerts,
     language: state.app.language,
     offline: state.app.online === false
 }));
@@ -38,8 +39,7 @@ const connector = connect((state: RootState) => ({
  * Screens access via the Drawer Navigation (Side Menu)
  * @returns
  */
-export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alert, offline }) => {
-
+export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alerts, offline }) => {
     return (
         <HomeBottomTabs.Navigator
             initialRouteName={AuthenticatedScreens.Home}
@@ -59,8 +59,8 @@ export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alert, 
             }}
             screenOptions={({ route }) => ({
                 gestureDirection: 'horizontal-inverted',
-                headerShown: offline,
-                header: () => offline && <OfflineBanner />,
+                headerShown: (alerts && alerts.length > 0) || offline,
+                header: () => (alerts && alerts.length > 0 && <RemoteAlertBanner alerts={alerts} />) || (offline && <OfflineBanner />),
                 headerTitle: '',
                 tabBarIcon: ({ focused, color, size }) => {
                     switch (route.name) {

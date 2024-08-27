@@ -130,3 +130,13 @@ export interface TraineeCourse extends Course {
 }
 
 export interface TraineeCourseResult extends Pagination<TraineeCourse> {}
+
+enum AlertType {
+  Success = 'Success',
+  Error = 'Error',
+}
+export interface CurrentAlertApiModel {
+  id: number;
+  type: AlertType;
+  message: string;
+}

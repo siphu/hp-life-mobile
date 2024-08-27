@@ -1,5 +1,5 @@
 import {config} from '~/config/config';
-import {AuthToken, UserProfile} from '../model';
+import {AuthToken, CurrentAlertApiModel, UserProfile} from '../model';
 import {stores} from '~/stores';
 import {get, post} from './restful';
 import {StoreUserState} from '~/stores/user/state';
@@ -23,4 +23,12 @@ export async function refreshToken(token?: AuthToken): Promise<AuthToken> {
       Authorization: `Bearer ${token?.access_token}`,
     },
   );
+}
+
+export async function getCurrentAlert(
+  locale: string,
+): Promise<CurrentAlertApiModel[]> {
+  return get<CurrentAlertApiModel[]>(`${config.api.alert}/alerts/current`, {
+    language: locale,
+  });
 }

@@ -7,6 +7,7 @@ import {
 import {
   refreshToken as remoteRefreshToken,
   getUserProfile as remoteGetUserProfile,
+  getCurrentAlert as remoteGetAlert,
 } from '~/api/rest/user';
 import {stores} from '~/stores';
 import {StoreAppState} from '~/stores/app/state';
@@ -19,8 +20,9 @@ import {
 } from '~/stores/course/actions';
 import {CourseAction} from '~/stores/course/reducers';
 import {StoreCourseState} from '~/stores/course/state';
-import {setProfile, setToken} from '~/stores/user/actions';
+import {setAlerts, setProfile, setToken} from '~/stores/user/actions';
 import {UserAction} from '~/stores/user/reducers';
+import {StoreUserState} from '~/stores/user/state';
 
 let lastCategoryFetchTime: number | null = null;
 let lastEnrolledCoursesFetchTime: number | null = null;
@@ -148,35 +150,28 @@ export const getAvailableCourses = async (
   return (stores.getState().course! as StoreCourseState).available![language];
 };
 
-export const getRemoteMessages = async (force?: boolean) => {
+export const getRemoteMessages = async () => {
   const appState: StoreAppState = stores.getState().app!;
+  const userState: StoreUserState = stores.getState().user!;
 
   const currentTime = Date.now();
   const cacheDuration = MESSAGE_CACHE_DURATION * 1000;
 
   const shouldUseCache =
+    !userState.profile ||
     appState.online !== true ||
     (lastRemoteMessageCalled &&
-      currentTime - lastRemoteMessageCalled < cacheDuration &&
-      !force);
+      currentTime - lastRemoteMessageCalled < cacheDuration);
 
   if (shouldUseCache) {
-    return ['abc'];
+    return userState.alerts;
   }
 
-  await fetchRemoteMessages();
+  const alerts = await remoteGetAlert(userState.profile!.language);
+  stores.dispatch(setAlerts(alerts));
   lastRemoteMessageCalled = currentTime;
-
-  return ['abc'];
+  return alerts;
 };
-
-async function fetchRemoteMessages() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(['Message 1', 'Message 2', 'Message 3']);
-    }, 250);
-  });
-}
 
 export const refreshToken = (token?: AuthToken) => {
   return remoteRefreshToken(token).then(setToken).then(stores.dispatch);
