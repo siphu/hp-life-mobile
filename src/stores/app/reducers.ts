@@ -1,4 +1,6 @@
+import {Notification} from '~/api/endpoints';
 import {StoreAppState, state as defaultState} from './state';
+import notifee from '@notifee/react-native';
 
 export enum AppAction {
   SET_LANGUAGE = 'SET_LANGUAGE',
@@ -29,20 +31,33 @@ export const reducers = (
         online: action.payload,
       };
     case AppAction.SET_NOTIFICATIONS:
+      notifee.setBadgeCount(
+        action.payload.filter((n: Notification) => !n.isRead).length,
+      );
       return {
         ...state,
         notifications: action.payload,
       };
     case AppAction.MARK_NOTIFICATION_READ:
+      let newNotifications = state.notifications.map(notification => {
+        if (notification.id === action.payload)
+          return {...notification, isRead: true};
+        return notification;
+      });
+      notifee.setBadgeCount(
+        newNotifications.filter((n: Notification) => !n.isRead).length,
+      );
       return {
         ...state,
-        notifications: state.notifications.map(notification => {
-          if (notification.id === action.payload)
-            return {...notification, isRead: true};
-          return notification;
-        }),
+        notifications: newNotifications,
       };
     case AppAction.REMOVE_NOTIFICATION:
+      notifee.setBadgeCount(
+        state.notifications
+          .filter(n => n.id !== action.payload.id)
+          .filter((n: Notification) => !n.isRead).length,
+      );
+
       return {
         ...state,
         notifications: state.notifications.filter(

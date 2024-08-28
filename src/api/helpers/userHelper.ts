@@ -136,7 +136,6 @@ export const getPushNotifications = () => {
       ? []
       : notifications;
     const badgeChecked = badges.hasOwnProperty('error_message') ? [] : badges;
-    notifee.setBadgeCount(notificationChecked.filter(n => !n.isRead).length);
     stores.dispatch(setNotifications(notificationChecked));
     stores.dispatch(setBadges(badgeChecked));
   });
