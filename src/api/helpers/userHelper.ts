@@ -8,6 +8,7 @@ import {
   setEmailMarketingSetting,
   getNotifications as remoteGetNotifications,
   getMyBadges as remoteGetMyBadges,
+  unregisterFCM,
 } from '~/api/endpoints/user';
 import {stores} from '~/stores';
 import {StoreAppState} from '~/stores/app/state';
@@ -22,6 +23,7 @@ import {UserAction} from '~/stores/user/reducers';
 import {StoreUserState} from '~/stores/user/state';
 import notifee from '@notifee/react-native';
 import {setNotifications} from '~/stores/app/actions';
+import messaging from '@react-native-firebase/messaging';
 
 let lastRemoteMessageCalled: number | null = null;
 
@@ -82,9 +84,17 @@ export const updateUserProfile = (userProfile: UserProfile) => {
     );
 };
 
-export const signOut = () => {
+export const signOut = async () => {
   stores.dispatch({type: CourseAction.RESET_COURSE_STORE});
+  await unRegisterDeviceForMessaging();
+  stores.dispatch(setNotifications([]));
   stores.dispatch({type: UserAction.SIGN_OUT});
+};
+
+export const unRegisterDeviceForMessaging = async () => {
+  await unregisterFCM(await messaging().getToken());
+  await messaging().unregisterDeviceForRemoteMessages();
+  await notifee.setBadgeCount(0);
 };
 
 export const getPushNotifications = () => {

@@ -16,6 +16,7 @@ import { config } from "./config/config";
 import BootSplash from "react-native-bootsplash";
 import PushNotificationHandler from '~/notifications';
 import { getPushNotifications, getUserProfile, refreshToken } from "./api/helpers";
+import _ from "lodash";
 
 NetInfo.configure({
     reachabilityUrl: config.api.learning,
@@ -32,24 +33,24 @@ const NetworkListener = () => {
     const token = useSelector((state: RootState) => state.user.token);
     const dispatch = useDispatch();
 
-    React.useEffect(() => {
-        const unsubscribe = NetInfo.addEventListener((state) => {
-            const isNowOnline = state.isConnected; //(state.isConnected && state.isInternetReachable);
 
+    React.useEffect(() => {
+        const debouncedListener = _.debounce((state) => {
+            const isNowOnline = state.isConnected; //(state.isConnected && state.isInternetReachable);
+            if (isCurrentOnline !== isNowOnline) {
+                dispatch(setOnlineStatus(isNowOnline));
+                console.log('[NetInfo State Change]', isCurrentOnline, isNowOnline);
+            }
             if (!isCurrentOnline && isNowOnline && token) {
                 refreshToken().catch(() => { }).then(getUserProfile).then(getPushNotifications);
             }
-            if (isNowOnline !== isCurrentOnline)
-                console.log('[NetInfo State Change]', isCurrentOnline, isNowOnline);
-
-            if (isCurrentOnline !== isNowOnline)
-                dispatch(setOnlineStatus(isNowOnline));
-        });
+        }, 100);
+        const unsubscribe = NetInfo.addEventListener(debouncedListener);
 
         return () => {
             unsubscribe();
         };
-    }, [isCurrentOnline, dispatch]);
+    }, [isCurrentOnline, dispatch, token]);
 
     return null;
 };

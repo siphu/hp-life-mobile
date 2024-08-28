@@ -11,6 +11,7 @@ import { HeaderBackIcon } from './components/HeaderBackIcon';
 import { GlobalStyles } from '~/config/styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import InAppBrowser from '~/screens/InAppBrowser';
+import Notification from '~/screens/Notification';
 
 const Screen = createStackNavigator();
 
@@ -58,6 +59,14 @@ export const AuthenticatedStack = () => {
             <Screen.Screen
                 name={AuthenticatedScreens.CourseInformation}
                 component={CourseInformation}
+                options={({ navigation }) => ({
+                    headerShown: true,
+                    headerLeft: () => <HeaderBackIcon onPress={navigation.goBack} />
+                })}
+            />
+            <Screen.Screen
+                name={AuthenticatedScreens.Notification}
+                component={Notification}
                 options={({ navigation }) => ({
                     headerShown: true,
                     headerLeft: () => <HeaderBackIcon onPress={navigation.goBack} />

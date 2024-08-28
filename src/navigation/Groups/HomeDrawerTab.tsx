@@ -154,7 +154,7 @@ export const HomeDrawer = () => {
                     backgroundColor: GlobalStyles.header.backgroundColor,
                 },
                 headerLeft: () => React.useMemo(() => <HeaderMenuIcon onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />, []),
-                headerRight: () => React.useMemo(() => <HeaderNotificationIcon onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />, [online, notifications]),
+                headerRight: () => React.useMemo(() => <HeaderNotificationIcon onPress={() => navigation.navigate(AuthenticatedScreens.Notification)} />, [online, notifications]),
                 headerBackground: () => <HeaderLogo />,
                 headerTitle: '',
                 drawerType: 'front',

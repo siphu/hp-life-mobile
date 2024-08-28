@@ -22,7 +22,6 @@ export const reducers = (
         language: action.payload,
       };
     case AppAction.SET_ONLINE_STATUS:
-      console.log('setting online state', action.payload);
       return {
         ...state,
         online: action.payload,

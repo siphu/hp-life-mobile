@@ -14,6 +14,7 @@ export enum AuthenticatedScreens {
   Explore = 'Explore',
 
   Profile = 'Profile',
+  Notification = 'Notification',
 
   InAppBrowser = 'External Content',
 

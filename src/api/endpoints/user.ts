@@ -104,3 +104,9 @@ export async function getMyBadges(locale?: string): Promise<MyBadge[]> {
   const localeString = locale ? `?language=${locale}` : '';
   return get<MyBadge[]>(`${config.api.rewards}/MyBadges${localeString}`);
 }
+
+export async function unregisterFCM(fcm: string): Promise<void> {
+  return remove<void>(
+    `${config.api.push}/Account/pushNotificationTokens/${fcm}`,
+  );
+}
