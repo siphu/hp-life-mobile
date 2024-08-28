@@ -8,11 +8,11 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import { stores, persistor, RootState } from './stores';
 import { PersistGate } from "redux-persist/integration/react";
 import './translations';
-import '~/api/interceptor';
+import '~/api/client/interceptor';
 import TranslationProvider from "./providers/TranslationProvider";
 import NetInfo from '@react-native-community/netinfo';
 import { setOnlineStatus } from "./stores/app/actions";
-import { getUserProfile, refreshToken } from "./api/helper";
+import { getUserProfile, refreshToken } from "./api/endpoints";
 import { config } from "./config/config";
 import BootSplash from "react-native-bootsplash";
 
@@ -54,24 +54,14 @@ const NetworkListener = () => {
 
 
 export const App = () => {
-
-
-    // React.useEffect(() => {
-    //     persistor.purge(); // Clear persisted storage
-    // }, []);
-
-    // persistor.purge();
-    const onReady = () => {
-        BootSplash.hide({ fade: true });
-    };
-
+    // React.useEffect(() => { persistor.purge(); }, []);
     return (
         <SafeAreaProvider>
             <Provider store={stores}>
                 <PersistGate loading={null} persistor={persistor}>
                     <NetworkListener />
                     <TranslationProvider>
-                        <NavigationContainer onReady={onReady}>
+                        <NavigationContainer onReady={() => BootSplash.hide({ fade: true })}>
                             <OrientationLocker orientation="PORTRAIT" />
                             <StatusBar
                                 animated={true}

@@ -2,11 +2,9 @@ import React from 'react';
 import { StyleProp, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { Text } from '~/components/Text';
 import { ColorValue } from 'react-native';
-import Images from '~/res/images';
 import { config } from '~/config/config';
 import styles from './style';
 import { MaterialIcons } from "~/components/MaterialIcons";
-import { t } from '~/providers/TranslationProvider';
 
 export interface RadioButtonProps {
   selected?: boolean;

@@ -4,17 +4,12 @@ import {
     StackNavigationOptions,
 } from '@react-navigation/stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { config } from '~/config/config';
 import { UnAuthenticatedScreens } from './screens';
 import Login from '~/screens/Login';
-import { HeaderBackIcon } from './components/HeaderBackIcon';
-import { HeaderMenuIcon } from './components/HeaderMenuIcon';
 import { HeaderLogo } from './components/HeaderLogo';
 import { GlobalStyles } from '~/config/styles';
-import { useNavigation } from '@react-navigation/native';
 import { HeaderLanguageIcon } from './components/HeaderLanguageIcon';
 import LanguageSelector from '~/components/LanguageSelector';
-import { View } from 'react-native';
 
 const Screen = createStackNavigator();
 

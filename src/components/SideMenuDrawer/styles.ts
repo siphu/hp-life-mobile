@@ -1,7 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {config} from '~/config/config';
 import {GlobalStyles} from '~/config/styles';
-import {StatusBar} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {

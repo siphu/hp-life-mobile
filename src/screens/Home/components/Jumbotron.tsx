@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
-import { Course } from "~/api/model";
+import { Course } from "~/api/endpoints";
 import Text from "~/components/Text";
 import { styles } from "../styles";
 import { AvailableOffline } from "./AvailableOffline";

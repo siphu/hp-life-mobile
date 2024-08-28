@@ -1,5 +1,4 @@
 import { ColorValue, View } from "react-native";
-import Text from "../Text";
 import styles from "./styles";
 
 interface AlertBannerProp {

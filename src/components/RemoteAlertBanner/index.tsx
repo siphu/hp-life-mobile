@@ -1,16 +1,9 @@
-
-
-import { config } from "~/config/config";
 import AlertBanner from "../AlertBanner";
 import Text from "../Text";
-import { t } from "~/providers/TranslationProvider";
-import styles from "./styles";
-import { CurrentAlertApiModel } from "~/api/model";
+import { CurrentAlertApiModel } from "~/api/endpoints";
 import React from "react";
 
-
 export default ({ alerts }: { alerts: CurrentAlertApiModel[] }) => {
-
     return (
         <>
             {alerts.map(alert => {

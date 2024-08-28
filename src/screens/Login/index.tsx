@@ -14,7 +14,7 @@ import { config } from "~/config/config";
 import { ScrollViewBackgroundLayer } from "~/components/ScrollViewBackgroundLayer";
 import { GlobalStyles } from "~/config/styles";
 import { t } from "~/providers/TranslationProvider";
-import { getUserProfile, refreshToken } from "~/api/helper";
+import { getUserProfile, refreshToken } from "~/api/helpers";
 
 const Login = () => {
     const appState = useSelector((state: RootState) => state.app);

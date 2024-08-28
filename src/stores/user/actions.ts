@@ -1,5 +1,5 @@
 import {UserAction} from './reducers';
-import {AuthToken, CurrentAlertApiModel, UserProfile} from '~/api/model';
+import {AuthToken, CurrentAlertApiModel, UserProfile} from '~/api/endpoints';
 
 export const setProfile = (profile?: UserProfile) => {
   return {

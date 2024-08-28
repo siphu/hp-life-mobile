@@ -17,7 +17,7 @@ import Alert from "../Alert";
 import React from "react";
 import Button from "../Button";
 import { t } from "~/providers/TranslationProvider";
-import { signOut } from "~/api/helper";
+import { signOut } from "~/api/helpers";
 
 const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
     const userState = useSelector((root: RootState) => root.user);

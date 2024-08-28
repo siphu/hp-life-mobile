@@ -1,7 +1,6 @@
 import React from "react";
 import { ScrollView, View } from "react-native"
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
 import { getLanguageNameFromCode } from "~/translations/languages";
 import i18n from '~/translations';
 import Images from "~/res/images";

@@ -18,7 +18,7 @@ import { DrawerContentWrapper } from '../components/DrawerContentWrapper';
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/stores';
-import { getRemoteMessages } from '~/api/helper';
+import { getRemoteMessages } from '~/api/helpers';
 import { t } from '~/providers/TranslationProvider';
 import OfflineBanner from '~/components/OfflineBanner';
 import RemoteAlertBanner from '~/components/RemoteAlertBanner';

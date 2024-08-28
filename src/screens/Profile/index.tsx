@@ -6,18 +6,15 @@ import Input from "./components/Input";
 import { connect, ConnectedProps, useDispatch } from "react-redux";
 import { RootState } from "~/stores";
 import { getLanguageNameFromCode } from "~/translations/languages";
-import { Countries, Gender, Timezones } from "~/api/dict";
-import Text from "~/components/Text";
+import { Countries, Gender, Timezones } from "~/utils";
 import { Dropdown } from "./components/Dropdown";
-import { setLanguage } from "~/stores/app/actions";
-import { UnknownAction } from "redux";
-import { t, useTranslationContext } from "~/providers/TranslationProvider";
+import { t } from "~/providers/TranslationProvider";
 import i18n, { getAvailableLanguages, TranslationsPaths } from "~/translations";
 import CheckBoxButton from "~/components/CheckBoxButton";
 import Button from "~/components/Button";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { config } from "~/config/config";
-import { updateUserProfile } from "~/api/helper";
+import { updateUserProfile } from "~/api/helpers";
 
 
 interface SelectOption {

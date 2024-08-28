@@ -1,13 +1,6 @@
-import {
-  Category,
-  Course,
-  CourseResult,
-  CourseStatus,
-  TraineeCourse,
-  TraineeCourseResult,
-} from '../model';
+import {Category, Course, CourseResult, TraineeCourseResult} from './model';
 import {config} from '~/config/config';
-import {get} from './restful';
+import {get} from '../client/restful';
 
 const PAGE_LIMIT = 500;
 

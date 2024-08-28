@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { styles, padding, radius } from "./styles";
+import { styles, padding } from "./styles";
 import { GlobalStyles } from "~/config/styles";
 import Modal from "react-native-modal";
 

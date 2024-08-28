@@ -1,7 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import * as React from 'react';
 import { BackHandler, Linking, Platform, View } from 'react-native';
-import WebView, { WebViewNavigation } from 'react-native-webview';
+import WebView from 'react-native-webview';
 import { URL } from 'react-native-url-polyfill';
 import { styles } from './styles'
 import { config } from '~/config/config';

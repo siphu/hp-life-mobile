@@ -2,7 +2,6 @@ import { TextStyle, View, ViewStyle } from 'react-native';
 import { Dropdown as DropdownSelector } from '~/components/react-native-element-dropdown'
 import Text from '~/components/Text';
 import { styles } from '../styles';
-import { config } from '~/config/config';
 import { t } from '~/providers/TranslationProvider';
 
 

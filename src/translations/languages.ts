@@ -1,4 +1,4 @@
-import {Language} from '~/api/dict';
+import {Language} from '~/utils/dict';
 
 export function getLanguageNameFromCode(code?: string): string | undefined {
   if (!code) return undefined;

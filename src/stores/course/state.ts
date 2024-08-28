@@ -1,4 +1,4 @@
-import {Category, Course, TraineeCourse} from '~/api/model';
+import {Category, Course, TraineeCourse} from '~/api/endpoints';
 
 export interface StoreCourseState {
   categories: Record<string, Category[]>;

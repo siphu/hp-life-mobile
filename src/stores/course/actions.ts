@@ -1,5 +1,5 @@
 import {CourseAction} from './reducers';
-import {AuthToken, Category, Course, UserProfile} from '~/api/model';
+import {Category, Course} from '~/api/endpoints';
 import {Dispatch} from 'redux';
 
 export const setCategory = (language: string, categories: Category[]) => {

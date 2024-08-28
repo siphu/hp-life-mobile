@@ -1,7 +1,5 @@
 import React from 'react';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
-import { StyleSheet, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-import { MaterialIcons } from "~/components/MaterialIcons";
+import { StyleSheet, TouchableHighlight, View } from 'react-native';
 import { GlobalStyles } from '~/config/styles';
 import Images from '~/res/images';
 

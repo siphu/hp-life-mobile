@@ -4,9 +4,9 @@ import {
   CurrentAlertApiModel,
   EmailMarketingAccountSetting,
   UserProfile,
-} from '../model';
+} from './model';
 import {stores} from '~/stores';
-import {get, post, put} from './restful';
+import {get, post, put} from '../client/restful';
 import {StoreUserState} from '~/stores/user/state';
 
 export async function getUserProfile(): Promise<UserProfile> {

@@ -1,4 +1,4 @@
-import {Course} from '~/api/model';
+import {Course} from '~/api/endpoints';
 import {StoreCourseState, state as defaultState} from './state';
 
 export enum CourseAction {

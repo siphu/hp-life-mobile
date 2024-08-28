@@ -1,4 +1,3 @@
-import {KeyValuePair} from '@react-native-async-storage/async-storage/lib/typescript/types';
 import axios, {AxiosHeaders, AxiosResponse} from 'axios';
 import moment from 'moment';
 export interface RequestError extends Error {

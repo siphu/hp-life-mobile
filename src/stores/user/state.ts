@@ -1,4 +1,4 @@
-import {AuthToken, CurrentAlertApiModel, UserProfile} from '~/api/model';
+import {AuthToken, CurrentAlertApiModel, UserProfile} from '~/api/endpoints';
 
 export interface StoreUserState {
   token?: AuthToken;

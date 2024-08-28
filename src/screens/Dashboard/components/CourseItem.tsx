@@ -1,14 +1,14 @@
 import React from "react";
-import { Course } from "~/api/model";
+import { Course } from "~/api/endpoints";
 import { styles } from "../styles";
 import { Image, TouchableOpacity, View } from "react-native";
 import Text from "~/components/Text";
 import FastImage from "@d11/react-native-fast-image";
 import { t } from "~/providers/TranslationProvider";
-import { date_to_str } from "~/api/util";
 import moment from "moment";
 import * as Progress from 'react-native-progress';
 import { config } from "~/config/config";
+import { friendlyDate } from "~/utils";
 
 export class CourseItem extends React.PureComponent<{ item: Course, onClick: () => void }> {
     render() {
@@ -18,13 +18,13 @@ export class CourseItem extends React.PureComponent<{ item: Course, onClick: () 
             t('courseInformation.startedDate') +
             ': ' +
             (item.startDate
-                ? date_to_str(moment(item.startDate))
+                ? friendlyDate(moment(item.startDate))
                 : t('courseInformation.neverDate'));
 
         const extraTextCompleted =
             t('courseInformation.finishDate') +
             ': ' +
-            date_to_str(moment(item.finishDate));
+            friendlyDate(moment(item.finishDate));
 
         return (
             <TouchableOpacity accessible={false} style={styles.itemContainer} onPress={onClick}>

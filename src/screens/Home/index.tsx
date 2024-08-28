@@ -4,13 +4,13 @@ import { connect, ConnectedProps } from "react-redux";
 import Text from "~/components/Text"
 import { RootState } from "~/stores";
 import { setCategory } from "~/stores/course/actions";
-import { getAvailableCourses } from "~/api/helper";
+import { getAvailableCourses } from "~/api/helpers";
 import { GlobalStyles } from "~/config/styles";
 import { styles } from "./styles";
 import Jumbotron from "./components/Jumbotron";
 import { NavigationProp, useIsFocused, useNavigation } from "@react-navigation/native";
 import { t } from "~/providers/TranslationProvider";
-import { Course } from "~/api/model";
+import { Course } from "~/api/endpoints";
 
 const connector = connect((state: RootState) => ({
     data: (state.course.available[state.app.language] || [])

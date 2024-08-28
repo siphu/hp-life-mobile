@@ -2,9 +2,7 @@ import { connect, ConnectedProps, useDispatch, useSelector } from "react-redux";
 import { UnAuthenticatedStack } from "./UnAuthenticatedStack";
 import { RootState } from "~/stores";
 import { AuthenticatedStack } from './AuthenticatedStack';
-import NetInfo from '@react-native-community/netinfo';
 import React from "react";
-import { getUserProfile, refreshToken } from "~/api/helper";
 
 /** This fixes the navigation.navigate() as never */
 export type RootStackParamList = { [key: string]: any };

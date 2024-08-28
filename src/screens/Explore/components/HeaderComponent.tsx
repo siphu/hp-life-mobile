@@ -3,7 +3,7 @@ import { Dropdown } from '~/components/react-native-element-dropdown';
 import React from "react";
 import { config } from "~/config/config";
 import TabIndicator from "~/components/TabIndicator";
-import { Category } from "~/api/model";
+import { Category } from "~/api/endpoints";
 import { t } from "~/providers/TranslationProvider";
 
 export interface FilterSelectionProps {

@@ -1,33 +1,37 @@
 import React from 'react';
 import { Dimensions, ScrollView, View } from "react-native";
 import { connect, ConnectedProps } from "react-redux";
-import { useRoute, RouteProp } from '@react-navigation/native';
-import Text from "~/components/Text";
 import WebView from "~/components/Webview";
 import { RootState } from "~/stores";
 import FastImage from '@d11/react-native-fast-image';
-import { Course } from '~/api/model';
-import { getParticipantCourse } from '~/api/rest/courses';
-import { HTMLWrapper } from '~/api/util';
+import { Course, getParticipantCourse } from '~/api/endpoints';
 import { config } from '~/config/config';
 import { GlobalStyles } from '~/config/styles';
+import { ParamListBase, RouteProp, useRoute } from '@react-navigation/native';
+import { HTMLWrapper } from '~/utils';
 
+type CourseInformationParams = {
+    id: number;
+};
 
-const connector = connect((state: RootState, ownProps: { route: { params: Record<string, any> } }) => {
-    const enrolledCourse = state.course.enrolled.find(course => course.id === ownProps.route.params?.id);
+const connector = connect((state: RootState, ownProps: { route: RouteProp<{ params: CourseInformationParams }> }) => {
+    const courseId = ownProps.route.params.id;
+    const enrolledCourse = state.course.enrolled.find(course => course.id === courseId);
     return {
         enrolled: !!enrolledCourse,
-        courseId: ownProps.route.params?.id
+        courseId
     };
 });
 
 const CourseInformation: React.FC<ConnectedProps<typeof connector>> = ({ enrolled, courseId }) => {
     const [courseInformation, setCourse] = React.useState<Course | undefined>();
+
     React.useEffect(() => {
         getParticipantCourse(courseId).then(setCourse);
     }, [courseId]);
 
     if (!courseInformation) return null;
+
     const additionalCss = `
     body {
       word-break: break-word;
@@ -35,6 +39,7 @@ const CourseInformation: React.FC<ConnectedProps<typeof connector>> = ({ enrolle
       -moz-hyphens: auto;
       hyphens: auto;
     };`;
+
     return (
         <ScrollView style={GlobalStyles.screenContainer} contentContainerStyle={{ flex: 1 }}>
             <FastImage
@@ -56,4 +61,12 @@ const CourseInformation: React.FC<ConnectedProps<typeof connector>> = ({ enrolle
     );
 };
 
-export default connector(CourseInformation);
+
+const ConnectedCourseInformation = connector(CourseInformation);
+
+const CourseInformationWrapper: React.FC = () => {
+    const route = useRoute<RouteProp<{ params: CourseInformationParams }>>();
+    return <ConnectedCourseInformation route={route} />;
+};
+
+export default CourseInformationWrapper;

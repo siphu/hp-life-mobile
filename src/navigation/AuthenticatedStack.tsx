@@ -58,7 +58,7 @@ export const AuthenticatedStack = () => {
             <Screen.Screen
                 name={AuthenticatedScreens.CourseInformation}
                 component={CourseInformation}
-                options={({ navigation, route }) => ({
+                options={({ navigation }) => ({
                     headerShown: true,
                     headerLeft: () => <HeaderBackIcon onPress={navigation.goBack} />
                 })}
