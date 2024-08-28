@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["formatjs", "hplife", "persistor"],
+  "cSpell.words": ["formatjs", "hplife", "notifee", "persistor"],
   "files.exclude": {
     "node_modules/": true,
     ".bundle": true,

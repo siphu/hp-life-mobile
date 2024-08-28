@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "806665594130",
+    "project_id": "hp-life-c5501",
+    "storage_bucket": "hp-life-c5501.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806665594130:android:d517b5acb0f086ddb9ffcb",
+        "android_client_info": {
+          "package_name": "com.dyd.demo.hplife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806665594130-mhsq8rlpqcgmke66s7kfkn4c2omaolq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAiYA9SqcFYuxRC1AK2O0wsi3gYH3Hc4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806665594130-mhsq8rlpqcgmke66s7kfkn4c2omaolq7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "806665594130-tfl7625vb9kbuh3s5h5728khetbholeu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dyd.demo.hplife"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806665594130:android:3f3a4103ecebdb61b9ffcb",
+        "android_client_info": {
+          "package_name": "com.hp.life"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806665594130-mhsq8rlpqcgmke66s7kfkn4c2omaolq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAiYA9SqcFYuxRC1AK2O0wsi3gYH3Hc4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806665594130-mhsq8rlpqcgmke66s7kfkn4c2omaolq7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "806665594130-tfl7625vb9kbuh3s5h5728khetbholeu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dyd.demo.hplife"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
