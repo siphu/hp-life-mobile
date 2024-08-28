@@ -83,7 +83,7 @@ android {
         applicationId "com.hp.life"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 201
+        versionCode 202
         versionName "3.0"
     }
     signingConfigs {

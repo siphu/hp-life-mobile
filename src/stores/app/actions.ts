@@ -21,3 +21,13 @@ export const setNotifications = (notifications: Notification[]) => ({
   type: AppAction.SET_NOTIFICATIONS,
   payload: notifications,
 });
+
+export const setNotificationRead = (id: number) => ({
+  type: AppAction.MARK_NOTIFICATION_READ,
+  payload: id,
+});
+
+export const removeNotification = (notification: Notification) => ({
+  type: AppAction.REMOVE_NOTIFICATION,
+  payload: notification,
+});

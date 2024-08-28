@@ -15,6 +15,8 @@ export const config = {
       danger: '#ff4400',
       selected: '#EEF6FE',
       text: '#142341',
+      textSecondary: '#00000099',
+      primary: '#0096d6',
     },
     button: {
       primary: '#165dba',

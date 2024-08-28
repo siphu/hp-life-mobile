@@ -9,7 +9,10 @@ import {
   getNotifications as remoteGetNotifications,
   getMyBadges as remoteGetMyBadges,
   unregisterFCM,
-} from '~/api/endpoints/user';
+  markNotificationsRead as remoteMarkNotificationRead,
+  clearNotifications as remoteClearNotifications,
+  deleteNotification as remoteDeleteNotification,
+} from '~/api/endpoints';
 import {stores} from '~/stores';
 import {StoreAppState} from '~/stores/app/state';
 import {CourseAction} from '~/stores/course/reducers';
@@ -22,7 +25,11 @@ import {
 import {UserAction} from '~/stores/user/reducers';
 import {StoreUserState} from '~/stores/user/state';
 import notifee from '@notifee/react-native';
-import {setNotifications} from '~/stores/app/actions';
+import {
+  removeNotification,
+  setNotificationRead,
+  setNotifications,
+} from '~/stores/app/actions';
 import messaging from '@react-native-firebase/messaging';
 import {jwtDecode} from 'jwt-decode';
 import moment from 'moment';
@@ -133,4 +140,25 @@ export const getPushNotifications = () => {
     stores.dispatch(setNotifications(notificationChecked));
     stores.dispatch(setBadges(badgeChecked));
   });
+};
+
+export const markNotificationsRead = (notification: Notification) => {
+  return remoteMarkNotificationRead(notification.id)
+    .then(() => setNotificationRead(notification.id))
+    .then(stores.dispatch)
+    .catch(() => {});
+};
+
+export const clearNotifications = () => {
+  return remoteClearNotifications()
+    .then(() => setNotifications([]))
+    .then(stores.dispatch)
+    .catch(() => {});
+};
+
+export const deleteNotification = (notification: Notification) => {
+  return remoteDeleteNotification(notification.id)
+    .then(() => removeNotification(notification))
+    .then(stores.dispatch)
+    .catch(() => {});
 };

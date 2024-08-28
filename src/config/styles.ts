@@ -32,4 +32,11 @@ export const GlobalStyles = StyleSheet.create({
     height: 60,
     backgroundColor: '#0096d6',
   },
+  flexShrink: {
+    flexShrink: 1,
+  },
+  flexCenter: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

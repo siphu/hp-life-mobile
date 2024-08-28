@@ -14,9 +14,9 @@ import NetInfo from '@react-native-community/netinfo';
 import { setOnlineStatus } from "./stores/app/actions";
 import { config } from "./config/config";
 import BootSplash from "react-native-bootsplash";
-import PushNotificationHandler from '~/notifications';
 import { getPushNotifications, getUserProfile, refreshToken } from "./api/helpers";
 import _ from "lodash";
+import NotificationProvider from "./providers/NotificationProvider";
 
 NetInfo.configure({
     reachabilityUrl: config.api.learning,
@@ -65,7 +65,6 @@ export const App = () => {
             <Provider store={stores}>
                 <PersistGate loading={null} persistor={persistor}>
                     <NetworkListener />
-                    <PushNotificationHandler />
                     <TranslationProvider>
                         <NavigationContainer onReady={() => BootSplash.hide({ fade: true })}>
                             <OrientationLocker orientation="PORTRAIT" />
