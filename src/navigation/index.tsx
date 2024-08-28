@@ -14,9 +14,7 @@ declare global {
   }
 }
 
-const connector = connect((state: RootState) => ({
-  token: state.user.token,
-}));
+const connector = connect((state: RootState) => ({ token: state.user.token, }));
 const NavigationSwitch: React.FC<ConnectedProps<typeof connector>> = ({ token }) => {
   return token ? <AuthenticatedStack /> : <UnAuthenticatedStack />;
 };

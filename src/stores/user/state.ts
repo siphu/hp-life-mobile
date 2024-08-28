@@ -1,11 +1,18 @@
-import {AuthToken, CurrentAlertApiModel, UserProfile} from '~/api/endpoints';
+import {
+  AuthToken,
+  CurrentAlertApiModel,
+  MyBadge,
+  UserProfile,
+} from '~/api/endpoints';
 
 export interface StoreUserState {
   token?: AuthToken;
   profile?: UserProfile;
   alerts: CurrentAlertApiModel[];
+  badges: MyBadge[];
 }
 
 export const state: StoreUserState = {
   alerts: [],
+  badges: [],
 };

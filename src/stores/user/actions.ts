@@ -1,5 +1,10 @@
 import {UserAction} from './reducers';
-import {AuthToken, CurrentAlertApiModel, UserProfile} from '~/api/endpoints';
+import {
+  AuthToken,
+  CurrentAlertApiModel,
+  MyBadge,
+  UserProfile,
+} from '~/api/endpoints';
 
 export const setProfile = (profile?: UserProfile) => {
   return {
@@ -21,3 +26,8 @@ export const setAlerts = (alerts: CurrentAlertApiModel[]) => {
     payload: alerts,
   };
 };
+
+export const setBadges = (badges: MyBadge[]) => ({
+  type: UserAction.SET_BADGES,
+  payload: badges,
+});

@@ -5,6 +5,7 @@ export enum UserAction {
   SET_TOKEN = 'SET_TOKEN',
   SET_PROFILE = 'SET_PROFILE',
   SET_ALERTS = 'SET_ALERTS',
+  SET_BADGES = 'SET_BADGES',
 }
 
 interface ReducerAction {
@@ -33,6 +34,11 @@ export const reducers = (
       return {
         ...state,
         alerts: action.payload,
+      };
+    case UserAction.SET_BADGES:
+      return {
+        ...state,
+        badges: action.payload,
       };
     default:
       return state;

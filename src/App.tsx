@@ -12,10 +12,10 @@ import '~/api/client/interceptor';
 import TranslationProvider from "./providers/TranslationProvider";
 import NetInfo from '@react-native-community/netinfo';
 import { setOnlineStatus } from "./stores/app/actions";
-import { getUserProfile, refreshToken } from "./api/endpoints";
 import { config } from "./config/config";
 import BootSplash from "react-native-bootsplash";
 import PushNotificationHandler from '~/notifications';
+import { getPushNotifications, getUserProfile, refreshToken } from "./api/helpers";
 
 NetInfo.configure({
     reachabilityUrl: config.api.learning,
@@ -35,14 +35,15 @@ const NetworkListener = () => {
     React.useEffect(() => {
         const unsubscribe = NetInfo.addEventListener((state) => {
             const isNowOnline = state.isConnected; //(state.isConnected && state.isInternetReachable);
-            //const isNowOnline = true;
 
             if (!isCurrentOnline && isNowOnline && token) {
-                refreshToken().catch(() => { }).then(getUserProfile);
+                refreshToken().catch(() => { }).then(getUserProfile).then(getPushNotifications);
             }
             if (isNowOnline !== isCurrentOnline)
                 console.log('[NetInfo State Change]', isCurrentOnline, isNowOnline);
-            dispatch(setOnlineStatus(isNowOnline));
+
+            if (isCurrentOnline !== isNowOnline)
+                dispatch(setOnlineStatus(isNowOnline));
         });
 
         return () => {
@@ -55,7 +56,9 @@ const NetworkListener = () => {
 
 
 export const App = () => {
-    // React.useEffect(() => { persistor.purge(); }, []);
+
+    //React.useEffect(() => { persistor.purge(); }, []);
+
     return (
         <SafeAreaProvider>
             <Provider store={stores}>

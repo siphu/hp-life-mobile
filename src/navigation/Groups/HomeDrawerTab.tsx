@@ -16,13 +16,15 @@ import { HeaderMenuIcon } from '../components/HeaderMenuIcon';
 import { DrawerActions, EventArg, ParamListBase, RouteProp, TabNavigationState, useNavigation, useRoute } from '@react-navigation/native';
 import { DrawerContentWrapper } from '../components/DrawerContentWrapper';
 import React from 'react';
-import { connect, ConnectedProps } from 'react-redux';
+import { connect, ConnectedProps, shallowEqual, useSelector } from 'react-redux';
 import { RootState } from '~/stores';
 import { getRemoteMessages } from '~/api/helpers';
 import { t } from '~/providers/TranslationProvider';
 import OfflineBanner from '~/components/OfflineBanner';
 import RemoteAlertBanner from '~/components/RemoteAlertBanner';
 import { TouchableOpacity } from 'react-native';
+import { HeaderLanguageIcon } from '../components/HeaderLanguageIcon';
+import { HeaderNotificationIcon } from '../components/HeaderNotificationIcon';
 
 const HomeDrawerNavigation = createDrawerNavigator();
 const HomeBottomTabs = createBottomTabNavigator();
@@ -130,6 +132,15 @@ const ConnectedBottomTabs = connector(BottomTabs);
 export const HomeDrawer = () => {
     const insets = useSafeAreaInsets();
     const navigation = useNavigation();
+
+    const { online, notifications } = useSelector(
+        (root: RootState) => ({
+            online: root.app.online,
+            notifications: root.app.notifications,
+        }),
+        shallowEqual
+    );
+
     return (
         <HomeDrawerNavigation.Navigator
             initialRouteName={AuthenticatedScreens.HomeTabs}
@@ -142,7 +153,8 @@ export const HomeDrawer = () => {
                     shadowOpacity: 0,
                     backgroundColor: GlobalStyles.header.backgroundColor,
                 },
-                headerLeft: () => <HeaderMenuIcon onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />,
+                headerLeft: () => React.useMemo(() => <HeaderMenuIcon onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />, []),
+                headerRight: () => React.useMemo(() => <HeaderNotificationIcon onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />, [online, notifications]),
                 headerBackground: () => <HeaderLogo />,
                 headerTitle: '',
                 drawerType: 'front',

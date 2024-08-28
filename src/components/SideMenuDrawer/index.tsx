@@ -24,9 +24,19 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
     const appState = useSelector((root: RootState) => root.app);
     const [showLogout, setShowLogout] = React.useState<boolean>(false);
 
-    const dispatch = useDispatch();
-
     const menu: MenuItemProps[] = [
+        {
+            label: t('sideMenu.links.help'),
+            icon: 'help_outline',
+            selected: false,
+            click: () => {
+                browseInApp({
+                    title: t('sideMenu.links.help'),
+                    url: `${config.api.webUrl}/mobile/help`
+                });
+            },
+            disabled: !appState.online
+        },
         {
             label: t('sideMenu.certificate'),
             icon: 'verified',

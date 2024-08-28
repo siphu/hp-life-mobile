@@ -18,13 +18,13 @@ import {
 const persistAppConfig = {
   key: 'app',
   storage: AsyncStorage,
-  whitelist: ['language'],
+  whitelist: ['language', 'notifications'],
 };
 
 const persistUserConfig = {
   key: 'user',
   storage: AsyncStorage,
-  whitelist: ['token', 'profile'],
+  whitelist: ['token', 'profile', 'badges'],
 };
 
 const persistCourseConfig = {
@@ -33,24 +33,15 @@ const persistCourseConfig = {
   whitelist: ['categories', 'latest', 'enrolled', 'available'],
 };
 
-const persistRootConfig = {
-  key: 'root',
-  storage: AsyncStorage,
-  whitelist: ['app', 'user', 'course'],
-};
-
 const rootReducer = combineReducers({
   app: persistReducer(persistAppConfig, reducerApp),
   user: persistReducer(persistUserConfig, reducerUser),
   course: persistReducer(persistCourseConfig, reducerCourse),
 });
 
-//@ts-ignore
-const persistedReducer = persistReducer(persistRootConfig, rootReducer);
-
 export const stores = configureStore({
   devTools: false,
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {

@@ -144,3 +144,24 @@ export interface CurrentAlertApiModel {
 export interface EmailMarketingAccountSetting {
   isNewsletterEnabled: boolean;
 }
+
+export interface Notification {
+  id: number;
+  type: string;
+  resourceId: string;
+  creationDate: Date;
+  isRead: boolean;
+  title?: string;
+  body?: string;
+  imageUrl?: string;
+}
+
+export interface NotificationsResults extends Pagination<Notification> {}
+
+export interface MyBadge {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl?: string;
+  issueDate?: Date;
+}

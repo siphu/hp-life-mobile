@@ -1,12 +1,13 @@
 import {StoreAppState, state as defaultState} from './state';
 
-export enum StoreAppType {
+export enum AppAction {
   SET_LANGUAGE = 'SET_LANGUAGE',
   SET_ONLINE_STATUS = 'SET_ONLINE_STATUS',
+  SET_NOTIFICATIONS = 'SET_NOTIFICATIONS',
 }
 
 interface ReducerAppAction {
-  type: StoreAppType;
+  type: AppAction;
   payload: any;
 }
 
@@ -15,15 +16,21 @@ export const reducers = (
   action: ReducerAppAction,
 ): StoreAppState => {
   switch (action.type) {
-    case StoreAppType.SET_LANGUAGE:
+    case AppAction.SET_LANGUAGE:
       return {
         ...state,
         language: action.payload,
       };
-    case StoreAppType.SET_ONLINE_STATUS:
+    case AppAction.SET_ONLINE_STATUS:
+      console.log('setting online state', action.payload);
       return {
         ...state,
         online: action.payload,
+      };
+    case AppAction.SET_NOTIFICATIONS:
+      return {
+        ...state,
+        notifications: action.payload,
       };
     default:
       return state;

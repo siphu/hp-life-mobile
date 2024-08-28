@@ -1,10 +1,4 @@
-import {
-  AuthToken,
-  Course,
-  CourseStatus,
-  TraineeCourse,
-  UserProfile,
-} from '../endpoints/model';
+import {AuthToken, Notification, UserProfile} from '../endpoints/model';
 import {
   refreshToken as remoteRefreshToken,
   getUserProfile as remoteGetUserProfile,
@@ -12,13 +6,22 @@ import {
   getCurrentAlert as remoteGetAlert,
   getEmailMarketingSetting,
   setEmailMarketingSetting,
+  getNotifications as remoteGetNotifications,
+  getMyBadges as remoteGetMyBadges,
 } from '~/api/endpoints/user';
 import {stores} from '~/stores';
 import {StoreAppState} from '~/stores/app/state';
 import {CourseAction} from '~/stores/course/reducers';
-import {setAlerts, setProfile, setToken} from '~/stores/user/actions';
+import {
+  setAlerts,
+  setBadges,
+  setProfile,
+  setToken,
+} from '~/stores/user/actions';
 import {UserAction} from '~/stores/user/reducers';
 import {StoreUserState} from '~/stores/user/state';
+import notifee from '@notifee/react-native';
+import {setNotifications} from '~/stores/app/actions';
 
 let lastRemoteMessageCalled: number | null = null;
 
@@ -82,4 +85,20 @@ export const updateUserProfile = (userProfile: UserProfile) => {
 export const signOut = () => {
   stores.dispatch({type: CourseAction.RESET_COURSE_STORE});
   stores.dispatch({type: UserAction.SIGN_OUT});
+};
+
+export const getPushNotifications = () => {
+  Promise.all(
+    [remoteGetNotifications(), remoteGetMyBadges()].map(p => p.catch(e => e)),
+  ).then(([notifications, badges]) => {
+    const notificationChecked: Notification[] = notifications.hasOwnProperty(
+      'error_message',
+    )
+      ? []
+      : notifications;
+    const badgeChecked = badges.hasOwnProperty('error_message') ? [] : badges;
+    notifee.setBadgeCount(notificationChecked.filter(n => !n.isRead).length);
+    stores.dispatch(setNotifications(notificationChecked));
+    stores.dispatch(setBadges(badgeChecked));
+  });
 };

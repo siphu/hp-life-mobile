@@ -41,6 +41,7 @@ export const styles = StyleSheet.create({
     resizeMode: 'cover',
     width: '100%',
     aspectRatio: 1.592592592592593,
+    backgroundColor: 'rgba(230, 230, 230, 1)',
   },
   backgroundImageContainer: {},
   backgroundImageStyle: {
