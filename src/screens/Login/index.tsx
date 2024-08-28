@@ -14,7 +14,7 @@ import { config } from "~/config/config";
 import { ScrollViewBackgroundLayer } from "~/components/ScrollViewBackgroundLayer";
 import { GlobalStyles } from "~/config/styles";
 import { t } from "~/providers/TranslationProvider";
-import { getUserProfile, refreshToken } from "~/api/helpers";
+import { getPushNotifications, getUserProfile, refreshToken } from "~/api/helpers";
 
 const Login = () => {
     const appState = useSelector((state: RootState) => state.app);
@@ -35,6 +35,7 @@ const Login = () => {
             .then(extractToken)
             .then((token) => refreshToken(token).catch(() => { }))
             .then(getUserProfile)
+            .then(() => getPushNotifications().catch(() => { }))
             .catch((e) => console.error('e', e));
     }
 

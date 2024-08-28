@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useSelector } from 'react-redux';
+import { connect, ConnectedProps, useSelector } from 'react-redux';
 import { MaterialIcons } from "~/components/MaterialIcons";
 import Text from '~/components/Text';
 import { config } from '~/config/config';
@@ -38,13 +38,17 @@ const styles = StyleSheet.create({
 interface MenuHeaderProp {
     onPress?: () => void;
 }
-export const HeaderNotificationIcon = (props: MenuHeaderProp) => {
-    const { online, notifications } = useSelector((root: RootState) => root.app);
-    const ParentView: any = online ? TouchableOpacity : View;
 
+const connector = connect((state: RootState, ownProps: MenuHeaderProp) => ({
+    notifications: state.app.notifications.filter(n => !n.isRead),
+    online: state.app.online,
+    onPress: ownProps.onPress
+}));
+const Notification: React.FC<ConnectedProps<typeof connector>> = ({ online, notifications, onPress }) => {
+    const ParentView: any = online ? TouchableOpacity : View;
     return (
         <ParentView
-            onPress={props.onPress}
+            onPress={onPress}
             style={styles.touchableArea}>
             <MaterialIcons name='notifications' size={30} color={'black'} />
             {notifications && notifications.length > 0 && (
@@ -61,3 +65,4 @@ export const HeaderNotificationIcon = (props: MenuHeaderProp) => {
         </ParentView>
     );
 };
+export const HeaderNotificationIcon = connector(Notification);

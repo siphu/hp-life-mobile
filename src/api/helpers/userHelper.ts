@@ -24,6 +24,8 @@ import {StoreUserState} from '~/stores/user/state';
 import notifee from '@notifee/react-native';
 import {setNotifications} from '~/stores/app/actions';
 import messaging from '@react-native-firebase/messaging';
+import {jwtDecode} from 'jwt-decode';
+import moment from 'moment';
 
 let lastRemoteMessageCalled: number | null = null;
 
@@ -54,8 +56,28 @@ export const getRemoteMessages = async () => {
   return alerts;
 };
 
+export const checkAndRefreshToken = async (
+  token?: AuthToken,
+): Promise<AuthToken> => {
+  const userState: StoreUserState = stores.getState().user!;
+
+  const authToken = token ? token : (userState.token as AuthToken);
+  const decodedToken = jwtDecode(authToken.access_token);
+
+  if (decodedToken.exp) {
+    const expirationTime = moment.unix(decodedToken.exp);
+    const threeDaysFromNow = moment().add(3, 'days');
+    const willExpireSoon = expirationTime.isBefore(threeDaysFromNow);
+    if (!willExpireSoon) return authToken;
+  }
+  return remoteRefreshToken(authToken);
+};
+
 export const refreshToken = (token?: AuthToken) => {
-  return remoteRefreshToken(token).then(setToken).then(stores.dispatch);
+  return checkAndRefreshToken(token)
+    .then(setToken)
+    .then(stores.dispatch)
+    .catch(e => console.error('error', e));
 };
 
 export const getUserProfile = () => {
@@ -98,7 +120,7 @@ export const unRegisterDeviceForMessaging = async () => {
 };
 
 export const getPushNotifications = () => {
-  Promise.all(
+  return Promise.all(
     [remoteGetNotifications(), remoteGetMyBadges()].map(p => p.catch(e => e)),
   ).then(([notifications, badges]) => {
     const notificationChecked: Notification[] = notifications.hasOwnProperty(
