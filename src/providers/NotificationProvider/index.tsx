@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode } from 'react';
 import { connect } from 'react-redux';
-import { RootState } from '~/stores';
+import { RootState, stores } from '~/stores';
 import messaging from '@react-native-firebase/messaging';
 import notifee from '@notifee/react-native';
 import { Notification as NotificationModel } from '~/api/endpoints';
@@ -9,7 +9,9 @@ import { AuthenticatedScreens } from '~/navigation/screens';
 import { config } from '~/config/config';
 import { t } from '../TranslationProvider';
 import { NavigationProp, NavigationState } from '@react-navigation/native';
-import { clearNotifications, deleteNotification, markNotificationsRead } from '~/api/helpers';
+import { clearNotifications, deleteNotification, markNotificationsRead, registerDeviceForMessaging } from '~/api/helpers';
+import { Prompt } from './components/Prompt';
+import { setPushNotificationPreferences } from '~/stores/user/actions';
 
 type RNNavigationProp = Omit<NavigationProp<ReactNavigation.RootParamList>, "getState"> & { getState(): NavigationState | undefined };
 
@@ -27,6 +29,7 @@ interface NotificationProviderProps {
     notifications: NotificationModel[];
     language: string;
     navigation: RNNavigationProp;
+    preferencePushNotification?: boolean;
 }
 
 interface NotificationProviderState {
@@ -42,18 +45,8 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
 
     async componentDidMount() {
         this.unsubscribeMessageListener = messaging().onMessage(this.handleIncomingNotification);
-        //messaging().setBackgroundMessageHandler(this.handleIncomingNotification);
-
         this.setState({ initialized: true });
     }
-
-    componentDidUpdate(prevProps: NotificationProviderProps) {
-
-    }
-
-    // shouldComponentUpdate(nextProps: Readonly<NotificationProviderProps>, nextState: Readonly<NotificationProviderState>, nextContext: any): boolean {
-    //     return false;
-    // }
 
     componentWillUnmount() {
         if (this.unsubscribeMessageListener) {
@@ -62,7 +55,6 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
     }
 
     handleIncomingNotification = async (remoteMessage: any) => {
-
         await notifee.displayNotification({
             title: remoteMessage.notification?.title,
             body: remoteMessage.notification?.body,
@@ -72,12 +64,10 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
         });
 
         this.handleNotification(remoteMessage);
-
     };
 
     handleNotification = async (notification: NotificationModel) => {
-        if (!notification.isRead)
-            markNotificationsRead(notification);
+        if (!notification.isRead) markNotificationsRead(notification);
 
         switch (notification.type) {
             case 'NewCourseAvailable':
@@ -88,7 +78,7 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
                 return this.props.navigation.navigate(AuthenticatedScreens.InAppBrowser, {
                     title: t('sideMenu.links.news'),
                     url: `${config.api.webUrl}/mobile/${notification.resourceId}`,
-                    locale: this.props.language
+                    locale: this.props.language,
                 });
             case 'CourseCertificateEarned':
                 return this.props.navigation.navigate(AuthenticatedScreens.Dashboard, {
@@ -101,7 +91,6 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
             default:
                 return this.props.navigation.navigate(AuthenticatedScreens.Dashboard);
         }
-
     };
 
     requestPermission = async () => {
@@ -113,17 +102,26 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
         if (enabled) {
             console.log('Push notifications authorized');
         } else {
-            Alert.alert('Push notifications are disabled');
+            console.log('Push notifications declined');
         }
-    }
+
+        return enabled;
+    };
 
     clearNotifications = async () => {
         clearNotifications();
-    }
+    };
 
     deleteNotification = async (notification: NotificationModel) => {
         deleteNotification(notification);
-    }
+    };
+
+    userPreferenceSelected = async (enable: boolean) => {
+        stores.dispatch(setPushNotificationPreferences(enable));
+        if (enable) {
+            this.requestPermission().then(registerDeviceForMessaging);
+        }
+    };
 
     render() {
         const { children } = this.props;
@@ -134,12 +132,19 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
         }
 
         return (
-            <NotificationContext.Provider value={{
-                handleNotification: this.handleNotification,
-                requestPermission: this.requestPermission,
-                clearNotifications: this.clearNotifications,
-                deleteNotification: this.deleteNotification
-            }}>
+            <NotificationContext.Provider
+                value={{
+                    handleNotification: this.handleNotification,
+                    requestPermission: this.requestPermission,
+                    clearNotifications: this.clearNotifications,
+                    deleteNotification: this.deleteNotification,
+                }}
+            >
+                <Prompt
+                    visible={this.props.preferencePushNotification === undefined}
+                    onClose={() => this.userPreferenceSelected(false)}
+                    onConfirm={() => this.userPreferenceSelected(true)}
+                />
                 {children}
             </NotificationContext.Provider>
         );
@@ -148,8 +153,9 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
 
 const mapStateToProps = (state: RootState, ownProps: { navigation: RNNavigationProp }) => ({
     notifications: state.app.notifications,
+    preferencePushNotification: state.user.preferencePushNotification,
     language: state.app.language,
-    navigation: ownProps.navigation
+    navigation: ownProps.navigation,
 });
 
 export default connect(mapStateToProps)(NotificationHandler);

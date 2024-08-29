@@ -110,3 +110,18 @@ export async function unregisterFCM(fcm: string): Promise<void> {
     `${config.api.push}/Account/pushNotificationTokens/${fcm}`,
   );
 }
+
+export async function registerFCM(fcm: string): Promise<void> {
+  return post<void>(`${config.api.push}/Account/pushNotificationTokens`, {
+    token: fcm,
+  });
+}
+
+export async function checkFCMRegistration(fcm: string): Promise<boolean> {
+  try {
+    await get<void>(`${config.api.push}/Account/pushNotificationTokens/${fcm}`);
+    return true;
+  } catch ($e) {
+    return false;
+  }
+}

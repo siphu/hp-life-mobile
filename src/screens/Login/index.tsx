@@ -17,15 +17,19 @@ import { t } from "~/providers/TranslationProvider";
 import { getPushNotifications, getUserProfile, refreshToken } from "~/api/helpers";
 
 const Login = () => {
+
     const appState = useSelector((state: RootState) => state.app);
     const navigation = useNavigation();
-    const openLanguageSelector = _.debounce(() => navigation.navigate(UnAuthenticatedScreens.Language), 100);
+    const openLanguageSelector = React.useCallback(
+        _.debounce(() => navigation.navigate(UnAuthenticatedScreens.Language), 100),
+        [navigation]
+    );
 
     React.useEffect(() => {
         if (!appState.language) {
             openLanguageSelector();
         }
-    }, []);
+    }, [appState.language]);
 
     const signIn = async () => {
         const ts = new Date().getTime();
@@ -33,11 +37,13 @@ const Login = () => {
 
         openBrowser(url)
             .then(extractToken)
-            .then((token) => refreshToken(token).catch(() => { }))
+            .then((token) => refreshToken(token).catch((e) => console.error('Error refreshing token:', e)))
             .then(getUserProfile)
-            .then(() => getPushNotifications().catch(() => { }))
-            .catch((e) => console.error('e', e));
-    }
+            .then(() => getPushNotifications().catch((e) => console.error('Error getting push notifications:', e)))
+            .catch((e) => console.error('Sign-in error:', e));
+    };
+
+    const join = () => { }
 
     return (
         <View style={GlobalStyles.flex}>
@@ -52,7 +58,7 @@ const Login = () => {
                                 title={t('login.login')} onPress={signIn} />
                             <Button style={{ borderWidth: 1, }} textStyle={{ color: config.color.neutral[900] }}
                                 color={config.color.neutral[50]}
-                                title={t('login.join')} onPress={signIn} />
+                                title={t('login.join')} onPress={join} />
                         </View>
                     </View>
                 </View>

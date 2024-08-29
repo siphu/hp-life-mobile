@@ -671,7 +671,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hp.life;
-				PRODUCT_NAME = hplife;
+				PRODUCT_NAME = "HP LIFE";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "HP Life Development Provision";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -705,7 +705,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hp.life;
-				PRODUCT_NAME = hplife;
+				PRODUCT_NAME = "HP LIFE";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "HP Life Distribution Provision File";
 				SWIFT_VERSION = 5.0;

@@ -112,9 +112,9 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
                 ))}
             </ScrollView>
             <View>
-                <Alert show={showLogout} position="Bottom" onRequestClose={() => setShowLogout(false)}>
+                <Alert show={showLogout} position="Center" onRequestClose={() => setShowLogout(false)}>
                     <View style={{
-                        rowGap: 12,
+                        rowGap: 20,
                     }}>
                         <View><Text style={{
                             fontSize: 28,
@@ -125,13 +125,15 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
                                 fontSize: 16,
                             }}>{t('sideMenu.logout.prompt')}</Text>
                         </View>
-                        <View style={{ flexDirection: 'row', columnGap: 12 }}>
-                            <Button title={t('sideMenu.logout.cancel')} color={config.color.button.primary} style={{
-                                paddingHorizontal: 20,
-                            }} onPress={() => setShowLogout(false)}></Button>
-                            <Button onPress={() => { signOut() }} title={t('sideMenu.logout.yes')} color={config.color.misc.danger} style={{
-                                paddingHorizontal: 20,
-                            }}></Button>
+                        <View style={{ flexDirection: 'column', rowGap: 8 }}>
+                            <Button color={config.color.neutral[900]}
+                                title={t('sideMenu.logout.yes')} onPress={() => signOut().catch(() => { }).then(() => setShowLogout(false))}
+                            />
+                            <Button style={{ borderWidth: 1, }} textStyle={{ color: config.color.neutral[900] }}
+                                color={config.color.neutral[50]}
+                                title={t('sideMenu.logout.cancel')}
+                                onPress={() => setShowLogout(false)}
+                            />
                         </View>
                     </View>
                 </Alert>

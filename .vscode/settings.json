@@ -6,5 +6,6 @@
     ".vscode": true,
     ".yarn": true,
     "vendor": true
-  }
+  },
+  "CodeGPT.apiKey": "OpenAI"
 }

@@ -12,6 +12,7 @@ import {
   markNotificationsRead as remoteMarkNotificationRead,
   clearNotifications as remoteClearNotifications,
   deleteNotification as remoteDeleteNotification,
+  registerFCM,
 } from '~/api/endpoints';
 import {stores} from '~/stores';
 import {StoreAppState} from '~/stores/app/state';
@@ -30,7 +31,7 @@ import {
   setNotificationRead,
   setNotifications,
 } from '~/stores/app/actions';
-import messaging from '@react-native-firebase/messaging';
+import messaging, {firebase} from '@react-native-firebase/messaging';
 import {jwtDecode} from 'jwt-decode';
 import moment from 'moment';
 
@@ -115,15 +116,24 @@ export const updateUserProfile = (userProfile: UserProfile) => {
 
 export const signOut = async () => {
   stores.dispatch({type: CourseAction.RESET_COURSE_STORE});
-  await unRegisterDeviceForMessaging();
+  unRegisterDeviceForMessaging().catch(() => {});
   stores.dispatch(setNotifications([]));
   stores.dispatch({type: UserAction.SIGN_OUT});
 };
 
 export const unRegisterDeviceForMessaging = async () => {
-  await unregisterFCM(await messaging().getToken());
-  await messaging().unregisterDeviceForRemoteMessages();
+  try {
+    await unregisterFCM(await messaging().getToken());
+    // await messaging().unregisterDeviceForRemoteMessages();
+    await firebase.messaging().unregisterDeviceForRemoteMessages();
+  } catch {}
   await notifee.setBadgeCount(0);
+};
+
+export const registerDeviceForMessaging = async () => {
+  // await firebase.messaging().registerDeviceForRemoteMessages();
+  const fcmToken = await messaging().getToken();
+  await registerFCM(fcmToken).catch(() => {});
 };
 
 export const getPushNotifications = () => {

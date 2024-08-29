@@ -24,7 +24,7 @@ const persistAppConfig = {
 const persistUserConfig = {
   key: 'user',
   storage: AsyncStorage,
-  whitelist: ['token', 'profile', 'badges'],
+  whitelist: ['token', 'profile', 'badges', 'preferencePushNotification'],
 };
 
 const persistCourseConfig = {

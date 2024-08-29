@@ -10,6 +10,7 @@ export interface StoreUserState {
   profile?: UserProfile;
   alerts: CurrentAlertApiModel[];
   badges: MyBadge[];
+  preferencePushNotification?: boolean;
 }
 
 export const state: StoreUserState = {

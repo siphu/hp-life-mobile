@@ -31,3 +31,8 @@ export const setBadges = (badges: MyBadge[]) => ({
   type: UserAction.SET_BADGES,
   payload: badges,
 });
+
+export const setPushNotificationPreferences = (enable?: boolean) => ({
+  type: UserAction.SET_PUSH_NOTIFICATION_PREFERENCES,
+  payload: enable,
+});
