@@ -1,4 +1,9 @@
-import {AuthToken, Notification, UserProfile} from '../endpoints/model';
+import {
+  AuthToken,
+  MyBadge,
+  Notification,
+  UserProfile,
+} from '../endpoints/model';
 import {
   refreshToken as remoteRefreshToken,
   getUserProfile as remoteGetUserProfile,
@@ -13,6 +18,7 @@ import {
   clearNotifications as remoteClearNotifications,
   deleteNotification as remoteDeleteNotification,
   registerFCM,
+  analyticsBadgeSharing,
 } from '~/api/endpoints';
 import {stores} from '~/stores';
 import {StoreAppState} from '~/stores/app/state';
@@ -34,6 +40,8 @@ import {
 import messaging, {firebase} from '@react-native-firebase/messaging';
 import {jwtDecode} from 'jwt-decode';
 import moment from 'moment';
+import Share from 'react-native-share';
+import {config} from '~/config/config';
 
 let lastRemoteMessageCalled: number | null = null;
 
@@ -169,5 +177,16 @@ export const deleteNotification = (notification: Notification) => {
   return remoteDeleteNotification(notification.id)
     .then(() => removeNotification(notification))
     .then(stores.dispatch)
+    .catch(() => {});
+};
+
+export const shareBadge = async (badge: MyBadge) => {
+  const language = stores.getState().app.language;
+  Share.open({
+    url: `${config.api.webUrl}/${language}/badges/${badge.id}`,
+  })
+    .then(() => {
+      analyticsBadgeSharing(badge.id as string);
+    })
     .catch(() => {});
 };

@@ -19,8 +19,7 @@ declare global {
 const connector = connect((state: RootState) => ({ token: state.user.token, }));
 const NavigationSwitch: React.FC<ConnectedProps<typeof connector>> = ({ token }) => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-  return token ? <NotificationProvider navigation={navigation} dispatch={dispatch}><AuthenticatedStack /></NotificationProvider> : <UnAuthenticatedStack />;
+  return token ? <NotificationProvider navigation={navigation}><AuthenticatedStack /></NotificationProvider> : <UnAuthenticatedStack />;
 };
 
 export const NavigationStacks = connector(NavigationSwitch);

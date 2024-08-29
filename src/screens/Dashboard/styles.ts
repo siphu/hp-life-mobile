@@ -3,6 +3,7 @@ import {config} from '~/config/config';
 
 const screenWidth = Dimensions.get('window').width;
 const ITEM_HEIGHT = Math.floor(screenWidth * 0.3);
+// const BADGE_HEIGHT = Math.floor(screenWidth * 0.66);
 
 const PADDING_HORIZONTAL = 20;
 const ITEM_SPACING = 10;
@@ -10,6 +11,7 @@ const HEADER_HEIGHT = 50;
 
 export {
   screenWidth,
+  // BADGE_HEIGHT,
   ITEM_HEIGHT,
   PADDING_HORIZONTAL,
   ITEM_SPACING,
@@ -68,5 +70,61 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '500',
     marginLeft: 8,
+  },
+
+  badgeContainer: {
+    flexDirection: 'column',
+    padding: 15,
+    borderColor: config.color.neutral[300],
+    borderWidth: 1,
+    backgroundColor: '#FAFAFA',
+    marginBottom: 8,
+    //height: BADGE_HEIGHT,
+  },
+  badgeRow: {
+    flex: 1,
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  badgeImageContainer: {
+    padding: 6.5,
+    marginRight: 10,
+    justifyContent: 'center',
+  },
+  badgeImageBackground: {
+    width: 67,
+    height: 67,
+    borderRadius: 35,
+  },
+  remoteImage: {
+    width: 67,
+    height: 67,
+    aspectRatio: 1,
+  },
+  badgeDescriptionText: {
+    fontWeight: '400',
+    fontSize: 14,
+    lineHeight: 18.2,
+    letterSpacing: 0.17,
+    color: config.color.misc.textSecondary,
+    textAlign: 'left',
+  },
+  badgeEarnedOnText: {
+    marginTop: 10,
+    fontWeight: '400',
+    fontSize: 12,
+    lineHeight: 14,
+    letterSpacing: 0.15,
+    color: config.color.misc.primary,
+    textAlign: 'left',
+  },
+  badgeRightContainer: {
+    flexGrow: 1,
+    flex: 1,
+    paddingHorizontal: 10,
+    paddingTop: 5,
+    justifyContent: 'center',
+    display: 'flex',
+    rowGap: 8,
   },
 });
