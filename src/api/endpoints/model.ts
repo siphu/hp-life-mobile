@@ -72,6 +72,7 @@ export interface Course extends BasicModel {
   certificateUrl?: string;
   lastTaskId?: number;
   lastLessonId?: number;
+  lessons?: Lesson[];
 }
 
 export interface CourseResult extends Pagination<Course> {}

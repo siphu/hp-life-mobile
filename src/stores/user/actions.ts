@@ -36,3 +36,8 @@ export const setPushNotificationPreferences = (enable?: boolean) => ({
   type: UserAction.SET_PUSH_NOTIFICATION_PREFERENCES,
   payload: enable,
 });
+
+export const setPushRegistered = (enable: boolean) => ({
+  type: UserAction.SET_PUSH_REGISTERED,
+  payload: enable,
+});

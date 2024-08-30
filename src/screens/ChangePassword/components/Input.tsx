@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleProp, View, ViewStyle, I18nManager } from 'react-native';
 import { Text } from '~/components/Text';
 import { config } from '~/config/config';
-import { styles } from '../styles';
+import { styles } from '../styles'
 import TextInput from '~/components/TextInput';
 
 interface ProfileTextInputProps {
@@ -36,7 +36,7 @@ const Input = (props: ProfileTextInputProps) => {
                     editable={props.enabled ?? false}
                     style={styles.inputText}
                     placeholder={props.placeholder ?? ''}
-                    placeholderTextColor={config.color.neutral[900]}
+                    placeholderTextColor={config.color.misc.borderDark}
                     value={props.value}
                     onChangeText={props.onChange}
                 />

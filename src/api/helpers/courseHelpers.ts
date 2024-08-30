@@ -103,7 +103,7 @@ export const getEnrolledCourses = async (
 
   lastEnrolledCoursesFetchTime = currentTime;
 
-  return courseState.enrolled;
+  return stores.getState().course!.enrolled;
 };
 
 export const getAvailableCourses = async (

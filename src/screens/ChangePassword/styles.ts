@@ -50,9 +50,9 @@ export const styles = StyleSheet.create({
     borderColor: config.color.neutral[900],
     borderWidth: 1,
   },
-  versionText: {
-    color: config.color.misc.borderDark,
-    fontSize: 12,
-    textAlign: 'center',
+  errorMessage: {
+    color: config.color.misc.danger,
+    fontSize: 16,
+    fontWeight: '400',
   },
 });

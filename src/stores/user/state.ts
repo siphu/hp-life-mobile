@@ -11,9 +11,11 @@ export interface StoreUserState {
   alerts: CurrentAlertApiModel[];
   badges: MyBadge[];
   preferencePushNotification?: boolean;
+  pushRegistered: boolean;
 }
 
 export const state: StoreUserState = {
   alerts: [],
   badges: [],
+  pushRegistered: false,
 };

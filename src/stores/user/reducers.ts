@@ -7,6 +7,7 @@ export enum UserAction {
   SET_ALERTS = 'SET_ALERTS',
   SET_BADGES = 'SET_BADGES',
   SET_PUSH_NOTIFICATION_PREFERENCES = 'SET_PUSH_NOTIFICATION_PREFERENCES',
+  SET_PUSH_REGISTERED = 'SET_PUSH_REGISTERED',
 }
 
 interface ReducerAction {
@@ -45,6 +46,11 @@ export const reducers = (
       return {
         ...state,
         preferencePushNotification: action.payload,
+      };
+    case UserAction.SET_PUSH_REGISTERED:
+      return {
+        ...state,
+        pushRegistered: action.payload,
       };
     default:
       return state;

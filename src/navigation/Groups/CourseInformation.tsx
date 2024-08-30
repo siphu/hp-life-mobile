@@ -14,9 +14,10 @@ import CourseInformation from "~/screens/CourseInformation";
 import { RootStackParamList } from "..";
 import CourseExecution from "~/screens/CourseExecution";
 import CourseSideMenuDrawer from "~/components/CourseSideMenuDrawer";
-import { Course, getParticipantCourse, getTraineeCourse } from "~/api/endpoints";
+import { Course, getParticipantCourse, getParticipantLessons, getTraineeCourse } from "~/api/endpoints";
 import { StackScreenProps } from "@react-navigation/stack";
 import Loader from "~/components/Loader";
+import { getAvailableCourses, getEnrolledCourses } from "~/api/helpers";
 
 const CourseDrawerNavigation = createDrawerNavigator<RootStackParamList>();
 
@@ -31,17 +32,36 @@ const connector = connect((state: RootState, ownProps: CourseDrawerProps) => {
         courseId,
         route: ownProps.route,
         navigation: ownProps.navigation,
+        ts: ownProps.route.params.ts
     };
 });
 
-const CourseDrawer: React.FC<ConnectedProps<typeof connector>> = ({ course, enrolled, courseId, route, navigation }) => {
+const CourseDrawer: React.FC<ConnectedProps<typeof connector>> = ({ course, enrolled, courseId, ts, route, navigation }) => {
     const insets = useSafeAreaInsets();
     const [courseInformation, setCourse] = React.useState<Course | undefined>();
+
     React.useEffect(() => {
-        if (enrolled)
-            getTraineeCourse(courseId).then(setCourse)
-        else getParticipantCourse(courseId).then(setCourse);
-    }, [courseId]);
+        const fetchData = async () => {
+            let isEnrolled = enrolled;
+            if (ts) {
+                const newEnrolledCourses = await getEnrolledCourses(true);
+                isEnrolled = !!newEnrolledCourses.find(c => c.id === courseId);
+                if (!enrolled && isEnrolled) {
+                    getAvailableCourses(true);
+                }
+            }
+
+            if (isEnrolled) {
+                getTraineeCourse(courseId).then(setCourse);
+            } else {
+                Promise.all([getParticipantCourse(courseId), getParticipantLessons(courseId)]).then(([c, l]) => {
+                    setCourse({ ...c, lessons: l });
+                });
+            }
+        };
+
+        fetchData();
+    }, [courseId, ts]);
 
     return (
         <>

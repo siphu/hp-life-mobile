@@ -2,6 +2,7 @@ import {
   Category,
   Course,
   CourseResult,
+  Lesson,
   TraineeCourse,
   TraineeCourseResult,
 } from './model';
@@ -68,5 +69,13 @@ export async function getAvailableCourses(
 export async function getParticipantCourse(courseId: number): Promise<Course> {
   return get<Course>(
     `${config.api.learning}/api/marketplace/courses/${courseId}`,
+  );
+}
+
+export async function getParticipantLessons(
+  courseId: number,
+): Promise<Lesson[]> {
+  return get<Lesson[]>(
+    `${config.api.learning}/api/marketplace/courses/${courseId}/lessons`,
   );
 }

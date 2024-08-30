@@ -16,6 +16,7 @@ import { setPushNotificationPreferences } from '~/stores/user/actions';
 type RNNavigationProp = Omit<NavigationProp<ReactNavigation.RootParamList>, "getState"> & { getState(): NavigationState | undefined };
 
 interface NotificationContextProps {
+    hasPermission?: boolean;
     handleNotification: (notification: NotificationModel) => void;
     requestPermission: () => void;
     clearNotifications: () => void;
@@ -34,17 +35,25 @@ interface NotificationProviderProps {
 
 interface NotificationProviderState {
     initialized: boolean;
+    hasPermission?: boolean;
 }
 
 class NotificationHandler extends React.Component<NotificationProviderProps, NotificationProviderState> {
+
+
     state: NotificationProviderState = {
         initialized: false,
+        hasPermission: undefined
     };
 
     private unsubscribeMessageListener: (() => void) | null = null;
 
     async componentDidMount() {
+        this.hasPermission = this.hasPermission.bind(this);
+
+
         this.unsubscribeMessageListener = messaging().onMessage(this.handleIncomingNotification);
+        await this.hasPermission();
         this.setState({ initialized: true });
     }
 
@@ -56,10 +65,19 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
 
     handleIncomingNotification = async (remoteMessage: any) => {
         await notifee.displayNotification({
-            title: remoteMessage.notification?.title,
+            title: remoteMessage.notification?.title || 'HP LIFE',
             body: remoteMessage.notification?.body,
+            data: remoteMessage.data,
             android: {
-                channelId: 'default',
+                smallIcon: 'ic_small_icon',
+                color: config.color.misc.primary,
+                largeIcon: remoteMessage?.android?.imageUrl,
+                sound: 'default',
+                channelId: 'hp-life-mobile-notification',
+                pressAction: {
+                    id: 'hp-life-mobile-notification',
+                    launchActivity: 'default',
+                },
             },
         });
 
@@ -93,6 +111,19 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
         }
     };
 
+    hasPermission = async () => {
+        messaging()
+            .hasPermission()
+            .then(permission => {
+                const hasPermission =
+                    permission === messaging.AuthorizationStatus.AUTHORIZED ||
+                    permission === messaging.AuthorizationStatus.PROVISIONAL;
+                this.setState({
+                    hasPermission: hasPermission
+                });
+            });
+    }
+
     requestPermission = async () => {
         const authStatus = await messaging().requestPermission();
         const enabled =
@@ -105,6 +136,9 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
             console.log('Push notifications declined');
         }
 
+        this.setState({
+            hasPermission: enabled
+        });
         return enabled;
     };
 
@@ -134,6 +168,7 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
         return (
             <NotificationContext.Provider
                 value={{
+                    hasPermission: this.state.hasPermission,
                     handleNotification: this.handleNotification,
                     requestPermission: this.requestPermission,
                     clearNotifications: this.clearNotifications,

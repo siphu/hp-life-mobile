@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, ScrollView, View } from "react-native";
+import { Dimensions, RefreshControl, ScrollView, View } from "react-native";
 import { connect, ConnectedProps } from "react-redux";
 import WebView from "~/components/Webview";
 import { RootState } from "~/stores";
@@ -16,6 +16,7 @@ import { DrawerScreenProps } from '@react-navigation/drawer';
 import { RootStackParamList } from '~/navigation';
 import { AuthenticatedScreens } from '~/navigation/screens';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { ScrollViewBackgroundLayer } from '~/components/ScrollViewBackgroundLayer';
 
 
 interface Props {
@@ -26,14 +27,9 @@ interface Props {
     navigation: StackNavigationProp<RootStackParamList, AuthenticatedScreens.CourseDetail, undefined>
 }
 
-const CourseInformation = ({ course, courseId, enrolled }: Props) => {
-    const inset = useSafeAreaInsets();
-    //const { course, courseId, enrolled } = route.params;
-
-    console.log('course', course);
+const CourseInformation = ({ course, courseId, enrolled, navigation }: Props) => {
 
     if (!course) return null;
-
     const additionalCss = `
     body {
       word-break: break-word;
@@ -43,21 +39,25 @@ const CourseInformation = ({ course, courseId, enrolled }: Props) => {
     };`;
 
     return (
-        <ScrollView style={GlobalStyles.screenContainer} showsVerticalScrollIndicator={false}>
-            <HeaderImage course={course} />
-            <ActionBar course={course} />
-            <View style={{ paddingHorizontal: 20, backgroundColor: config.color.neutral[50] }}>
-                {course && (
-                    <WebView
-                        scrollEnabled={false}
-                        showsVerticalScrollIndicator={false}
-                        style={{ paddingBottom: inset.bottom }}
-                        autoExpand={true}
-                        bounces={false}
-                        source={{ html: HTMLWrapper(course.body || '', additionalCss) }} />
-                )}
-            </View>
-        </ScrollView >
+        <View style={GlobalStyles.flex}>
+            <ScrollView style={GlobalStyles.screenContainer}
+                refreshControl={<RefreshControl refreshing={false} onRefresh={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { id: courseId, ts: new Date().toUTCString() })} />}
+                showsVerticalScrollIndicator={false}>
+                <HeaderImage course={course} />
+                <ActionBar course={course} enrolled={enrolled} />
+                <View style={{ paddingHorizontal: 20, backgroundColor: config.color.neutral[50] }}>
+                    {course && (
+                        <WebView
+                            scrollEnabled={false}
+                            showsVerticalScrollIndicator={false}
+                            autoExpand={true}
+                            bounces={false}
+                            source={{ html: HTMLWrapper(course.body || '', additionalCss) }} />
+                    )}
+                </View>
+                <SafeAreaView edges={['bottom']} />
+            </ScrollView >
+        </View>
     );
 };
 

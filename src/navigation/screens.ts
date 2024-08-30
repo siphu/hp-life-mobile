@@ -17,6 +17,7 @@ export enum AuthenticatedScreens {
   Notification = 'Notification',
 
   InAppBrowser = 'External Content',
+  ChangePassword = 'Change Password',
 
   CourseInformation = 'Course Information', //course drawer page
   CourseDetail = 'Course Detail', //previously Course Information

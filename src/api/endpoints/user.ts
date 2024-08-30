@@ -11,6 +11,7 @@ import {
 import {stores} from '~/stores';
 import {get, post, put, remove} from '../client/restful';
 import {StoreUserState} from '~/stores/user/state';
+import axios from 'axios';
 
 const PAGE_LIMIT = 500;
 
@@ -124,4 +125,26 @@ export async function checkFCMRegistration(fcm: string): Promise<boolean> {
   } catch ($e) {
     return false;
   }
+}
+
+export async function postChangePassword(
+  oldPassword: string,
+  newPassword: string,
+  confirmPassword: string,
+): Promise<void> {
+  return await post<void>(`${config.api.identity}/api/account/changepassword`, {
+    OldPassword: oldPassword,
+    NewPassword: newPassword,
+    ConfirmPassword: confirmPassword,
+  });
+}
+
+export async function requestAccountDeletion(): Promise<void> {
+  return axios.post(
+    `${config.api.identity}/api/Account/accountDeletionRequest`,
+    undefined,
+    {
+      headers: {'Client-Id': config.api.client_id},
+    },
+  );
 }

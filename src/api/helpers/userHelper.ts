@@ -19,6 +19,7 @@ import {
   deleteNotification as remoteDeleteNotification,
   registerFCM,
   analyticsBadgeSharing,
+  checkFCMRegistration,
 } from '~/api/endpoints';
 import {stores} from '~/stores';
 import {StoreAppState} from '~/stores/app/state';
@@ -27,6 +28,7 @@ import {
   setAlerts,
   setBadges,
   setProfile,
+  setPushRegistered,
   setToken,
 } from '~/stores/user/actions';
 import {UserAction} from '~/stores/user/reducers';
@@ -100,8 +102,13 @@ export const getUserProfile = () => {
   return Promise.all([
     remoteGetUserProfile(),
     getEmailMarketingSetting().catch(e => null),
+    messaging()
+      .getToken()
+      .then(checkFCMRegistration)
+      .catch(e => false),
   ])
-    .then(([profile, marketing]) => {
+    .then(([profile, marketing, pushRegistered]) => {
+      stores.dispatch(setPushRegistered(pushRegistered));
       profile.isNewsletterEnabled =
         (marketing && marketing.isNewsletterEnabled) || false;
       return profile;
@@ -123,8 +130,8 @@ export const updateUserProfile = (userProfile: UserProfile) => {
 };
 
 export const signOut = async () => {
+  await unRegisterDeviceForMessaging().catch(() => {});
   stores.dispatch({type: CourseAction.RESET_COURSE_STORE});
-  unRegisterDeviceForMessaging().catch(() => {});
   stores.dispatch(setNotifications([]));
   stores.dispatch({type: UserAction.SIGN_OUT});
 };
@@ -132,16 +139,17 @@ export const signOut = async () => {
 export const unRegisterDeviceForMessaging = async () => {
   try {
     await unregisterFCM(await messaging().getToken());
-    // await messaging().unregisterDeviceForRemoteMessages();
-    await firebase.messaging().unregisterDeviceForRemoteMessages();
+    await messaging().unregisterDeviceForRemoteMessages();
+    stores.dispatch(setPushRegistered(false));
   } catch {}
   await notifee.setBadgeCount(0);
 };
 
 export const registerDeviceForMessaging = async () => {
-  // await firebase.messaging().registerDeviceForRemoteMessages();
+  await firebase.messaging().registerDeviceForRemoteMessages();
   const fcmToken = await messaging().getToken();
-  await registerFCM(fcmToken).catch(() => {});
+  await registerFCM(fcmToken).catch(e => null);
+  stores.dispatch(setPushRegistered(true));
 };
 
 export const getPushNotifications = () => {

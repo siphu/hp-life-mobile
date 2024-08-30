@@ -48,10 +48,12 @@ export class CourseItem extends React.PureComponent<{ item: Course, category: st
                         </TouchableOpacity>
                     </View>
                     <View style={styles.outerTagContainer}>
-                        <View style={styles.tagContainer}>
-                            {(item.progress && item.progress >= 1) && (<Completed />) || null}
-                            {(item.progress && item.progress < 1) && (<InProgress />) || null}
-                        </View>
+                        {(item.traineeEnrollmentStatus === 'Enrolled' && item.progress !== undefined && (
+                            <View style={styles.tagContainer}>
+                                {(item.progress >= 1) && (<Completed />)}
+                                {(item.progress < 1) && (<InProgress />)}
+                            </View>
+                        ))}
                         <View style={styles.tagContainer}>
                             {(item.books && Array.isArray(item.books) && item.books.length) && (<AvailableOffline />) || null}
                         </View>

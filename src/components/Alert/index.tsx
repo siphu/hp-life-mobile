@@ -3,6 +3,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { styles, padding } from "./styles";
 import { GlobalStyles } from "~/config/styles";
 import Modal from "react-native-modal";
+import { config } from "~/config/config";
 
 interface AlertProps {
     position?: 'Top' | 'Bottom' | 'Center';

@@ -1,4 +1,5 @@
 import React from "react";
+import { LogBox } from 'react-native';
 import { StatusBar } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -16,7 +17,6 @@ import { config } from "./config/config";
 import BootSplash from "react-native-bootsplash";
 import { getPushNotifications, getUserProfile, refreshToken } from "./api/helpers";
 import _ from "lodash";
-import NotificationProvider from "./providers/NotificationProvider";
 
 NetInfo.configure({
     reachabilityUrl: config.api.learning,
@@ -83,3 +83,11 @@ export const App = () => {
         </SafeAreaProvider>
     );
 }
+
+
+
+
+LogBox.ignoreLogs([
+    "Usage of \"messaging().registerDeviceForRemoteMessages()\" is not required. You only need to register if auto-registration is disabled in your 'firebase.json' configuration file via the 'messaging_ios_auto_register_for_remote_messages' property.",
+]);
+LogBox.ignoreAllLogs();
