@@ -118,7 +118,12 @@ export const getAvailableCourses = async (
     appState.online !== true ||
     (lastAvailableCoursesFetchTime &&
       currentTime - lastAvailableCoursesFetchTime < cacheDuration &&
-      !force);
+      !force &&
+      (stores.getState().course! as StoreCourseState).available.hasOwnProperty(
+        language,
+      ) &&
+      (stores.getState().course! as StoreCourseState).available![language]
+        .length > 0);
 
   if (shouldUseCache) {
     return (stores.getState().course! as StoreCourseState).available![language];
