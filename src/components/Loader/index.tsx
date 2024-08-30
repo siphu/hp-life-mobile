@@ -5,7 +5,8 @@ import Images from '~/res/images';
 import { SvgXml } from 'react-native-svg';
 import Spinner from '~/res/images/resources/spinner.svg';
 
-const Loader = React.memo(() => {
+const Loader = React.memo(({ visible }: { visible: boolean }) => {
+    if (!visible) return null;
     return (
         <View style={styles.container}>
             <View style={styles.coverView}>

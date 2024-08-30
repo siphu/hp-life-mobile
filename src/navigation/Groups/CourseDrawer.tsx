@@ -16,6 +16,7 @@ import CourseExecution from "~/screens/CourseExecution";
 import CourseSideMenuDrawer from "~/components/CourseSideMenuDrawer";
 import { Course, getParticipantCourse, getTraineeCourse } from "~/api/endpoints";
 import { StackScreenProps } from "@react-navigation/stack";
+import Loader from "~/components/Loader";
 
 const CourseDrawerNavigation = createDrawerNavigator<RootStackParamList>();
 
@@ -43,52 +44,55 @@ const CourseDrawer: React.FC<ConnectedProps<typeof connector>> = ({ course, enro
     }, [courseId]);
 
     return (
-        <CourseDrawerNavigation.Navigator
-            initialRouteName={AuthenticatedScreens.CourseDetail}
-            drawerContent={(props) => courseInformation && <CourseSideMenuDrawer {...props} course={courseInformation} courseId={courseId} enrolled={enrolled} />}
-            screenOptions={{
-                headerShown: true,
-                headerStyle: {
-                    height: GlobalStyles.header.height + insets.top,
-                    elevation: 0,
-                    shadowOpacity: 0,
-                    backgroundColor: GlobalStyles.header.backgroundColor,
-                },
-                headerLeft: () => <HeaderBackIcon onPress={navigation.goBack} />,
-                headerRight: () => (
-                    <HeaderLessonIcon onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />
-                ),
-                headerTitle: '',
-                drawerType: 'front',
-                drawerPosition: 'right',
-                drawerStyle: {
-                    width: '90%',
-                },
-            }}
-        >
-            <CourseDrawerNavigation.Screen
-                name={AuthenticatedScreens.CourseDetail}
-                children={({ route, navigation }) => (
-                    courseInformation && (<CourseInformation
-                        courseId={courseId}
-                        course={courseInformation}
-                        enrolled={enrolled}
-                        route={route}
-                        navigation={navigation}
-                    />))
-                } />
-            <CourseDrawerNavigation.Screen
-                name={AuthenticatedScreens.CourseExecution}
-                children={({ route, navigation }) => (
-                    courseInformation && (<CourseExecution
-                        courseId={courseId}
-                        course={courseInformation}
-                        enrolled={enrolled}
-                        route={route}
-                        navigation={navigation}
-                    />))
-                } />
-        </CourseDrawerNavigation.Navigator>
+        <>
+            <Loader visible={!courseInformation} />
+            <CourseDrawerNavigation.Navigator
+                initialRouteName={AuthenticatedScreens.CourseDetail}
+                drawerContent={(props) => courseInformation && <CourseSideMenuDrawer {...props} course={courseInformation} courseId={courseId} enrolled={enrolled} />}
+                screenOptions={{
+                    headerShown: true,
+                    headerStyle: {
+                        height: GlobalStyles.header.height + insets.top,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                        backgroundColor: GlobalStyles.header.backgroundColor,
+                    },
+                    headerLeft: () => <HeaderBackIcon onPress={navigation.goBack} />,
+                    headerRight: () => (
+                        <HeaderLessonIcon onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />
+                    ),
+                    headerTitle: '',
+                    drawerType: 'front',
+                    drawerPosition: 'right',
+                    drawerStyle: {
+                        width: '90%',
+                    },
+                }}
+            >
+                <CourseDrawerNavigation.Screen
+                    name={AuthenticatedScreens.CourseDetail}
+                    children={({ route, navigation }) => (
+                        courseInformation && (<CourseInformation
+                            courseId={courseId}
+                            course={courseInformation}
+                            enrolled={enrolled}
+                            route={route}
+                            navigation={navigation}
+                        />))
+                    } />
+                <CourseDrawerNavigation.Screen
+                    name={AuthenticatedScreens.CourseExecution}
+                    children={({ route, navigation }) => (
+                        courseInformation && (<CourseExecution
+                            courseId={courseId}
+                            course={courseInformation}
+                            enrolled={enrolled}
+                            route={route}
+                            navigation={navigation}
+                        />))
+                    } />
+            </CourseDrawerNavigation.Navigator>
+        </>
     );
 };
 
