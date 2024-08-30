@@ -23,8 +23,12 @@ const Home: React.FC<ConnectedProps<typeof connector>> = ({ data, online }) => {
     const isFocused = useIsFocused();
     const navigation = useNavigation<NavigationProp<any>>();
 
-    const onRefresh = (force?: boolean) => {
-        getAvailableCourses(force);
+    const onRefresh = async (force?: boolean) => {
+        try {
+            const r = await getAvailableCourses(force);
+        } catch (e) {
+            console.log('e', e);
+        }
     }
 
     React.useEffect(() => {

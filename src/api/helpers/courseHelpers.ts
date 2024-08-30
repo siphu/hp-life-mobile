@@ -142,3 +142,9 @@ export const getAvailableCourses = async (
 
   return (stores.getState().course! as StoreCourseState).available![language];
 };
+
+export const clearCourseCacheTimer = () => {
+  lastCategoryFetchTime = null;
+  lastEnrolledCoursesFetchTime = null;
+  lastAvailableCoursesFetchTime = null;
+};

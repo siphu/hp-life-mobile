@@ -48,6 +48,7 @@ import {jwtDecode} from 'jwt-decode';
 import moment from 'moment';
 import Share from 'react-native-share';
 import {config} from '~/config/config';
+import {clearCacheTimer} from '.';
 
 let lastRemoteMessageCalled: number | null = null;
 
@@ -97,6 +98,10 @@ export const checkAndRefreshToken = async (
 };
 
 export const refreshToken = (token?: AuthToken) => {
+  if (token) {
+    /* when a token is given, we should clear the cache timer. this typical only triggers on sign in */
+    clearCacheTimer();
+  }
   return checkAndRefreshToken(token)
     .then(setToken)
     .then(stores.dispatch)
@@ -139,6 +144,7 @@ export const signOut = async () => {
   stores.dispatch({type: CourseAction.RESET_COURSE_STORE});
   stores.dispatch(setNotifications([]));
   stores.dispatch({type: UserAction.SIGN_OUT});
+  clearCacheTimer();
 };
 
 export const unRegisterDeviceForMessaging = async () => {
@@ -225,4 +231,8 @@ export const downloadCertificate = async (course: TraineeCourse) => {
 
 export const downloadTranscript = async () => {
   return remoteDownloadTransaction('transcript.pdf', 'application/pdf');
+};
+
+export const clearUserCacheTimer = () => {
+  lastRemoteMessageCalled = null;
 };
