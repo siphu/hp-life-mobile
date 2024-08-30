@@ -70,7 +70,7 @@ export class CertificateItem extends React.PureComponent<{ item: Course, onClick
                             color={config.color.neutral[900]}
                             title={t('myCourse.downloadTranscript')}
                             onPress={onDownload}
-                            icon={<MaterialSymbolsOutlined name='download' size={18} color={config.color.neutral[50]} />}
+                            icon={<MaterialSymbolsOutlined name='download' size={20} color={config.color.neutral[50]} />}
                         />
                         <Button
                             style={{ height: 32 }}
