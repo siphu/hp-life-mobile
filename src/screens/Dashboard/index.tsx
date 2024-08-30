@@ -12,6 +12,8 @@ import { BadgeItem } from "./components/BadgeItem";
 import HeaderComponent from "./components/HeaderComponent";
 import { AuthenticatedScreens } from "~/navigation/screens";
 import { CertificateItem } from "./components/CertificateItem";
+import Text from "~/components/Text";
+import { t } from "~/providers/TranslationProvider";
 
 const RENDER_PER_PAGE = 8;
 
@@ -122,6 +124,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
     return (
         <View style={GlobalStyles.screenContainer}>
             <FlatList
+                style={GlobalStyles.flex}
                 data={displayedData}
                 renderItem={renderItem}
                 ListHeaderComponent={
@@ -139,6 +142,15 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
                 indicatorStyle={'black'}
                 contentContainerStyle={styles.contentContainer}
                 ItemSeparatorComponent={() => <View style={{ height: ITEM_SPACING }} />}
+                ListEmptyComponent={() => <View style={styles.centerView}>
+                    <Text style={styles.noCourseText}>
+                        {t(
+                            selectedOptions === 'myCourse.completed'
+                                ? 'myCourse.noCertificate'
+                                : 'myCourse.noCourse',
+                        )}
+                    </Text>
+                </View>}
                 getItemLayout={selectedOptions !== 'myCourse.badges' ? (_, index) => ({
                     length: selectedOptions === 'myCourse.completed' ? CERTIFICATE_ITEM_HEIGHT : ITEM_HEIGHT,
                     offset:

@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: PADDING_HORIZONTAL,
     paddingTop: 20,
     paddingBottom: 20,
+    flexGrow: 1,
   },
   itemContainer: {
     height: ITEM_HEIGHT,
@@ -129,5 +130,14 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     display: 'flex',
     rowGap: 8,
+  },
+  centerView: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  noCourseText: {
+    fontSize: 18,
+    textAlign: 'center',
   },
 });
