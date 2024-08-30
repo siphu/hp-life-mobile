@@ -121,6 +121,9 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
     }, [route]);
 
 
+    const itemLength = React.useMemo(() => selectedOptions === 'myCourse.completed' ? CERTIFICATE_ITEM_HEIGHT : ITEM_HEIGHT, [selectedOptions]);
+    const headerHeight = React.useMemo(() => selectedOptions === 'myCourse.completed' ? HEADER_WITH_CERTIFICATE : HEADER_HEIGHT, [selectedOptions]);
+
     return (
         <View style={GlobalStyles.screenContainer}>
             <FlatList
@@ -152,13 +155,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
                     </Text>
                 </View>}
                 getItemLayout={selectedOptions !== 'myCourse.badges' ? (_, index) => ({
-                    length: selectedOptions === 'myCourse.completed' ? CERTIFICATE_ITEM_HEIGHT : ITEM_HEIGHT,
-                    offset:
-                        (selectedOptions === 'myCourse.completed' ? HEADER_WITH_CERTIFICATE : HEADER_HEIGHT) +
-                        (
-                            (selectedOptions === 'myCourse.completed' ? CERTIFICATE_ITEM_HEIGHT : ITEM_HEIGHT) + ITEM_SPACING
-                        ) * index,
-                    index,
+                    length: itemLength, offset: headerHeight + ((itemLength + ITEM_SPACING) * index), index,
                 }) : undefined}
                 initialNumToRender={RENDER_PER_PAGE}
                 maxToRenderPerBatch={selectedOptions !== 'myCourse.badges' ? RENDER_PER_PAGE : undefined}
