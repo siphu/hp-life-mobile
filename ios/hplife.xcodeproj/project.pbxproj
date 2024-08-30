@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* hplifeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* hplifeTests.m */; };
+		0A632FBE3D594FE6AAED8D2D /* MaterialSymbolsOutlined.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1978937B4DD547DD9076B417 /* MaterialSymbolsOutlined.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-hplife.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-hplife.a */; };
 		0CAD3694D4954E91B336BD6E /* FormaDJRMicro-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6BD22DFC668141FEB0B398A9 /* FormaDJRMicro-ExtraLight.ttf */; };
 		0E6EC30766E1433BBA7D3F13 /* FormaDJRMicro-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 396EFC0C19B14FDBB1FB05A3 /* FormaDJRMicro-BlackItalic.ttf */; };
@@ -78,6 +79,7 @@
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = hplife/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		172F9AAA71204589888E99F3 /* FormaDJRMicro-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-ExtraLightItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		18BC52C46F4148BB857E625D /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = hplife/BootSplash.storyboard; sourceTree = "<group>"; };
+		1978937B4DD547DD9076B417 /* MaterialSymbolsOutlined.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialSymbolsOutlined.ttf; path = ../src/res/fonts/MaterialSymbolsOutlined.ttf; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-hplife-hplifeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hplife-hplifeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DE0FBF2E59F4202B02B75C8 /* FormaDJRMicro-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-LightItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-LightItalic.ttf"; sourceTree = "<group>"; };
 		396EFC0C19B14FDBB1FB05A3 /* FormaDJRMicro-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FormaDJRMicro-BlackItalic.ttf"; path = "../src/res/fonts/FormaDJRMicro-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				B26F63D7B86D42F3A72EA3DA /* FormaDJRMicro-Regular.ttf */,
 				EDF56133DC2D49C0B067A394 /* MaterialIconsOutlined-Regular.ttf */,
 				D86F9BD395D64DF18290389A /* MaterialIcons-Regular.ttf */,
+				1978937B4DD547DD9076B417 /* MaterialSymbolsOutlined.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				0E89C4F305734AE38D885712 /* MaterialIcons-Regular.ttf in Resources */,
 				26B19F25E5EA4E9BBFAB36A1 /* BootSplash.storyboard in Resources */,
 				2D08DFA816DA453BB679F90E /* Colors.xcassets in Resources */,
+				0A632FBE3D594FE6AAED8D2D /* MaterialSymbolsOutlined.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,7 +658,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = hplife/hplife.entitlements;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6HB5Y2QTA3;
 				ENABLE_BITCODE = NO;
@@ -689,7 +693,7 @@
 				CODE_SIGN_ENTITLEMENTS = hplife/hplife.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6HB5Y2QTA3;
 				INFOPLIST_FILE = hplife/Info.plist;

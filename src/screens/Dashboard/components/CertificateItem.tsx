@@ -10,7 +10,7 @@ import * as Progress from 'react-native-progress';
 import { config } from "~/config/config";
 import { friendlyDate } from "~/utils";
 import Button from "~/components/Button";
-import { MaterialIcons } from "~/components/MaterialIcons";
+import { MaterialSymbolsOutlined } from "~/components/MaterialIcons";
 
 
 export class CertificateItem extends React.PureComponent<{ item: Course, onClick: () => void, onShare: () => void, onDownload: () => void }> {
@@ -70,14 +70,14 @@ export class CertificateItem extends React.PureComponent<{ item: Course, onClick
                             color={config.color.neutral[900]}
                             title={t('myCourse.downloadTranscript')}
                             onPress={onDownload}
-                            icon={<MaterialIcons name='download' size={18} color={config.color.neutral[50]} />}
+                            icon={<MaterialSymbolsOutlined name='download' size={18} color={config.color.neutral[50]} />}
                         />
                         <Button
                             style={{ height: 32 }}
                             color={config.color.neutral[900]}
                             title={t('myCourse.share')}
                             onPress={onShare}
-                            icon={<MaterialIcons name='ios_share' size={18} color={config.color.neutral[50]} />} />
+                            icon={<MaterialSymbolsOutlined name='ios_share' size={18} color={config.color.neutral[50]} />} />
                     </View>
                 </View>
             </TouchableOpacity>

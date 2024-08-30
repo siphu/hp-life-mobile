@@ -5,6 +5,7 @@ import Text from "~/components/Text";
 import { config } from "~/config/config";
 import { t } from "~/providers/TranslationProvider";
 import { styles } from "../styles";
+import { MaterialSymbolsOutlined } from "~/components/MaterialIcons";
 
 export const ActionBar = ({ course, enrolled }: { course: Course; enrolled: boolean }) => {
     return (

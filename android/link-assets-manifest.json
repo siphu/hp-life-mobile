@@ -64,6 +64,10 @@
     {
       "path": "src/res/fonts/MaterialIconsOutlined-Regular.ttf",
       "sha1": "6d72371912a5e7bcc156fa70ade2fd41124d6d96"
+    },
+    {
+      "path": "src/res/fonts/MaterialSymbolsOutlined.ttf",
+      "sha1": "ca74869556146bb17b8e3c3fe5e7bada601ba960"
     }
   ]
 }
