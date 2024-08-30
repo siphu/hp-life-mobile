@@ -27,8 +27,8 @@ let lastAvailableCoursesFetchTime: number | null = null;
 
 /* cache duration in seconds */
 const CATEGORY_CACHE_DURATION = 3600;
-const ENROLLED_CACHE_DURATION = 60;
-const COURSE_CACHE_DURATION = 600;
+const ENROLLED_CACHE_DURATION = 300;
+const COURSE_CACHE_DURATION = 3600;
 
 const filterCourses = (courses: TraineeCourse[]): TraineeCourse[] => {
   return courses.filter(
