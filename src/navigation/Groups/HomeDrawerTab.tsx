@@ -23,11 +23,11 @@ import { t } from '~/providers/TranslationProvider';
 import OfflineBanner from '~/components/OfflineBanner';
 import RemoteAlertBanner from '~/components/RemoteAlertBanner';
 import { TouchableOpacity } from 'react-native';
-import { HeaderLanguageIcon } from '../components/HeaderLanguageIcon';
 import { HeaderNotificationIcon } from '../components/HeaderNotificationIcon';
+import { RootStackParamList } from '..';
 
-const HomeDrawerNavigation = createDrawerNavigator();
-const HomeBottomTabs = createBottomTabNavigator();
+const HomeDrawerNavigation = createDrawerNavigator<RootStackParamList>();
+const HomeBottomTabs = createBottomTabNavigator<RootStackParamList>();
 
 const AllowedOfflineScreens = [AuthenticatedScreens.Dashboard];
 

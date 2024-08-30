@@ -12,8 +12,14 @@ import { GlobalStyles } from '~/config/styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import InAppBrowser from '~/screens/InAppBrowser';
 import Notification from '~/screens/Notification';
+import { HeaderMenuIcon } from './components/HeaderMenuIcon';
+import { DrawerActions } from '@react-navigation/native';
+import { View } from 'react-native';
+import { HeaderLessonIcon } from './components/HeaderLessonIcon';
+import CourseDrawer from './Groups/CourseDrawer';
+import { RootStackParamList } from '.';
 
-const Screen = createStackNavigator();
+const Screen = createStackNavigator<RootStackParamList>();
 
 export const AuthenticatedStack = () => {
 
@@ -58,18 +64,14 @@ export const AuthenticatedStack = () => {
             />
             <Screen.Screen
                 name={AuthenticatedScreens.CourseInformation}
-                component={CourseInformation}
-                options={({ navigation }) => ({
-                    headerShown: true,
-                    headerLeft: () => <HeaderBackIcon onPress={navigation.goBack} />
-                })}
-            />
+                component={CourseDrawer} />
             <Screen.Screen
                 name={AuthenticatedScreens.Notification}
                 component={Notification}
                 options={({ navigation }) => ({
                     headerShown: true,
                     headerLeft: () => <HeaderBackIcon onPress={navigation.goBack} />
+
                 })}
             />
         </Screen.Navigator>

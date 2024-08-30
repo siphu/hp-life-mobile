@@ -4,14 +4,28 @@ import { RootState, stores } from "~/stores";
 import { AuthenticatedStack } from './AuthenticatedStack';
 import React from "react";
 import NotificationProvider from "~/providers/NotificationProvider";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, NavigationState, useNavigation } from "@react-navigation/native";
+import { AuthenticatedScreens } from "./screens";
+import { Course } from "~/api/endpoints";
 
-/** This fixes the navigation.navigate() as never */
-export type RootStackParamList = { [key: string]: any };
+export type RootStackParamList = {
+  [AuthenticatedScreens.CourseDetail]: {
+    courseId: number;
+    course: Course;
+    enrolled: boolean;
+  };
+  [AuthenticatedScreens.CourseExecution]: {
+    courseId: number;
+    course: Course;
+    enrolled: boolean;
+  };
+  [AuthenticatedScreens.CourseInformation]: { id: number };
+  [AuthenticatedScreens.InAppBrowser]: { locale: string; title?: string };
+  [key: string]: any;
+};
+
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
     interface RootParamList extends RootStackParamList { }
   }
 }

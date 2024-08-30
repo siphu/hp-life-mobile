@@ -11,6 +11,7 @@ import Jumbotron from "./components/Jumbotron";
 import { NavigationProp, useIsFocused, useNavigation } from "@react-navigation/native";
 import { t } from "~/providers/TranslationProvider";
 import { Course } from "~/api/endpoints";
+import Loader from "~/components/Loader";
 
 const connector = connect((state: RootState) => ({
     data: (state.course.available[state.app.language] || [])

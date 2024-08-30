@@ -91,9 +91,7 @@ class WebView extends Component<WebViewProps, WebViewState> {
     render() {
         const { autoExpand, style, onMessage, onNavigationStateChange, ...webViewProps } = this.props;
         const { webViewHeight } = this.state;
-
         const autoExpandJavaScript = autoExpand ? this.getAutoExpandJavaScript() : '';
-
         const combinedJavaScript = `${autoExpandJavaScript}\n${webViewProps.injectedJavaScript || ''}`;
 
         return (

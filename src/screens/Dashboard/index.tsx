@@ -96,7 +96,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
             return (
                 <CourseItem
                     item={item as TraineeCourse}
-                    onClick={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { id: item.id })}
+                    onClick={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { id: item.id as number })}
                 />
             );
         }

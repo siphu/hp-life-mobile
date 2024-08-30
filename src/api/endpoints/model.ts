@@ -65,6 +65,13 @@ export interface Course extends BasicModel {
   traineeEnrollmentStatus?: string;
   author?: string;
   books?: ParticipantBookInfo[];
+  isTrainee: boolean;
+  isCoach: boolean;
+  hasCertificate: boolean;
+  isGroupAdmin: boolean; // false
+  certificateUrl?: string;
+  lastTaskId?: number;
+  lastLessonId?: number;
 }
 
 export interface CourseResult extends Pagination<Course> {}
@@ -128,7 +135,6 @@ export interface TraineeCourse extends Course {
   accountVerified?: boolean;
   lessons: Lesson[];
 }
-
 export interface TraineeCourseResult extends Pagination<TraineeCourse> {}
 
 enum AlertType {

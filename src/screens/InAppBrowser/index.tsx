@@ -1,4 +1,4 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import * as React from 'react';
 import { BackHandler, Linking, Platform, View } from 'react-native';
 import WebView from 'react-native-webview';
@@ -8,6 +8,7 @@ import { config } from '~/config/config';
 import { HeaderBackIcon } from '~/navigation/components/HeaderBackIcon';
 import { AuthenticatedScreens } from '~/navigation/screens';
 import { RootStackParamList } from '~/navigation';
+import { StackScreenProps } from '@react-navigation/stack';
 
 function urlWithLocale(url: string, locale: string): string {
     const urlParser = new URL(url);
@@ -15,9 +16,9 @@ function urlWithLocale(url: string, locale: string): string {
     return finalUrl;
 }
 
-const InAppBrowser = ({ navigation }: RootStackParamList) => {
+const InAppBrowser = ({ route }: StackScreenProps<RootStackParamList, AuthenticatedScreens.InAppBrowser>) => {
+    const navigation = useNavigation();
     const [canGoBack, setCanGoBack] = React.useState<boolean>(false);
-    const route = useRoute();
     const webViewRef = React.useRef<WebView>(null);
     // @ts-ignore
     const { title, locale } = route.params;
@@ -74,7 +75,7 @@ const InAppBrowser = ({ navigation }: RootStackParamList) => {
                         const match = (/^(?:\/[^\/]+)?\/course\/(\d+)(?:-.*)?$/gm).exec(pathname.toLowerCase());
                         if (match && match?.length > 1) {
                             navigation.navigate(AuthenticatedScreens.CourseInformation, {
-                                id: match[1]
+                                id: Number.parseInt(match[1], 10)
                             });
                             return false;
                         }

@@ -9,28 +9,30 @@ import { config } from '~/config/config';
 import { GlobalStyles } from '~/config/styles';
 import { ParamListBase, RouteProp, useRoute } from '@react-navigation/native';
 import { HTMLWrapper } from '~/utils';
+import HeaderImage from './components/HeaderImage';
+import { ActionBar } from './components/ActionBar';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { DrawerScreenProps } from '@react-navigation/drawer';
+import { RootStackParamList } from '~/navigation';
+import { AuthenticatedScreens } from '~/navigation/screens';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-type CourseInformationParams = {
-    id: number;
-};
 
-const connector = connect((state: RootState, ownProps: { route: RouteProp<{ params: CourseInformationParams }> }) => {
-    const courseId = ownProps.route.params.id;
-    const enrolledCourse = state.course.enrolled.find(course => course.id === courseId);
-    return {
-        enrolled: !!enrolledCourse,
-        courseId
-    };
-});
+interface Props {
+    course: Course;
+    courseId: number;
+    enrolled: boolean;
+    route: RouteProp<RootStackParamList, AuthenticatedScreens.CourseDetail>;
+    navigation: StackNavigationProp<RootStackParamList, AuthenticatedScreens.CourseDetail, undefined>
+}
 
-const CourseInformation: React.FC<ConnectedProps<typeof connector>> = ({ enrolled, courseId }) => {
-    const [courseInformation, setCourse] = React.useState<Course | undefined>();
+const CourseInformation = ({ course, courseId, enrolled }: Props) => {
+    const inset = useSafeAreaInsets();
+    //const { course, courseId, enrolled } = route.params;
 
-    React.useEffect(() => {
-        getParticipantCourse(courseId).then(setCourse);
-    }, [courseId]);
+    console.log('course', course);
 
-    if (!courseInformation) return null;
+    if (!course) return null;
 
     const additionalCss = `
     body {
@@ -41,32 +43,22 @@ const CourseInformation: React.FC<ConnectedProps<typeof connector>> = ({ enrolle
     };`;
 
     return (
-        <ScrollView style={GlobalStyles.screenContainer} contentContainerStyle={{ flex: 1 }}>
-            <FastImage
-                style={{
-                    height: Dimensions.get('screen').width * .75,
-                    width: '100%',
-                }}
-                source={{
-                    uri: courseInformation.imageUrl,
-                }}
-            />
-            <View style={{ padding: 20, flex: 1, backgroundColor: config.color.neutral[50] }}>
-                <WebView
-                    autoExpand={true}
-                    bounces={false}
-                    source={{ html: HTMLWrapper(courseInformation.body || '', additionalCss) }} />
+        <ScrollView style={GlobalStyles.screenContainer} showsVerticalScrollIndicator={false}>
+            <HeaderImage course={course} />
+            <ActionBar course={course} />
+            <View style={{ paddingHorizontal: 20, backgroundColor: config.color.neutral[50] }}>
+                {course && (
+                    <WebView
+                        scrollEnabled={false}
+                        showsVerticalScrollIndicator={false}
+                        style={{ paddingBottom: inset.bottom }}
+                        autoExpand={true}
+                        bounces={false}
+                        source={{ html: HTMLWrapper(course.body || '', additionalCss) }} />
+                )}
             </View>
-        </ScrollView>
+        </ScrollView >
     );
 };
 
-
-const ConnectedCourseInformation = connector(CourseInformation);
-
-const CourseInformationWrapper: React.FC = () => {
-    const route = useRoute<RouteProp<{ params: CourseInformationParams }>>();
-    return <ConnectedCourseInformation route={route} />;
-};
-
-export default CourseInformationWrapper;
+export default CourseInformation;

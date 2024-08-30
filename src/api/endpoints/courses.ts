@@ -1,4 +1,10 @@
-import {Category, Course, CourseResult, TraineeCourseResult} from './model';
+import {
+  Category,
+  Course,
+  CourseResult,
+  TraineeCourse,
+  TraineeCourseResult,
+} from './model';
 import {config} from '~/config/config';
 import {get} from '../client/restful';
 
@@ -27,6 +33,13 @@ export async function getTraineeCourses(
     `${config.api.learning}/api/trainee/courses?resultsPerPage=${limit}&page=${
       page || 0
     }`,
+  );
+}
+export async function getTraineeCourse(
+  courseId: number,
+): Promise<TraineeCourse> {
+  return get<TraineeCourse>(
+    `${config.api.learning}/api/trainee/courses/${courseId}`,
   );
 }
 

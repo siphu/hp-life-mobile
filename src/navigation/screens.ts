@@ -18,7 +18,8 @@ export enum AuthenticatedScreens {
 
   InAppBrowser = 'External Content',
 
-  CourseInformation = 'Course Information',
+  CourseInformation = 'Course Information', //course drawer page
+  CourseDetail = 'Course Detail', //previously Course Information
   CourseExecution = 'Course Execution',
 
   Setting = 'Settings & Notifications',
