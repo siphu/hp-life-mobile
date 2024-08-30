@@ -1,6 +1,6 @@
 import React from "react";
 import { Course } from "~/api/endpoints";
-import { styles } from "../styles";
+import { CERTIFICATE_ITEM_HEIGHT, styles } from "../styles";
 import { Image, TouchableOpacity, View } from "react-native";
 import Text from "~/components/Text";
 import FastImage from "@d11/react-native-fast-image";
@@ -9,10 +9,13 @@ import moment from "moment";
 import * as Progress from 'react-native-progress';
 import { config } from "~/config/config";
 import { friendlyDate } from "~/utils";
+import Button from "~/components/Button";
+import { MaterialIcons } from "~/components/MaterialIcons";
 
-export class CourseItem extends React.PureComponent<{ item: Course, onClick: () => void }> {
+
+export class CertificateItem extends React.PureComponent<{ item: Course, onClick: () => void, onShare: () => void, onDownload: () => void }> {
     render() {
-        const { item, onClick } = this.props;
+        const { item, onClick, onShare, onDownload } = this.props;
 
         const extraTextInProgress =
             t('courseInformation.startedDate') +
@@ -27,7 +30,7 @@ export class CourseItem extends React.PureComponent<{ item: Course, onClick: () 
             friendlyDate(moment(item.finishDate));
 
         return (
-            <TouchableOpacity accessible={false} style={styles.itemContainer} onPress={onClick}>
+            <TouchableOpacity accessible={false} style={[styles.itemContainer, { height: CERTIFICATE_ITEM_HEIGHT }]} onPress={onClick}>
                 <TouchableOpacity
                     accessible={false}
                     accessibilityElementsHidden={true}
@@ -60,25 +63,21 @@ export class CourseItem extends React.PureComponent<{ item: Course, onClick: () 
                             {item.name}
                         </Text>
                     </TouchableOpacity>
-                    <View>
+                    <View style={{ rowGap: 4, paddingBottom: 5 }}>
                         <Text style={styles.extraText}>{item.progress && item.progress >= 1 ? extraTextCompleted : extraTextInProgress}</Text>
-                        <View style={styles.progressBarContainer}>
-                            <View style={{ flex: 1 }}>
-                                <Progress.Bar
-                                    progress={item.progress || 0}
-                                    color={config.color.neutral[900]}
-                                    unfilledColor={config.color.misc.border}
-                                    borderWidth={0}
-                                    width={null}
-                                    borderRadius={0}
-                                />
-                            </View>
-                            <Text style={styles.progressBarText}>
-                                <Text style={styles.progressBarText}>
-                                    {((item.progress || 0) * 100).toFixed(0) + '%'}
-                                </Text>
-                            </Text>
-                        </View>
+                        <Button
+                            style={{ height: 32 }}
+                            color={config.color.neutral[900]}
+                            title={t('myCourse.downloadTranscript')}
+                            onPress={onDownload}
+                            icon={<MaterialIcons name='download' size={18} color={config.color.neutral[50]} />}
+                        />
+                        <Button
+                            style={{ height: 32 }}
+                            color={config.color.neutral[900]}
+                            title={t('myCourse.share')}
+                            onPress={onShare}
+                            icon={<MaterialIcons name='ios_share' size={18} color={config.color.neutral[50]} />} />
                     </View>
                 </View>
             </TouchableOpacity>

@@ -3,14 +3,15 @@ import { Dimensions, FlatList, ListRenderItem, RefreshControl, View } from "reac
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "~/stores";
 import { GlobalStyles } from "~/config/styles";
-import { ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
+import { CERTIFICATE_ITEM_HEIGHT, HEADER_HEIGHT, HEADER_WITH_CERTIFICATE, ITEM_HEIGHT, ITEM_SPACING, styles } from "./styles";
 import { useIsFocused, useNavigation, useRoute } from "@react-navigation/native";
-import { getEnrolledCourses, shareBadge } from "~/api/helpers";
+import { downloadCertificate, downloadTranscript, getEnrolledCourses, shareBadge, shareCertificate } from "~/api/helpers";
 import { CourseStatus, TraineeCourse, MyBadge } from "~/api/endpoints";
 import { CourseItem } from "./components/CourseItem";
 import { BadgeItem } from "./components/BadgeItem";
 import HeaderComponent from "./components/HeaderComponent";
 import { AuthenticatedScreens } from "~/navigation/screens";
+import { CertificateItem } from "./components/CertificateItem";
 
 const RENDER_PER_PAGE = 8;
 
@@ -92,6 +93,14 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
     const renderItem: ListRenderItem<TraineeCourse | MyBadge> = React.useCallback(({ item }) => {
         if (selectedOptions === 'myCourse.badges') {
             return <BadgeItem item={item as MyBadge} onShare={() => shareBadge(item as MyBadge)} />;
+        }
+        else if (selectedOptions === 'myCourse.completed') {
+            return <CertificateItem
+                item={item as TraineeCourse}
+                onClick={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { id: item.id as number })}
+                onShare={() => shareCertificate(item as TraineeCourse)}
+                onDownload={() => downloadCertificate(item as TraineeCourse)}
+            />;
         } else {
             return (
                 <CourseItem
@@ -120,6 +129,8 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
                         categories={options}
                         selected={selectedOptions}
                         onSelect={s => setSelectedOptions(s!)}
+                        showDownloadTranscript={selectedOptions === 'myCourse.completed'}
+                        onTranscript={() => downloadTranscript()}
                     />
                 }
                 keyExtractor={item => item.id ? item.id.toString() : item.name}
@@ -129,8 +140,12 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
                 contentContainerStyle={styles.contentContainer}
                 ItemSeparatorComponent={() => <View style={{ height: ITEM_SPACING }} />}
                 getItemLayout={selectedOptions !== 'myCourse.badges' ? (_, index) => ({
-                    length: ITEM_HEIGHT,
-                    offset: 70 + (ITEM_HEIGHT + ITEM_SPACING) * index,
+                    length: selectedOptions === 'myCourse.completed' ? CERTIFICATE_ITEM_HEIGHT : ITEM_HEIGHT,
+                    offset:
+                        (selectedOptions === 'myCourse.completed' ? HEADER_WITH_CERTIFICATE : HEADER_HEIGHT) +
+                        (
+                            (selectedOptions === 'myCourse.completed' ? CERTIFICATE_ITEM_HEIGHT : ITEM_HEIGHT) + ITEM_SPACING
+                        ) * index,
                     index,
                 }) : undefined}
                 initialNumToRender={RENDER_PER_PAGE}

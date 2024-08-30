@@ -4,13 +4,17 @@ import React from "react";
 import { config } from "~/config/config";
 import { t } from "~/providers/TranslationProvider";
 import { TranslationsPaths } from "~/translations";
+import Button from "~/components/Button";
+import { HEADER_HEIGHT, HEADER_WITH_CERTIFICATE } from "../styles";
 export interface FilterSelectionProps {
     categories: string[];
     selected?: string;
-    onSelect?: (category?: string) => void;
+    onSelect: (category?: string) => void;
+    onTranscript: () => void;
+    showDownloadTranscript?: boolean;
 }
 
-const HeaderComponent = ({ categories, selected, onSelect }: FilterSelectionProps) => {
+const HeaderComponent = ({ showDownloadTranscript, categories, selected, onSelect, onTranscript }: FilterSelectionProps) => {
 
     const data = React.useMemo(() => categories.map(c => ({ label: t(c as TranslationsPaths), value: c })), [categories]);
 
@@ -24,7 +28,7 @@ const HeaderComponent = ({ categories, selected, onSelect }: FilterSelectionProp
     }, []);
 
     return (
-        <View style={{ height: 70 }}>
+        <View style={{ height: showDownloadTranscript ? HEADER_WITH_CERTIFICATE : HEADER_HEIGHT, gap: 10 }}>
             <Dropdown
                 accessibilityLabel={(selected ? selected + "; " : "") + t('accessibility.dropdownMenu')}
                 fontFamily={fontName}
@@ -51,6 +55,12 @@ const HeaderComponent = ({ categories, selected, onSelect }: FilterSelectionProp
                     if (onSelect) onSelect(item.value);
                 }}
             />
+            {showDownloadTranscript && (<Button
+                title={t('myCourse.downloadTranscript')}
+                style={{ height: 42, backgroundColor: config.color.misc.primary }}
+                textStyle={{ color: config.color.neutral[900] }}
+                onPress={onTranscript}
+            />)}
         </View>
     );
 };

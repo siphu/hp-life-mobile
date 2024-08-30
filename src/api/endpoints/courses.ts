@@ -8,6 +8,9 @@ import {
 } from './model';
 import {config} from '~/config/config';
 import {get} from '../client/restful';
+import RNFetchBlob from 'rn-fetch-blob';
+import {Platform} from 'react-native';
+import {stores} from '~/stores';
 
 const PAGE_LIMIT = 500;
 
@@ -78,4 +81,74 @@ export async function getParticipantLessons(
   return get<Lesson[]>(
     `${config.api.learning}/api/marketplace/courses/${courseId}/lessons`,
   );
+}
+
+export async function downloadCertificate(
+  certificateId: string,
+  fileName: string,
+  mime: string,
+): Promise<string> {
+  const url = `${config.api.learning}/api/certificates/${certificateId}`;
+  const {dirs} = RNFetchBlob.fs;
+
+  const DownloadDir = Platform.select({
+    ios: dirs.DocumentDir,
+    android: dirs.DocumentDir,
+  });
+
+  return new Promise((resolve, reject) => {
+    RNFetchBlob.config({
+      path: DownloadDir + '/' + fileName,
+      fileCache: Platform.OS === 'ios',
+    })
+      .fetch('GET', url)
+      .then((res: any) => {
+        if (Platform.OS === 'ios') {
+          RNFetchBlob.ios.openDocument(res.path());
+        } else {
+          RNFetchBlob.android.actionViewIntent(res.path(), mime);
+        }
+        resolve(res.path());
+      })
+      .catch((e: any) => {
+        console.error('e', e);
+        reject(e);
+      });
+  });
+}
+
+export async function downloadTranscript(
+  fileName: string,
+  mime: string,
+): Promise<string> {
+  const url = `${config.api.learning}/api/Trainee/transcript`;
+  const {dirs} = RNFetchBlob.fs;
+
+  const DownloadDir = Platform.select({
+    ios: dirs.DocumentDir,
+    android: dirs.DocumentDir,
+  });
+
+  return new Promise((resolve, reject) => {
+    const token = stores.getState().user.token!.access_token;
+    RNFetchBlob.config({
+      path: DownloadDir + '/' + fileName,
+      fileCache: Platform.OS === 'ios',
+    })
+      .fetch('GET', url, {
+        Authorization: `Bearer ${token}`,
+      })
+      .then((res: any) => {
+        if (Platform.OS === 'ios') {
+          RNFetchBlob.ios.openDocument(res.path());
+        } else {
+          RNFetchBlob.android.actionViewIntent(res.path(), mime);
+        }
+        resolve(res.path());
+      })
+      .catch((e: any) => {
+        console.error('e', e);
+        reject(e);
+      });
+  });
 }

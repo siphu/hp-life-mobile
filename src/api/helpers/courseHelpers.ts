@@ -60,9 +60,9 @@ export const getCategories = async (force?: boolean) => {
   }
 
   if (!cachedCategories || force) {
+    lastCategoryFetchTime = currentTime;
     const categories = await getRemoteCategories(lang);
     await stores.dispatch(setCategory(lang, categories));
-    lastCategoryFetchTime = currentTime;
     return categories;
   }
 
@@ -93,6 +93,7 @@ export const getEnrolledCourses = async (
 
   let page = 0;
   let finished = false;
+  lastEnrolledCoursesFetchTime = currentTime;
 
   do {
     const result = await getTraineeCourses(page);
@@ -100,8 +101,6 @@ export const getEnrolledCourses = async (
     ++page;
     finished = page >= result.pagesCount - 1;
   } while (!finished);
-
-  lastEnrolledCoursesFetchTime = currentTime;
 
   return stores.getState().course!.enrolled;
 };
@@ -131,6 +130,7 @@ export const getAvailableCourses = async (
     await stores.dispatch(setAvailableCourses(language, []));
   }
 
+  lastAvailableCoursesFetchTime = currentTime;
   let page = 0;
   let finished = false;
   do {
@@ -139,8 +139,6 @@ export const getAvailableCourses = async (
     ++page;
     finished = page >= result.pagesCount - 1;
   } while (!finished);
-
-  lastAvailableCoursesFetchTime = currentTime;
 
   return (stores.getState().course! as StoreCourseState).available![language];
 };

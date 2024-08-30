@@ -2,6 +2,7 @@ import {
   AuthToken,
   MyBadge,
   Notification,
+  TraineeCourse,
   UserProfile,
 } from '../endpoints/model';
 import {
@@ -20,6 +21,9 @@ import {
   registerFCM,
   analyticsBadgeSharing,
   checkFCMRegistration,
+  analyticsCertificateSharing,
+  downloadCertificate as remoteDownloadCertificate,
+  downloadTranscript as remoteDownloadTransaction,
 } from '~/api/endpoints';
 import {stores} from '~/stores';
 import {StoreAppState} from '~/stores/app/state';
@@ -68,9 +72,10 @@ export const getRemoteMessages = async () => {
     return userState.alerts;
   }
 
+  lastRemoteMessageCalled = currentTime;
   const alerts = await remoteGetAlert(userState.profile!.language);
   stores.dispatch(setAlerts(alerts));
-  lastRemoteMessageCalled = currentTime;
+
   return alerts;
 };
 
@@ -197,4 +202,27 @@ export const shareBadge = async (badge: MyBadge) => {
       analyticsBadgeSharing(badge.id as string);
     })
     .catch(() => {});
+};
+
+export const shareCertificate = async (course: TraineeCourse) => {
+  const language = stores.getState().app.language;
+  Share.open({
+    url: `${config.api.webUrl}/certificate/${course.certificateId!}`,
+  })
+    .then(() => {
+      analyticsCertificateSharing(course.certificateId!);
+    })
+    .catch(() => {});
+};
+
+export const downloadCertificate = async (course: TraineeCourse) => {
+  return remoteDownloadCertificate(
+    course.certificateId!,
+    'certificate.pdf',
+    'application/pdf',
+  );
+};
+
+export const downloadTranscript = async () => {
+  return remoteDownloadTransaction('transcript.pdf', 'application/pdf');
 };

@@ -3,15 +3,18 @@ import {config} from '~/config/config';
 
 const screenWidth = Dimensions.get('window').width;
 const ITEM_HEIGHT = Math.floor(screenWidth * 0.3);
-// const BADGE_HEIGHT = Math.floor(screenWidth * 0.66);
+
+const CERTIFICATE_ITEM_HEIGHT = ITEM_HEIGHT + 40;
 
 const PADDING_HORIZONTAL = 20;
 const ITEM_SPACING = 10;
-const HEADER_HEIGHT = 50;
+const HEADER_HEIGHT = 60;
+const HEADER_WITH_CERTIFICATE = 110;
 
 export {
   screenWidth,
-  // BADGE_HEIGHT,
+  CERTIFICATE_ITEM_HEIGHT,
+  HEADER_WITH_CERTIFICATE,
   ITEM_HEIGHT,
   PADDING_HORIZONTAL,
   ITEM_SPACING,
@@ -37,8 +40,8 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
   },
   image: {
-    height: ITEM_HEIGHT - 10,
-    width: ITEM_HEIGHT - 10,
+    height: '100%',
+    width: ITEM_HEIGHT,
   },
   rightContainer: {
     flexGrow: 1,
