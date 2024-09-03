@@ -1,4 +1,4 @@
-import {Course} from '~/api/endpoints';
+import {Course, TraineeCourse} from '~/api/endpoints';
 import {StoreCourseState, state as defaultState} from './state';
 
 export enum CourseAction {
@@ -46,9 +46,29 @@ export const reducers = (
             (existingItem: Course) => existingItem.id === newItem.id,
           ),
       );
+      // Update the available courses progress and enrollment status
+      let updatedAvailable = Object.fromEntries(
+        Object.entries(state.available).map(([key, courses]) => [
+          key,
+          courses.map(course => {
+            const found = (action.payload as TraineeCourse[]).find(
+              (updated: Course) => updated.id === course.id,
+            );
+            return found
+              ? {
+                  ...course,
+                  traineeEnrollmentStatus: found.enrollmentStatus,
+                  progress: found.progress,
+                }
+              : course;
+          }),
+        ]),
+      );
+
       return {
         ...state,
         enrolled: [...updatedEnrolledCourse, ...newCourses],
+        available: updatedAvailable,
       };
 
     case CourseAction.SET_AVAILABLE_COURSES:
@@ -60,22 +80,23 @@ export const reducers = (
       };
     case CourseAction.UPDATE_AVAILABLE_COURSES: {
       let availableCourses = {...state.available};
-      const language = action.payload.language;
-      const languageCourses = availableCourses[language] || [];
-      const updatedAvailableCourses = languageCourses.map(item => {
+      let language = action.payload.language;
+      let languageCourses = availableCourses[language] || [];
+      let updatedAvailableCourses = languageCourses.map(item => {
         return (
           action.payload.courses.find(
             (updated: Course) => updated.id === item.id,
           ) || item
         );
       });
-      const newAvailableCourses = (action.payload.courses as Course[]).filter(
+      let newAvailableCourses = (action.payload.courses as Course[]).filter(
         newItem => {
           return !languageCourses.some(
             (existingItem: Course) => existingItem.id === newItem.id,
           );
         },
       );
+
       availableCourses[language] = [
         ...updatedAvailableCourses,
         ...newAvailableCourses,

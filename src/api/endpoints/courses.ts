@@ -34,7 +34,7 @@ export async function getTraineeCourses(
   limit: number = PAGE_LIMIT,
 ): Promise<TraineeCourseResult> {
   return get<TraineeCourseResult>(
-    `${config.api.learning}/api/trainee/courses?resultsPerPage=${limit}&page=${
+    `${config.api.learning}/api/mytraineecourses?resultsPerPage=${limit}&page=${
       page || 0
     }`,
   );

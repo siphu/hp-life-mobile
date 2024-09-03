@@ -145,7 +145,18 @@ export const getAvailableCourses = async (
     finished = page >= result.pagesCount - 1;
   } while (!finished);
 
-  return (stores.getState().course! as StoreCourseState).available![language];
+  const updatedCourses = (stores.getState().course! as StoreCourseState)
+    .available![language];
+  const enrolledCourses = (stores.getState().course! as StoreCourseState)
+    .enrolled;
+
+  // checks to see if we are newly enrolled in a course but we dont have the enrolled info.
+  const newlyEnrolled = updatedCourses.find(course =>
+    enrolledCourses.find(enrolled => enrolled.id === course.id),
+  );
+  if (newlyEnrolled) /*await*/ getEnrolledCourses();
+
+  return updatedCourses;
 };
 
 export const clearCourseCacheTimer = () => {
