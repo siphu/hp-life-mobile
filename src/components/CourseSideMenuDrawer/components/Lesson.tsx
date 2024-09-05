@@ -9,7 +9,7 @@ import { GlobalStyles } from "~/config/styles";
 import { styles } from "../styles";
 import { DrawerNavigationHelpers } from "@react-navigation/drawer/lib/typescript/src/types";
 
-export const Lesson = ({ course, lesson, selectedTask, navigation }: { course: Course; lesson: LessonModel; selectedTask?: TaskModel; navigation: DrawerNavigationHelpers }) => {
+export const Lesson = ({ course, lesson, selectedTask, navigation, enrolled }: { course: Course; lesson: LessonModel; selectedTask?: TaskModel; navigation: DrawerNavigationHelpers; enrolled: boolean }) => {
     const [expanded, setExpanded] = React.useState(true);
     const [contentHeight, setContentHeight] = React.useState(0);
     const finishedTask = React.useMemo(() => lesson.tasks.filter(t => !!t.finishDate).length, [lesson]);
@@ -57,6 +57,7 @@ export const Lesson = ({ course, lesson, selectedTask, navigation }: { course: C
                                 task={item}
                                 selected={item.id === selectedTask?.id}
                                 navigation={navigation}
+                                enrolled={enrolled}
                             />
                         )}
                     />

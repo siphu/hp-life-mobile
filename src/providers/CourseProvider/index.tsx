@@ -19,6 +19,7 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
     const courseId = (this.props.params as Record<string, any>)?.courseId as number;
 
     this.state = {
+      fetching: false,
       enrolled: !!this.props.enrolled.find(e => e.id === courseId)
     };
     this.fetchData = this.fetchData.bind(this);
@@ -26,10 +27,12 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
   }
 
   async updateTask(task: Task) {
+    this.setState({ fetching: true });
     const detail = await getTraineeTaskById(task).catch(() => undefined);
     this.setState({
       task: task,
       taskDetail: detail,
+      fetching: false
     });
   }
 
@@ -42,7 +45,7 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
     let enrolled = !!this.props.enrolled.find(e => e.id === courseId);
     let isEnrolled = enrolled;
 
-
+    this.setState({ fetching: true });
     if (force) {
       const newEnrolledCourses = await getEnrolledCourses(true);
       isEnrolled = newEnrolledCourses.some(c => c.id === courseId);
@@ -70,8 +73,7 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
         enrolled: false
       });
     }
-
-
+    this.setState({ fetching: false });
   }
 
   componentDidMount(): void {
@@ -83,6 +85,9 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
   }
 
   shouldComponentUpdate(nextProps: Readonly<CourseProviderProps>, nextState: Readonly<CourseProviderState>, nextContext: any): boolean {
+
+    const justFetchingUpdated = this.state.fetching !== nextState.fetching;
+    if (justFetchingUpdated) return true;
 
     const shouldUpdate =
       this.state.course !== nextState.course
@@ -119,7 +124,8 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
         task: this.state.task,
         taskDetail: this.state.taskDetail,
         enrolled: this.state.enrolled,
-        update: this.fetchData
+        update: this.fetchData,
+        fetching: this.state.fetching
       }}>
         {children}
       </CourseContext.Provider>

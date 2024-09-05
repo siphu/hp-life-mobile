@@ -27,6 +27,7 @@ const CourseSideMenuDrawer = ({ navigation }: CourseSideMenuDrawerProps) => {
             lesson={item}
             selectedTask={courseContextProvider.task}
             navigation={navigation}
+            enrolled={courseContextProvider.enrolled}
         />
     );
 

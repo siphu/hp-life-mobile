@@ -22,17 +22,12 @@ interface Props {
 }
 
 const CourseExecution = ({ }: Props) => {
-    const { course, task, taskDetail } = useCourseProviderContext();
-    const [ready, setIsReady] = React.useState<boolean>(false);
+    const { course, task, taskDetail, fetching } = useCourseProviderContext();
 
-    React.useEffect(() => {
-        if (ready)
-            setIsReady(false);
-    }, [task]);
-
-    return <ScrollView style={GlobalStyles.screenContainer} contentContainerStyle={{ flex: 1 }}>
-        <Loader visible={!ready} />
+    return <ScrollView style={GlobalStyles.screenContainer} contentContainerStyle={GlobalStyles.screenContainer}>
+        <Loader visible={fetching} />
         {taskDetail && (<WebView
+            autoExpand={true}
             style={{ flexGrow: 1, backgroundColor: config.color.neutral[50] }}
             scalesPageToFit={true}
             mediaPlaybackRequiresUserAction={false}
@@ -44,9 +39,6 @@ const CourseExecution = ({ }: Props) => {
             domStorageEnabled={true}
             bounces={false}
             source={contentParser(taskDetail.body!)}
-            onLoadEnd={() => {
-                setIsReady(true);
-            }}
         />)}
     </ScrollView>;
 };
