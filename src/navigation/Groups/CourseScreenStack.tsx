@@ -6,7 +6,7 @@ import CourseExecution from "~/screens/CourseExecution";;
 import { GlobalStyles } from "~/config/styles";
 import { HeaderBackIcon } from "../components/HeaderBackIcon";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { DrawerActions, useNavigation, useRoute } from "@react-navigation/native";
+import { DrawerActions } from "@react-navigation/native";
 import { HeaderLessonIcon } from "../components/HeaderLessonIcon";
 import React from "react";
 import Orientation, { OrientationType } from "react-native-orientation-locker";
@@ -17,10 +17,9 @@ const CourseScreenStackNavigator = createStackNavigator<RootStackParamList>();
 export const CourseScreenStack = () => {
     const [showHeader, setShowHeader] = React.useState<boolean>(Dimensions.get('screen').width < Dimensions.get('screen').height);
 
-    const onOrientationChange = (orientation: OrientationType) => {
-        const shouldShow = !['LANDSCAPE-RIGHT', 'LANDSCAPE-LEFT'].includes(orientation);
-        if (shouldShow !== showHeader) setShowHeader(shouldShow);
-    }
+    const onOrientationChange = React.useCallback((orientation: OrientationType) => {
+        setShowHeader(!['LANDSCAPE-RIGHT', 'LANDSCAPE-LEFT'].includes(orientation));
+    }, [showHeader]);
 
     React.useEffect(() => {
         Orientation.addOrientationListener(onOrientationChange);
