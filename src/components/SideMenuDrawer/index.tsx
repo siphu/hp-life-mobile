@@ -1,7 +1,7 @@
 import { DrawerContentComponentProps, DrawerContentScrollView } from "@react-navigation/drawer";
 import { ScrollView, StatusBar, TouchableOpacity, View } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Text from "~/components//Text";
 import { config } from "~/config/config";
 import { GlobalStyles } from "~/config/styles";
@@ -10,19 +10,15 @@ import { styles } from "./styles";
 import Images from '~/res/images';
 import { ProfileItem } from "./components/ProfileItem";
 import { AuthenticatedScreens } from '~/navigation/screens'
-import { setToken } from "~/stores/user/actions";
 import MenuItem, { MenuItemProps } from "./components/MenuItem";
 import { MaterialIcons } from "~/components/MaterialIcons";
-import Alert from "../Alert";
 import React from "react";
-import Button from "../Button";
 import { t } from "~/providers/TranslationProvider";
-import { signOut } from "~/api/helpers";
+import { Logout } from "./components/Logout";
 
 const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
     const userState = useSelector((root: RootState) => root.user);
     const appState = useSelector((root: RootState) => root.app);
-    const [showLogout, setShowLogout] = React.useState<boolean>(false);
 
     const menu: MenuItemProps[] = [
         {
@@ -111,39 +107,7 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
                     />
                 ))}
             </ScrollView>
-            <View>
-                <Alert show={showLogout} position="Center" onRequestClose={() => setShowLogout(false)}>
-                    <View style={{
-                        rowGap: 20,
-                    }}>
-                        <View><Text style={{
-                            fontSize: 28,
-                            fontWeight: 500,
-                        }}>{t('sideMenu.logout.label')}</Text></View>
-                        <View>
-                            <Text style={{
-                                fontSize: 16,
-                            }}>{t('sideMenu.logout.prompt')}</Text>
-                        </View>
-                        <View style={{ flexDirection: 'column', rowGap: 8 }}>
-                            <Button color={config.color.neutral[900]}
-                                title={t('sideMenu.logout.yes')} onPress={() => signOut().catch(() => { }).then(() => setShowLogout(false))}
-                            />
-                            <Button style={{ borderWidth: 1, }} textStyle={{ color: config.color.neutral[900] }}
-                                color={config.color.neutral[50]}
-                                title={t('sideMenu.logout.cancel')}
-                                onPress={() => setShowLogout(false)}
-                            />
-                        </View>
-                    </View>
-                </Alert>
-                <TouchableOpacity style={styles.logoutContainer} onPress={() => setShowLogout(true)} accessibilityRole='button'>
-                    <MaterialIcons style={styles.linkIcon} name={'logout'} size={24} color={config.color.neutral[900]} />
-                    <Text style={styles.rowText}>
-                        {t('sideMenu.logout.label')}
-                    </Text>
-                </TouchableOpacity>
-            </View>
+            <Logout />
             <View style={styles.hpFoundationContainer}>
                 <Images.logo.foundation
                     height={60}

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Text } from '~/components/Text';
 import styles from './styles';
+import { config } from '~/config/config';
 
 interface ColoredButtonProps {
     color?: ColorValue;
@@ -17,6 +18,7 @@ interface ColoredButtonProps {
     style?: ViewStyle;
     textStyle?: TextStyle;
     icon?: any;
+    variant?: 'Primary' | 'Secondary';
 }
 
 const Button = (props: ColoredButtonProps) => {
@@ -25,6 +27,8 @@ const Button = (props: ColoredButtonProps) => {
             style={[
                 styles.ColoredButtonBG,
                 { backgroundColor: props.color ?? 'white' },
+                (props.variant === 'Primary' ? styles.primaryVariant :
+                    props.variant === 'Secondary' ? styles.secondaryVariant : {}),
                 props.style ?? {},
             ]}>
             <TouchableOpacity
@@ -33,7 +37,13 @@ const Button = (props: ColoredButtonProps) => {
                 onPress={props.onPress}
                 disabled={props.disabled ?? false}>
                 <View style={styles.imageWrapper}>{props.icon}</View>
-                <Text style={[styles.StyledText, props.textStyle]}>{props.title}</Text>
+                <Text style={[styles.StyledText,
+                props.variant ? {
+                    color: props.variant === 'Primary' ?
+                        styles.primaryVariant.color :
+                        styles.secondaryVariant.color
+                } : {}
+                    , props.textStyle]}>{props.title}</Text>
             </TouchableOpacity>
         </View>
     );

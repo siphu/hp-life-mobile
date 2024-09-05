@@ -6,9 +6,11 @@ import React from "react";
 import NotificationProvider from "~/providers/NotificationProvider";
 import { useNavigation } from "@react-navigation/native";
 import { AuthenticatedScreens } from "./screens";
+import { TraineeCourse } from "~/api/endpoints";
 export type RootStackParamList = {
-  [AuthenticatedScreens.CourseInformation]: { id: number, ts?: string }; //ts forces a refresh
+  [AuthenticatedScreens.CourseInformation]: { courseId: number, taskId?: number; ts?: string };
   [AuthenticatedScreens.InAppBrowser]: { locale: string; title?: string, url?: string; };
+  [AuthenticatedScreens.CourseExecution]: { courseId: number; taskId?: number; ts?: string; }
   [key: string]: any;
 };
 

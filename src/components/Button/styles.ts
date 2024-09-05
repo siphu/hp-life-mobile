@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {config} from '~/config/config';
 import {GlobalStyles} from '~/config/styles';
 
 const styles = StyleSheet.create({
@@ -29,6 +30,17 @@ const styles = StyleSheet.create({
   },
   imageWrapper: {
     marginRight: 8,
+  },
+  primaryVariant: {
+    backgroundColor: config.color.neutral[900],
+    borderWidth: 0,
+    color: config.color.neutral[50],
+  },
+  secondaryVariant: {
+    backgroundColor: config.color.neutral[50],
+    borderWidth: 1,
+    borderColor: config.color.neutral[900],
+    color: config.color.neutral[900],
   },
 });
 

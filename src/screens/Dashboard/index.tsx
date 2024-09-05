@@ -99,7 +99,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
         else if (selectedOptions === 'myCourse.completed') {
             return <CertificateItem
                 item={item as TraineeCourse}
-                onClick={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { id: item.id as number })}
+                onClick={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { courseId: item.id as number })}
                 onShare={() => shareCertificate(item as TraineeCourse)}
                 onDownload={() => downloadCertificate(item as TraineeCourse)}
             />;
@@ -107,7 +107,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
             return (
                 <CourseItem
                     item={item as TraineeCourse}
-                    onClick={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { id: item.id as number })}
+                    onClick={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { courseId: item.id as number })}
                 />
             );
         }

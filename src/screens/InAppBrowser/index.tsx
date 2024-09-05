@@ -56,7 +56,7 @@ const InAppBrowser = ({ route }: StackScreenProps<RootStackParamList, Authentica
         <View style={styles.fullFlex}>
             <WebView
                 ref={webViewRef}
-                source={{ uri: url }}
+                source={{ uri: url as string }}
                 style={styles.grow}
                 javaScriptEnabled={true}
                 originWhitelist={['*']}
@@ -75,7 +75,7 @@ const InAppBrowser = ({ route }: StackScreenProps<RootStackParamList, Authentica
                         const match = (/^(?:\/[^\/]+)?\/course\/(\d+)(?:-.*)?$/gm).exec(pathname.toLowerCase());
                         if (match && match?.length > 1) {
                             navigation.navigate(AuthenticatedScreens.CourseInformation, {
-                                id: Number.parseInt(match[1], 10)
+                                courseId: Number.parseInt(match[1], 10)
                             });
                             return false;
                         }

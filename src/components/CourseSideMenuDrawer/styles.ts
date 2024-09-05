@@ -15,11 +15,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: GlobalStyles.header.backgroundColor,
     flexDirection: 'row',
-    height: 50,
+    height: GlobalStyles.header.height,
     justifyContent: 'flex-start',
     paddingHorizontal: 20,
   },
-  hpLogoContainer: {
+  center: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
@@ -131,5 +131,30 @@ export const styles = StyleSheet.create({
   },
   bottomSafeArea: {
     backgroundColor: config.color.neutral[700],
+  },
+  progressBarContainer: {
+    paddingHorizontal: 20,
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
+  headerText: {
+    alignItems: 'center',
+    color: config.color.neutral[900],
+    flex: 0,
+    fontSize: 16,
+    fontWeight: '400',
+  },
+  courseImage: {
+    width: 80,
+    height: 80,
+  },
+  courseName: {
+    fontSize: 22,
+  },
+  lessonName: {
+    fontSize: 16,
+  },
+  taskName: {
+    fontSize: 16,
   },
 });

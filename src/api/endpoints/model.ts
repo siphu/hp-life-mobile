@@ -172,3 +172,38 @@ export interface MyBadge {
   imageUrl?: string;
   issueDate?: Date;
 }
+
+export interface BasicModel {
+  id: number;
+  name: string;
+  /**/
+  description?: string;
+  body?: string;
+  startDate?: any;
+  finishDate?: any;
+  language?: string;
+}
+
+export enum TaskType {
+  Content = 'Content',
+  Survey = 'Survey',
+  Quiz = 'Quiz',
+  Meeting = 'Meeting',
+  EditableForm = 'EditableForm',
+  Assignment = 'Assignment',
+}
+
+export enum SurveyQuestionType {
+  RadioBox = 'RadioBox',
+  CheckBox = 'CheckBox',
+  RadioBoxGrid = 'RadioBoxGrid',
+  CheckBoxGrid = 'CheckBoxGrid',
+  LinearScale = 'LinearScale',
+  DropDown = 'DropDown',
+  SingleLineText = 'SingleLineText',
+  MultiLineText = 'MultiLineText',
+  Date = 'Date',
+  DateTime = 'DateTime',
+  Time = 'Time',
+  Description = 'Description',
+}

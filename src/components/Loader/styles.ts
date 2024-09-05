@@ -20,6 +20,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
+  image: {
+    width: '50%',
+    height: 'auto',
+    aspectRatio: 1,
+  },
 });
 
 export default styles;

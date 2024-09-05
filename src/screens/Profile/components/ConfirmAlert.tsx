@@ -11,7 +11,7 @@ export const ConfirmAlert = ({ show }: { show: boolean }) => {
         <Alert show={show} position="Center">
             <View style={{ rowGap: 20 }}>
                 <View><Text style={{
-                    fontSize: 28,
+                    fontSize: 24,
                     fontWeight: 500,
                     textAlign: 'center',
                 }}>{t('profile.deleteAccount.label')}</Text></View>

@@ -13,7 +13,7 @@ export const Prompt = ({ visible, onClose, onConfirm }: { visible: boolean, onCl
             rowGap: 20,
         }}>
             <View><Text style={{
-                fontSize: 28,
+                fontSize: 24,
                 fontWeight: 500,
             }}>{t('onboarding.pushNotification.title')}</Text></View>
             <View>

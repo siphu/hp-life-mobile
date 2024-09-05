@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: GlobalStyles.header.backgroundColor,
     flexDirection: 'row',
-    height: 50,
+    height: GlobalStyles.header.height,
     justifyContent: 'flex-start',
     paddingHorizontal: 20,
   },

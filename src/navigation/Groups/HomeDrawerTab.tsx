@@ -9,8 +9,7 @@ import { BottomTabBarButtonProps, BottomTabNavigationEventMap, createBottomTabNa
 import { HeaderLogo } from '../components/HeaderLogo';
 import Dashboard from '~/screens/Dashboard';
 import Explore from '~/screens/Explore';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { MaterialIcons } from "~/components/MaterialIcons";
+import { MaterialIcons, MaterialIconsOutlined } from "~/components/MaterialIcons";
 import { config } from '~/config/config';
 import { HeaderMenuIcon } from '../components/HeaderMenuIcon';
 import { DrawerActions, EventArg, ParamListBase, RouteProp, TabNavigationState, useNavigation, useRoute } from '@react-navigation/native';
@@ -90,9 +89,9 @@ export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({ alerts,
             const iconColor = focused ? config.color.blue.primary : color;
             switch (route.name) {
                 case AuthenticatedScreens.Home:
-                    return <MaterialCommunityIcons name="home-outline" size={size} color={iconColor} />;
+                    return <MaterialIconsOutlined name="home" size={size} color={iconColor} />;
                 case AuthenticatedScreens.Dashboard:
-                    return <MaterialCommunityIcons name="school-outline" size={size} color={iconColor} />;
+                    return <MaterialIconsOutlined name="school" size={size} color={iconColor} />;
                 case AuthenticatedScreens.Explore:
                     return <MaterialIcons name="search" size={24} color={iconColor} />;
                 default:

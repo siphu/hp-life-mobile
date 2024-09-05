@@ -56,4 +56,15 @@ export const styles = StyleSheet.create({
   courseActionTextRow: {
     textAlign: 'left',
   },
+  courseActionPercentText: {
+    fontSize: 14,
+    paddingTop: 6,
+    textAlign: 'left',
+  },
+  courseActionDateText: {
+    textAlign: 'left',
+  },
+  rowGap: {
+    rowGap: 10,
+  },
 });

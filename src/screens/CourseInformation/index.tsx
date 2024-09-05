@@ -21,13 +21,12 @@ import { ScrollViewBackgroundLayer } from '~/components/ScrollViewBackgroundLaye
 
 interface Props {
     course: Course;
-    courseId: number;
     enrolled: boolean;
     route: RouteProp<RootStackParamList, AuthenticatedScreens.CourseDetail>;
     navigation: StackNavigationProp<RootStackParamList, AuthenticatedScreens.CourseDetail, undefined>
 }
 
-const CourseInformation = ({ course, courseId, enrolled, navigation }: Props) => {
+const CourseInformation = ({ course, enrolled, navigation }: Props) => {
 
     if (!course) return null;
     const additionalCss = `
@@ -41,10 +40,10 @@ const CourseInformation = ({ course, courseId, enrolled, navigation }: Props) =>
     return (
         <View style={GlobalStyles.flex}>
             <ScrollView style={GlobalStyles.screenContainer}
-                refreshControl={<RefreshControl refreshing={false} onRefresh={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { id: courseId, ts: new Date().toUTCString() })} />}
+                refreshControl={<RefreshControl refreshing={false} onRefresh={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { courseId: course.id, ts: new Date().toUTCString() })} />}
                 showsVerticalScrollIndicator={false}>
                 <HeaderImage course={course} />
-                <ActionBar course={course} enrolled={enrolled} />
+                <ActionBar course={course} enrolled={enrolled} navigation={navigation} />
                 <View style={{ paddingHorizontal: 20, backgroundColor: config.color.neutral[50] }}>
                     {course && (
                         <WebView

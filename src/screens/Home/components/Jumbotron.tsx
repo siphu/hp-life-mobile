@@ -45,7 +45,7 @@ class Jumbotron extends React.PureComponent<JumbotronProps> {
                 accessible={true}
                 accessibilityLabel={accessibilityText}
                 accessibilityRole='button'
-                onPress={() => { navigation.navigate(AuthenticatedScreens.CourseInformation, { id: course.id }) }}
+                onPress={() => { navigation.navigate(AuthenticatedScreens.CourseInformation, { courseId: course.id }) }}
             >
                 <View accessible={false}>
                     <FastImage

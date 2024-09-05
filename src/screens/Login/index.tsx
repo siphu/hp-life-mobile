@@ -14,7 +14,7 @@ import { config } from "~/config/config";
 import { ScrollViewBackgroundLayer } from "~/components/ScrollViewBackgroundLayer";
 import { GlobalStyles } from "~/config/styles";
 import { t } from "~/providers/TranslationProvider";
-import { getPushNotifications, getUserProfile, refreshToken } from "~/api/helpers";
+import { getEnrolledCourses, getPushNotifications, getUserProfile, refreshToken } from "~/api/helpers";
 
 const Login = () => {
 
@@ -39,6 +39,7 @@ const Login = () => {
             .then(extractToken)
             .then((token) => refreshToken(token).catch((e) => console.error('Error refreshing token:', e)))
             .then(getUserProfile)
+            .then(() => getEnrolledCourses().catch(e => console.error('Unable to fetch enrolled courses')))
             .then(() => getPushNotifications().catch((e) => console.error('Error getting push notifications:', e)))
             .catch((e) => console.error('Sign-in error:', e));
     };

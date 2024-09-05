@@ -165,7 +165,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({ language, profile
                     rowGap: 20,
                 }}>
                     <View><Text style={{
-                        fontSize: 28,
+                        fontSize: 24,
                         fontWeight: 500,
                     }}>{t('profile.pushNotification.noPermission.title')}</Text></View>
                     <View>
