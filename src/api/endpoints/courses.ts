@@ -1,13 +1,19 @@
 import {
   Category,
+  Content,
   Course,
   CourseResult,
+  EditableForm,
   Lesson,
+  Meeting,
+  Quiz,
+  Survey,
+  Task,
   TraineeCourse,
   TraineeCourseResult,
 } from './model';
 import {config} from '~/config/config';
-import {get} from '../client/restful';
+import {get, RequestError} from '../client/restful';
 import RNFetchBlob from 'rn-fetch-blob';
 import {Platform} from 'react-native';
 import {stores} from '~/stores';
@@ -151,4 +157,57 @@ export async function downloadTranscript(
         reject(e);
       });
   });
+}
+
+export async function getTraineeTaskById(
+  task: Task,
+): Promise<Content | Quiz | Survey | Meeting | EditableForm> {
+  switch (task.type) {
+    case 'Content':
+      return getTraineeContentTask(task.id);
+    case 'Meeting':
+      return getTraineeMeetingTask(task.id);
+    case 'Survey':
+      return getTraineeSurveyTask(task.id);
+    case 'Quiz':
+      return getTraineeQuizTask(task.id);
+    case 'EditableForm':
+      return getTraineeEditableFormTask(task.id);
+    default:
+      return Promise.reject({
+        message: 'Unknown Task Type',
+        error_message: 'Unknown Task Type',
+      } as unknown as RequestError);
+  }
+}
+
+export async function getTraineeContentTask(
+  contentId: number,
+): Promise<Content> {
+  return get<Content>(
+    `${config.api.learning}/api/trainee/content/${contentId}`,
+  );
+}
+
+export async function getTraineeMeetingTask(
+  meetingId: number,
+): Promise<Meeting> {
+  return get<Meeting>(
+    `${config.api.learning}/api/trainee/meeting/${meetingId}`,
+  );
+}
+export async function getTraineeEditableFormTask(
+  editableFormId: number,
+): Promise<EditableForm> {
+  return get<EditableForm>(
+    `${config.api.learning}/api/trainee/form/${editableFormId}`,
+  );
+}
+
+export async function getTraineeQuizTask(quizId: number): Promise<Quiz> {
+  return get<Quiz>(`${config.api.learning}/api/trainee/form/${quizId}`);
+}
+
+export async function getTraineeSurveyTask(surveyId: number): Promise<Survey> {
+  return get<Survey>(`${config.api.learning}/api/trainee/form/${surveyId}`);
 }

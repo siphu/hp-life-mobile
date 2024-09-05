@@ -3,9 +3,20 @@ import {
   NavigationState,
   RouteProp,
 } from '@react-navigation/native';
-import {Course, Task, TraineeCourse} from '~/api/endpoints';
+import {
+  Content,
+  Course,
+  EditableForm,
+  Meeting,
+  Quiz,
+  Survey,
+  Task,
+  TraineeCourse,
+} from '~/api/endpoints';
 import {RootStackParamList} from '~/navigation';
 import {AuthenticatedScreens} from '~/navigation/screens';
+
+type TaskDetail = Content | Quiz | Survey | Meeting | EditableForm;
 
 export type RNNavigationProp = Omit<
   NavigationProp<ReactNavigation.RootParamList>,
@@ -15,6 +26,7 @@ export type RNNavigationProp = Omit<
 export interface CourseContextType {
   course?: Course;
   task?: Task;
+  taskDetail?: TaskDetail;
   enrolled: boolean;
   update: (force?: boolean) => Promise<void>;
 }
@@ -31,5 +43,6 @@ export interface CourseProviderProps {
 export interface CourseProviderState {
   course?: Course;
   task?: Task;
+  taskDetail?: TaskDetail;
   enrolled: boolean;
 }

@@ -18,6 +18,7 @@ import { AuthenticatedScreens } from '~/navigation/screens';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { ScrollViewBackgroundLayer } from '~/components/ScrollViewBackgroundLayer';
 import { useCourseProviderContext } from '~/providers/CourseProvider';
+import Loader from '~/components/Loader';
 
 
 interface Props {
@@ -28,8 +29,6 @@ interface Props {
 const CourseInformation = ({ navigation }: Props) => {
 
     const { course, enrolled, update } = useCourseProviderContext();
-
-    if (!course) return null;
     const additionalCss = `
     body {
       word-break: break-word;
@@ -40,23 +39,26 @@ const CourseInformation = ({ navigation }: Props) => {
 
     return (
         <View style={GlobalStyles.flex}>
-            <ScrollView style={GlobalStyles.screenContainer}
-                refreshControl={<RefreshControl refreshing={false} onRefresh={() => update(true)} />}
-                showsVerticalScrollIndicator={false}>
-                <HeaderImage course={course} />
-                <ActionBar course={course} enrolled={enrolled} navigation={navigation} />
-                <View style={{ paddingHorizontal: 20, backgroundColor: config.color.neutral[50] }}>
-                    {course && (
-                        <WebView
-                            scrollEnabled={false}
-                            showsVerticalScrollIndicator={false}
-                            autoExpand={true}
-                            bounces={false}
-                            source={{ html: HTMLWrapper(course.body || '', additionalCss) }} />
-                    )}
-                </View>
-                <SafeAreaView edges={['bottom']} />
-            </ScrollView >
+            <Loader visible={!course} />
+            {course && (
+                <ScrollView style={GlobalStyles.screenContainer}
+                    refreshControl={<RefreshControl refreshing={false} onRefresh={() => update(true)} />}
+                    showsVerticalScrollIndicator={false}>
+                    <HeaderImage course={course} />
+                    <ActionBar course={course} enrolled={enrolled} navigation={navigation} />
+                    <View style={{ paddingHorizontal: 20, backgroundColor: config.color.neutral[50] }}>
+                        {course && (
+                            <WebView
+                                scrollEnabled={false}
+                                showsVerticalScrollIndicator={false}
+                                autoExpand={true}
+                                bounces={false}
+                                source={{ html: HTMLWrapper(course.body || '', additionalCss) }} />
+                        )}
+                    </View>
+                    <SafeAreaView edges={['bottom']} />
+                </ScrollView >
+            )}
         </View >
     );
 };

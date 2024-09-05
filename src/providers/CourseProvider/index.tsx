@@ -7,7 +7,7 @@ import { RootStackParamList } from '~/navigation';
 import { AuthenticatedScreens } from '~/navigation/screens';
 import Loader from '~/components/Loader';
 import { getAvailableCourses, getEnrolledCourses } from '~/api/helpers';
-import { getParticipantCourse, getParticipantLessons, getTraineeCourse } from '~/api/endpoints';
+import { getParticipantCourse, getParticipantLessons, getTraineeCourse, getTraineeTaskById, Task } from '~/api/endpoints';
 
 
 export const CourseContext = createContext<CourseContextType>({} as CourseContextType);
@@ -22,6 +22,15 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
       enrolled: !!this.props.enrolled.find(e => e.id === courseId)
     };
     this.fetchData = this.fetchData.bind(this);
+    this.updateTask = this.updateTask.bind(this);
+  }
+
+  async updateTask(task: Task) {
+    const detail = await getTraineeTaskById(task).catch(() => undefined);
+    this.setState({
+      task: task,
+      taskDetail: detail,
+    });
   }
 
   async fetchData(force?: boolean) {
@@ -32,6 +41,7 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
 
     let enrolled = !!this.props.enrolled.find(e => e.id === courseId);
     let isEnrolled = enrolled;
+
 
     if (force) {
       const newEnrolledCourses = await getEnrolledCourses(true);
@@ -61,6 +71,7 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
       });
     }
 
+
   }
 
   componentDidMount(): void {
@@ -85,13 +96,14 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
       const allTasks = nextState.course.lessons?.flatMap(lesson => lesson.tasks);
 
       if (nextScreen === AuthenticatedScreens.CourseExecution && !nextTaskId && !nextState.task) {
-        this.setState({
-          task: allTasks && allTasks.length > 0 ? allTasks[0] : undefined
-        });
-      } else if (previousTaskId !== nextTaskId && this.state.task?.id !== nextTaskId) {
-        this.setState({
-          task: allTasks?.find(t => t.id === nextTaskId)
-        })
+        const firstTask = allTasks && allTasks.length > 0 ? allTasks[0] : undefined;
+        if (firstTask)
+          this.updateTask(firstTask)
+        else this.setState({ task: undefined });
+      } else if (nextScreen === AuthenticatedScreens.CourseExecution && previousTaskId !== nextTaskId && this.state.task?.id !== nextTaskId) {
+        const task = allTasks?.find(t => t.id === nextTaskId);
+        if (task) this.updateTask(task);
+        else this.setState({ task: undefined });
       }
     }
 
@@ -105,10 +117,10 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
       <CourseContext.Provider value={{
         course: this.state.course,
         task: this.state.task,
+        taskDetail: this.state.taskDetail,
         enrolled: this.state.enrolled,
         update: this.fetchData
       }}>
-        <Loader visible={!this.state.course} />
         {children}
       </CourseContext.Provider>
     );

@@ -207,3 +207,72 @@ export enum SurveyQuestionType {
   Time = 'Time',
   Description = 'Description',
 }
+
+export interface Content extends Task {
+  body: string;
+  level?: number;
+  traineeBody?: string;
+  coachBody?: string;
+  isPrivate?: boolean; // OBS.: override BasicModel, force non-optional
+  finishDate?: string;
+}
+
+export interface Meeting extends Task {
+  body: string; // OBS.: override BasicModel, force non-optional
+  durationMinutes: number;
+  scheduledDate: any;
+  roomId?: string;
+}
+
+interface FormBase extends Task {
+  isAutoCorrectionEnabled: boolean;
+  isResponsePrivate: boolean;
+  questions: Question[];
+  minPassingScore?: number;
+  coachValidationRequired?: boolean;
+  durationMinutes?: number;
+}
+
+export type EditableForm = FormBase;
+
+export interface Quiz extends FormBase {
+  minPassingScore: number;
+}
+
+export type Survey = FormBase;
+export type Form = FormBase;
+
+export interface Question extends BasicModel {
+  id: number;
+  name: string;
+  type: string;
+  isRequired: boolean;
+  weight: number;
+  body: string; // OBS.: override BasicModel, force non-optional
+  /**/
+  options?: QuestionOption[];
+  expectedOptions?: number[];
+  selectedOptions?: number[];
+  expectedAnswer?: string | number;
+  actualAnswer?: string | number;
+  minValue?: number;
+  maxValue?: number;
+  minValueLabel?: string;
+  maxValueLabel?: string;
+  subQuestions?: SubQuestion[];
+  order?: number;
+}
+
+export interface QuestionOption {
+  id: number;
+  body: string;
+  order?: number;
+  expectedAnswer?: string;
+}
+
+export interface SubQuestion {
+  id: number;
+  body: string;
+  expectedOptions?: number[];
+  selectedOptions?: number[];
+}
