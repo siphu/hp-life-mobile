@@ -9,23 +9,23 @@ import { Lesson } from "./components/Lesson";
 import { Header } from "./components/Header";
 import { Information } from "./components/Information";
 import { DrawerNavigationHelpers } from "@react-navigation/drawer/lib/typescript/src/types";
+import { useCourseProviderContext } from "~/providers/CourseProvider";
 
 export interface CourseSideMenuProps {
-    course: Course;
-    courseId: number;
-    task?: Task;
-    enrolled: boolean;
     navigation: DrawerNavigationHelpers;
 }
 
 type CourseSideMenuDrawerProps = CourseSideMenuProps & DrawerContentComponentProps;
 
-const CourseSideMenuDrawer = ({ navigation, course, task, enrolled }: CourseSideMenuDrawerProps) => {
+const CourseSideMenuDrawer = ({ navigation }: CourseSideMenuDrawerProps) => {
+
+    const courseContextProvider = useCourseProviderContext();
+
     const renderLesson = ({ item }: { item: LessonModel }) => (
         <Lesson
-            course={course}
+            course={courseContextProvider.course!}
             lesson={item}
-            selectedTask={task}
+            selectedTask={courseContextProvider.task}
             navigation={navigation}
         />
     );
@@ -34,16 +34,21 @@ const CourseSideMenuDrawer = ({ navigation, course, task, enrolled }: CourseSide
         <View style={{ borderBottomWidth: 1, borderColor: config.color.misc.borderDark }} />
     );
 
+    if (!courseContextProvider.course) return;
+
     return (
         <View style={GlobalStyles.screenContainer}>
-            <Header navigation={navigation} course={course} enrolled={enrolled} />
+            <Header
+                navigation={navigation}
+                course={courseContextProvider.course}
+                enrolled={courseContextProvider.enrolled} />
             <FlatList
                 accessible={false}
                 accessibilityRole="menu"
                 style={GlobalStyles.screenContainer}
-                data={course.lessons || []}
+                data={courseContextProvider.course.lessons || []}
                 keyExtractor={(item) => item.id.toString()}
-                ListHeaderComponent={<Information course={course} />}
+                ListHeaderComponent={<Information course={courseContextProvider.course} />}
                 ListHeaderComponentStyle={{
                     borderBottomWidth: 1,
                     borderBottomColor: config.color.misc.borderDark

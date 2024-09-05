@@ -7,8 +7,14 @@ import Text from "~/components/Text";
 import * as Progress from 'react-native-progress';
 import { CourseSideMenuProps } from "..";
 import { t } from "~/providers/TranslationProvider";
+import { Course } from "~/api/endpoints";
+import { DrawerNavigationHelpers } from "@react-navigation/drawer/lib/typescript/src/types";
 
-type CourseSideMenuHeaderProps = Omit<CourseSideMenuProps, 'courseId'>
+export interface CourseSideMenuHeaderProps {
+    course: Course;
+    enrolled: boolean;
+    navigation: DrawerNavigationHelpers;
+}
 
 export const Header = ({ enrolled, course, navigation }: CourseSideMenuHeaderProps) => {
     return (

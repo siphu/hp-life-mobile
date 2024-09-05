@@ -4,42 +4,18 @@ import { RootState, stores } from '~/stores';
 import messaging from '@react-native-firebase/messaging';
 import notifee from '@notifee/react-native';
 import { Notification as NotificationModel } from '~/api/endpoints';
-import { Alert } from 'react-native';
 import { AuthenticatedScreens } from '~/navigation/screens';
 import { config } from '~/config/config';
 import { t } from '../TranslationProvider';
-import { NavigationProp, NavigationState } from '@react-navigation/native';
 import { clearNotifications, deleteNotification, markNotificationsRead, registerDeviceForMessaging } from '~/api/helpers';
 import { Prompt } from './components/Prompt';
 import { setPushNotificationPreferences } from '~/stores/user/actions';
+import { NotificationContextProps, NotificationProviderProps, NotificationProviderState, RNNavigationProp } from './types';
 
-type RNNavigationProp = Omit<NavigationProp<ReactNavigation.RootParamList>, "getState"> & { getState(): NavigationState | undefined };
-
-interface NotificationContextProps {
-    hasPermission?: boolean;
-    handleNotification: (notification: NotificationModel) => void;
-    requestPermission: () => void;
-    clearNotifications: () => void;
-    deleteNotification: (notification: NotificationModel) => void;
-}
 
 export const NotificationContext = createContext<NotificationContextProps>({} as NotificationContextProps);
 
-interface NotificationProviderProps {
-    children: ReactNode;
-    notifications: NotificationModel[];
-    language: string;
-    navigation: RNNavigationProp;
-    preferencePushNotification?: boolean;
-}
-
-interface NotificationProviderState {
-    initialized: boolean;
-    hasPermission?: boolean;
-}
-
 class NotificationHandler extends React.Component<NotificationProviderProps, NotificationProviderState> {
-
 
     state: NotificationProviderState = {
         initialized: false,
@@ -89,9 +65,11 @@ class NotificationHandler extends React.Component<NotificationProviderProps, Not
 
         switch (notification.type) {
             case 'NewCourseAvailable':
-                return this.props.navigation.navigate(AuthenticatedScreens.CourseInformation, {
-                    id: Number.parseInt(notification.resourceId, 10),
-                });
+                return this.props.navigation.navigate(AuthenticatedScreens.CourseDrawer,
+                    {
+                        screen: AuthenticatedScreens.CourseInformation,
+                        params: { courseId: Number.parseInt(notification.resourceId, 10) }
+                    })
             case 'NewArticleAvailable':
                 return this.props.navigation.navigate(AuthenticatedScreens.InAppBrowser, {
                     title: t('sideMenu.links.news'),

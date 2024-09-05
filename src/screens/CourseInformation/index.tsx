@@ -17,16 +17,17 @@ import { RootStackParamList } from '~/navigation';
 import { AuthenticatedScreens } from '~/navigation/screens';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { ScrollViewBackgroundLayer } from '~/components/ScrollViewBackgroundLayer';
+import { useCourseProviderContext } from '~/providers/CourseProvider';
 
 
 interface Props {
-    course: Course;
-    enrolled: boolean;
-    route: RouteProp<RootStackParamList, AuthenticatedScreens.CourseDetail>;
-    navigation: StackNavigationProp<RootStackParamList, AuthenticatedScreens.CourseDetail, undefined>
+    route: RouteProp<RootStackParamList, AuthenticatedScreens.CourseInformation>;
+    navigation: StackNavigationProp<RootStackParamList, AuthenticatedScreens.CourseInformation, undefined>
 }
 
-const CourseInformation = ({ course, enrolled, navigation }: Props) => {
+const CourseInformation = ({ navigation }: Props) => {
+
+    const { course, enrolled, update } = useCourseProviderContext();
 
     if (!course) return null;
     const additionalCss = `
@@ -40,7 +41,7 @@ const CourseInformation = ({ course, enrolled, navigation }: Props) => {
     return (
         <View style={GlobalStyles.flex}>
             <ScrollView style={GlobalStyles.screenContainer}
-                refreshControl={<RefreshControl refreshing={false} onRefresh={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { courseId: course.id, ts: new Date().toUTCString() })} />}
+                refreshControl={<RefreshControl refreshing={false} onRefresh={() => update(true)} />}
                 showsVerticalScrollIndicator={false}>
                 <HeaderImage course={course} />
                 <ActionBar course={course} enrolled={enrolled} navigation={navigation} />
@@ -56,7 +57,7 @@ const CourseInformation = ({ course, enrolled, navigation }: Props) => {
                 </View>
                 <SafeAreaView edges={['bottom']} />
             </ScrollView >
-        </View>
+        </View >
     );
 };
 

@@ -74,9 +74,11 @@ const InAppBrowser = ({ route }: StackScreenProps<RootStackParamList, Authentica
                         const { pathname } = UrlObject;
                         const match = (/^(?:\/[^\/]+)?\/course\/(\d+)(?:-.*)?$/gm).exec(pathname.toLowerCase());
                         if (match && match?.length > 1) {
-                            navigation.navigate(AuthenticatedScreens.CourseInformation, {
-                                courseId: Number.parseInt(match[1], 10)
-                            });
+                            navigation.navigate(AuthenticatedScreens.CourseDrawer,
+                                {
+                                    screen: AuthenticatedScreens.CourseInformation,
+                                    params: { courseId: Number.parseInt(match[1], 10) }
+                                });
                             return false;
                         }
                     }

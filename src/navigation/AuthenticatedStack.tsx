@@ -15,9 +15,10 @@ import { HeaderMenuIcon } from './components/HeaderMenuIcon';
 import { DrawerActions } from '@react-navigation/native';
 import { View } from 'react-native';
 import { HeaderLessonIcon } from './components/HeaderLessonIcon';
-import CourseInformation from './Groups/CourseInformation';
+import CourseDrawer from './Groups/CourseDrawer';
 import { RootStackParamList } from '.';
 import ChangePassword from '~/screens/ChangePassword';
+import CourseProvider from '~/providers/CourseProvider';
 
 const Screen = createStackNavigator<RootStackParamList>();
 
@@ -71,8 +72,9 @@ export const AuthenticatedStack = () => {
                 })}
             />
             <Screen.Screen
-                name={AuthenticatedScreens.CourseInformation}
-                component={CourseInformation} />
+                name={AuthenticatedScreens.CourseDrawer}
+                component={CourseDrawer}
+            />
             <Screen.Screen
                 name={AuthenticatedScreens.Notification}
                 component={Notification}

@@ -55,7 +55,11 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({ data, categories 
     };
 
     const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {
-        return <CourseItem item={item} category={categories.find(v => v.id === item.categoryId)!.name} onClick={() => navigation.navigate(AuthenticatedScreens.CourseInformation, { courseId: item.id })} />;
+        return <CourseItem item={item} category={categories.find(v => v.id === item.categoryId)!.name} onClick={() => navigation.navigate(AuthenticatedScreens.CourseDrawer,
+            {
+                screen: AuthenticatedScreens.CourseInformation,
+                params: { courseId: item.id }
+            })} />;
     }, []);
 
 

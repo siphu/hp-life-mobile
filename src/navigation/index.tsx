@@ -8,9 +8,9 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthenticatedScreens } from "./screens";
 import { TraineeCourse } from "~/api/endpoints";
 export type RootStackParamList = {
-  [AuthenticatedScreens.CourseInformation]: { courseId: number, taskId?: number; ts?: string };
+  [AuthenticatedScreens.CourseInformation]: { courseId: number, taskId?: number; };
   [AuthenticatedScreens.InAppBrowser]: { locale: string; title?: string, url?: string; };
-  [AuthenticatedScreens.CourseExecution]: { courseId: number; taskId?: number; ts?: string; }
+  [AuthenticatedScreens.CourseExecution]: { courseId: number; taskId?: number; }
   [key: string]: any;
 };
 
