@@ -2,6 +2,7 @@
 #import "RNBootSplash.h"
 #import <React/RCTBundleURLProvider.h>
 #import <Firebase.h> // react-native-firebase
+#import "Orientation.h" // react-native-orientation-locker
 
 @implementation AppDelegate
 
@@ -33,6 +34,11 @@
 
 - (void)customizeRootView:(RCTRootView *)rootView {
   [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
+}
+
+// react-native-orientation-locker
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  return [Orientation getOrientation];
 }
 
 @end

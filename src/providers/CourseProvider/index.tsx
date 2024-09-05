@@ -9,7 +9,6 @@ import Loader from '~/components/Loader';
 import { getAvailableCourses, getEnrolledCourses } from '~/api/helpers';
 import { getParticipantCourse, getParticipantLessons, getTraineeCourse, getTraineeTaskById, Task } from '~/api/endpoints';
 
-
 export const CourseContext = createContext<CourseContextType>({} as CourseContextType);
 
 export class CourseProvider extends React.Component<CourseProviderProps, CourseProviderState> {

@@ -15,6 +15,7 @@ import Loader from "~/components/Loader";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import WebView from "~/components/Webview";
+import { OrientationLocker } from "react-native-orientation-locker";
 
 interface Props {
     route: RouteProp<RootStackParamList, AuthenticatedScreens.CourseExecution>;
@@ -26,6 +27,7 @@ const CourseExecution = ({ }: Props) => {
 
     return <ScrollView style={GlobalStyles.screenContainer} contentContainerStyle={GlobalStyles.screenContainer}>
         <Loader visible={fetching} />
+        <OrientationLocker orientation={'UNLOCK'} />
         {taskDetail && (<WebView
             autoExpand={true}
             style={{ flexGrow: 1, backgroundColor: config.color.neutral[50] }}

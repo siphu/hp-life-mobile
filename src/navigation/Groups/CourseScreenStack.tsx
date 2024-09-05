@@ -9,15 +9,30 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { DrawerActions, useNavigation, useRoute } from "@react-navigation/native";
 import { HeaderLessonIcon } from "../components/HeaderLessonIcon";
 import React from "react";
+import Orientation, { OrientationType } from "react-native-orientation-locker";
+import { Dimensions } from "react-native";
 
 const CourseScreenStackNavigator = createStackNavigator<RootStackParamList>();
 
 export const CourseScreenStack = () => {
+    const [showHeader, setShowHeader] = React.useState<boolean>(Dimensions.get('screen').width < Dimensions.get('screen').height);
+
+    const onOrientationChange = (orientation: OrientationType) => {
+        const shouldShow = !['LANDSCAPE-RIGHT', 'LANDSCAPE-LEFT'].includes(orientation);
+        if (shouldShow !== showHeader) setShowHeader(shouldShow);
+    }
+
+    React.useEffect(() => {
+        Orientation.addOrientationListener(onOrientationChange);
+        return () => Orientation.removeDeviceOrientationListener(onOrientationChange);
+    }, []);
+
     const insets = useSafeAreaInsets();
+
     return (<CourseScreenStackNavigator.Navigator
         initialRouteName={AuthenticatedScreens.CourseInformation}
         screenOptions={({ navigation }) => ({
-            headerShown: true,
+            headerShown: showHeader,
             headerStyle: {
                 height: GlobalStyles.header.height + insets.top,
                 elevation: 0,
