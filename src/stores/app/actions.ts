@@ -31,3 +31,10 @@ export const removeNotification = (notification: Notification) => ({
   type: AppAction.REMOVE_NOTIFICATION,
   payload: notification,
 });
+
+export const setScreenOrientation = (
+  orientation: 'Portrait' | 'Landscape',
+) => ({
+  type: AppAction.SET_SCREEN_ORIENTATION,
+  payload: orientation,
+});

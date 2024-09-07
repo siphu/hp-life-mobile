@@ -8,6 +8,7 @@ export enum AppAction {
   SET_NOTIFICATIONS = 'SET_NOTIFICATIONS',
   MARK_NOTIFICATION_READ = 'MARK_NOTIFICATION_READ',
   REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION',
+  SET_SCREEN_ORIENTATION = 'SET_SCREEN_ORIENTATION',
 }
 
 interface ReducerAppAction {
@@ -63,6 +64,11 @@ export const reducers = (
         notifications: state.notifications.filter(
           n => n.id !== action.payload.id,
         ),
+      };
+    case AppAction.SET_SCREEN_ORIENTATION:
+      return {
+        ...state,
+        orientation: action.payload,
       };
     default:
       return state;
