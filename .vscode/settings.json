@@ -1,5 +1,12 @@
 {
-  "cSpell.words": ["formatjs", "hplife", "notifee", "persistor", "webp"],
+  "cSpell.words": [
+    "formatjs",
+    "hplife",
+    "netinfo",
+    "notifee",
+    "persistor",
+    "webp"
+  ],
   "files.exclude": {
     "node_modules/": true,
     ".bundle": true,

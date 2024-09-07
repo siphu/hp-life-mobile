@@ -14,6 +14,8 @@ import { AuthenticatedScreens } from "~/navigation/screens";
 import { CertificateItem } from "./components/CertificateItem";
 import Text from "~/components/Text";
 import { t } from "~/providers/TranslationProvider";
+import Loader from "~/components/Loader";
+import { loaderWrapper } from "~/api/helpers/appHelpers";
 
 const RENDER_PER_PAGE = 8;
 
@@ -105,7 +107,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
                         params: { courseId: item.id as number }
                     })}
                 onShare={() => shareCertificate(item as TraineeCourse)}
-                onDownload={() => downloadCertificate(item as TraineeCourse)}
+                onDownload={() => loaderWrapper(() => downloadCertificate(item as TraineeCourse))}
             />;
         } else {
             return (
@@ -144,7 +146,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
                         selected={selectedOptions}
                         onSelect={s => setSelectedOptions(s!)}
                         showDownloadTranscript={selectedOptions === 'myCourse.completed'}
-                        onTranscript={() => downloadTranscript()}
+                        onTranscript={() => loaderWrapper(() => downloadTranscript())}
                     />
                 }
                 keyExtractor={item => item.id ? item.id.toString() : item.name}
