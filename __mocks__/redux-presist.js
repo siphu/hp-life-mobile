@@ -7,3 +7,7 @@ jest.mock('redux-persist', () => ({
     persist: jest.fn(),
   })),
 }));
+
+jest.mock('redux-persist/integration/react', () => ({
+  PersistGate: ({children}) => children, // Render children immediately
+}));

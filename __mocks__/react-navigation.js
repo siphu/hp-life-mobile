@@ -1,45 +1,16 @@
-jest.mock('@react-navigation/native', () => ({
-  ...jest.requireActual('@react-navigation/native'),
-  useNavigation: () => ({
-    navigate: jest.fn(),
-    goBack: jest.fn(),
-    setOptions: jest.fn(),
-    addListener: jest.fn(),
-  }),
-  useRoute: () => ({
-    params: {},
-  }),
-}));
+// include this line for mocking react-native-gesture-handler
+import 'react-native-gesture-handler/jestSetup';
 
-jest.mock('@react-navigation/stack', () => {
-  const actualNav = jest.requireActual('@react-navigation/stack');
-  return {
-    ...actualNav,
-    createStackNavigator: jest.fn().mockReturnValue({
-      Navigator: jest.fn().mockImplementation(({children}) => children),
-      Screen: jest.fn().mockImplementation(({children}) => children),
-    }),
-  };
+// include this section and the NativeAnimatedHelper section for mocking react-native-reanimated
+jest.mock('react-native-reanimated', () => {
+  const Reanimated = require('react-native-reanimated/mock');
+
+  // The mock for `call` immediately calls the callback which is incorrect
+  // So we override it with a no-op
+  Reanimated.default.call = () => {};
+
+  return Reanimated;
 });
 
-jest.mock('@react-navigation/drawer', () => {
-  const actualNav = jest.requireActual('@react-navigation/drawer');
-  return {
-    ...actualNav,
-    createDrawerNavigator: jest.fn().mockReturnValue({
-      Navigator: jest.fn().mockImplementation(({children}) => children),
-      Screen: jest.fn().mockImplementation(({children}) => children),
-    }),
-  };
-});
-
-jest.mock('@react-navigation/bottom-tabs', () => {
-  const actualNav = jest.requireActual('@react-navigation/bottom-tabs');
-  return {
-    ...actualNav,
-    createBottomTabNavigator: jest.fn().mockReturnValue({
-      Navigator: jest.fn().mockImplementation(({children}) => children),
-      Screen: jest.fn().mockImplementation(({children}) => children),
-    }),
-  };
-});
+// Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
