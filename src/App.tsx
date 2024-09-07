@@ -4,22 +4,16 @@ import { StatusBar } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationStacks } from "./navigation";
-import Orientation, { OrientationLocker, OrientationType } from 'react-native-orientation-locker';
-import { Provider, useDispatch, useSelector } from "react-redux";
-import { stores, persistor, RootState } from './stores';
+import { OrientationLocker } from 'react-native-orientation-locker';
+import { Provider } from "react-redux";
+import { stores, persistor } from './stores';
 import { PersistGate } from "redux-persist/integration/react";
 import './translations';
 import '~/api/client/interceptor';
 import TranslationProvider from "./providers/TranslationProvider";
-import NetInfo from '@react-native-community/netinfo';
-import { setOnlineStatus, setScreenOrientation } from "./stores/app/actions";
-import { config } from "./config/config";
 import BootSplash from "react-native-bootsplash";
-import { getPushNotifications, getUserProfile, refreshToken } from "./api/helpers";
-import _ from "lodash";
 import NetworkListener from "./listeners/NetworkListener";
 import { OrientationListener } from "./listeners/OrientationListener";
-
 
 export const App = () => {
     return (
