@@ -3,20 +3,9 @@ import {
   NavigationState,
   RouteProp,
 } from '@react-navigation/native';
-import {
-  Content,
-  Course,
-  EditableForm,
-  Meeting,
-  Quiz,
-  Survey,
-  Task,
-  TraineeCourse,
-} from '~/api/endpoints';
+import {Course, Task, TaskDetail, TraineeCourse} from '~/api/endpoints';
 import {RootStackParamList} from '~/navigation';
 import {AuthenticatedScreens} from '~/navigation/screens';
-
-type TaskDetail = Content | Quiz | Survey | Meeting | EditableForm;
 
 export type RNNavigationProp = Omit<
   NavigationProp<ReactNavigation.RootParamList>,

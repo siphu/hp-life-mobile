@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { WebView as RNWebView, WebViewMessageEvent, WebViewProps as RNWebViewProps, WebViewNavigation } from 'react-native-webview';
+import webviewAutoHeightJavascript from './webviewAutoHeightJavascript';
 
 interface WebViewProps extends RNWebViewProps {
     autoExpand?: boolean;
@@ -12,7 +13,7 @@ interface WebViewState {
 }
 
 class WebView extends Component<WebViewProps, WebViewState> {
-    private webViewRef = React.createRef<RNWebView>();
+    private webViewRef = createRef<RNWebView>();
     static defaultProps: Partial<WebViewProps> = {
         autoExpand: false,
     };
@@ -25,20 +26,17 @@ class WebView extends Component<WebViewProps, WebViewState> {
     }
 
     onWebViewMessage = (event: WebViewMessageEvent) => {
+
         try {
             const messageData = JSON.parse(event.nativeEvent.data);
-
-            if (messageData.type === 'auto_height_adjustment') {
-                const newHeight = Number(messageData.value);
+            if (messageData.type === 'webviewAutoHeightAdjustment') {
+                const newHeight = Number(messageData.payload);
                 if (!isNaN(newHeight) && newHeight !== this.state.webViewHeight) {
                     this.setState({ webViewHeight: newHeight });
                 }
-            } else if (this.props.onMessage) {
-                // Call the caller's onMessage handler for other message types
-                this.props.onMessage(event);
             }
-        } catch (error) {
-            // If JSON parsing fails, pass the event to the caller's onMessage handler
+        } catch (e) { console.log('[onWebViewMessage]', e) }
+        finally {
             if (this.props.onMessage) {
                 this.props.onMessage(event);
             }
@@ -46,52 +44,26 @@ class WebView extends Component<WebViewProps, WebViewState> {
     };
 
     onNavigationStateChange = (navState: WebViewNavigation) => {
-        // Re-inject only the autoExpand JavaScript when the page changes
         if (this.props.autoExpand && this.webViewRef.current) {
-            this.webViewRef.current.injectJavaScript(this.getAutoExpandJavaScript());
+            this.webViewRef.current.injectJavaScript(webviewAutoHeightJavascript);
         }
 
-        // Call the caller's onNavigationStateChange handler if provided
         if (this.props.onNavigationStateChange) {
             this.props.onNavigationStateChange(navState);
         }
     };
 
-    getAutoExpandJavaScript = () => {
-        return `
-      if (typeof window._webview_auto_height_adjustment === 'undefined') {
-        window._webview_auto_height_adjustment = true;
-        setTimeout(function() {
-          let lastHeight = 0;
-          let timeoutId;
-
-          const updateHeight = function() {
-            const height = document.documentElement.scrollHeight || document.body.scrollHeight;
-            if (height !== lastHeight) {
-              lastHeight = height;
-              window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'auto_height_adjustment', value: height }));
-            }
-          };
-
-          const debouncedUpdateHeight = function() {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(updateHeight, 100);
-          };
-
-          const observer = new MutationObserver(debouncedUpdateHeight);
-          observer.observe(document.body, { childList: true, subtree: true, attributes: true });
-
-          // Initial height calculation
-          updateHeight();
-        }, 0);
-      }
-    `;
+    // Expose injectJavaScript via a public method
+    injectJavaScript = (script: string) => {
+        if (this.webViewRef.current) {
+            this.webViewRef.current.injectJavaScript(script);
+        }
     };
 
     render() {
         const { autoExpand, style, onMessage, onNavigationStateChange, ...webViewProps } = this.props;
         const { webViewHeight } = this.state;
-        const autoExpandJavaScript = autoExpand ? this.getAutoExpandJavaScript() : '';
+        const autoExpandJavaScript = autoExpand ? webviewAutoHeightJavascript : '';
         const combinedJavaScript = `${autoExpandJavaScript}\n${webViewProps.injectedJavaScript || ''}`;
 
         return (

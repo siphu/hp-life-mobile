@@ -9,6 +9,9 @@ import { HeaderBackIcon } from '~/navigation/components/HeaderBackIcon';
 import { AuthenticatedScreens } from '~/navigation/screens';
 import { RootStackParamList } from '~/navigation';
 import { StackScreenProps } from '@react-navigation/stack';
+import { isBaseUrl } from '~/utils';
+import { appendViewport, disableBaseUrlLink, documentReady, getContentSize } from '~/utils/WebViewJavascript';
+import Loader from '~/components/Loader';
 
 function urlWithLocale(url: string, locale: string): string {
     const urlParser = new URL(url);
@@ -20,10 +23,8 @@ const InAppBrowser = ({ route }: StackScreenProps<RootStackParamList, Authentica
     const navigation = useNavigation();
     const [canGoBack, setCanGoBack] = React.useState<boolean>(false);
     const webViewRef = React.useRef<WebView>(null);
-    // @ts-ignore
     const { title, locale } = route.params;
-    // @ts-ignore
-    const url = locale ? urlWithLocale(route.params?.url, locale) : route.params?.url;
+    const url = locale ? urlWithLocale(route.params?.url!, locale) : route.params?.url;
 
     const nav = useNavigation();
 
@@ -56,48 +57,54 @@ const InAppBrowser = ({ route }: StackScreenProps<RootStackParamList, Authentica
         <View style={styles.fullFlex}>
             <WebView
                 ref={webViewRef}
-                source={{ uri: url as string }}
-                style={styles.grow}
-                javaScriptEnabled={true}
+                key={url!}
+                source={{ uri: url! }}
+                scalesPageToFit={true}
+                mediaPlaybackRequiresUserAction={false}
                 originWhitelist={['*']}
-                setSupportMultipleWindows={false}
+                javaScriptEnabled={true}
+                scrollEnabled={true}
+                allowsInlineMediaPlayback={true}
                 allowsFullscreenVideo={true}
-                onLoadProgress={e => {
+                domStorageEnabled={true}
+                startInLoadingState
+                renderLoading={() => (<Loader visible={true} />)}
+                onLoadEnd={() => {
+                    if (webViewRef.current) {
+                        webViewRef.current.injectJavaScript(disableBaseUrlLink);
+                    }
+                }}
+                onLoadProgress={(e) => {
                     if (Platform.OS === 'android' && e.nativeEvent.progress >= 1) {
                         setCanGoBack(e.nativeEvent.canGoBack);
                     }
                 }}
-                onShouldStartLoadWithRequest={e => {
-
-                    if (e.url.toLocaleLowerCase().startsWith(config.api.webUrl.toLocaleLowerCase())) {
-                        const UrlObject = new URL(e.url) as any;
+                onShouldStartLoadWithRequest={(e) => {
+                    if (isBaseUrl(config.api.webUrl, e.url)) {
+                        return false;
+                    } else if (e.url.toLowerCase().startsWith(config.api.webUrl.toLowerCase())) {
+                        const UrlObject = new URL(e.url);
                         const { pathname } = UrlObject;
                         const match = (/^(?:\/[^\/]+)?\/course\/(\d+)(?:-.*)?$/gm).exec(pathname.toLowerCase());
-                        if (match && match?.length > 1) {
-                            navigation.navigate(AuthenticatedScreens.CourseDrawer,
-                                {
-                                    screen: AuthenticatedScreens.CourseInformation,
-                                    params: { courseId: Number.parseInt(match[1], 10) }
-                                });
+                        if (match && match.length > 1) {
+                            navigation.navigate(AuthenticatedScreens.CourseDrawer, {
+                                screen: AuthenticatedScreens.CourseInformation,
+                                params: { courseId: parseInt(match[1], 10) }
+                            });
                             return false;
                         }
-                    }
-                    else if (
-                        e.url.toLocaleLowerCase().startsWith('tel:') ||
-                        e.url.toLocaleLowerCase().startsWith('mailto:') ||
-                        e.url.toLocaleLowerCase().startsWith('maps:') ||
-                        e.url.toLocaleLowerCase().startsWith('geo:') ||
-                        e.url.toLocaleLowerCase().startsWith('sms:')
-                    ) {
+                    } else if ([
+                        'tel:', 'mailto:', 'maps:', 'geo:', 'sms:', 'intent:'
+                    ].some(prefix => e.url.toLowerCase().startsWith(prefix))) {
                         Linking.openURL(e.url).catch(error => {
-                            console.log('error', error);
+                            console.log('Error opening URL:', error);
                         });
                         return false;
                     }
                     return true;
                 }}
-                onNavigationStateChange={e => {
-                    if (Platform.OS == 'ios') {
+                onNavigationStateChange={(e) => {
+                    if (Platform.OS === 'ios') {
                         setCanGoBack(e.canGoBack);
                     }
                 }}

@@ -25,14 +25,17 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
     this.updateTask = this.updateTask.bind(this);
   }
 
-  async updateTask(task: Task) {
-    this.setState({ fetching: true });
+  async updateTask(task: Task, disableFetching?: boolean) {
+    if (!disableFetching) this.setState({ fetching: true });
     const detail = await getTraineeTaskById(task).catch(() => undefined);
-    this.setState({
+    let payload: any = {
       task: task,
       taskDetail: detail,
-      fetching: false
-    });
+    };
+    if (!disableFetching)
+      payload['fetching'] = false;
+
+    this.setState(payload);
   }
 
   async fetchData(force?: boolean) {
@@ -57,12 +60,19 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
     if (isEnrolled) {
       const course = await getTraineeCourse(courseId);
       const allTasks = course.lessons?.flatMap(lesson => lesson.tasks) || [];
-      const foundTask = allTasks.find(t => t.id === taskId);
+
+      /* attempts to find the task if the id exists, or find the first unfinished task */
+      const foundTask = taskId ? allTasks.find(t => t.id === taskId) : allTasks.find(t => !t.finishDate);
+
       this.setState({
         course: course,
         task: foundTask,
         enrolled: true
       });
+
+      //this just prefetches it
+      //if (foundTask) this.updateTask(foundTask, true);
+
 
     } else {
       const [c, l] = await Promise.all([getParticipantCourse(courseId), getParticipantLessons(courseId)]);
@@ -91,6 +101,7 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
     const shouldUpdate =
       this.state.course !== nextState.course
       || this.state.task !== nextState.task
+      || nextProps.screen !== this.props.screen
       ;
 
     if (nextState.course) {
@@ -104,7 +115,10 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
         if (firstTask)
           this.updateTask(firstTask)
         else this.setState({ task: undefined });
-      } else if (nextScreen === AuthenticatedScreens.CourseExecution && previousTaskId !== nextTaskId && this.state.task?.id !== nextTaskId) {
+      } else if (
+        nextScreen === AuthenticatedScreens.CourseExecution && (previousTaskId !== nextTaskId && this.state.task?.id !== nextTaskId)
+        || (nextState.task && nextState.task.id && !nextState.taskDetail)
+      ) {
         const task = allTasks?.find(t => t.id === nextTaskId);
         if (task) this.updateTask(task);
         else this.setState({ task: undefined });

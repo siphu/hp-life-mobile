@@ -276,3 +276,5 @@ export interface SubQuestion {
   expectedOptions?: number[];
   selectedOptions?: number[];
 }
+
+export type TaskDetail = Content | Quiz | Survey | Meeting | EditableForm;

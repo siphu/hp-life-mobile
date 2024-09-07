@@ -1,25 +1,18 @@
 import React from 'react';
-import { Dimensions, RefreshControl, ScrollView, View } from "react-native";
-import { connect, ConnectedProps } from "react-redux";
+import { RefreshControl, ScrollView, View } from "react-native";
 import WebView from "~/components/Webview";
-import { RootState } from "~/stores";
-import FastImage from '@d11/react-native-fast-image';
-import { Course, getParticipantCourse } from '~/api/endpoints';
 import { config } from '~/config/config';
 import { GlobalStyles } from '~/config/styles';
-import { ParamListBase, RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
 import { HTMLWrapper } from '~/utils';
 import HeaderImage from './components/HeaderImage';
 import { ActionBar } from './components/ActionBar';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { DrawerScreenProps } from '@react-navigation/drawer';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootStackParamList } from '~/navigation';
 import { AuthenticatedScreens } from '~/navigation/screens';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { ScrollViewBackgroundLayer } from '~/components/ScrollViewBackgroundLayer';
 import { useCourseProviderContext } from '~/providers/CourseProvider';
 import Loader from '~/components/Loader';
-
 
 interface Props {
     route: RouteProp<RootStackParamList, AuthenticatedScreens.CourseInformation>;
@@ -55,9 +48,12 @@ const CourseInformation = ({ navigation }: Props) => {
                                 autoExpand={true}
                                 bounces={false}
                                 startInLoadingState
-                                onLoadEnd={() => setLoading(false)}
                                 key={course.body}
-                                source={{ html: HTMLWrapper(course.body || '', additionalCss) }} />
+                                source={{ html: HTMLWrapper(course.body || '', additionalCss) }}
+                                onLoadEnd={() => {
+                                    setLoading(false);
+                                }}
+                            />
                         )}
                     </View>
                     <SafeAreaView edges={['bottom']} />
