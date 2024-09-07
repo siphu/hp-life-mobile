@@ -13,12 +13,12 @@ export const Prompt = ({ visible, onClose, onConfirm }: { visible: boolean, onCl
             rowGap: 20,
         }}>
             <View><Text style={{
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: 500,
             }}>{t('onboarding.pushNotification.title')}</Text></View>
             <View>
                 <Text style={{
-                    fontSize: 16,
+                    fontSize: 14,
                 }}>{t('onboarding.pushNotification.body')}</Text>
             </View>
             <View style={{ flexDirection: 'column', rowGap: 8 }}>

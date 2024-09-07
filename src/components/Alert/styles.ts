@@ -1,9 +1,10 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 
 const radius = 20;
 const padding = 20;
 
 const modalContainer = {
+  width: Dimensions.get('window').width * 0.9,
   paddingTop: padding,
   paddingHorizontal: padding,
   backgroundColor: 'white',

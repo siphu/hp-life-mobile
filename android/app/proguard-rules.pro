@@ -8,3 +8,6 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+-keepattributes *Annotation*
+-keep class com.google.firebase.crashlytics.** { *; }
+-keep class com.google.firebase.analytics.** { *; }

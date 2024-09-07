@@ -18,12 +18,12 @@ export const Logout = () => {
                     rowGap: 20,
                 }}>
                     <View><Text style={{
-                        fontSize: 24,
+                        fontSize: 20,
                         fontWeight: 500,
                     }}>{t('sideMenu.logout.label')}</Text></View>
                     <View>
                         <Text style={{
-                            fontSize: 16,
+                            fontSize: 14,
                         }}>{t('sideMenu.logout.prompt')}</Text>
                     </View>
                     <View style={{ flexDirection: 'column', rowGap: 8 }}>
