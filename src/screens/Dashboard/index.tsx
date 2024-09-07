@@ -14,6 +14,7 @@ import { AuthenticatedScreens } from "~/navigation/screens";
 import { CertificateItem } from "./components/CertificateItem";
 import Text from "~/components/Text";
 import { t } from "~/providers/TranslationProvider";
+import Loader from "~/components/Loader";
 
 const RENDER_PER_PAGE = 8;
 
@@ -51,6 +52,14 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
     const isFocused = useIsFocused();
     const [displayedData, setDisplayedData] = React.useState<(TraineeCourse | MyBadge)[]>([]);
     const [selectedOptions, setSelectedOptions] = React.useState<string>(!online ? 'myCourse.ebook' : (route.params?.category || 'myCourse.inProgress'));
+    const [loader, setLoader] = React.useState<boolean>(false);
+
+
+    const loaderWrapper = async (fn: () => Promise<any>) => {
+        setLoader(true);
+        await fn();
+        setLoader(false);
+    }
 
     const onRefresh = React.useCallback(async (force?: boolean) => {
         getEnrolledCourses(force);
@@ -105,7 +114,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
                         params: { courseId: item.id as number }
                     })}
                 onShare={() => shareCertificate(item as TraineeCourse)}
-                onDownload={() => downloadCertificate(item as TraineeCourse)}
+                onDownload={() => loaderWrapper(() => downloadCertificate(item as TraineeCourse))}
             />;
         } else {
             return (
@@ -134,6 +143,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
 
     return (
         <View style={GlobalStyles.screenContainer}>
+            <Loader visible={loader} />
             <FlatList
                 style={GlobalStyles.flex}
                 data={displayedData}
@@ -144,7 +154,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
                         selected={selectedOptions}
                         onSelect={s => setSelectedOptions(s!)}
                         showDownloadTranscript={selectedOptions === 'myCourse.completed'}
-                        onTranscript={() => downloadTranscript()}
+                        onTranscript={() => loaderWrapper(() => downloadTranscript())}
                     />
                 }
                 keyExtractor={item => item.id ? item.id.toString() : item.name}
