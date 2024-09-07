@@ -71,7 +71,7 @@ class Jumbotron extends React.PureComponent<JumbotronProps> {
                         <Text style={styles.titleText}>{course.name.trim()}</Text>
                     </View>
                     <View style={styles.buttonRowContainer}>
-                        {course.progress !== undefined && (
+                        {course.traineeEnrollmentStatus === 'Enrolled' && course.progress !== undefined && (
                             <View style={styles.progressExtraMargin}>
                                 {course.progress >= 1 && (<Completed />)}
                                 {course.progress < 1 && (<InProgress />)}
