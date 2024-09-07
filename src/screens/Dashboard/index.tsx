@@ -15,6 +15,7 @@ import { CertificateItem } from "./components/CertificateItem";
 import Text from "~/components/Text";
 import { t } from "~/providers/TranslationProvider";
 import Loader from "~/components/Loader";
+import { loaderWrapper } from "~/api/helpers/appHelpers";
 
 const RENDER_PER_PAGE = 8;
 
@@ -52,14 +53,6 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
     const isFocused = useIsFocused();
     const [displayedData, setDisplayedData] = React.useState<(TraineeCourse | MyBadge)[]>([]);
     const [selectedOptions, setSelectedOptions] = React.useState<string>(!online ? 'myCourse.ebook' : (route.params?.category || 'myCourse.inProgress'));
-    const [loader, setLoader] = React.useState<boolean>(false);
-
-
-    const loaderWrapper = async (fn: () => Promise<any>) => {
-        setLoader(true);
-        await fn();
-        setLoader(false);
-    }
 
     const onRefresh = React.useCallback(async (force?: boolean) => {
         getEnrolledCourses(force);
@@ -143,7 +136,6 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({ badges, data, o
 
     return (
         <View style={GlobalStyles.screenContainer}>
-            <Loader visible={loader} />
             <FlatList
                 style={GlobalStyles.flex}
                 data={displayedData}

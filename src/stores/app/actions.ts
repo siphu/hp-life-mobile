@@ -38,3 +38,8 @@ export const setScreenOrientation = (
   type: AppAction.SET_SCREEN_ORIENTATION,
   payload: orientation,
 });
+
+export const setLoader = (visible: boolean) => ({
+  type: AppAction.SET_LOADER,
+  payload: visible,
+});

@@ -13,6 +13,8 @@ import { AuthenticatedScreens } from '~/navigation/screens';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useCourseProviderContext } from '~/providers/CourseProvider';
 import Loader from '~/components/Loader';
+import { stores } from '~/stores';
+import { setLoader } from '~/stores/app/actions';
 
 interface Props {
     route: RouteProp<RootStackParamList, AuthenticatedScreens.CourseInformation>;
@@ -21,7 +23,11 @@ interface Props {
 
 const CourseInformation = ({ navigation }: Props) => {
     const { course, enrolled, update } = useCourseProviderContext();
-    const [loading, setLoading] = React.useState<boolean>(!course);
+
+    React.useEffect(() => {
+        if (!course) stores.dispatch(setLoader(true));
+    }, [course]);
+
 
     const additionalCss = `
     body {
@@ -33,7 +39,6 @@ const CourseInformation = ({ navigation }: Props) => {
 
     return (
         <View style={GlobalStyles.flex}>
-            <Loader visible={loading} />
             {course && (
                 <ScrollView style={GlobalStyles.screenContainer}
                     refreshControl={<RefreshControl refreshing={false} onRefresh={() => update(true)} />}
@@ -50,8 +55,9 @@ const CourseInformation = ({ navigation }: Props) => {
                                 startInLoadingState
                                 key={course.body}
                                 source={{ html: HTMLWrapper(course.body || '', additionalCss) }}
+                                renderLoading={() => (<Loader visible={true} />)}
                                 onLoadEnd={() => {
-                                    setLoading(false);
+                                    stores.dispatch(setLoader(false));
                                 }}
                             />
                         )}

@@ -6,6 +6,7 @@ export interface StoreAppState {
   online: boolean | null;
   notifications: Notification[];
   orientation: 'Portrait' | 'Landscape';
+  loader: boolean;
 }
 
 export const state: StoreAppState = {
@@ -16,4 +17,5 @@ export const state: StoreAppState = {
     Dimensions.get('screen').width > Dimensions.get('screen').height
       ? 'Landscape'
       : 'Portrait',
+  loader: false,
 };
