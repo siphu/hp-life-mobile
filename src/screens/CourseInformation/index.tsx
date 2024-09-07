@@ -27,8 +27,9 @@ interface Props {
 }
 
 const CourseInformation = ({ navigation }: Props) => {
-
     const { course, enrolled, update } = useCourseProviderContext();
+    const [loading, setLoading] = React.useState<boolean>(!course);
+
     const additionalCss = `
     body {
       word-break: break-word;
@@ -39,7 +40,7 @@ const CourseInformation = ({ navigation }: Props) => {
 
     return (
         <View style={GlobalStyles.flex}>
-            <Loader visible={!course} />
+            <Loader visible={loading} />
             {course && (
                 <ScrollView style={GlobalStyles.screenContainer}
                     refreshControl={<RefreshControl refreshing={false} onRefresh={() => update(true)} />}
@@ -53,6 +54,9 @@ const CourseInformation = ({ navigation }: Props) => {
                                 showsVerticalScrollIndicator={false}
                                 autoExpand={true}
                                 bounces={false}
+                                startInLoadingState
+                                onLoadEnd={() => setLoading(false)}
+                                key={course.body}
                                 source={{ html: HTMLWrapper(course.body || '', additionalCss) }} />
                         )}
                     </View>

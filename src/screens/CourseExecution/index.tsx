@@ -1,7 +1,7 @@
 import { DrawerScreenProps } from "@react-navigation/drawer";
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
-import { ScrollView, View } from "react-native";
+import { ActivityIndicator, ScrollView, View } from "react-native";
 import { NativeStackScreenProps } from "react-native-screens/lib/typescript/native-stack/types";
 import { Course, Task, TraineeCourse } from "~/api/endpoints";
 import Text from "~/components/Text";
@@ -26,10 +26,8 @@ const CourseExecution = ({ }: Props) => {
     const { course, task, taskDetail, fetching } = useCourseProviderContext();
 
     return <ScrollView style={GlobalStyles.screenContainer} contentContainerStyle={GlobalStyles.screenContainer}>
-        <Loader visible={fetching} />
         <OrientationLocker orientation={'UNLOCK'} />
         {taskDetail && (<WebView
-            autoExpand={true}
             style={{ flexGrow: 1, backgroundColor: config.color.neutral[50] }}
             scalesPageToFit={true}
             mediaPlaybackRequiresUserAction={false}
@@ -40,7 +38,11 @@ const CourseExecution = ({ }: Props) => {
             allowsFullscreenVideo={true}
             domStorageEnabled={true}
             bounces={false}
+            key={taskDetail.body}
             source={contentParser(taskDetail.body!)}
+            startInLoadingState
+            cacheEnabled={false}
+            renderLoading={() => (<Loader visible={true} />)}
         />)}
     </ScrollView>;
 };
