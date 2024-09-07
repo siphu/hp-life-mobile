@@ -1,0 +1,15 @@
+jest.mock('react-native-color-matrix-image-filters', () => ({
+  ColorMatrix: jest.fn(() => null),
+  Normal: jest.fn(() => null),
+  Invert: jest.fn(() => null),
+  Grayscale: jest.fn(() => null),
+  Sepia: jest.fn(() => null),
+  HueRotate: jest.fn(() => null),
+  LuminanceToAlpha: jest.fn(() => null),
+  Saturate: jest.fn(() => null),
+  Lighten: jest.fn(() => null),
+  Contrast: jest.fn(() => null),
+  Temperature: jest.fn(() => null),
+  Tint: jest.fn(() => null),
+  Threshold: jest.fn(() => null),
+}));
