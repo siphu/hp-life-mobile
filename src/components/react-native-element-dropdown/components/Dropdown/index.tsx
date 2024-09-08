@@ -25,19 +25,19 @@ import {
   ViewStyle,
   StatusBar,
 } from 'react-native';
-import { useDetectDevice } from '../../toolkits';
-import { useDeviceOrientation } from '../../useDeviceOrientation';
+import {useDetectDevice} from '../../toolkits';
+import {useDeviceOrientation} from '../../useDeviceOrientation';
 import CInput from '../TextInput';
-import { DropdownProps } from './model';
-import { styles } from './styles';
+import {DropdownProps} from './model';
+import {styles} from './styles';
 
-const { isTablet } = useDetectDevice;
+const {isTablet} = useDetectDevice;
 const ic_down = require('../../assets/down.png');
 
 const statusBarHeight: number = StatusBar.currentHeight || 0;
 
 const DropdownComponent: <T>(
-  props: DropdownProps<T>
+  props: DropdownProps<T>,
 ) => ReactElement<any, string | JSXElementConstructor<any>> | null =
   React.forwardRef((props, currentRef) => {
     const orientation = useDeviceOrientation();
@@ -99,7 +99,7 @@ const DropdownComponent: <T>(
     const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
     const [searchText, setSearchText] = useState('');
 
-    const { width: W, height: H } = Dimensions.get('window');
+    const {width: W, height: H} = Dimensions.get('window');
     const styleContainerVertical: ViewStyle = useMemo(() => {
       return {
         backgroundColor: 'rgba(0,0,0,0.1)',
@@ -114,7 +114,7 @@ const DropdownComponent: <T>(
     }, [W, orientation]);
 
     useImperativeHandle(currentRef, () => {
-      return { open: eventOpen, close: eventClose };
+      return {open: eventOpen, close: eventClose};
     });
 
     useEffect(() => {
@@ -195,7 +195,7 @@ const DropdownComponent: <T>(
         _measure();
         setKeyboardHeight(e.endCoordinates.height);
       },
-      [_measure]
+      [_measure],
     );
 
     const onKeyboardDidHide = useCallback(() => {
@@ -206,11 +206,11 @@ const DropdownComponent: <T>(
     useEffect(() => {
       const susbcriptionKeyboardDidShow = Keyboard.addListener(
         'keyboardDidShow',
-        onKeyboardDidShow
+        onKeyboardDidShow,
       );
       const susbcriptionKeyboardDidHide = Keyboard.addListener(
         'keyboardDidHide',
-        onKeyboardDidHide
+        onKeyboardDidHide,
       );
 
       return () => {
@@ -228,8 +228,8 @@ const DropdownComponent: <T>(
       const defaultValue =
         typeof value === 'object' ? _.get(value, valueField) : value;
 
-      const getItem = data.filter((e) =>
-        _.isEqual(defaultValue, _.get(e, valueField))
+      const getItem = data.filter(e =>
+        _.isEqual(defaultValue, _.get(e, valueField)),
       );
 
       if (getItem.length > 0) {
@@ -251,7 +251,7 @@ const DropdownComponent: <T>(
               typeof value === 'object' ? _.get(value, valueField) : value;
 
             const index = _.findIndex(listData, (e: any) =>
-              _.isEqual(defaultValue, _.get(e, valueField))
+              _.isEqual(defaultValue, _.get(e, valueField)),
             );
             if (index > -1 && index <= listData.length - 1) {
               refList?.current?.scrollToIndex({
@@ -326,14 +326,14 @@ const DropdownComponent: <T>(
           };
 
           const dataSearch = data.filter(
-            searchQuery ? propSearchFunction : defaultFilterFunction
+            searchQuery ? propSearchFunction : defaultFilterFunction,
           );
           setListData(dataSearch);
         } else {
           setListData(data);
         }
       },
-      [data, searchField, labelField, searchQuery]
+      [data, searchField, labelField, searchQuery],
     );
 
     const onSelect = useCallback(
@@ -358,7 +358,7 @@ const DropdownComponent: <T>(
         onChangeText,
         onConfirmSelectItem,
         onSearch,
-      ]
+      ],
     );
 
     const _renderDropdown = () => {
@@ -368,9 +368,8 @@ const DropdownComponent: <T>(
           testID={testID}
           accessible={!!accessibilityLabel}
           accessibilityLabel={accessibilityLabel}
-          accessibilityRole='button'
-          onPress={showOrClose}
-        >
+          accessibilityRole="button"
+          onPress={showOrClose}>
           <View style={styles.dropdown}>
             {renderLeftIcon?.(visible)}
             <Text
@@ -379,8 +378,7 @@ const DropdownComponent: <T>(
                 isSelected !== null ? selectedTextStyle : placeholderStyle,
                 font(),
               ]}
-              {...selectedTextProps}
-            >
+              {...selectedTextProps}>
               {isSelected !== null
                 ? _.get(currentValue, labelField)
                 : placeholder}
@@ -392,7 +390,7 @@ const DropdownComponent: <T>(
                 source={ic_down}
                 style={StyleSheet.flatten([
                   styles.icon,
-                  { tintColor: iconColor },
+                  {tintColor: iconColor},
                   iconStyle,
                 ])}
               />
@@ -403,10 +401,10 @@ const DropdownComponent: <T>(
     };
 
     const _renderItem = useCallback(
-      ({ item, index }: { item: any; index: number }) => {
+      ({item, index}: {item: any; index: number}) => {
         const isSelected = currentValue && _.get(currentValue, valueField);
         const selected = _.isEqual(_.get(item, valueField), isSelected);
-        _.assign(item, { _index: index });
+        _.assign(item, {_index: index});
         return (
           <TouchableHighlight
             key={index.toString()}
@@ -414,20 +412,18 @@ const DropdownComponent: <T>(
             accessible={!!accessibilityLabel}
             accessibilityLabel={_.get(
               item,
-              itemAccessibilityLabelField || labelField
+              itemAccessibilityLabelField || labelField,
             )}
-            accessibilityRole='menuitem'
+            accessibilityRole="menuitem"
             underlayColor={activeColor}
-            onPress={() => onSelect(item)}
-          >
+            onPress={() => onSelect(item)}>
             <View
               style={StyleSheet.flatten([
                 itemContainerStyle,
                 selected && {
                   backgroundColor: activeColor,
                 },
-              ])}
-            >
+              ])}>
               {renderItem ? (
                 renderItem(item, selected)
               ) : (
@@ -437,8 +433,7 @@ const DropdownComponent: <T>(
                       styles.textItem,
                       itemTextStyle,
                       font(),
-                    ])}
-                  >
+                    ])}>
                     {_.get(item, labelField)}
                   </Text>
                 </View>
@@ -460,13 +455,13 @@ const DropdownComponent: <T>(
         onSelect,
         renderItem,
         valueField,
-      ]
+      ],
     );
 
     const renderSearch = useCallback(() => {
       if (search) {
         if (renderInputSearch) {
-          return renderInputSearch((text) => {
+          return renderInputSearch(text => {
             if (onChangeText) {
               setSearchText(text);
               onChangeText(text);
@@ -483,7 +478,7 @@ const DropdownComponent: <T>(
               value={searchText}
               autoCorrect={false}
               placeholder={searchPlaceholder}
-              onChangeText={(e) => {
+              onChangeText={e => {
                 if (onChangeText) {
                   setSearchText(e);
                   onChangeText(e);
@@ -491,7 +486,7 @@ const DropdownComponent: <T>(
                 onSearch(e);
               }}
               placeholderTextColor="gray"
-              iconStyle={[{ tintColor: iconColor }, iconStyle]}
+              iconStyle={[{tintColor: iconColor}, iconStyle]}
             />
           );
         }
@@ -528,7 +523,7 @@ const DropdownComponent: <T>(
               data={listData}
               inverted={isTopPosition ? inverted : false}
               renderItem={_renderItem}
-              accessibilityRole='menu'
+              accessibilityRole="menu"
               keyExtractor={(_item, index) => index.toString()}
               showsVerticalScrollIndicator={showsVerticalScrollIndicator}
             />
@@ -555,12 +550,12 @@ const DropdownComponent: <T>(
         scrollIndex,
         showsVerticalScrollIndicator,
         testID,
-      ]
+      ],
     );
 
     const _renderModal = useCallback(() => {
       if (visible && position) {
-        const { isFull, width, height, top, bottom, left } = position;
+        const {isFull, width, height, top, bottom, left} = position;
 
         const onAutoPosition = () => {
           if (keyboardHeight > 0) {
@@ -599,29 +594,28 @@ const DropdownComponent: <T>(
               statusBarTranslucent
               visible={visible}
               supportedOrientations={['landscape', 'portrait']}
-              onRequestClose={showOrClose}
-            >
-              <TouchableWithoutFeedback accessible={false} onPress={showOrClose}>
+              onRequestClose={showOrClose}>
+              <TouchableWithoutFeedback
+                accessible={false}
+                onPress={showOrClose}>
                 <View
                   style={StyleSheet.flatten([
                     styles.flex1,
                     isFull && styleContainerVertical,
-                    backgroundColor && { backgroundColor: backgroundColor },
+                    backgroundColor && {backgroundColor: backgroundColor},
                     keyboardStyle,
-                  ])}
-                >
+                  ])}>
                   <View
                     style={StyleSheet.flatten([
                       styles.flex1,
                       !isTopPosition
-                        ? { paddingTop: extendHeight }
+                        ? {paddingTop: extendHeight}
                         : {
-                          justifyContent: 'flex-end',
-                          paddingBottom: extendHeight,
-                        },
+                            justifyContent: 'flex-end',
+                            paddingBottom: extendHeight,
+                          },
                       isFull && styles.fullScreen,
-                    ])}
-                  >
+                    ])}>
                     <View
                       style={StyleSheet.flatten([
                         styles.container,
@@ -630,8 +624,7 @@ const DropdownComponent: <T>(
                           width,
                         },
                         containerStyle,
-                      ])}
-                    >
+                      ])}>
                       {_renderList(isTopPosition)}
                     </View>
                   </View>
@@ -664,8 +657,7 @@ const DropdownComponent: <T>(
       <View
         style={StyleSheet.flatten([styles.mainWrap, style])}
         ref={ref}
-        onLayout={_measure}
-      >
+        onLayout={_measure}>
         {_renderDropdown()}
         {_renderModal()}
       </View>

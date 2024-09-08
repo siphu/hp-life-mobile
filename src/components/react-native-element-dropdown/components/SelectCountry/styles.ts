@@ -1,4 +1,4 @@
-import { I18nManager, StyleSheet } from 'react-native';
+import {I18nManager, StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   dropdown: {

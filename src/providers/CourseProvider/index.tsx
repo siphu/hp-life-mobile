@@ -1,53 +1,74 @@
-import React, { createContext } from 'react';
-import { CourseContextType, CourseProviderProps, CourseProviderState, RNNavigationProp } from './types';
-import { RootState } from '~/stores';
-import { NavigationProp, NavigationState, RouteProp } from '@react-navigation/native';
-import { connect } from 'react-redux';
-import { RootStackParamList } from '~/navigation';
-import { AuthenticatedScreens } from '~/navigation/screens';
+import React, {createContext} from 'react';
+import {
+  CourseContextType,
+  CourseProviderProps,
+  CourseProviderState,
+  RNNavigationProp,
+} from './types';
+import {RootState} from '~/stores';
+import {
+  NavigationProp,
+  NavigationState,
+  RouteProp,
+} from '@react-navigation/native';
+import {connect} from 'react-redux';
+import {RootStackParamList} from '~/navigation';
+import {AuthenticatedScreens} from '~/navigation/screens';
 import Loader from '~/components/Loader';
-import { getAvailableCourses, getEnrolledCourses } from '~/api/helpers';
-import { getParticipantCourse, getParticipantLessons, getTraineeCourse, getTraineeTaskById, Task } from '~/api/endpoints';
+import {getAvailableCourses, getEnrolledCourses} from '~/api/helpers';
+import {
+  getParticipantCourse,
+  getParticipantLessons,
+  getTraineeCourse,
+  getTraineeTaskById,
+  Task,
+} from '~/api/endpoints';
 
-export const CourseContext = createContext<CourseContextType>({} as CourseContextType);
+export const CourseContext = createContext<CourseContextType>(
+  {} as CourseContextType,
+);
 
-export class CourseProvider extends React.Component<CourseProviderProps, CourseProviderState> {
-
+export class CourseProvider extends React.Component<
+  CourseProviderProps,
+  CourseProviderState
+> {
   constructor(props: CourseProviderProps) {
     super(props);
-    const courseId = (this.props.params as Record<string, any>)?.courseId as number;
+    const courseId = (this.props.params as Record<string, any>)
+      ?.courseId as number;
 
     this.state = {
       fetching: false,
-      enrolled: !!this.props.enrolled.find(e => e.id === courseId)
+      enrolled: !!this.props.enrolled.find(e => e.id === courseId),
     };
     this.fetchData = this.fetchData.bind(this);
     this.updateTask = this.updateTask.bind(this);
   }
 
   async updateTask(task: Task, disableFetching?: boolean) {
-    if (!disableFetching) this.setState({ fetching: true });
+    if (!disableFetching) this.setState({fetching: true});
     const detail = await getTraineeTaskById(task).catch(() => undefined);
     let payload: any = {
       task: task,
       taskDetail: detail,
     };
-    if (!disableFetching)
-      payload['fetching'] = false;
+    if (!disableFetching) payload['fetching'] = false;
 
     this.setState(payload);
   }
 
   async fetchData(force?: boolean) {
-    const courseId = (this.props.params as Record<string, any>)?.courseId as number;
-    const requestedTaskId = (this.props.params as Record<string, any>)?.taskId as number | undefined;
+    const courseId = (this.props.params as Record<string, any>)
+      ?.courseId as number;
+    const requestedTaskId = (this.props.params as Record<string, any>)
+      ?.taskId as number | undefined;
 
     const taskId = requestedTaskId || this.state.task?.id;
 
     let enrolled = !!this.props.enrolled.find(e => e.id === courseId);
     let isEnrolled = enrolled;
 
-    this.setState({ fetching: true });
+    this.setState({fetching: true});
     if (force) {
       const newEnrolledCourses = await getEnrolledCourses(true);
       isEnrolled = newEnrolledCourses.some(c => c.id === courseId);
@@ -62,109 +83,128 @@ export class CourseProvider extends React.Component<CourseProviderProps, CourseP
       const allTasks = course.lessons?.flatMap(lesson => lesson.tasks) || [];
 
       /* attempts to find the task if the id exists, or find the first unfinished task */
-      const foundTask = taskId ? allTasks.find(t => t.id === taskId) : allTasks.find(t => !t.finishDate);
+      const foundTask = taskId
+        ? allTasks.find(t => t.id === taskId)
+        : allTasks.find(t => !t.finishDate);
 
       this.setState({
         course: course,
         task: foundTask,
-        enrolled: true
+        enrolled: true,
       });
 
       //this just prefetches it
       //if (foundTask) this.updateTask(foundTask, true);
-
-
     } else {
-      const [c, l] = await Promise.all([getParticipantCourse(courseId), getParticipantLessons(courseId)]);
+      const [c, l] = await Promise.all([
+        getParticipantCourse(courseId),
+        getParticipantLessons(courseId),
+      ]);
       this.setState({
-        course: { ...c, lessons: l },
+        course: {...c, lessons: l},
         task: undefined,
-        enrolled: false
+        enrolled: false,
       });
     }
-    this.setState({ fetching: false });
+    this.setState({fetching: false});
   }
 
   componentDidMount(): void {
     this.fetchData();
   }
 
-  componentDidUpdate(prevProps: Readonly<CourseProviderProps>, prevState: Readonly<CourseProviderState>, snapshot?: any): void {
+  componentDidUpdate(
+    prevProps: Readonly<CourseProviderProps>,
+    prevState: Readonly<CourseProviderState>,
+    snapshot?: any,
+  ): void {}
 
-  }
-
-  shouldComponentUpdate(nextProps: Readonly<CourseProviderProps>, nextState: Readonly<CourseProviderState>, nextContext: any): boolean {
-
+  shouldComponentUpdate(
+    nextProps: Readonly<CourseProviderProps>,
+    nextState: Readonly<CourseProviderState>,
+    nextContext: any,
+  ): boolean {
     const justFetchingUpdated = this.state.fetching !== nextState.fetching;
     if (justFetchingUpdated) return true;
 
     const shouldUpdate =
-      this.state.course !== nextState.course
-      || this.state.task !== nextState.task
-      || nextProps.screen !== this.props.screen
-      ;
-
+      this.state.course !== nextState.course ||
+      this.state.task !== nextState.task ||
+      nextProps.screen !== this.props.screen;
     if (nextState.course) {
       const nextTaskId = nextProps.params?.taskId;
       const previousTaskId = this.props.params?.taskId;
       const nextScreen = nextProps.screen;
-      const allTasks = nextState.course.lessons?.flatMap(lesson => lesson.tasks);
+      const allTasks = nextState.course.lessons?.flatMap(
+        lesson => lesson.tasks,
+      );
 
-      if (nextScreen === AuthenticatedScreens.CourseExecution && !nextTaskId && !nextState.task) {
-        const firstTask = allTasks && allTasks.length > 0 ? allTasks[0] : undefined;
-        if (firstTask)
-          this.updateTask(firstTask)
-        else this.setState({ task: undefined });
+      if (
+        nextScreen === AuthenticatedScreens.CourseExecution &&
+        !nextTaskId &&
+        !nextState.task
+      ) {
+        const firstTask =
+          allTasks && allTasks.length > 0 ? allTasks[0] : undefined;
+        if (firstTask) this.updateTask(firstTask);
+        else this.setState({task: undefined});
       } else if (
-        nextScreen === AuthenticatedScreens.CourseExecution && (previousTaskId !== nextTaskId && this.state.task?.id !== nextTaskId)
-        || (nextState.task && nextState.task.id && !nextState.taskDetail)
+        (nextScreen === AuthenticatedScreens.CourseExecution &&
+          previousTaskId !== nextTaskId &&
+          this.state.task?.id !== nextTaskId) ||
+        (nextState.task && nextState.task.id && !nextState.taskDetail)
       ) {
         const task = allTasks?.find(t => t.id === nextTaskId);
         if (task) this.updateTask(task);
-        else this.setState({ task: undefined });
+        else this.setState({task: undefined});
       }
     }
 
     return shouldUpdate;
   }
 
-
   render() {
-    const { children } = this.props;
+    const {children} = this.props;
     return (
-      <CourseContext.Provider value={{
-        course: this.state.course,
-        task: this.state.task,
-        taskDetail: this.state.taskDetail,
-        enrolled: this.state.enrolled,
-        update: this.fetchData,
-        fetching: this.state.fetching
-      }}>
+      <CourseContext.Provider
+        value={{
+          course: this.state.course,
+          task: this.state.task,
+          taskDetail: this.state.taskDetail,
+          enrolled: this.state.enrolled,
+          update: this.fetchData,
+          fetching: this.state.fetching,
+        }}>
         {children}
       </CourseContext.Provider>
     );
   }
 }
 
-
 const getRouteParams = (navigation: RNNavigationProp) => {
   const state = navigation.getState();
 
   if (state?.routes) {
-    const courseDrawerRoute = state.routes.find(r => r.name === AuthenticatedScreens.CourseDrawer);
+    const courseDrawerRoute = state.routes.find(
+      r => r.name === AuthenticatedScreens.CourseDrawer,
+    );
 
-    const courseStackRoute = courseDrawerRoute?.state?.routes.find(r => r.name === AuthenticatedScreens.CourseScreenStack);
+    const courseStackRoute = courseDrawerRoute?.state?.routes.find(
+      r => r.name === AuthenticatedScreens.CourseScreenStack,
+    );
 
     if (courseStackRoute?.state?.routes) {
       const routeIndex = courseStackRoute.state.index;
       if (routeIndex) {
         const routeName = courseStackRoute.state.routeNames?.[routeIndex];
-        const currentRoute = courseStackRoute.state.routes.find(r => r.name === routeName);
+        const currentRoute = courseStackRoute.state.routes.find(
+          r => r.name === routeName,
+        );
         if (currentRoute?.params) {
           return {
             name: routeName,
-            params: currentRoute.params
-          }
+            params: currentRoute.params,
+          };
         }
       }
     }
@@ -177,13 +217,19 @@ const getRouteParams = (navigation: RNNavigationProp) => {
   return undefined;
 };
 
-const mapStateToProps = (state: RootState, ownProps: { navigation: RNNavigationProp; route: RouteProp<RootStackParamList, AuthenticatedScreens.CourseDrawer> }) => {
+const mapStateToProps = (
+  state: RootState,
+  ownProps: {
+    navigation: RNNavigationProp;
+    route: RouteProp<RootStackParamList, AuthenticatedScreens.CourseDrawer>;
+  },
+) => {
   const routeParams = getRouteParams(ownProps.navigation);
   return {
     enrolled: state.course.enrolled,
     route: ownProps.route,
     screen: routeParams?.name,
-    params: routeParams?.params as Record<string, any>
+    params: routeParams?.params as Record<string, any>,
   };
 };
 

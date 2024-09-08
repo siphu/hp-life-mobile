@@ -26,18 +26,18 @@ import {
   ViewStyle,
   StatusBar,
 } from 'react-native';
-import { useDetectDevice } from '../../toolkits';
-import { useDeviceOrientation } from '../../useDeviceOrientation';
+import {useDetectDevice} from '../../toolkits';
+import {useDeviceOrientation} from '../../useDeviceOrientation';
 import CInput from '../TextInput';
-import { MultiSelectProps } from './model';
-import { styles } from './styles';
+import {MultiSelectProps} from './model';
+import {styles} from './styles';
 
-const { isTablet } = useDetectDevice;
+const {isTablet} = useDetectDevice;
 const ic_down = require('../../assets/down.png');
 const statusBarHeight: number = StatusBar.currentHeight || 0;
 
 const MultiSelectComponent: <T>(
-  props: MultiSelectProps<T>
+  props: MultiSelectProps<T>,
 ) => ReactElement<any, string | JSXElementConstructor<any>> | null =
   React.forwardRef((props, currentRef) => {
     const orientation = useDeviceOrientation();
@@ -104,7 +104,7 @@ const MultiSelectComponent: <T>(
     const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
     const [searchText, setSearchText] = useState('');
 
-    const { width: W, height: H } = Dimensions.get('window');
+    const {width: W, height: H} = Dimensions.get('window');
     const styleContainerVertical: ViewStyle = useMemo(() => {
       return {
         backgroundColor: 'rgba(0,0,0,0.1)',
@@ -119,7 +119,7 @@ const MultiSelectComponent: <T>(
     }, [W, orientation]);
 
     useImperativeHandle(currentRef, () => {
-      return { open: eventOpen, close: eventClose };
+      return {open: eventOpen, close: eventClose};
     });
 
     useEffect(() => {
@@ -203,7 +203,7 @@ const MultiSelectComponent: <T>(
         _measure();
         setKeyboardHeight(e.endCoordinates.height);
       },
-      [_measure]
+      [_measure],
     );
 
     const onKeyboardDidHide = useCallback(() => {
@@ -214,11 +214,11 @@ const MultiSelectComponent: <T>(
     useEffect(() => {
       const susbcriptionKeyboardDidShow = Keyboard.addListener(
         'keyboardDidShow',
-        onKeyboardDidShow
+        onKeyboardDidShow,
       );
       const susbcriptionKeyboardDidHide = Keyboard.addListener(
         'keyboardDidHide',
-        onKeyboardDidHide
+        onKeyboardDidHide,
       );
 
       return () => {
@@ -297,21 +297,21 @@ const MultiSelectComponent: <T>(
           };
 
           const dataSearch = data.filter(
-            searchQuery ? propSearchFunction : defaultFilterFunction
+            searchQuery ? propSearchFunction : defaultFilterFunction,
           );
           setListData(dataSearch);
         } else {
           setListData(data);
         }
       },
-      [data, searchField, labelField, searchQuery]
+      [data, searchField, labelField, searchQuery],
     );
 
     const onSelect = useCallback(
       (item: any) => {
         const newCurrentValue = [...currentValue];
         const index = newCurrentValue.findIndex(
-          (e) => e === _.get(item, valueField)
+          e => e === _.get(item, valueField),
         );
         if (index > -1) {
           newCurrentValue.splice(index, 1);
@@ -353,7 +353,7 @@ const MultiSelectComponent: <T>(
         onChange,
         onConfirmSelectItem,
         valueField,
-      ]
+      ],
     );
 
     const _renderDropdown = () => {
@@ -362,8 +362,7 @@ const MultiSelectComponent: <T>(
           testID={testID}
           accessible={!!accessibilityLabel}
           accessibilityLabel={accessibilityLabel}
-          onPress={showOrClose}
-        >
+          onPress={showOrClose}>
           <View style={styles.dropdown}>
             {renderLeftIcon?.(visible)}
             <Text
@@ -371,8 +370,7 @@ const MultiSelectComponent: <T>(
                 styles.textItem,
                 placeholderStyle,
                 font(),
-              ])}
-            >
+              ])}>
               {placeholder}
             </Text>
             {renderRightIcon ? (
@@ -382,7 +380,7 @@ const MultiSelectComponent: <T>(
                 source={ic_down}
                 style={StyleSheet.flatten([
                   styles.icon,
-                  { tintColor: iconColor },
+                  {tintColor: iconColor},
                   iconStyle,
                 ])}
               />
@@ -395,17 +393,17 @@ const MultiSelectComponent: <T>(
     const checkSelected = useCallback(
       (item: any) => {
         const index = currentValue.findIndex(
-          (e) => e === _.get(item, valueField)
+          e => e === _.get(item, valueField),
         );
         return index > -1;
       },
-      [currentValue, valueField]
+      [currentValue, valueField],
     );
 
     const _renderItem = useCallback(
-      ({ item, index }: { item: any; index: number }) => {
+      ({item, index}: {item: any; index: number}) => {
         const selected = checkSelected(item);
-        _.assign(item, { _index: index });
+        _.assign(item, {_index: index});
         return (
           <TouchableHighlight
             key={index.toString()}
@@ -413,11 +411,10 @@ const MultiSelectComponent: <T>(
             accessible={!!accessibilityLabel}
             accessibilityLabel={_.get(
               item,
-              itemAccessibilityLabelField || labelField
+              itemAccessibilityLabelField || labelField,
             )}
             underlayColor={activeColor}
-            onPress={() => onSelect(item)}
-          >
+            onPress={() => onSelect(item)}>
             <View
               style={StyleSheet.flatten([
                 itemContainerStyle,
@@ -425,8 +422,7 @@ const MultiSelectComponent: <T>(
                   backgroundColor: activeColor,
                   ...styles.wrapItem,
                 },
-              ])}
-            >
+              ])}>
               {renderItem ? (
                 renderItem(item, selected)
               ) : (
@@ -436,8 +432,7 @@ const MultiSelectComponent: <T>(
                       styles.textItem,
                       itemTextStyle,
                       font(),
-                    ])}
-                  >
+                    ])}>
                     {_.get(item, labelField)}
                   </Text>
                 </View>
@@ -458,13 +453,13 @@ const MultiSelectComponent: <T>(
         labelField,
         onSelect,
         renderItem,
-      ]
+      ],
     );
 
     const renderSearch = useCallback(() => {
       if (search) {
         if (renderInputSearch) {
-          return renderInputSearch((text) => {
+          return renderInputSearch(text => {
             if (onChangeText) {
               setSearchText(text);
               onChangeText(text);
@@ -480,7 +475,7 @@ const MultiSelectComponent: <T>(
               inputStyle={[inputSearchStyle, font()]}
               autoCorrect={false}
               placeholder={searchPlaceholder}
-              onChangeText={(e) => {
+              onChangeText={e => {
                 if (onChangeText) {
                   setSearchText(e);
                   onChangeText(e);
@@ -488,7 +483,7 @@ const MultiSelectComponent: <T>(
                 onSearch(e);
               }}
               placeholderTextColor="gray"
-              iconStyle={[{ tintColor: iconColor }, iconStyle]}
+              iconStyle={[{tintColor: iconColor}, iconStyle]}
             />
           );
         }
@@ -547,12 +542,12 @@ const MultiSelectComponent: <T>(
         renderSearch,
         showsVerticalScrollIndicator,
         testID,
-      ]
+      ],
     );
 
     const _renderModal = useCallback(() => {
       if (visible && position) {
-        const { isFull, width, height, top, bottom, left } = position;
+        const {isFull, width, height, top, bottom, left} = position;
 
         const onAutoPosition = () => {
           if (keyboardHeight > 0) {
@@ -591,29 +586,26 @@ const MultiSelectComponent: <T>(
               statusBarTranslucent
               visible={visible}
               supportedOrientations={['landscape', 'portrait']}
-              onRequestClose={showOrClose}
-            >
+              onRequestClose={showOrClose}>
               <TouchableWithoutFeedback onPress={showOrClose}>
                 <View
                   style={StyleSheet.flatten([
                     styles.flex1,
                     isFull && styleContainerVertical,
-                    backgroundColor && { backgroundColor: backgroundColor },
+                    backgroundColor && {backgroundColor: backgroundColor},
                     keyboardStyle,
-                  ])}
-                >
+                  ])}>
                   <View
                     style={StyleSheet.flatten([
                       styles.flex1,
                       !isTopPosition
-                        ? { paddingTop: extendHeight }
+                        ? {paddingTop: extendHeight}
                         : {
                             justifyContent: 'flex-end',
                             paddingBottom: extendHeight,
                           },
                       isFull && styles.fullScreen,
-                    ])}
-                  >
+                    ])}>
                     <View
                       style={StyleSheet.flatten([
                         styles.container,
@@ -622,8 +614,7 @@ const MultiSelectComponent: <T>(
                           width,
                         },
                         containerStyle,
-                      ])}
-                    >
+                      ])}>
                       {_renderList(isTopPosition)}
                     </View>
                   </View>
@@ -671,9 +662,8 @@ const MultiSelectComponent: <T>(
           style={StyleSheet.flatten([
             styles.rowSelectedItem,
             inside && styles.flex1,
-          ])}
-        >
-          {list.map((e) => {
+          ])}>
+          {list.map(e => {
             if (renderSelectedItem) {
               return (
                 <TouchableWithoutFeedback
@@ -681,11 +671,10 @@ const MultiSelectComponent: <T>(
                   accessible={!!accessibilityLabel}
                   accessibilityLabel={_.get(
                     e,
-                    itemAccessibilityLabelField || labelField
+                    itemAccessibilityLabelField || labelField,
                   )}
                   key={_.get(e, labelField)}
-                  onPress={() => unSelect(e)}
-                >
+                  onPress={() => unSelect(e)}>
                   {renderSelectedItem(e, () => {
                     unSelect(e);
                   })}
@@ -698,32 +687,28 @@ const MultiSelectComponent: <T>(
                   accessible={!!accessibilityLabel}
                   accessibilityLabel={_.get(
                     e,
-                    itemAccessibilityLabelField || labelField
+                    itemAccessibilityLabelField || labelField,
                   )}
                   key={_.get(e, labelField)}
-                  onPress={() => unSelect(e)}
-                >
+                  onPress={() => unSelect(e)}>
                   <View
                     style={StyleSheet.flatten([
                       styles.selectedItem,
                       selectedStyle,
-                    ])}
-                  >
+                    ])}>
                     <Text
                       style={StyleSheet.flatten([
                         styles.selectedTextLeftItem,
                         selectedTextStyle,
                         font(),
-                      ])}
-                    >
+                      ])}>
                       {_.get(e, labelField)}
                     </Text>
                     <Text
                       style={StyleSheet.flatten([
                         styles.selectedTextItem,
                         selectedTextStyle,
-                      ])}
-                    >
+                      ])}>
                       ⓧ
                     </Text>
                   </View>
@@ -740,8 +725,7 @@ const MultiSelectComponent: <T>(
         <View
           style={StyleSheet.flatten([styles.mainWrap, style])}
           ref={ref}
-          onLayout={_measure}
-        >
+          onLayout={_measure}>
           {_renderDropdownInside()}
           {_renderModal()}
         </View>
@@ -754,8 +738,7 @@ const MultiSelectComponent: <T>(
           testID={testID}
           accessible={!!accessibilityLabel}
           accessibilityLabel={accessibilityLabel}
-          onPress={showOrClose}
-        >
+          onPress={showOrClose}>
           <View style={styles.dropdownInside}>
             {renderLeftIcon?.()}
             {value && value?.length > 0 ? (
@@ -766,8 +749,7 @@ const MultiSelectComponent: <T>(
                   styles.textItem,
                   placeholderStyle,
                   font(),
-                ])}
-              >
+                ])}>
                 {placeholder}
               </Text>
             )}
@@ -778,7 +760,7 @@ const MultiSelectComponent: <T>(
                 source={ic_down}
                 style={StyleSheet.flatten([
                   styles.icon,
-                  { tintColor: iconColor },
+                  {tintColor: iconColor},
                   iconStyle,
                 ])}
               />
@@ -797,8 +779,7 @@ const MultiSelectComponent: <T>(
         <View
           style={StyleSheet.flatten([styles.mainWrap, style])}
           ref={ref}
-          onLayout={_measure}
-        >
+          onLayout={_measure}>
           {_renderDropdown()}
           {_renderModal()}
         </View>

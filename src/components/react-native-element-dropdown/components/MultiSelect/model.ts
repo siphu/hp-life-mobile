@@ -63,10 +63,10 @@ export interface MultiSelectProps<T> {
   renderItem?: (item: T, selected?: boolean) => JSX.Element | null | undefined;
   renderSelectedItem?: (
     item: T,
-    unSelect?: (item: T) => void
+    unSelect?: (item: T) => void,
   ) => JSX.Element | null | undefined;
   renderInputSearch?: (
-    onSearch: (text: string) => void
+    onSearch: (text: string) => void,
   ) => JSX.Element | null | undefined;
   onFocus?: () => void;
   onBlur?: () => void;
