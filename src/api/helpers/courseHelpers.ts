@@ -1,10 +1,4 @@
-import {
-  AuthToken,
-  Course,
-  CourseStatus,
-  TraineeCourse,
-  UserProfile,
-} from '~/api/endpoints/model';
+import { Course, CourseStatus, TraineeCourse } from '~/api/endpoints/model';
 import {
   getAvailableCourses as getRemoteAvailableCourses,
   getCategories as getRemoteCategories,
@@ -119,12 +113,12 @@ export const getAvailableCourses = async (
     (lastAvailableCoursesFetchTime &&
       currentTime - lastAvailableCoursesFetchTime < cacheDuration &&
       !force &&
-      (stores.getState().course! as StoreCourseState).available.hasOwnProperty(
+      Object.prototype.hasOwnProperty.call(
+        (stores.getState().course! as StoreCourseState).available,
         language,
       ) &&
       (stores.getState().course! as StoreCourseState).available![language]
         .length > 0);
-
   if (shouldUseCache) {
     return (stores.getState().course! as StoreCourseState).available![language];
   }

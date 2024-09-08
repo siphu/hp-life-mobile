@@ -11,7 +11,6 @@ import { GlobalStyles } from '~/config/styles';
 import { styles } from '../styles';
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 import { AuthenticatedScreens } from '~/navigation/screens';
-import { DrawerActions } from '@react-navigation/native';
 
 const icons = {
   checked: (

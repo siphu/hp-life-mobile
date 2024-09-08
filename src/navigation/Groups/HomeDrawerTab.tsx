@@ -5,7 +5,6 @@ import { AuthenticatedScreens } from '../screens';
 import Home from '~/screens/Home';
 import {
   BottomTabBarButtonProps,
-  BottomTabNavigationEventMap,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import { HeaderLogo } from '../components/HeaderLogo';
@@ -28,12 +27,7 @@ import {
 } from '@react-navigation/native';
 import { DrawerContentWrapper } from '../components/DrawerContentWrapper';
 import React from 'react';
-import {
-  connect,
-  ConnectedProps,
-  shallowEqual,
-  useSelector,
-} from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/stores';
 import { getRemoteMessages } from '~/api/helpers';
 import { t } from '~/providers/TranslationProvider';
@@ -194,14 +188,6 @@ export const HomeDrawer = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
 
-  const { online, notifications } = useSelector(
-    (root: RootState) => ({
-      online: root.app.online,
-      notifications: root.app.notifications,
-    }),
-    shallowEqual,
-  );
-
   return (
     <HomeDrawerNavigation.Navigator
       useLegacyImplementation={false}
@@ -215,26 +201,18 @@ export const HomeDrawer = () => {
           shadowOpacity: 0,
           backgroundColor: GlobalStyles.header.backgroundColor,
         },
-        headerLeft: () =>
-          React.useMemo(
-            () => (
-              <HeaderMenuIcon
-                onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-              />
-            ),
-            [],
-          ),
-        headerRight: () =>
-          React.useMemo(
-            () => (
-              <HeaderNotificationIcon
-                onPress={() =>
-                  navigation.navigate(AuthenticatedScreens.Notification)
-                }
-              />
-            ),
-            [online, notifications],
-          ),
+        headerLeft: () => (
+          <HeaderMenuIcon
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+          />
+        ),
+        headerRight: () => (
+          <HeaderNotificationIcon
+            onPress={() =>
+              navigation.navigate(AuthenticatedScreens.Notification)
+            }
+          />
+        ),
         headerBackground: () => <HeaderLogo />,
         headerTitle: '',
         drawerType: 'front',

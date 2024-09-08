@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { Text } from '~/components/Text';
 import styles from './styles';
-import { config } from '~/config/config';
 
 interface ColoredButtonProps {
   color?: ColorValue;
@@ -17,6 +16,7 @@ interface ColoredButtonProps {
   disabled?: boolean;
   style?: ViewStyle;
   textStyle?: TextStyle;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon?: any;
   variant?: 'Primary' | 'Secondary';
 }

@@ -7,10 +7,10 @@ export const contentParser = (body: string) => {
   const mobileReg = /<div.*?mobile\s*=\s*["'](.*?)["']/gims;
   let mobileFlags: Array<string> = [];
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let m: any;
   let uri: string | undefined;
-  let bypass = false;
-  let rebounce: number | undefined;
+  // let bypass = false;
 
   /* get all the mobile flags if exists */
   if ((m = mobileReg.exec(body)) !== null) {
@@ -32,7 +32,7 @@ export const contentParser = (body: string) => {
         lessonResponsiveReg.exec(body) !== null ||
         mobileFlags.indexOf('full') !== undefined
       ) {
-        bypass = true;
+        // bypass = true;
       }
     }
   }

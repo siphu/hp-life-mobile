@@ -24,16 +24,18 @@ import {
 const Login = () => {
   const appState = useSelector((state: RootState) => state.app);
   const navigation = useNavigation();
-  const openLanguageSelector = React.useCallback(
-    _.debounce(() => navigation.navigate(UnAuthenticatedScreens.Language), 100),
-    [navigation],
+
+  const openLanguageSelector = _.debounce(
+    () => navigation.navigate(UnAuthenticatedScreens.Language),
+    100,
   );
 
   React.useEffect(() => {
     if (!appState.language) {
       openLanguageSelector();
     }
-  }, [appState.language]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const signIn = async () => {
     const ts = new Date().getTime();
@@ -49,7 +51,7 @@ const Login = () => {
       )
       .then(getUserProfile)
       .then(() =>
-        getEnrolledCourses().catch(e =>
+        getEnrolledCourses().catch(() =>
           console.error('Unable to fetch enrolled courses'),
         ),
       )

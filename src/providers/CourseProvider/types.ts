@@ -27,6 +27,7 @@ export interface CourseProviderProps {
   route: RouteProp<RootStackParamList, AuthenticatedScreens.CourseDrawer>;
   enrolled: TraineeCourse[];
   screen?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params: Record<string, any>;
 }
 

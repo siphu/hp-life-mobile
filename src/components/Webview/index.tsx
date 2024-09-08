@@ -69,7 +69,9 @@ class WebView extends Component<WebViewProps, WebViewState> {
     const {
       autoExpand,
       style,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onMessage,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onNavigationStateChange,
       ...webViewProps
     } = this.props;

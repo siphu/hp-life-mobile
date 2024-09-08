@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, FlatList, ListRenderItem } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
 import { GlobalStyles } from '~/config/styles';
 import { config } from '~/config/config';
-import { Course, Task, Lesson as LessonModel } from '~/api/endpoints';
+import { Lesson as LessonModel } from '~/api/endpoints';
 import { Lesson } from './components/Lesson';
 import { Header } from './components/Header';
 import { Information } from './components/Information';

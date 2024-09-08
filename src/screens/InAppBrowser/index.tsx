@@ -1,9 +1,4 @@
-import {
-  NavigationProp,
-  RouteProp,
-  useNavigation,
-  useRoute,
-} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { BackHandler, Linking, Platform, View } from 'react-native';
 import WebView from 'react-native-webview';
@@ -15,12 +10,7 @@ import { AuthenticatedScreens } from '~/navigation/screens';
 import { RootStackParamList } from '~/navigation';
 import { StackScreenProps } from '@react-navigation/stack';
 import { isBaseUrl } from '~/utils';
-import {
-  appendViewport,
-  disableBaseUrlLink,
-  documentReady,
-  getContentSize,
-} from '~/utils/WebViewJavascript';
+import { disableBaseUrlLink } from '~/utils/WebViewJavascript';
 import Loader from '~/components/Loader';
 
 function urlWithLocale(url: string, locale: string): string {
@@ -35,12 +25,10 @@ const InAppBrowser = ({
   const navigation = useNavigation();
   const [canGoBack, setCanGoBack] = React.useState<boolean>(false);
   const webViewRef = React.useRef<WebView>(null);
-  const { title, locale } = route.params;
+  const { locale } = route.params;
   const url = locale
-    ? urlWithLocale(route.params?.url!, locale)
+    ? urlWithLocale(route.params!.url!, locale)
     : route.params?.url;
-
-  const nav = useNavigation();
 
   React.useEffect(() => {
     const backHandler = BackHandler.addEventListener(
@@ -68,6 +56,7 @@ const InAppBrowser = ({
         />
       ),
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -104,7 +93,7 @@ const InAppBrowser = ({
           ) {
             const UrlObject = new URL(e.url);
             const { pathname } = UrlObject;
-            const match = /^(?:\/[^\/]+)?\/course\/(\d+)(?:-.*)?$/gm.exec(
+            const match = /^(?:\/[^/]+)?\/course\/(\d+)(?:-.*)?$/gm.exec(
               pathname.toLowerCase(),
             );
             if (match && match.length > 1) {

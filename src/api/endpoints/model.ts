@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export enum CourseStatus {
   Published = 'Published',
   Draft = 'Draft',

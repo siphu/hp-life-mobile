@@ -4,9 +4,7 @@ import React from 'react';
 import { RootStackParamList } from '..';
 import CourseSideMenuDrawer from '~/components/CourseSideMenuDrawer';
 import { CourseScreenStack } from './CourseScreenStack';
-import CourseProvider, {
-  useCourseProviderContext,
-} from '~/providers/CourseProvider';
+import CourseProvider from '~/providers/CourseProvider';
 import { StackScreenProps } from '@react-navigation/stack';
 
 const CourseDrawerNavigation = createDrawerNavigator<RootStackParamList>();

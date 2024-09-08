@@ -50,13 +50,13 @@ const ChangePassword = ({
       .then(() => {
         navigation.goBack();
       })
-      .catch((e: any) => {
+      .catch(e => {
         const message =
-          e.message.hasOwnProperty('Errors') &&
+          Object.prototype.hasOwnProperty.call(e.message, 'Errors') &&
           Array.isArray(e.message.Errors) &&
           e.message.Errors.length > 0
             ? e.message.Errors[0]
-            : e.message.hasOwnProperty('Errors') &&
+            : Object.prototype.hasOwnProperty.call(e.message, 'Errors') &&
                 Array.isArray(e.message.Errors)
               ? 'Unknown'
               : e.message;

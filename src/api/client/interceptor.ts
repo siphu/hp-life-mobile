@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { stores } from '~/stores';
-import { config as appConfig, config } from '~/config/config';
+import { config } from '~/config/config';
 import qs from 'qs';
 import { isValidUrl } from '~/utils';
 

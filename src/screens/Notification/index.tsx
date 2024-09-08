@@ -1,17 +1,12 @@
-import { FlatList, RefreshControl, ScrollView, View } from 'react-native';
+import { FlatList, RefreshControl, View } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
-import { Notification as NotificationModel } from '~/api/endpoints';
-import Text from '~/components/Text';
 import { GlobalStyles } from '~/config/styles';
 import { RootState } from '~/stores';
 import { styles } from './styles';
 import { Header } from './components/Header';
 import { NotificationItem } from './components/NotificationItem';
 import React from 'react';
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import moment from 'moment';
 import { getPushNotifications } from '~/api/helpers';
 import { useNotificationContext } from '~/providers/NotificationProvider';
@@ -33,7 +28,7 @@ const Notification: React.FC<ConnectedProps<typeof connector>> = ({
 }) => {
   const notificationContext = useNotificationContext();
   const inset = useSafeAreaInsets();
-  const onRefresh = (force?: boolean) => {
+  const onRefresh = () => {
     getPushNotifications();
   };
 
@@ -56,10 +51,7 @@ const Notification: React.FC<ConnectedProps<typeof connector>> = ({
         showsVerticalScrollIndicator={true}
         indicatorStyle={'black'}
         refreshControl={
-          <RefreshControl
-            refreshing={false}
-            onRefresh={() => onRefresh(true)}
-          />
+          <RefreshControl refreshing={false} onRefresh={() => onRefresh()} />
         }
         contentContainerStyle={[
           styles.contentContainer,

@@ -7,8 +7,6 @@ import React from 'react';
 import { disableBaseUrlLink } from '~/utils/WebViewJavascript';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GlobalStyles } from '~/config/styles';
-import Orientation, { OrientationType } from 'react-native-orientation-locker';
-import { Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { RootState } from '~/stores';
 

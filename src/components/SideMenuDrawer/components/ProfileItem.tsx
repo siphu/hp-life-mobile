@@ -1,6 +1,5 @@
 import { I18nManager, TouchableOpacity, View } from 'react-native';
 import Text from '~/components/Text';
-import Images from '~/res/images';
 import { styles } from '../styles';
 import { config } from '~/config/config';
 import { t } from '~/providers/TranslationProvider';

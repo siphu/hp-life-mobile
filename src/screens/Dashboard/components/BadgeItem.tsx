@@ -1,12 +1,11 @@
 import React from 'react';
-import { Course, MyBadge } from '~/api/endpoints';
+import { MyBadge } from '~/api/endpoints';
 import { styles } from '../styles';
-import { Dimensions, Image, TouchableOpacity, View } from 'react-native';
+import { Image, View } from 'react-native';
 import Text from '~/components/Text';
 import FastImage from '@d11/react-native-fast-image';
 import { t } from '~/providers/TranslationProvider';
 import moment from 'moment';
-import * as Progress from 'react-native-progress';
 import { config } from '~/config/config';
 import { friendlyDate } from '~/utils';
 import {

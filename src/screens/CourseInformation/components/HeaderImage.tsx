@@ -1,11 +1,9 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import { Text } from '~/components/Text';
 import LinearGradient from 'react-native-linear-gradient';
 
-import Images from '~/res/images';
 import { styles } from '../styles';
-import { MaterialIcons } from '~/components/MaterialIcons';
 import FastImage from '@d11/react-native-fast-image';
 import { Course } from '~/api/endpoints';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { connect, ConnectedProps, useSelector } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { MaterialIcons } from '~/components/MaterialIcons';
 import Text from '~/components/Text';
 import { config } from '~/config/config';
@@ -49,7 +49,7 @@ const Notification: React.FC<ConnectedProps<typeof connector>> = ({
   notifications,
   onPress,
 }) => {
-  const ParentView: any = online ? TouchableOpacity : View;
+  const ParentView = online ? TouchableOpacity : View;
   return (
     <ParentView onPress={onPress} style={styles.touchableArea}>
       <MaterialIcons name="notifications" size={30} color={'black'} />

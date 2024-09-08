@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosHeaders, AxiosResponse } from 'axios';
 import moment from 'moment';
 export interface RequestError extends Error {
@@ -44,7 +45,7 @@ export const processResponse = async function <R>(
     .catch(result => {
       console.error('r', result);
       const timerEnd = moment();
-      if (result.hasOwnProperty('config'))
+      if (Object.prototype.hasOwnProperty.call(result, 'config'))
         console.error(
           `[${timerStart.toLocaleString()}]`,
           `[${('000' + timerEnd.diff(timerStart)).slice(-5)}ms]`,
@@ -52,7 +53,7 @@ export const processResponse = async function <R>(
           `[${result.config.method?.toUpperCase()}]`,
           result.config.url,
         );
-      else if (result.hasOwnProperty('data')) {
+      else if (Object.prototype.hasOwnProperty.call(result, 'data')) {
         console.error(
           `[${timerStart.toLocaleString()}]`,
           `[${('000' + timerEnd.diff(timerStart)).slice(-5)}ms]`,
@@ -80,7 +81,7 @@ export async function post<T>(
   url: string,
   payload?: Record<string, unknown> | any,
   formUrlEncoded = false,
-  headers?: Object,
+  headers?: Record<string, string>,
 ): Promise<T> {
   let configHeader = headers || {};
   if (formUrlEncoded)

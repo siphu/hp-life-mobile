@@ -11,14 +11,9 @@ import { GlobalStyles } from '~/config/styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import InAppBrowser from '~/screens/InAppBrowser';
 import Notification from '~/screens/Notification';
-import { HeaderMenuIcon } from './components/HeaderMenuIcon';
-import { DrawerActions } from '@react-navigation/native';
-import { View } from 'react-native';
-import { HeaderLessonIcon } from './components/HeaderLessonIcon';
 import CourseDrawer from './Groups/CourseDrawer';
 import { RootStackParamList } from '.';
 import ChangePassword from '~/screens/ChangePassword';
-import CourseProvider from '~/providers/CourseProvider';
 
 const Screen = createStackNavigator<RootStackParamList>();
 

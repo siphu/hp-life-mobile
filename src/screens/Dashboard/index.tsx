@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Dimensions,
-  FlatList,
-  ListRenderItem,
-  RefreshControl,
-  View,
-} from 'react-native';
+import { FlatList, ListRenderItem, RefreshControl, View } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/stores';
 import { GlobalStyles } from '~/config/styles';
@@ -37,8 +31,7 @@ import { AuthenticatedScreens } from '~/navigation/screens';
 import { CertificateItem } from './components/CertificateItem';
 import Text from '~/components/Text';
 import { t } from '~/providers/TranslationProvider';
-import Loader from '~/components/Loader';
-import { loaderWrapper } from '~/api/helpers/appHelpers';
+import { loaderWrapper } from '~/components/Alert';
 
 const RENDER_PER_PAGE = 8;
 
@@ -112,6 +105,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({
     if (isFocused) {
       onRefresh();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocused]);
 
   const filteredData = React.useMemo(() => {

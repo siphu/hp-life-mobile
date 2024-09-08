@@ -108,7 +108,7 @@ export async function downloadCertificate(
       fileCache: Platform.OS === 'ios',
     })
       .fetch('GET', url)
-      .then((res: any) => {
+      .then(res => {
         if (Platform.OS === 'ios') {
           RNFetchBlob.ios.openDocument(res.path());
         } else {
@@ -116,7 +116,7 @@ export async function downloadCertificate(
         }
         resolve(res.path());
       })
-      .catch((e: any) => {
+      .catch(e => {
         console.error('e', e);
         reject(e);
       });
@@ -144,7 +144,7 @@ export async function downloadTranscript(
       .fetch('GET', url, {
         Authorization: `Bearer ${token}`,
       })
-      .then((res: any) => {
+      .then(res => {
         if (Platform.OS === 'ios') {
           RNFetchBlob.ios.openDocument(res.path());
         } else {
@@ -152,7 +152,7 @@ export async function downloadTranscript(
         }
         resolve(res.path());
       })
-      .catch((e: any) => {
+      .catch(e => {
         console.error('e', e);
         reject(e);
       });

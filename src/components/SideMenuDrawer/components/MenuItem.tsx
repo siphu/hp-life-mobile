@@ -3,7 +3,6 @@ import { styles } from '../styles';
 import { I18nManager, TouchableOpacity, View } from 'react-native';
 import { Text } from '~/components/Text';
 import { config } from '~/config/config';
-import Images from '~/res/images';
 import { GlobalStyles } from '~/config/styles';
 import { MaterialIconsOutlined } from '~/components/MaterialIcons';
 import { MaterialIcons } from '~/components/MaterialIcons';
@@ -18,7 +17,7 @@ export interface MenuItemProps {
 }
 
 export default (props: MenuItemProps) => {
-  const ParentElement: any = props.disabled ? View : TouchableOpacity;
+  const ParentElement = props.disabled ? View : TouchableOpacity;
   return (
     <ParentElement
       accessibilityRole="button"

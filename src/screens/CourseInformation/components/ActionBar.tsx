@@ -5,7 +5,6 @@ import Text from '~/components/Text';
 import { config } from '~/config/config';
 import { t } from '~/providers/TranslationProvider';
 import { styles } from '../styles';
-import { MaterialSymbolsOutlined } from '~/components/MaterialIcons';
 import { DownloadBookButton } from './DownloadBookButton';
 import EnrolledInformation from './EnrolledInformation';
 import { StackNavigationProp } from '@react-navigation/stack';

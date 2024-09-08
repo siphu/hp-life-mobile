@@ -4,8 +4,6 @@ import { config } from '~/config/config';
 import Loader from '~/components/Loader';
 import React from 'react';
 import { disableBaseUrlLink } from '~/utils/WebViewJavascript';
-import { Dimensions } from 'react-native';
-import Orientation, { OrientationType } from 'react-native-orientation-locker';
 import { GlobalStyles } from '~/config/styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { connect } from 'react-redux';

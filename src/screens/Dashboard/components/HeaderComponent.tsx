@@ -1,4 +1,4 @@
-import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import { Dropdown } from '~/components/react-native-element-dropdown';
 import React from 'react';
 import { config } from '~/config/config';

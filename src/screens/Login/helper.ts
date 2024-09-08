@@ -14,9 +14,9 @@ export const openBrowser = async (
   url: string,
   returnUrl: string = 'hplife://authentication/login',
 ): Promise<string> => {
-  return new Promise(async (resolve, reject) => {
+  try {
     if (await InAppBrowser.isAvailable()) {
-      InAppBrowser.openAuth(url, returnUrl, {
+      const response = await InAppBrowser.openAuth(url, returnUrl, {
         // iOS Properties
         dismissButtonStyle: 'done',
         preferredBarTintColor: GlobalStyles.header.backgroundColor,
@@ -27,7 +27,7 @@ export const openBrowser = async (
         modalTransitionStyle: 'coverVertical',
         modalEnabled: true,
         enableBarCollapsing: false,
-        ephemeralWebSession: false, //incognito mode
+        ephemeralWebSession: false, // incognito mode
         // Android Properties
         showTitle: false,
         toolbarColor: GlobalStyles.header.backgroundColor,
@@ -37,31 +37,29 @@ export const openBrowser = async (
         enableUrlBarHiding: true,
         enableDefaultShare: false,
         forceCloseOnRedirection: true,
-        // Specify full animation resource identifier(package:anim/name)
-        // or only resource name(in case of animation bundled with app).
+        // Animations
         animations: {
           startEnter: 'slide_in_bottom',
           startExit: 'slide_out_bottom',
           endEnter: 'slide_in_bottom',
           endExit: 'slide_out_bottom',
         },
-      })
-        .then(async response => {
-          if (response.type === 'success') {
-            resolve(response.url);
-          } else {
-            InAppBrowser.closeAuth();
-            reject(response);
-          }
-        })
-        .catch(e => {
-          InAppBrowser.closeAuth();
-          reject(e);
-        });
+      });
+
+      if (response.type === 'success') {
+        return response.url;
+      } else {
+        InAppBrowser.closeAuth();
+        throw new Error(`Browser auth failed: ${response.type}`);
+      }
     } else {
-      Linking.openURL(url);
+      await Linking.openURL(url);
+      return url;
     }
-  });
+  } catch (e) {
+    InAppBrowser.closeAuth();
+    throw e;
+  }
 };
 
 export const extractToken = (path?: string): AuthToken => {

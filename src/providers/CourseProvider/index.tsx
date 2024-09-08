@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { createContext } from 'react';
 import {
   CourseContextType,
@@ -6,15 +7,10 @@ import {
   RNNavigationProp,
 } from './types';
 import { RootState } from '~/stores';
-import {
-  NavigationProp,
-  NavigationState,
-  RouteProp,
-} from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
 import { connect } from 'react-redux';
 import { RootStackParamList } from '~/navigation';
 import { AuthenticatedScreens } from '~/navigation/screens';
-import Loader from '~/components/Loader';
 import { getAvailableCourses, getEnrolledCourses } from '~/api/helpers';
 import {
   getParticipantCourse,
@@ -113,16 +109,9 @@ export class CourseProvider extends React.Component<
     this.fetchData();
   }
 
-  componentDidUpdate(
-    prevProps: Readonly<CourseProviderProps>,
-    prevState: Readonly<CourseProviderState>,
-    snapshot?: any,
-  ): void {}
-
   shouldComponentUpdate(
     nextProps: Readonly<CourseProviderProps>,
     nextState: Readonly<CourseProviderState>,
-    nextContext: any,
   ): boolean {
     const justFetchingUpdated = this.state.fetching !== nextState.fetching;
     if (justFetchingUpdated) return true;

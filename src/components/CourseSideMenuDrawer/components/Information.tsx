@@ -1,5 +1,4 @@
 import Text from '~/components/Text';
-import { CourseSideMenuProps } from '..';
 import { Course } from '~/api/endpoints';
 import { GlobalStyles } from '~/config/styles';
 import { View } from 'react-native';

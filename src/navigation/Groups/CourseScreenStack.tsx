@@ -9,8 +9,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DrawerActions } from '@react-navigation/native';
 import { HeaderLessonIcon } from '../components/HeaderLessonIcon';
 import React from 'react';
-import Orientation, { OrientationType } from 'react-native-orientation-locker';
-import { Dimensions } from 'react-native';
 import { RootState } from '~/stores';
 import { connect } from 'react-redux';
 

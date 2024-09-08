@@ -1,7 +1,7 @@
 import React from 'react';
 import { Course } from '~/api/endpoints';
 import { styles } from '../styles';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import Text from '~/components/Text';
 import FastImage from '@d11/react-native-fast-image';
 import { InProgress } from './InProgress';

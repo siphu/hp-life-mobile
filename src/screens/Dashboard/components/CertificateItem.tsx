@@ -1,12 +1,11 @@
 import React from 'react';
 import { Course } from '~/api/endpoints';
 import { CERTIFICATE_ITEM_HEIGHT, styles } from '../styles';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import Text from '~/components/Text';
 import FastImage from '@d11/react-native-fast-image';
 import { t } from '~/providers/TranslationProvider';
 import moment from 'moment';
-import * as Progress from 'react-native-progress';
 import { config } from '~/config/config';
 import { friendlyDate } from '~/utils';
 import Button from '~/components/Button';

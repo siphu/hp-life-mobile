@@ -1,4 +1,5 @@
 // @ts-nocheck
+/* eslint-disable */
 
 import _ from 'lodash';
 import React, {

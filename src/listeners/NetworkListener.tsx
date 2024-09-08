@@ -10,7 +10,6 @@ import { RootState, stores } from '~/stores';
 import { setOnlineStatus } from '~/stores/app/actions';
 import NetInfo, { NetInfoState } from '@react-native-community/netinfo';
 import { config } from '~/config/config';
-import { AuthToken } from '~/api/endpoints';
 
 NetInfo.configure({
   reachabilityUrl: config.api.learning,
@@ -21,11 +20,6 @@ NetInfo.configure({
   reachabilityRequestTimeout: 15 * 1000,
   reachabilityShouldRun: () => true,
 });
-
-interface NetworkListenerProps {
-  isCurrentOnline?: boolean;
-  token?: AuthToken;
-}
 
 const mapStateToProps = (state: RootState) => ({
   isCurrentOnline: state.app.online,

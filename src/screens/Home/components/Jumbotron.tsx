@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Course } from '~/api/endpoints';
 import Text from '~/components/Text';
 import { styles } from '../styles';
@@ -9,15 +9,20 @@ import { Completed } from './Completed';
 import { InProgress } from './InProgress';
 import { AuthenticatedScreens } from '~/navigation/screens';
 import { connect } from 'react-redux';
-import { NavigationProp } from '@react-navigation/native';
+
 import FastImage from '@d11/react-native-fast-image';
-import { t, useTranslationContext } from '~/providers/TranslationProvider';
+import { t } from '~/providers/TranslationProvider';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '~/navigation';
 
 interface JumbotronProps {
   course: Course;
   language: string;
   categories: RootState['course']['categories'];
-  navigation: NavigationProp<any>;
+  navigation: StackNavigationProp<
+    RootStackParamList,
+    AuthenticatedScreens.Home
+  >;
   disabled?: boolean;
 }
 

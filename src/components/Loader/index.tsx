@@ -1,8 +1,6 @@
 import React from 'react';
 import { Animated, View } from 'react-native';
 import styles from './styles';
-import Images from '~/res/images';
-import { SvgXml } from 'react-native-svg';
 import Spinner from '~/res/images/resources/spinner/hp_spinner.png';
 import FastImage from '@d11/react-native-fast-image';
 

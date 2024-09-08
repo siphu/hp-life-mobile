@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  FlatList,
-  View,
-  RefreshControl,
-  ListRenderItem,
-  Dimensions,
-} from 'react-native';
+import { FlatList, View, RefreshControl, ListRenderItem } from 'react-native';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/stores';
 import { GlobalStyles } from '~/config/styles';
@@ -41,6 +35,7 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({
     if (isFocused) {
       onRefresh();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocused]);
 
   const filteredData = React.useMemo(() => {
@@ -82,6 +77,7 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({
         }
       />
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

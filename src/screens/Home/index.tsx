@@ -7,33 +7,46 @@ import { getAvailableCourses } from '~/api/helpers';
 import { GlobalStyles } from '~/config/styles';
 import { styles } from './styles';
 import Jumbotron from './components/Jumbotron';
-import {
-  NavigationProp,
-  useIsFocused,
-  useNavigation,
-} from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 import { t } from '~/providers/TranslationProvider';
 import { Course } from '~/api/endpoints';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '~/navigation';
+import { AuthenticatedScreens } from '~/navigation/screens';
 
-const connector = connect((state: RootState) => ({
-  data:
-    (state.course.available[state.app.language] || [])
-      .sort(
-        (a, b) =>
-          new Date(b.publishDate!).getTime() -
-          new Date(a.publishDate!).getTime(),
-      )
-      .slice(0, 15) || [],
-  language: state.app.language,
-  online: state.app.online,
-}));
-const Home: React.FC<ConnectedProps<typeof connector>> = ({ data, online }) => {
+const connector = connect(
+  (
+    state: RootState,
+    ownProps: {
+      navigation: StackNavigationProp<
+        RootStackParamList,
+        AuthenticatedScreens.Home
+      >;
+    },
+  ) => ({
+    data:
+      (state.course.available[state.app.language] || [])
+        .sort(
+          (a, b) =>
+            new Date(b.publishDate!).getTime() -
+            new Date(a.publishDate!).getTime(),
+        )
+        .slice(0, 15) || [],
+    language: state.app.language,
+    online: state.app.online,
+    navigation: ownProps.navigation,
+  }),
+);
+const Home: React.FC<ConnectedProps<typeof connector>> = ({
+  data,
+  online,
+  navigation,
+}) => {
   const isFocused = useIsFocused();
-  const navigation = useNavigation<NavigationProp<any>>();
 
   const onRefresh = async (force?: boolean) => {
     try {
-      const r = await getAvailableCourses(force);
+      await getAvailableCourses(force);
     } catch (e) {
       console.log('e', e);
     }
@@ -73,6 +86,7 @@ const Home: React.FC<ConnectedProps<typeof connector>> = ({ data, online }) => {
               disabled={!online}
             />
           ),
+          // eslint-disable-next-line react-hooks/exhaustive-deps
           [],
         )}
       />

@@ -70,7 +70,7 @@ export async function getCurrentAlert(
 export async function getNotifications(): Promise<Notification[]> {
   const base_url = `${config.api.push}/Notifications?resultsPerPage=${PAGE_LIMIT}`;
   const result = await get<NotificationsResults>(base_url);
-  if (result.hasOwnProperty('page')) {
+  if (Object.prototype.hasOwnProperty.call(result, 'page')) {
     const pageCount = result.pagesCount;
 
     if (pageCount > 1) {

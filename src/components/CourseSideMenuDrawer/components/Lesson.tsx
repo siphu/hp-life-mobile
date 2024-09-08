@@ -45,6 +45,7 @@ export const Lesson = ({
   }, [contentHeight, expanded, animatedHeight]);
 
   const onContentLayout = React.useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (event: { nativeEvent: { layout: { height: any } } }) => {
       const { height } = event.nativeEvent.layout;
       if (height > contentHeight) {

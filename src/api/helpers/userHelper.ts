@@ -111,11 +111,11 @@ export const refreshToken = (token?: AuthToken) => {
 export const getUserProfile = () => {
   return Promise.all([
     remoteGetUserProfile(),
-    getEmailMarketingSetting().catch(e => null),
+    getEmailMarketingSetting().catch(() => null),
     messaging()
       .getToken()
       .then(checkFCMRegistration)
-      .catch(e => false),
+      .catch(() => false),
   ])
     .then(([profile, marketing, pushRegistered]) => {
       stores.dispatch(setPushRegistered(pushRegistered));
@@ -152,14 +152,16 @@ export const unRegisterDeviceForMessaging = async () => {
     await unregisterFCM(await messaging().getToken());
     await messaging().unregisterDeviceForRemoteMessages();
     stores.dispatch(setPushRegistered(false));
-  } catch {}
+  } catch (e) {
+    /* empty */
+  }
   await notifee.setBadgeCount(0);
 };
 
 export const registerDeviceForMessaging = async () => {
   await firebase.messaging().registerDeviceForRemoteMessages();
   const fcmToken = await messaging().getToken();
-  await registerFCM(fcmToken).catch(e => null);
+  await registerFCM(fcmToken).catch(() => null);
   stores.dispatch(setPushRegistered(true));
 };
 
@@ -167,12 +169,16 @@ export const getPushNotifications = () => {
   return Promise.all(
     [remoteGetNotifications(), remoteGetMyBadges()].map(p => p.catch(e => e)),
   ).then(([notifications, badges]) => {
-    const notificationChecked: Notification[] = notifications.hasOwnProperty(
+    const notificationChecked: Notification[] =
+      Object.prototype.hasOwnProperty.call(notifications, 'error_message')
+        ? []
+        : notifications;
+    const badgeChecked = Object.prototype.hasOwnProperty.call(
+      badges,
       'error_message',
     )
       ? []
-      : notifications;
-    const badgeChecked = badges.hasOwnProperty('error_message') ? [] : badges;
+      : badges;
     stores.dispatch(setNotifications(notificationChecked));
     stores.dispatch(setBadges(badgeChecked));
   });
@@ -211,7 +217,6 @@ export const shareBadge = async (badge: MyBadge) => {
 };
 
 export const shareCertificate = async (course: TraineeCourse) => {
-  const language = stores.getState().app.language;
   Share.open({
     url: `${config.api.webUrl}/certificate/${course.certificateId!}`,
   })

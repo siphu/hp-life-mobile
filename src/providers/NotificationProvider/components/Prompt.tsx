@@ -1,11 +1,9 @@
 import { View } from 'react-native';
-import { useDispatch } from 'react-redux';
 import Alert from '~/components/Alert';
 import Button from '~/components/Button';
 import Text from '~/components/Text';
 import { config } from '~/config/config';
 import { t } from '~/providers/TranslationProvider';
-import { setPushNotificationPreferences } from '~/stores/user/actions';
 
 export const Prompt = ({
   visible,

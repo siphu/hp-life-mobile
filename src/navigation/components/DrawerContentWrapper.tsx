@@ -1,7 +1,4 @@
-import {
-  DrawerContentComponentProps,
-  DrawerContentScrollView,
-} from '@react-navigation/drawer';
+import { DrawerContentComponentProps } from '@react-navigation/drawer';
 import { View } from 'react-native';
 import SideMenuDrawer from '~/components/SideMenuDrawer';
 

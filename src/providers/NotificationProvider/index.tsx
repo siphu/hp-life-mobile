@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode } from 'react';
+import React, { createContext } from 'react';
 import { connect } from 'react-redux';
 import { RootState, stores } from '~/stores';
 import messaging from '@react-native-firebase/messaging';
@@ -53,6 +53,7 @@ class NotificationHandler extends React.Component<
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleIncomingNotification = async (remoteMessage: any) => {
     await notifee.displayNotification({
       title: remoteMessage.notification?.title || 'HP LIFE',

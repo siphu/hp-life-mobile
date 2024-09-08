@@ -6,23 +6,25 @@ import React from 'react';
 import NotificationProvider from '~/providers/NotificationProvider';
 import { useNavigation } from '@react-navigation/native';
 import { AuthenticatedScreens } from './screens';
-import { TraineeCourse } from '~/api/endpoints';
 import Loader from '~/components/Loader';
+
 export type RootStackParamList = {
-  [AuthenticatedScreens.CourseInformation]: {
-    courseId: number;
-    taskId?: number;
-  };
   [AuthenticatedScreens.InAppBrowser]: {
     locale: string;
     title?: string;
     url?: string;
   };
+  [AuthenticatedScreens.CourseInformation]: {
+    courseId: number;
+    taskId?: number;
+  };
   [AuthenticatedScreens.CourseExecution]: { courseId: number; taskId?: number };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
     interface RootParamList extends RootStackParamList {}
   }

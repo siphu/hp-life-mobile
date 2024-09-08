@@ -55,6 +55,7 @@ export type ScrollPickerProps<ItemT extends string | number> = {
   // TODO: add proper type to `scrollViewComponent` prop
   // tried using ComponentType<ScrollViewProps & { ref: React.RefObject<ScrollView> }>
   // but ScrollView component from react-native-gesture=handler is not compatible with this.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   scrollViewComponent?: any;
 };
 
@@ -241,11 +242,11 @@ const ScrollPicker: {
         bounces={false}
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled
-        onMomentumScrollBegin={(_e: any) => onMomentumScrollBegin()}
+        onMomentumScrollBegin={() => onMomentumScrollBegin()}
         onMomentumScrollEnd={(e: NativeSyntheticEvent<NativeScrollEvent>) =>
           onMomentumScrollEnd(e)
         }
-        onScrollBeginDrag={(_e: any) => onScrollBeginDrag()}
+        onScrollBeginDrag={() => onScrollBeginDrag()}
         onScrollEndDrag={(e: NativeSyntheticEvent<NativeScrollEvent>) =>
           onScrollEndDrag(e)
         }>

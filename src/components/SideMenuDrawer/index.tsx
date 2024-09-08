@@ -1,12 +1,6 @@
-import {
-  DrawerContentComponentProps,
-  DrawerContentScrollView,
-} from '@react-navigation/drawer';
-import { ScrollView, StatusBar, TouchableOpacity, View } from 'react-native';
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { DrawerContentComponentProps } from '@react-navigation/drawer';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import Text from '~/components//Text';
 import { config } from '~/config/config';
@@ -21,8 +15,9 @@ import { MaterialIcons } from '~/components/MaterialIcons';
 import React from 'react';
 import { t } from '~/providers/TranslationProvider';
 import { Logout } from './components/Logout';
+import { TranslationsPaths } from '~/translations';
 
-const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
+const SideMenuDrawer = ({ navigation }: DrawerContentComponentProps) => {
   const userState = useSelector((root: RootState) => root.user);
   const appState = useSelector((root: RootState) => root.app);
 
@@ -63,7 +58,7 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
     },
   ].filter(m => m !== undefined) as MenuItemProps[];
 
-  const browseInApp = (item: any) => {
+  const browseInApp = (item: Record<string, string>) => {
     navigation.navigate(AuthenticatedScreens.InAppBrowser, {
       title: item.title,
       url: item.url,
@@ -105,14 +100,14 @@ const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
         {menu.map((m, i) => (
           <MenuItem {...m} key={'menu_' + i.toString()} />
         ))}
-        {config.externalLinks.map((m: any, i) => (
+        {config.externalLinks.map((m, i) => (
           <MenuItem
-            label={t(m.title)}
+            label={t(m.title as TranslationsPaths)}
             icon={m.icon}
             key={'external_' + i.toString()}
             click={() => {
               browseInApp({
-                title: t(m.title),
+                title: t(m.title as TranslationsPaths),
                 url: m.url,
               });
             }}
