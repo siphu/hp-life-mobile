@@ -12,7 +12,7 @@ export enum CourseAction {
 
 interface ReducerAction {
   type: CourseAction;
-  payload: any;
+  payload: any; //@ts-ignore
 }
 
 export const reducers = (

@@ -7,7 +7,7 @@ export function getLanguageNameFromCode(code?: string): string | undefined {
 }
 
 export function getLanguageCodeFromName(name: string): string {
-  let code = Object.keys(Language).find((l: string) => Language[l] === name);
+  const code = Object.keys(Language).find((l: string) => Language[l] === name);
   if (code) return code;
   throw new Error(`'${name}' is not a valid language`);
 }

@@ -1,5 +1,5 @@
-import {config} from '~/config/config';
-import {getAvailableLanguages} from '~/translations';
+import { config } from '~/config/config';
+import { getAvailableLanguages } from '~/translations';
 
 /**
  * This disables the link in a webview that links to the base url of the webUrl

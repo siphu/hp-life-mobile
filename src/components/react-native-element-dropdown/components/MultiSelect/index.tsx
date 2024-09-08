@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 // @ts-nocheck
 
 import _ from 'lodash';

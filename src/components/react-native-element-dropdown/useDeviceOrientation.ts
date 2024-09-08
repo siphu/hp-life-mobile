@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-shadow */
+// @ts-nocheck
 import { useEffect, useState } from 'react';
 import { Dimensions, ScaledSize } from 'react-native';
 

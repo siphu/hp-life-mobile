@@ -1,8 +1,8 @@
 export const development = {
   api: {
-    identity: `https://api-dev-hplife.dyd.solutions/identity`,
-    learning: `https://api-dev-hplife.dyd.solutions/learning`,
-    marketing: `https://api-dev-hplife.dyd.solutions/emailmarketing`,
+    identity: 'https://api-dev-hplife.dyd.solutions/identity',
+    learning: 'https://api-dev-hplife.dyd.solutions/learning',
+    marketing: 'https://api-dev-hplife.dyd.solutions/emailmarketing',
     push: 'https://api-dev-hplife.dyd.solutions/notifications',
     rewards: 'https://api-dev-hplife.dyd.solutions/rewards',
     analytics: 'https://api-dev-hplife.dyd.solutions/analytics',
@@ -22,9 +22,9 @@ export const development = {
 
 export const developmentManager = {
   api: {
-    identity: `https://api-manager-hplife.dyd.solutions/identity`,
-    learning: `https://api-manager-hplife.dyd.solutions/learning`,
-    marketing: `https://api-manager-hplife.dyd.solutions/emailmarketing`,
+    identity: 'https://api-manager-hplife.dyd.solutions/identity',
+    learning: 'https://api-manager-hplife.dyd.solutions/learning',
+    marketing: 'https://api-manager-hplife.dyd.solutions/emailmarketing',
     push: 'https://api-manager-hplife.dyd.solutions/notifications',
     rewards: 'https://api-manager-hplife.dyd.solutions/rewards',
     analytics: 'https://api-manager-hplife.dyd.solutions/analytics',
@@ -44,9 +44,9 @@ export const developmentManager = {
 
 export const test = {
   api: {
-    identity: `https://api-dev-hplife.dyd.solutions/identity`,
-    learning: `https://api-dev-hplife.dyd.solutions/learning`,
-    marketing: `https://api-dev-hplife.dyd.solutions/emailmarketing`,
+    identity: 'https://api-dev-hplife.dyd.solutions/identity',
+    learning: 'https://api-dev-hplife.dyd.solutions/learning',
+    marketing: 'https://api-dev-hplife.dyd.solutions/emailmarketing',
     push: 'https://api-dev-hplife.dyd.solutions/notifications',
     rewards: 'https://api-dev-hplife.dyd.solutions/rewards',
     analytics: 'https://api-dev-hplife.dyd.solutions/analytics',

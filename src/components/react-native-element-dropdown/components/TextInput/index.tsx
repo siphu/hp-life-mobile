@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 // @ts-nocheck
 
 import React, { useEffect, useState } from 'react';
