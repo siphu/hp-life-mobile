@@ -3,13 +3,13 @@ import { Linking, ScrollView, View } from 'react-native';
 import { GlobalStyles } from '~/config/styles';
 import { styles } from './styles';
 import Input from './components/Input';
-import { connect, ConnectedProps, useDispatch } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '~/stores';
 import { getLanguageNameFromCode } from '~/translations/languages';
 import { Countries, Gender, Timezones } from '~/utils';
 import { Dropdown } from './components/Dropdown';
 import { t } from '~/providers/TranslationProvider';
-import i18n, { getAvailableLanguages, TranslationsPaths } from '~/translations';
+import { getAvailableLanguages, TranslationsPaths } from '~/translations';
 import CheckBoxButton from '~/components/CheckBoxButton';
 import Button from '~/components/Button';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -53,7 +53,6 @@ const connector = connect(
 );
 
 const Profile: React.FC<ConnectedProps<typeof connector>> = ({
-  language,
   profile,
   pushedRegistered,
   preferencePushNotification,
@@ -82,7 +81,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         value: locale,
         label: getLanguageNameFromCode(locale)!,
       })),
-    [i18n.store.data],
+    [],
   );
 
   const genderOptions: SelectOption[] = React.useMemo(
@@ -91,7 +90,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         value: g[1].key,
         label: t(g[1].display as TranslationsPaths),
       })),
-    [Gender, language],
+    [],
   );
 
   const tzOptions: SelectOption[] = React.useMemo(
@@ -100,7 +99,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         value: tz,
         label: tz,
       })),
-    [Timezones],
+    [],
   );
 
   const changed = React.useMemo(
@@ -138,7 +137,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         style={{}}
         enabled={true}
         onChange={(t: string) => {
-          let profile = { ...userProfile };
+          const profile = { ...userProfile };
           profile.fullName = t;
           setUserProfile(profile);
         }}
@@ -151,7 +150,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         labelField="label"
         valueField="value"
         onChange={(t: SelectOption) => {
-          let profile = { ...userProfile };
+          const profile = { ...userProfile };
           profile.gender = t.value;
           setUserProfile(profile);
         }}
@@ -164,7 +163,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         labelField="name"
         valueField="code"
         onChange={t => {
-          let profile = { ...userProfile };
+          const profile = { ...userProfile };
           profile.country = t.code;
           setUserProfile(profile);
         }}
@@ -178,7 +177,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         valueField="value"
         autoScroll={false}
         onChange={t => {
-          let profile = { ...userProfile };
+          const profile = { ...userProfile };
           profile.language = t.value;
           setUserProfile(profile);
         }}
@@ -191,7 +190,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         labelField="label"
         valueField="value"
         onChange={t => {
-          let profile = { ...userProfile };
+          const profile = { ...userProfile };
           profile.timeZone = t.value;
           setUserProfile(profile);
         }}
@@ -202,7 +201,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         selected={userProfile.isNewsletterEnabled}
         style={{}}
         onSelect={() => {
-          let profile = { ...userProfile };
+          const profile = { ...userProfile };
           profile.isNewsletterEnabled = !profile.isNewsletterEnabled;
           setUserProfile(profile);
         }}

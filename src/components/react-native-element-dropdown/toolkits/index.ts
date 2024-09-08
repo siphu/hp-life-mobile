@@ -4,7 +4,7 @@ import type { IUseDetectDevice } from './model';
 const { width, height } = Dimensions.get('window');
 
 const isTablet = () => {
-  let pixelDensity = PixelRatio.get();
+  const pixelDensity = PixelRatio.get();
   const adjustedWidth = width * pixelDensity;
   const adjustedHeight = height * pixelDensity;
   if (pixelDensity < 2 && (adjustedWidth >= 1000 || adjustedHeight >= 1000)) {

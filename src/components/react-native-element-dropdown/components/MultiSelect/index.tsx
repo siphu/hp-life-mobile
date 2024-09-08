@@ -571,7 +571,7 @@ const MultiSelectComponent: <T>(
               ? onAutoPosition()
               : dropdownPosition === 'top';
 
-          let keyboardStyle: ViewStyle = {};
+          const keyboardStyle: ViewStyle = {};
 
           let extendHeight = !isTopPosition ? top : bottom;
           if (

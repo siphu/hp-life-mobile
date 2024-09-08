@@ -29,7 +29,10 @@ const HeaderComponent = ({
   onTabSelect,
 }: FilterSelectionProps) => {
   const data = React.useMemo(() => {
-    let map = categories.map(c => ({ label: c.name, value: c.id.toString() }));
+    const map = categories.map(c => ({
+      label: c.name,
+      value: c.id.toString(),
+    }));
     map.splice(0, 0, {
       label: t('explore.viewAll'),
       value: '',

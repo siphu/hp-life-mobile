@@ -60,7 +60,7 @@ export const stores = configureStore({
     }),
 });
 
-//@ts-ignore
+//@ts-expect-error
 export const persistor = persistStore(stores);
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof stores.dispatch;

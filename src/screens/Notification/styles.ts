@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { config } from '~/config/config';
 
 export const styles = StyleSheet.create({

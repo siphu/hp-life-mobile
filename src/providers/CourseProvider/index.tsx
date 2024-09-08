@@ -48,7 +48,7 @@ export class CourseProvider extends React.Component<
   async updateTask(task: Task, disableFetching?: boolean) {
     if (!disableFetching) this.setState({ fetching: true });
     const detail = await getTraineeTaskById(task).catch(() => undefined);
-    let payload: any = {
+    const payload: any = {
       task: task,
       taskDetail: detail,
     };
@@ -65,7 +65,7 @@ export class CourseProvider extends React.Component<
 
     const taskId = requestedTaskId || this.state.task?.id;
 
-    let enrolled = !!this.props.enrolled.find(e => e.id === courseId);
+    const enrolled = !!this.props.enrolled.find(e => e.id === courseId);
     let isEnrolled = enrolled;
 
     this.setState({ fetching: true });

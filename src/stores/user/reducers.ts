@@ -12,6 +12,7 @@ export enum UserAction {
 
 interface ReducerAction {
   type: UserAction;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload: any;
 }
 

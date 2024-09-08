@@ -7,7 +7,7 @@
     "android": "react-native run-android  --port=8082",
     "ios": "react-native run-ios --simulator=\"iPhone 15\" --port=8082",
     "ios:release": "react-native run-ios --mode Release --simulator=\"iPhone 15\"  --port=8082",
-    "lint": "eslint .",
+    "lint": "eslint --ext .js,.ts,.tsx src/",
     "prettier": "prettier --config .prettierrc.js --write 'src/**/*.{js,ts,tsx}'",
     "start": "react-native start --port=8082",
     "test": "jest --verbose",

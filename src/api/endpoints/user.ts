@@ -68,13 +68,13 @@ export async function getCurrentAlert(
 }
 
 export async function getNotifications(): Promise<Notification[]> {
-  let base_url = `${config.api.push}/Notifications?resultsPerPage=${PAGE_LIMIT}`;
-  let result = await get<NotificationsResults>(base_url);
+  const base_url = `${config.api.push}/Notifications?resultsPerPage=${PAGE_LIMIT}`;
+  const result = await get<NotificationsResults>(base_url);
   if (result.hasOwnProperty('page')) {
     const pageCount = result.pagesCount;
 
     if (pageCount > 1) {
-      let pageFetch: Array<Promise<NotificationsResults>> = [];
+      const pageFetch: Array<Promise<NotificationsResults>> = [];
       for (let i = 1; i < pageCount; ++i) {
         pageFetch.push(get<NotificationsResults>(`${base_url}&page=${i}`));
       }

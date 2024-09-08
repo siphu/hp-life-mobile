@@ -22,5 +22,13 @@
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "eslint.format.enable": true, // Enable ESLint as the formatter
+  "eslint.lintTask.enable": true, // Enable the lint task
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ]
 }

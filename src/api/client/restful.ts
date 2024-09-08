@@ -12,11 +12,11 @@ export interface RequestError extends Error {
 export const processResponse = async function <R>(
   response: Promise<AxiosResponse<any>>,
 ): Promise<R> {
-  let timerStart = moment();
+  const timerStart = moment();
 
   return response
     .then(result => {
-      let timerEnd = moment();
+      const timerEnd = moment();
 
       console.log(
         `[${timerStart.toLocaleString()}]`,
@@ -43,7 +43,7 @@ export const processResponse = async function <R>(
     })
     .catch(result => {
       console.error('r', result);
-      let timerEnd = moment();
+      const timerEnd = moment();
       if (result.hasOwnProperty('config'))
         console.error(
           `[${timerStart.toLocaleString()}]`,

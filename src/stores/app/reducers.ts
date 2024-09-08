@@ -14,6 +14,7 @@ export enum AppAction {
 
 interface ReducerAppAction {
   type: AppAction;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload: any;
 }
 
@@ -41,7 +42,7 @@ export const reducers = (
         notifications: action.payload,
       };
     case AppAction.MARK_NOTIFICATION_READ:
-      let newNotifications = state.notifications.map(notification => {
+      const newNotifications = state.notifications.map(notification => {
         if (notification.id === action.payload)
           return { ...notification, isRead: true };
         return notification;
