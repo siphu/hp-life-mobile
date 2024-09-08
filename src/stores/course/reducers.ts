@@ -23,19 +23,23 @@ export const reducers = (
   switch (action.type) {
     case CourseAction.RESET_COURSE_STORE:
       return defaultState;
+
     case CourseAction.SET_CATEGORY:
-      const newCategories = { ...state.categories };
-      newCategories[action.payload.language] = action.payload.categories;
       return {
         ...state,
-        categories: newCategories,
+        categories: {
+          ...state.categories,
+          [action.payload.language]: action.payload.categories,
+        },
       };
+
     case CourseAction.SET_ENROLLED:
       return {
         ...state,
         enrolled: action.payload,
       };
-    case CourseAction.UPDATE_ENROLLED:
+
+    case CourseAction.UPDATE_ENROLLED: {
       const updatedEnrolledCourse = state.enrolled.map(
         item =>
           action.payload.find((updated: Course) => updated.id === item.id) ||
@@ -47,7 +51,7 @@ export const reducers = (
             (existingItem: Course) => existingItem.id === newItem.id,
           ),
       );
-      // Update the available courses progress and enrollment status
+
       const updatedAvailable = Object.fromEntries(
         Object.entries(state.available).map(([key, courses]) => [
           key,
@@ -71,42 +75,46 @@ export const reducers = (
         enrolled: [...updatedEnrolledCourse, ...newCourses],
         available: updatedAvailable,
       };
+    }
 
     case CourseAction.SET_AVAILABLE_COURSES:
-      const availableCourses = { ...state.available };
-      availableCourses[action.payload.language] = action.payload.courses;
       return {
         ...state,
-        available: availableCourses,
+        available: {
+          ...state.available,
+          [action.payload.language]: action.payload.courses,
+        },
       };
+
     case CourseAction.UPDATE_AVAILABLE_COURSES: {
-      const availableCourses = { ...state.available };
-      const language = action.payload.language;
-      const languageCourses = availableCourses[language] || [];
-      const updatedAvailableCourses = languageCourses.map(item => {
+      const availableCourses = state.available[action.payload.language] || [];
+      const updatedAvailableCourses = availableCourses.map(item => {
         return (
           action.payload.courses.find(
             (updated: Course) => updated.id === item.id,
           ) || item
         );
       });
-      const newAvailableCourses = (action.payload.courses as Course[]).filter(
-        newItem => {
-          return !languageCourses.some(
+
+      const newAvailableCourses = action.payload.courses.filter(
+        (newItem: Course) =>
+          !availableCourses.some(
             (existingItem: Course) => existingItem.id === newItem.id,
-          );
-        },
+          ),
       );
 
-      availableCourses[language] = [
-        ...updatedAvailableCourses,
-        ...newAvailableCourses,
-      ];
       return {
         ...state,
-        available: availableCourses,
+        available: {
+          ...state.available,
+          [action.payload.language]: [
+            ...updatedAvailableCourses,
+            ...newAvailableCourses,
+          ],
+        },
       };
     }
+
     default:
       return state;
   }

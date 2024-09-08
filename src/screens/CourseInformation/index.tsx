@@ -12,7 +12,6 @@ import { RootStackParamList } from '~/navigation';
 import { AuthenticatedScreens } from '~/navigation/screens';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useCourseProviderContext } from '~/providers/CourseProvider';
-import Loader from '~/components/Loader';
 import { stores } from '~/stores';
 import { setLoader } from '~/stores/app/actions';
 
@@ -69,7 +68,6 @@ const CourseInformation = ({ navigation }: Props) => {
                 startInLoadingState
                 key={course.body}
                 source={{ html: HTMLWrapper(course.body || '', additionalCss) }}
-                renderLoading={() => <Loader visible={true} />}
                 onLoadEnd={() => {
                   stores.dispatch(setLoader(false));
                 }}

@@ -2,13 +2,13 @@ import { TaskDetail } from '~/api/endpoints';
 import WebView from '~/components/Webview';
 import { config } from '~/config/config';
 import { contentParser } from '../helper';
-import Loader from '~/components/Loader';
 import React from 'react';
 import { disableBaseUrlLink } from '~/utils/WebViewJavascript';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GlobalStyles } from '~/config/styles';
 import { connect } from 'react-redux';
-import { RootState } from '~/stores';
+import { RootState, stores } from '~/stores';
+import { setLoader } from '~/stores/app/actions';
 
 const mapStateToProps = (
   state: RootState,
@@ -27,6 +27,10 @@ export const ContentTask = connect(mapStateToProps)(({
   orientation: 'Portrait' | 'Landscape';
 }) => {
   const webViewRef = React.useRef<WebView>(null);
+
+  React.useEffect(() => {
+    stores.dispatch(setLoader(true));
+  }, [taskDetail]);
 
   return (
     <SafeAreaView
@@ -48,7 +52,6 @@ export const ContentTask = connect(mapStateToProps)(({
         bounces={false}
         key={taskDetail.body}
         source={contentParser(taskDetail.body!)}
-        renderLoading={() => <Loader visible={true} />}
         onMessage={e => {
           try {
             const data = JSON.parse(e.nativeEvent.data);
@@ -61,6 +64,7 @@ export const ContentTask = connect(mapStateToProps)(({
           if (webViewRef.current) {
             webViewRef.current.injectJavaScript(disableBaseUrlLink);
           }
+          stores.dispatch(setLoader(false));
         }}
       />
     </SafeAreaView>
