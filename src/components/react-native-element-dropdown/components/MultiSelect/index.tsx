@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-shadow */
+// @ts-nocheck
+
 import _ from 'lodash';
 import React, {
   JSXElementConstructor,
@@ -26,15 +28,17 @@ import {
   ViewStyle,
   StatusBar,
 } from 'react-native';
-import {useDetectDevice} from '../../toolkits';
-import {useDeviceOrientation} from '../../useDeviceOrientation';
+import { useDetectDevice } from '../../toolkits';
+import { useDeviceOrientation } from '../../useDeviceOrientation';
 import CInput from '../TextInput';
-import {MultiSelectProps} from './model';
-import {styles} from './styles';
+import { MultiSelectProps } from './model';
+import { styles } from './styles';
 
-const {isTablet} = useDetectDevice;
+const { isTablet } = useDetectDevice;
 const ic_down = require('../../assets/down.png');
 const statusBarHeight: number = StatusBar.currentHeight || 0;
+
+// @ts-ignore
 
 const MultiSelectComponent: <T>(
   props: MultiSelectProps<T>,
@@ -104,7 +108,7 @@ const MultiSelectComponent: <T>(
     const [keyboardHeight, setKeyboardHeight] = useState<number>(0);
     const [searchText, setSearchText] = useState('');
 
-    const {width: W, height: H} = Dimensions.get('window');
+    const { width: W, height: H } = Dimensions.get('window');
     const styleContainerVertical: ViewStyle = useMemo(() => {
       return {
         backgroundColor: 'rgba(0,0,0,0.1)',
@@ -119,7 +123,7 @@ const MultiSelectComponent: <T>(
     }, [W, orientation]);
 
     useImperativeHandle(currentRef, () => {
-      return {open: eventOpen, close: eventClose};
+      return { open: eventOpen, close: eventClose };
     });
 
     useEffect(() => {
@@ -380,7 +384,7 @@ const MultiSelectComponent: <T>(
                 source={ic_down}
                 style={StyleSheet.flatten([
                   styles.icon,
-                  {tintColor: iconColor},
+                  { tintColor: iconColor },
                   iconStyle,
                 ])}
               />
@@ -401,9 +405,9 @@ const MultiSelectComponent: <T>(
     );
 
     const _renderItem = useCallback(
-      ({item, index}: {item: any; index: number}) => {
+      ({ item, index }: { item: any; index: number }) => {
         const selected = checkSelected(item);
-        _.assign(item, {_index: index});
+        _.assign(item, { _index: index });
         return (
           <TouchableHighlight
             key={index.toString()}
@@ -483,7 +487,7 @@ const MultiSelectComponent: <T>(
                 onSearch(e);
               }}
               placeholderTextColor="gray"
-              iconStyle={[{tintColor: iconColor}, iconStyle]}
+              iconStyle={[{ tintColor: iconColor }, iconStyle]}
             />
           );
         }
@@ -547,7 +551,7 @@ const MultiSelectComponent: <T>(
 
     const _renderModal = useCallback(() => {
       if (visible && position) {
-        const {isFull, width, height, top, bottom, left} = position;
+        const { isFull, width, height, top, bottom, left } = position;
 
         const onAutoPosition = () => {
           if (keyboardHeight > 0) {
@@ -592,18 +596,18 @@ const MultiSelectComponent: <T>(
                   style={StyleSheet.flatten([
                     styles.flex1,
                     isFull && styleContainerVertical,
-                    backgroundColor && {backgroundColor: backgroundColor},
+                    backgroundColor && { backgroundColor: backgroundColor },
                     keyboardStyle,
                   ])}>
                   <View
                     style={StyleSheet.flatten([
                       styles.flex1,
                       !isTopPosition
-                        ? {paddingTop: extendHeight}
+                        ? { paddingTop: extendHeight }
                         : {
-                            justifyContent: 'flex-end',
-                            paddingBottom: extendHeight,
-                          },
+                          justifyContent: 'flex-end',
+                          paddingBottom: extendHeight,
+                        },
                       isFull && styles.fullScreen,
                     ])}>
                     <View
@@ -760,7 +764,7 @@ const MultiSelectComponent: <T>(
                 source={ic_down}
                 style={StyleSheet.flatten([
                   styles.icon,
-                  {tintColor: iconColor},
+                  { tintColor: iconColor },
                   iconStyle,
                 ])}
               />

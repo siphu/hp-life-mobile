@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import React, {useEffect, useState} from 'react';
+// @ts-nocheck
+
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   TextInput,
@@ -8,10 +10,11 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
 } from 'react-native';
-import type {CTextInput} from './model';
-import {styles} from './styles';
+import type { CTextInput } from './model';
+import { styles } from './styles';
 
 const ic_close = require('../../assets/close.png');
+
 
 const TextInputComponent: CTextInput = ({
   style = {},
@@ -24,7 +27,7 @@ const TextInputComponent: CTextInput = ({
   placeholder = '',
   inputStyle,
   iconStyle,
-  onChangeText = (_value: string) => {},
+  onChangeText = (_value: string) => { },
   renderLeftIcon,
   renderRightIcon,
   ...props

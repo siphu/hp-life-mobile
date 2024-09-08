@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, {
   useImperativeHandle,
   useMemo,
@@ -5,10 +7,10 @@ import React, {
   ReactElement,
   JSXElementConstructor,
 } from 'react';
-import {Image, View, Text} from 'react-native';
+import { Image, View, Text } from 'react-native';
 import Dropdown from '../Dropdown';
-import {SelectCountryProps} from './model';
-import {styles} from './styles';
+import { SelectCountryProps } from './model';
+import { styles } from './styles';
 
 const SelectCountryComponent: <T>(
   props: SelectCountryProps<T>,
@@ -26,7 +28,7 @@ const SelectCountryComponent: <T>(
     const ref: any = useRef(null);
 
     useImperativeHandle(currentRef, () => {
-      return {open: eventOpen, close: eventClose};
+      return { open: eventOpen, close: eventClose };
     });
 
     const eventOpen = () => {
