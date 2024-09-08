@@ -1,11 +1,11 @@
-import {Platform, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
-import {Dropdown} from '~/components/react-native-element-dropdown';
+import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { Dropdown } from '~/components/react-native-element-dropdown';
 import React from 'react';
-import {config} from '~/config/config';
-import {t} from '~/providers/TranslationProvider';
-import {TranslationsPaths} from '~/translations';
+import { config } from '~/config/config';
+import { t } from '~/providers/TranslationProvider';
+import { TranslationsPaths } from '~/translations';
 import Button from '~/components/Button';
-import {HEADER_HEIGHT, HEADER_WITH_CERTIFICATE} from '../styles';
+import { HEADER_HEIGHT, HEADER_WITH_CERTIFICATE } from '../styles';
 export interface FilterSelectionProps {
   categories: string[];
   selected?: string;
@@ -22,7 +22,7 @@ const HeaderComponent = ({
   onTranscript,
 }: FilterSelectionProps) => {
   const data = React.useMemo(
-    () => categories.map(c => ({label: t(c as TranslationsPaths), value: c})),
+    () => categories.map(c => ({ label: t(c as TranslationsPaths), value: c })),
     [categories],
   );
 
@@ -74,8 +74,8 @@ const HeaderComponent = ({
       {showDownloadTranscript && (
         <Button
           title={t('myCourse.downloadTranscript')}
-          style={{height: 42, backgroundColor: config.color.misc.primary}}
-          textStyle={{color: config.color.neutral[900]}}
+          style={{ height: 42, backgroundColor: config.color.misc.primary }}
+          textStyle={{ color: config.color.neutral[900] }}
           onPress={onTranscript}
         />
       )}

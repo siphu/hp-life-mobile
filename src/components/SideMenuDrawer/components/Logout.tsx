@@ -1,13 +1,13 @@
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
-import {signOut} from '~/api/helpers';
+import { TouchableOpacity, View } from 'react-native';
+import { signOut } from '~/api/helpers';
 import Alert from '~/components/Alert';
 import Button from '~/components/Button';
-import {MaterialIcons} from '~/components/MaterialIcons';
+import { MaterialIcons } from '~/components/MaterialIcons';
 import Text from '~/components/Text';
-import {t} from '~/providers/TranslationProvider';
-import {styles} from '../styles';
-import {config} from '~/config/config';
+import { t } from '~/providers/TranslationProvider';
+import { styles } from '../styles';
+import { config } from '~/config/config';
 
 export const Logout = () => {
   const [showLogout, setShowLogout] = React.useState<boolean>(false);
@@ -38,7 +38,7 @@ export const Logout = () => {
               {t('sideMenu.logout.prompt')}
             </Text>
           </View>
-          <View style={{flexDirection: 'column', rowGap: 8}}>
+          <View style={{ flexDirection: 'column', rowGap: 8 }}>
             <Button
               variant="Primary"
               title={t('sideMenu.logout.yes')}

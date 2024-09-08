@@ -1,13 +1,13 @@
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {AuthenticatedScreens} from '../screens';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { AuthenticatedScreens } from '../screens';
 import React from 'react';
-import {RootStackParamList} from '..';
+import { RootStackParamList } from '..';
 import CourseSideMenuDrawer from '~/components/CourseSideMenuDrawer';
-import {CourseScreenStack} from './CourseScreenStack';
+import { CourseScreenStack } from './CourseScreenStack';
 import CourseProvider, {
   useCourseProviderContext,
 } from '~/providers/CourseProvider';
-import {StackScreenProps} from '@react-navigation/stack';
+import { StackScreenProps } from '@react-navigation/stack';
 
 const CourseDrawerNavigation = createDrawerNavigator<RootStackParamList>();
 
@@ -16,7 +16,7 @@ type CourseDrawerProps = StackScreenProps<
   AuthenticatedScreens.CourseDrawer
 >;
 
-export const CourseDrawer = ({route, navigation}: CourseDrawerProps) => {
+export const CourseDrawer = ({ route, navigation }: CourseDrawerProps) => {
   return (
     <CourseProvider route={route} navigation={navigation}>
       <CourseDrawerNavigation.Navigator
@@ -28,7 +28,7 @@ export const CourseDrawer = ({route, navigation}: CourseDrawerProps) => {
           headerTitle: '',
           drawerType: 'front',
           drawerPosition: 'right',
-          drawerStyle: {width: '100%'},
+          drawerStyle: { width: '100%' },
         }}>
         <CourseDrawerNavigation.Screen
           name={AuthenticatedScreens.CourseScreenStack}

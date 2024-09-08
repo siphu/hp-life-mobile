@@ -1,21 +1,21 @@
-import React, {createContext} from 'react';
+import React, { createContext } from 'react';
 import {
   CourseContextType,
   CourseProviderProps,
   CourseProviderState,
   RNNavigationProp,
 } from './types';
-import {RootState} from '~/stores';
+import { RootState } from '~/stores';
 import {
   NavigationProp,
   NavigationState,
   RouteProp,
 } from '@react-navigation/native';
-import {connect} from 'react-redux';
-import {RootStackParamList} from '~/navigation';
-import {AuthenticatedScreens} from '~/navigation/screens';
+import { connect } from 'react-redux';
+import { RootStackParamList } from '~/navigation';
+import { AuthenticatedScreens } from '~/navigation/screens';
 import Loader from '~/components/Loader';
-import {getAvailableCourses, getEnrolledCourses} from '~/api/helpers';
+import { getAvailableCourses, getEnrolledCourses } from '~/api/helpers';
 import {
   getParticipantCourse,
   getParticipantLessons,
@@ -46,7 +46,7 @@ export class CourseProvider extends React.Component<
   }
 
   async updateTask(task: Task, disableFetching?: boolean) {
-    if (!disableFetching) this.setState({fetching: true});
+    if (!disableFetching) this.setState({ fetching: true });
     const detail = await getTraineeTaskById(task).catch(() => undefined);
     let payload: any = {
       task: task,
@@ -68,7 +68,7 @@ export class CourseProvider extends React.Component<
     let enrolled = !!this.props.enrolled.find(e => e.id === courseId);
     let isEnrolled = enrolled;
 
-    this.setState({fetching: true});
+    this.setState({ fetching: true });
     if (force) {
       const newEnrolledCourses = await getEnrolledCourses(true);
       isEnrolled = newEnrolledCourses.some(c => c.id === courseId);
@@ -101,12 +101,12 @@ export class CourseProvider extends React.Component<
         getParticipantLessons(courseId),
       ]);
       this.setState({
-        course: {...c, lessons: l},
+        course: { ...c, lessons: l },
         task: undefined,
         enrolled: false,
       });
     }
-    this.setState({fetching: false});
+    this.setState({ fetching: false });
   }
 
   componentDidMount(): void {
@@ -147,7 +147,7 @@ export class CourseProvider extends React.Component<
         const firstTask =
           allTasks && allTasks.length > 0 ? allTasks[0] : undefined;
         if (firstTask) this.updateTask(firstTask);
-        else this.setState({task: undefined});
+        else this.setState({ task: undefined });
       } else if (
         (nextScreen === AuthenticatedScreens.CourseExecution &&
           previousTaskId !== nextTaskId &&
@@ -156,7 +156,7 @@ export class CourseProvider extends React.Component<
       ) {
         const task = allTasks?.find(t => t.id === nextTaskId);
         if (task) this.updateTask(task);
-        else this.setState({task: undefined});
+        else this.setState({ task: undefined });
       }
     }
 
@@ -164,7 +164,7 @@ export class CourseProvider extends React.Component<
   }
 
   render() {
-    const {children} = this.props;
+    const { children } = this.props;
     return (
       <CourseContext.Provider
         value={{

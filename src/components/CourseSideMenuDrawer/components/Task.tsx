@@ -1,17 +1,17 @@
-import {TouchableOpacity, View} from 'react-native';
-import {Course, Task as TaskModel} from '~/api/endpoints';
+import { TouchableOpacity, View } from 'react-native';
+import { Course, Task as TaskModel } from '~/api/endpoints';
 import {
   MaterialIcons,
   MaterialIconsOutlined,
   MaterialSymbolsOutlined,
 } from '~/components/MaterialIcons';
-import {Text} from '~/components/Text';
-import {config} from '~/config/config';
-import {GlobalStyles} from '~/config/styles';
-import {styles} from '../styles';
-import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
-import {AuthenticatedScreens} from '~/navigation/screens';
-import {DrawerActions} from '@react-navigation/native';
+import { Text } from '~/components/Text';
+import { config } from '~/config/config';
+import { GlobalStyles } from '~/config/styles';
+import { styles } from '../styles';
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
+import { AuthenticatedScreens } from '~/navigation/screens';
+import { DrawerActions } from '@react-navigation/native';
 
 const icons = {
   checked: (
@@ -68,7 +68,7 @@ export const Task = ({
       style={[
         GlobalStyles.flexRow,
         GlobalStyles.alignCenter,
-        {gap: 4, paddingVertical: 8, paddingHorizontal: 20, backgroundColor},
+        { gap: 4, paddingVertical: 8, paddingHorizontal: 20, backgroundColor },
       ]}
       onPress={() => {
         enrolled &&

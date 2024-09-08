@@ -8,9 +8,9 @@ import es from './locales/es.json';
 import zhHans from './locales/zh-Hans.json';
 import id from './locales/id.json';
 import i18n from 'i18next';
-import {initReactI18next} from 'react-i18next';
+import { initReactI18next } from 'react-i18next';
 import * as Localization from 'react-native-localize';
-import {I18nManager} from 'react-native';
+import { I18nManager } from 'react-native';
 
 type Translations = typeof en;
 
@@ -23,14 +23,14 @@ type TranslationPaths<T> = {
 export type TranslationsPaths = TranslationPaths<Translations>;
 
 const resources = {
-  en: {translation: en},
-  fr: {translation: fr},
-  ar: {translation: ar},
-  hi: {translation: hi},
-  pt: {translation: pt},
-  es: {translation: es},
-  'zh-Hans': {translation: zhHans},
-  id: {translation: id},
+  en: { translation: en },
+  fr: { translation: fr },
+  ar: { translation: ar },
+  hi: { translation: hi },
+  pt: { translation: pt },
+  es: { translation: es },
+  'zh-Hans': { translation: zhHans },
+  id: { translation: id },
 };
 
 export const getAvailableLanguages = () => {
@@ -71,7 +71,7 @@ export const rtlLanguages = [
 
 I18nManager.allowRTL(true);
 
-const languageMapping: {[key: string]: string} = {
+const languageMapping: { [key: string]: string } = {
   'zh-CN': 'zh-Hans',
 };
 

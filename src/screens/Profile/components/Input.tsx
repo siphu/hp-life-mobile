@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {StyleProp, View, ViewStyle, I18nManager} from 'react-native';
-import {Text} from '~/components/Text';
-import {config} from '~/config/config';
-import {styles} from '../styles';
+import { StyleProp, View, ViewStyle, I18nManager } from 'react-native';
+import { Text } from '~/components/Text';
+import { config } from '~/config/config';
+import { styles } from '../styles';
 import TextInput from '~/components/TextInput';
 
 interface ProfileTextInputProps {

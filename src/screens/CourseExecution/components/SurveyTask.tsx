@@ -1,19 +1,19 @@
-import {TaskDetail} from '~/api/endpoints';
+import { TaskDetail } from '~/api/endpoints';
 import WebView from '~/components/Webview';
-import {config} from '~/config/config';
+import { config } from '~/config/config';
 import Loader from '~/components/Loader';
 import React from 'react';
-import {disableBaseUrlLink} from '~/utils/WebViewJavascript';
-import {Dimensions} from 'react-native';
-import Orientation, {OrientationType} from 'react-native-orientation-locker';
-import {GlobalStyles} from '~/config/styles';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {connect} from 'react-redux';
-import {RootState} from '~/stores';
+import { disableBaseUrlLink } from '~/utils/WebViewJavascript';
+import { Dimensions } from 'react-native';
+import Orientation, { OrientationType } from 'react-native-orientation-locker';
+import { GlobalStyles } from '~/config/styles';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { connect } from 'react-redux';
+import { RootState } from '~/stores';
 
 const mapStateToProps = (
   state: RootState,
-  ownProps: {taskDetail: TaskDetail},
+  ownProps: { taskDetail: TaskDetail },
 ) => {
   return {
     ...ownProps,
@@ -35,7 +35,7 @@ export const SurveyTask = connect(mapStateToProps)(({
       style={GlobalStyles.screenContainer}>
       <WebView
         ref={webViewRef}
-        style={{flexGrow: 1, backgroundColor: config.color.neutral[50]}}
+        style={{ flexGrow: 1, backgroundColor: config.color.neutral[50] }}
         scalesPageToFit={true}
         mediaPlaybackRequiresUserAction={false}
         originWhitelist={['*']}
@@ -48,7 +48,7 @@ export const SurveyTask = connect(mapStateToProps)(({
         cacheEnabled={false}
         bounces={false}
         key={taskDetail.body}
-        source={{html: 'This is a survey course. TODO'}}
+        source={{ html: 'This is a survey course. TODO' }}
         renderLoading={() => <Loader visible={true} />}
         onMessage={e => {
           try {

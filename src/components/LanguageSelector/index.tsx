@@ -1,17 +1,23 @@
 import React from 'react';
-import {ScrollView, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {getLanguageNameFromCode} from '~/translations/languages';
+import { ScrollView, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { getLanguageNameFromCode } from '~/translations/languages';
 import i18n from '~/translations';
 import Images from '~/res/images';
 import Button from '../Button';
-import {useTranslationContext} from '~/providers/TranslationProvider';
+import { useTranslationContext } from '~/providers/TranslationProvider';
 
 const LanguageSelector = () => {
   const translation = useTranslationContext();
   const navigation = useNavigation();
 
-  const LanguageButton = ({locale, name}: {locale: string; name: string}) => {
+  const LanguageButton = ({
+    locale,
+    name,
+  }: {
+    locale: string;
+    name: string;
+  }) => {
     return (
       <Button
         textStyle={{

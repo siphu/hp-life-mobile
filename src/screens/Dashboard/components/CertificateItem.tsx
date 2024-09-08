@@ -1,16 +1,16 @@
 import React from 'react';
-import {Course} from '~/api/endpoints';
-import {CERTIFICATE_ITEM_HEIGHT, styles} from '../styles';
-import {Image, TouchableOpacity, View} from 'react-native';
+import { Course } from '~/api/endpoints';
+import { CERTIFICATE_ITEM_HEIGHT, styles } from '../styles';
+import { Image, TouchableOpacity, View } from 'react-native';
 import Text from '~/components/Text';
 import FastImage from '@d11/react-native-fast-image';
-import {t} from '~/providers/TranslationProvider';
+import { t } from '~/providers/TranslationProvider';
 import moment from 'moment';
 import * as Progress from 'react-native-progress';
-import {config} from '~/config/config';
-import {friendlyDate} from '~/utils';
+import { config } from '~/config/config';
+import { friendlyDate } from '~/utils';
 import Button from '~/components/Button';
-import {MaterialSymbolsOutlined} from '~/components/MaterialIcons';
+import { MaterialSymbolsOutlined } from '~/components/MaterialIcons';
 
 export class CertificateItem extends React.PureComponent<{
   item: Course;
@@ -19,7 +19,7 @@ export class CertificateItem extends React.PureComponent<{
   onDownload: () => void;
 }> {
   render() {
-    const {item, onClick, onShare, onDownload} = this.props;
+    const { item, onClick, onShare, onDownload } = this.props;
 
     const extraTextInProgress =
       t('courseInformation.startedDate') +
@@ -36,7 +36,7 @@ export class CertificateItem extends React.PureComponent<{
     return (
       <TouchableOpacity
         accessible={false}
-        style={[styles.itemContainer, {height: CERTIFICATE_ITEM_HEIGHT}]}
+        style={[styles.itemContainer, { height: CERTIFICATE_ITEM_HEIGHT }]}
         onPress={onClick}>
         <TouchableOpacity
           accessible={false}
@@ -50,7 +50,7 @@ export class CertificateItem extends React.PureComponent<{
             alignItems: 'center',
             paddingHorizontal: 5,
           }}>
-          <View style={{paddingVertical: 5}}>
+          <View style={{ paddingVertical: 5 }}>
             <FastImage
               accessibilityElementsHidden={true}
               importantForAccessibility="no-hide-descendants"
@@ -58,7 +58,7 @@ export class CertificateItem extends React.PureComponent<{
               accessibilityLabel={''}
               accessibilityHint={''}
               accessibilityRole={'none'}
-              source={{uri: item.imageUrl}}
+              source={{ uri: item.imageUrl }}
               style={styles.image}
               resizeMode={FastImage.resizeMode.cover}
             />
@@ -70,14 +70,14 @@ export class CertificateItem extends React.PureComponent<{
               {item.name}
             </Text>
           </TouchableOpacity>
-          <View style={{rowGap: 4, paddingBottom: 5}}>
+          <View style={{ rowGap: 4, paddingBottom: 5 }}>
             <Text style={styles.extraText}>
               {item.progress && item.progress >= 1
                 ? extraTextCompleted
                 : extraTextInProgress}
             </Text>
             <Button
-              style={{height: 32}}
+              style={{ height: 32 }}
               color={config.color.neutral[900]}
               title={t('myCourse.downloadTranscript')}
               onPress={onDownload}
@@ -90,7 +90,7 @@ export class CertificateItem extends React.PureComponent<{
               }
             />
             <Button
-              style={{height: 32}}
+              style={{ height: 32 }}
               color={config.color.neutral[900]}
               title={t('myCourse.share')}
               onPress={onShare}

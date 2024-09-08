@@ -1,5 +1,5 @@
-import {config} from '~/config/config';
-import {post} from '../client';
+import { config } from '~/config/config';
+import { post } from '../client';
 
 export async function analyticsBadgeSharing(badgeId: string): Promise<void> {
   return post<void>(`${config.api.analytics}/Events/badgeSharing`, {

@@ -10,8 +10,8 @@ import {
   getCategories as getRemoteCategories,
   getTraineeCourses,
 } from '~/api/endpoints/courses';
-import {stores} from '~/stores';
-import {StoreAppState} from '~/stores/app/state';
+import { stores } from '~/stores';
+import { StoreAppState } from '~/stores/app/state';
 import {
   setAvailableCourses,
   setCategory,
@@ -19,7 +19,7 @@ import {
   updateAvailableCourses,
   updateEnrolledCourses,
 } from '~/stores/course/actions';
-import {StoreCourseState} from '~/stores/course/state';
+import { StoreCourseState } from '~/stores/course/state';
 
 let lastCategoryFetchTime: number | null = null;
 let lastEnrolledCoursesFetchTime: number | null = null;

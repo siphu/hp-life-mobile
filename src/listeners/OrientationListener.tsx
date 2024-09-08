@@ -1,7 +1,7 @@
 import React from 'react';
-import Orientation, {OrientationType} from 'react-native-orientation-locker';
-import {stores} from '~/stores';
-import {setScreenOrientation} from '~/stores/app/actions';
+import Orientation, { OrientationType } from 'react-native-orientation-locker';
+import { stores } from '~/stores';
+import { setScreenOrientation } from '~/stores/app/actions';
 
 export const OrientationListener = () => {
   const screenOrientationRotation = (orientation: OrientationType) => {

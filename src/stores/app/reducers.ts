@@ -1,5 +1,5 @@
-import {Notification} from '~/api/endpoints';
-import {StoreAppState, state as defaultState} from './state';
+import { Notification } from '~/api/endpoints';
+import { StoreAppState, state as defaultState } from './state';
 import notifee from '@notifee/react-native';
 
 export enum AppAction {
@@ -43,7 +43,7 @@ export const reducers = (
     case AppAction.MARK_NOTIFICATION_READ:
       let newNotifications = state.notifications.map(notification => {
         if (notification.id === action.payload)
-          return {...notification, isRead: true};
+          return { ...notification, isRead: true };
         return notification;
       });
       notifee.setBadgeCount(

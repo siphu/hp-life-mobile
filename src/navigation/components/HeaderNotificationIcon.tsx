@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {connect, ConnectedProps, useSelector} from 'react-redux';
-import {MaterialIcons} from '~/components/MaterialIcons';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { connect, ConnectedProps, useSelector } from 'react-redux';
+import { MaterialIcons } from '~/components/MaterialIcons';
 import Text from '~/components/Text';
-import {config} from '~/config/config';
-import {GlobalStyles} from '~/config/styles';
-import {RootState} from '~/stores';
+import { config } from '~/config/config';
+import { GlobalStyles } from '~/config/styles';
+import { RootState } from '~/stores';
 
 const styles = StyleSheet.create({
   touchableArea: {

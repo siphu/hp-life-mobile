@@ -1,7 +1,7 @@
-import {Platform, PixelRatio, Dimensions} from 'react-native';
-import type {IUseDetectDevice} from './model';
+import { Platform, PixelRatio, Dimensions } from 'react-native';
+import type { IUseDetectDevice } from './model';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const isTablet = () => {
   let pixelDensity = PixelRatio.get();
@@ -22,4 +22,4 @@ const useDetectDevice: IUseDetectDevice = {
   isTablet: isTablet(),
 };
 
-export {useDetectDevice};
+export { useDetectDevice };

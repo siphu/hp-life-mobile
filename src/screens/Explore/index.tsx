@@ -6,16 +6,16 @@ import {
   ListRenderItem,
   Dimensions,
 } from 'react-native';
-import {connect, ConnectedProps} from 'react-redux';
-import {RootState} from '~/stores';
-import {GlobalStyles} from '~/config/styles';
-import {ITEM_HEIGHT, ITEM_SPACING, styles} from './styles';
-import {Course} from '~/api/endpoints';
-import {getAvailableCourses} from '~/api/helpers';
-import {CourseItem} from './components/CourseItem';
+import { connect, ConnectedProps } from 'react-redux';
+import { RootState } from '~/stores';
+import { GlobalStyles } from '~/config/styles';
+import { ITEM_HEIGHT, ITEM_SPACING, styles } from './styles';
+import { Course } from '~/api/endpoints';
+import { getAvailableCourses } from '~/api/helpers';
+import { CourseItem } from './components/CourseItem';
 import HeaderComponent from './components/HeaderComponent';
-import {useIsFocused, useNavigation} from '@react-navigation/native';
-import {AuthenticatedScreens} from '~/navigation/screens';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { AuthenticatedScreens } from '~/navigation/screens';
 
 const RENDER_PER_PAGE = 8;
 
@@ -69,7 +69,7 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({
     }
   };
 
-  const renderItem: ListRenderItem<Course> = React.useCallback(({item}) => {
+  const renderItem: ListRenderItem<Course> = React.useCallback(({ item }) => {
     return (
       <CourseItem
         item={item}
@@ -77,7 +77,7 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({
         onClick={() =>
           navigation.navigate(AuthenticatedScreens.CourseDrawer, {
             screen: AuthenticatedScreens.CourseInformation,
-            params: {courseId: item.id},
+            params: { courseId: item.id },
           })
         }
       />
@@ -108,7 +108,7 @@ const Explore: React.FC<ConnectedProps<typeof connector>> = ({
           />
         }
         contentContainerStyle={styles.contentContainer}
-        ItemSeparatorComponent={() => <View style={{height: ITEM_SPACING}} />}
+        ItemSeparatorComponent={() => <View style={{ height: ITEM_SPACING }} />}
         getItemLayout={(_, index) => ({
           length: ITEM_HEIGHT,
           offset: 105 + (ITEM_HEIGHT + ITEM_SPACING) * index,

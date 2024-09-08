@@ -1,31 +1,31 @@
 import React from 'react';
-import {Linking, ScrollView, View} from 'react-native';
-import {GlobalStyles} from '~/config/styles';
-import {styles} from './styles';
+import { Linking, ScrollView, View } from 'react-native';
+import { GlobalStyles } from '~/config/styles';
+import { styles } from './styles';
 import Input from './components/Input';
-import {connect, ConnectedProps, useDispatch} from 'react-redux';
-import {RootState} from '~/stores';
-import {getLanguageNameFromCode} from '~/translations/languages';
-import {Countries, Gender, Timezones} from '~/utils';
-import {Dropdown} from './components/Dropdown';
-import {t} from '~/providers/TranslationProvider';
-import i18n, {getAvailableLanguages, TranslationsPaths} from '~/translations';
+import { connect, ConnectedProps, useDispatch } from 'react-redux';
+import { RootState } from '~/stores';
+import { getLanguageNameFromCode } from '~/translations/languages';
+import { Countries, Gender, Timezones } from '~/utils';
+import { Dropdown } from './components/Dropdown';
+import { t } from '~/providers/TranslationProvider';
+import i18n, { getAvailableLanguages, TranslationsPaths } from '~/translations';
 import CheckBoxButton from '~/components/CheckBoxButton';
 import Button from '~/components/Button';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {config} from '~/config/config';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { config } from '~/config/config';
 import {
   registerDeviceForMessaging,
   unRegisterDeviceForMessaging,
   updateUserProfile,
 } from '~/api/helpers';
-import {useNotificationContext} from '~/providers/NotificationProvider';
+import { useNotificationContext } from '~/providers/NotificationProvider';
 import Alert from '~/components/Alert';
 import Text from '~/components/Text';
-import {AuthenticatedScreens} from '~/navigation/screens';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '~/navigation';
-import {RemoveAccount} from './components/RemoveAccount';
+import { AuthenticatedScreens } from '~/navigation/screens';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '~/navigation';
+import { RemoveAccount } from './components/RemoveAccount';
 import DeviceInfo from 'react-native-device-info';
 
 interface SelectOption {
@@ -59,7 +59,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
   preferencePushNotification,
   navigation,
 }) => {
-  const {hasPermission} = useNotificationContext();
+  const { hasPermission } = useNotificationContext();
   const statePushPreference =
     !!hasPermission && pushedRegistered && !!preferencePushNotification;
   const [userProfile, setUserProfile] = React.useState(profile);
@@ -138,7 +138,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         style={{}}
         enabled={true}
         onChange={(t: string) => {
-          let profile = {...userProfile};
+          let profile = { ...userProfile };
           profile.fullName = t;
           setUserProfile(profile);
         }}
@@ -151,12 +151,12 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         labelField="label"
         valueField="value"
         onChange={(t: SelectOption) => {
-          let profile = {...userProfile};
+          let profile = { ...userProfile };
           profile.gender = t.value;
           setUserProfile(profile);
         }}
       />
-      <Dropdown<{name: string; code: string}>
+      <Dropdown<{ name: string; code: string }>
         title={t('profile.country')}
         data={Countries}
         value={userProfile.country}
@@ -164,7 +164,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         labelField="name"
         valueField="code"
         onChange={t => {
-          let profile = {...userProfile};
+          let profile = { ...userProfile };
           profile.country = t.code;
           setUserProfile(profile);
         }}
@@ -178,7 +178,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         valueField="value"
         autoScroll={false}
         onChange={t => {
-          let profile = {...userProfile};
+          let profile = { ...userProfile };
           profile.language = t.value;
           setUserProfile(profile);
         }}
@@ -191,7 +191,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         labelField="label"
         valueField="value"
         onChange={t => {
-          let profile = {...userProfile};
+          let profile = { ...userProfile };
           profile.timeZone = t.value;
           setUserProfile(profile);
         }}
@@ -202,7 +202,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         selected={userProfile.isNewsletterEnabled}
         style={{}}
         onSelect={() => {
-          let profile = {...userProfile};
+          let profile = { ...userProfile };
           profile.isNewsletterEnabled = !profile.isNewsletterEnabled;
           setUserProfile(profile);
         }}
@@ -232,15 +232,15 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
               {t('profile.pushNotification.noPermission.body')}
             </Text>
           </View>
-          <View style={{flexDirection: 'column', rowGap: 8}}>
+          <View style={{ flexDirection: 'column', rowGap: 8 }}>
             <Button
               color={config.color.neutral[900]}
               title={t('profile.pushNotification.noPermission.setting')}
               onPress={Linking.openSettings}
             />
             <Button
-              style={{borderWidth: 1}}
-              textStyle={{color: config.color.neutral[900]}}
+              style={{ borderWidth: 1 }}
+              textStyle={{ color: config.color.neutral[900] }}
               color={config.color.neutral[50]}
               title={t('profile.pushNotification.noPermission.cancel')}
               onPress={() => setShowPushAlert(false)}
@@ -264,7 +264,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
             : styles.disabledButton.backgroundColor
         }
         textStyle={
-          changed ? {color: config.color.neutral[50]} : styles.disabledButton
+          changed ? { color: config.color.neutral[50] } : styles.disabledButton
         }
         onPress={() => {
           updateUserProfile(userProfile);
@@ -280,7 +280,7 @@ const Profile: React.FC<ConnectedProps<typeof connector>> = ({
         color={config.color.neutral[50]}
         onPress={() => navigation.navigate(AuthenticatedScreens.ChangePassword)}
         style={styles.changePasswordButton}
-        textStyle={{color: config.color.neutral[900]}}
+        textStyle={{ color: config.color.neutral[900] }}
       />
 
       <RemoveAccount />

@@ -1,12 +1,12 @@
 import React from 'react';
-import {styles} from '../styles';
-import {I18nManager, TouchableOpacity, View} from 'react-native';
-import {Text} from '~/components/Text';
-import {config} from '~/config/config';
+import { styles } from '../styles';
+import { I18nManager, TouchableOpacity, View } from 'react-native';
+import { Text } from '~/components/Text';
+import { config } from '~/config/config';
 import Images from '~/res/images';
-import {GlobalStyles} from '~/config/styles';
-import {MaterialIconsOutlined} from '~/components/MaterialIcons';
-import {MaterialIcons} from '~/components/MaterialIcons';
+import { GlobalStyles } from '~/config/styles';
+import { MaterialIconsOutlined } from '~/components/MaterialIcons';
+import { MaterialIcons } from '~/components/MaterialIcons';
 
 export interface MenuItemProps {
   label: string;

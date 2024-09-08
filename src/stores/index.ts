@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {combineReducers} from 'redux';
-import {reducers as reducerApp} from './app/reducers';
-import {reducers as reducerUser} from './user/reducers';
-import {reducers as reducerCourse} from './course/reducers';
-import {configureStore} from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
+import { reducers as reducerApp } from './app/reducers';
+import { reducers as reducerUser } from './user/reducers';
+import { reducers as reducerCourse } from './course/reducers';
+import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,

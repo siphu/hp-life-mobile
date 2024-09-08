@@ -6,9 +6,9 @@ import {
   RefreshControl,
   View,
 } from 'react-native';
-import {connect, ConnectedProps} from 'react-redux';
-import {RootState} from '~/stores';
-import {GlobalStyles} from '~/config/styles';
+import { connect, ConnectedProps } from 'react-redux';
+import { RootState } from '~/stores';
+import { GlobalStyles } from '~/config/styles';
 import {
   CERTIFICATE_ITEM_HEIGHT,
   HEADER_HEIGHT,
@@ -17,7 +17,11 @@ import {
   ITEM_SPACING,
   styles,
 } from './styles';
-import {useIsFocused, useNavigation, useRoute} from '@react-navigation/native';
+import {
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {
   downloadCertificate,
   downloadTranscript,
@@ -25,16 +29,16 @@ import {
   shareBadge,
   shareCertificate,
 } from '~/api/helpers';
-import {CourseStatus, TraineeCourse, MyBadge} from '~/api/endpoints';
-import {CourseItem} from './components/CourseItem';
-import {BadgeItem} from './components/BadgeItem';
+import { CourseStatus, TraineeCourse, MyBadge } from '~/api/endpoints';
+import { CourseItem } from './components/CourseItem';
+import { BadgeItem } from './components/BadgeItem';
 import HeaderComponent from './components/HeaderComponent';
-import {AuthenticatedScreens} from '~/navigation/screens';
-import {CertificateItem} from './components/CertificateItem';
+import { AuthenticatedScreens } from '~/navigation/screens';
+import { CertificateItem } from './components/CertificateItem';
 import Text from '~/components/Text';
-import {t} from '~/providers/TranslationProvider';
+import { t } from '~/providers/TranslationProvider';
 import Loader from '~/components/Loader';
-import {loaderWrapper} from '~/api/helpers/appHelpers';
+import { loaderWrapper } from '~/api/helpers/appHelpers';
 
 const RENDER_PER_PAGE = 8;
 
@@ -148,7 +152,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({
   };
 
   const renderItem: ListRenderItem<TraineeCourse | MyBadge> = React.useCallback(
-    ({item}) => {
+    ({ item }) => {
       if (selectedOptions === 'myCourse.badges') {
         return (
           <BadgeItem
@@ -163,7 +167,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({
             onClick={() =>
               navigation.navigate(AuthenticatedScreens.CourseDrawer, {
                 screen: AuthenticatedScreens.CourseInformation,
-                params: {courseId: item.id as number},
+                params: { courseId: item.id as number },
               })
             }
             onShare={() => shareCertificate(item as TraineeCourse)}
@@ -179,7 +183,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({
             onClick={() =>
               navigation.navigate(AuthenticatedScreens.CourseDrawer, {
                 screen: AuthenticatedScreens.CourseInformation,
-                params: {courseId: item.id},
+                params: { courseId: item.id },
               })
             }
           />
@@ -236,7 +240,7 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({
         showsVerticalScrollIndicator={true}
         indicatorStyle={'black'}
         contentContainerStyle={styles.contentContainer}
-        ItemSeparatorComponent={() => <View style={{height: ITEM_SPACING}} />}
+        ItemSeparatorComponent={() => <View style={{ height: ITEM_SPACING }} />}
         ListEmptyComponent={() => (
           <View style={styles.centerView}>
             <Text style={styles.noCourseText}>

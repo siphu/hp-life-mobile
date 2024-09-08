@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import { View } from 'react-native';
 import {
   Lesson,
   ParticipantBookInfo,
@@ -7,8 +7,8 @@ import {
 } from '~/api/endpoints';
 import Button from '~/components/Button';
 import Text from '~/components/Text';
-import {config} from '~/config/config';
-import {t} from '~/providers/TranslationProvider';
+import { config } from '~/config/config';
+import { t } from '~/providers/TranslationProvider';
 
 interface DownloadBookButtonProps {
   course: TraineeCourse;

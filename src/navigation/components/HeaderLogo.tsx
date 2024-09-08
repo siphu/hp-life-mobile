@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, TouchableHighlight, View} from 'react-native';
-import {GlobalStyles} from '~/config/styles';
+import { StyleSheet, TouchableHighlight, View } from 'react-native';
+import { GlobalStyles } from '~/config/styles';
 import Images from '~/res/images';
 
 const styles = StyleSheet.create({

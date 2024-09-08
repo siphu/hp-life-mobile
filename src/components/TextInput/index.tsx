@@ -1,6 +1,10 @@
 import React from 'react';
-import {Platform, TextInput as RNTextInput, TextInputProps} from 'react-native';
-import {config} from '~/config/config';
+import {
+  Platform,
+  TextInput as RNTextInput,
+  TextInputProps,
+} from 'react-native';
+import { config } from '~/config/config';
 
 export interface ExpandedTextInputProps extends TextInputProps {
   innerRef?: React.LegacyRef<RNTextInput>;
@@ -19,7 +23,7 @@ const TextInput: React.FC<ExpandedTextInputProps> = ({
   return (
     <RNTextInput
       ref={innerRef}
-      style={[{fontFamily: fontName}, style]}
+      style={[{ fontFamily: fontName }, style]}
       {...rest}
     />
   );

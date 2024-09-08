@@ -3,12 +3,12 @@ import {
   createStackNavigator,
   StackNavigationOptions,
 } from '@react-navigation/stack';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {UnAuthenticatedScreens} from './screens';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { UnAuthenticatedScreens } from './screens';
 import Login from '~/screens/Login';
-import {HeaderLogo} from './components/HeaderLogo';
-import {GlobalStyles} from '~/config/styles';
-import {HeaderLanguageIcon} from './components/HeaderLanguageIcon';
+import { HeaderLogo } from './components/HeaderLogo';
+import { GlobalStyles } from '~/config/styles';
+import { HeaderLanguageIcon } from './components/HeaderLanguageIcon';
 import LanguageSelector from '~/components/LanguageSelector';
 
 const Screen = createStackNavigator();
@@ -46,7 +46,8 @@ export const UnAuthenticatedStack = () => {
           }}
         />
       </Screen.Group>
-      <Screen.Group screenOptions={{headerShown: false, presentation: 'modal'}}>
+      <Screen.Group
+        screenOptions={{ headerShown: false, presentation: 'modal' }}>
         <Screen.Screen
           name={UnAuthenticatedScreens.Language}
           component={LanguageSelector}

@@ -613,9 +613,9 @@ const DropdownComponent: <T>(
                       !isTopPosition
                         ? { paddingTop: extendHeight }
                         : {
-                          justifyContent: 'flex-end',
-                          paddingBottom: extendHeight,
-                        },
+                            justifyContent: 'flex-end',
+                            paddingBottom: extendHeight,
+                          },
                       isFull && styles.fullScreen,
                     ])}>
                     <View

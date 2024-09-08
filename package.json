@@ -8,7 +8,7 @@
     "ios": "react-native run-ios --simulator=\"iPhone 15\" --port=8082",
     "ios:release": "react-native run-ios --mode Release --simulator=\"iPhone 15\"  --port=8082",
     "lint": "eslint .",
-    "prettier": "prettier -w src/",
+    "prettier": "prettier --config .prettierrc.js --write 'src/**/*.{ts,tsx}'",
     "start": "react-native start --port=8082",
     "test": "jest --verbose",
     "clean": "watchman watch-del-all && npm cache clean --force && npm cache verify && rm -fr $TMPDIR/react-* && react-native start --reset-cache",

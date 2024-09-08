@@ -1,5 +1,5 @@
-import {Course, TraineeCourse} from '~/api/endpoints';
-import {StoreCourseState, state as defaultState} from './state';
+import { Course, TraineeCourse } from '~/api/endpoints';
+import { StoreCourseState, state as defaultState } from './state';
 
 export enum CourseAction {
   RESET_COURSE_STORE = 'RESET_COURSE_STORE',
@@ -23,7 +23,7 @@ export const reducers = (
     case CourseAction.RESET_COURSE_STORE:
       return defaultState;
     case CourseAction.SET_CATEGORY:
-      let newCategories = {...state.categories};
+      let newCategories = { ...state.categories };
       newCategories[action.payload.language] = action.payload.categories;
       return {
         ...state,
@@ -72,14 +72,14 @@ export const reducers = (
       };
 
     case CourseAction.SET_AVAILABLE_COURSES:
-      let availableCourses = {...state.available};
+      let availableCourses = { ...state.available };
       availableCourses[action.payload.language] = action.payload.courses;
       return {
         ...state,
         available: availableCourses,
       };
     case CourseAction.UPDATE_AVAILABLE_COURSES: {
-      let availableCourses = {...state.available};
+      let availableCourses = { ...state.available };
       let language = action.payload.language;
       let languageCourses = availableCourses[language] || [];
       let updatedAvailableCourses = languageCourses.map(item => {

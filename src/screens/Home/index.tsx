@@ -1,19 +1,19 @@
 import React from 'react';
-import {FlatList, RefreshControl, View} from 'react-native';
-import {connect, ConnectedProps} from 'react-redux';
+import { FlatList, RefreshControl, View } from 'react-native';
+import { connect, ConnectedProps } from 'react-redux';
 import Text from '~/components/Text';
-import {RootState} from '~/stores';
-import {getAvailableCourses} from '~/api/helpers';
-import {GlobalStyles} from '~/config/styles';
-import {styles} from './styles';
+import { RootState } from '~/stores';
+import { getAvailableCourses } from '~/api/helpers';
+import { GlobalStyles } from '~/config/styles';
+import { styles } from './styles';
 import Jumbotron from './components/Jumbotron';
 import {
   NavigationProp,
   useIsFocused,
   useNavigation,
 } from '@react-navigation/native';
-import {t} from '~/providers/TranslationProvider';
-import {Course} from '~/api/endpoints';
+import { t } from '~/providers/TranslationProvider';
+import { Course } from '~/api/endpoints';
 
 const connector = connect((state: RootState) => ({
   data:
@@ -27,7 +27,7 @@ const connector = connect((state: RootState) => ({
   language: state.app.language,
   online: state.app.online,
 }));
-const Home: React.FC<ConnectedProps<typeof connector>> = ({data, online}) => {
+const Home: React.FC<ConnectedProps<typeof connector>> = ({ data, online }) => {
   const isFocused = useIsFocused();
   const navigation = useNavigation<NavigationProp<any>>();
 
@@ -65,7 +65,7 @@ const Home: React.FC<ConnectedProps<typeof connector>> = ({data, online}) => {
         }
         data={data}
         renderItem={React.useCallback(
-          ({item}: {item: Course}) => (
+          ({ item }: { item: Course }) => (
             <Jumbotron
               course={item}
               key={item.id.toString()}

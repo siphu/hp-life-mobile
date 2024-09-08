@@ -1,12 +1,12 @@
 import React from 'react';
-import {Course} from '~/api/endpoints';
-import {styles} from '../styles';
-import {Image, TouchableOpacity, View} from 'react-native';
+import { Course } from '~/api/endpoints';
+import { styles } from '../styles';
+import { Image, TouchableOpacity, View } from 'react-native';
 import Text from '~/components/Text';
 import FastImage from '@d11/react-native-fast-image';
-import {InProgress} from './InProgress';
-import {Completed} from './Completed';
-import {AvailableOffline} from './AvailableOffline';
+import { InProgress } from './InProgress';
+import { Completed } from './Completed';
+import { AvailableOffline } from './AvailableOffline';
 
 export class CourseItem extends React.PureComponent<{
   item: Course;
@@ -14,7 +14,7 @@ export class CourseItem extends React.PureComponent<{
   onClick: () => void;
 }> {
   render() {
-    const {item, onClick, category} = this.props;
+    const { item, onClick, category } = this.props;
 
     return (
       <TouchableOpacity
@@ -40,7 +40,7 @@ export class CourseItem extends React.PureComponent<{
             accessibilityLabel={''}
             accessibilityHint={''}
             accessibilityRole={'none'}
-            source={{uri: item.imageUrl}}
+            source={{ uri: item.imageUrl }}
             style={styles.image}
             resizeMode={FastImage.resizeMode.cover}
           />

@@ -6,9 +6,9 @@ import {
   TextStyle,
   ColorValue,
 } from 'react-native';
-import {Text} from '~/components/Text';
+import { Text } from '~/components/Text';
 import styles from './styles';
-import {config} from '~/config/config';
+import { config } from '~/config/config';
 
 interface ColoredButtonProps {
   color?: ColorValue;
@@ -26,7 +26,7 @@ const Button = (props: ColoredButtonProps) => {
     <View
       style={[
         styles.ColoredButtonBG,
-        {backgroundColor: props.color ?? 'white'},
+        { backgroundColor: props.color ?? 'white' },
         props.variant === 'Primary'
           ? styles.primaryVariant
           : props.variant === 'Secondary'

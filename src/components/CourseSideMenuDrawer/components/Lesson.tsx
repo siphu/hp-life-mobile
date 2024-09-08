@@ -1,17 +1,17 @@
 import React from 'react';
-import {Animated, FlatList, Pressable, View} from 'react-native';
+import { Animated, FlatList, Pressable, View } from 'react-native';
 import {
   Course,
   Lesson as LessonModel,
   Task as TaskModel,
 } from '~/api/endpoints';
 import Text from '~/components/Text';
-import {Task} from './Task';
-import {MaterialIcons} from '~/components/MaterialIcons';
-import {config} from '~/config/config';
-import {GlobalStyles} from '~/config/styles';
-import {styles} from '../styles';
-import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
+import { Task } from './Task';
+import { MaterialIcons } from '~/components/MaterialIcons';
+import { config } from '~/config/config';
+import { GlobalStyles } from '~/config/styles';
+import { styles } from '../styles';
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 
 export const Lesson = ({
   course,
@@ -45,8 +45,8 @@ export const Lesson = ({
   }, [contentHeight, expanded, animatedHeight]);
 
   const onContentLayout = React.useCallback(
-    (event: {nativeEvent: {layout: {height: any}}}) => {
-      const {height} = event.nativeEvent.layout;
+    (event: { nativeEvent: { layout: { height: any } } }) => {
+      const { height } = event.nativeEvent.layout;
       if (height > contentHeight) {
         setContentHeight(height);
         animatedHeight.setValue(height);
@@ -61,7 +61,7 @@ export const Lesson = ({
       style={[
         GlobalStyles.flexRow,
         GlobalStyles.alignCenter,
-        {justifyContent: 'space-between', paddingHorizontal: 10},
+        { justifyContent: 'space-between', paddingHorizontal: 10 },
       ]}>
       <Text
         style={
@@ -76,18 +76,18 @@ export const Lesson = ({
   );
 
   return (
-    <View style={{paddingVertical: 10}}>
+    <View style={{ paddingVertical: 10 }}>
       <LessonHeader />
       <Animated.View
         style={{
           height: contentHeight === 0 ? 'auto' : animatedHeight,
           overflow: 'hidden',
         }}>
-        <View style={{paddingVertical: 8}} onLayout={onContentLayout}>
+        <View style={{ paddingVertical: 8 }} onLayout={onContentLayout}>
           <FlatList
             keyExtractor={item => item.id.toString()}
             data={lesson.tasks}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <Task
                 course={course}
                 task={item}

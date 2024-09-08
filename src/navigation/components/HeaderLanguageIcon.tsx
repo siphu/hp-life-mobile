@@ -1,9 +1,9 @@
 import React from 'react';
-import {useNavigation} from '@react-navigation/native';
-import {StyleSheet, TouchableOpacity} from 'react-native';
-import {MaterialIcons} from '~/components/MaterialIcons';
-import {GlobalStyles} from '~/config/styles';
-import {UnAuthenticatedScreens} from '../screens';
+import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '~/components/MaterialIcons';
+import { GlobalStyles } from '~/config/styles';
+import { UnAuthenticatedScreens } from '../screens';
 
 const styles = StyleSheet.create({
   touchableArea: {

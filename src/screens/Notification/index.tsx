@@ -1,17 +1,20 @@
-import {FlatList, RefreshControl, ScrollView, View} from 'react-native';
-import {connect, ConnectedProps} from 'react-redux';
-import {Notification as NotificationModel} from '~/api/endpoints';
+import { FlatList, RefreshControl, ScrollView, View } from 'react-native';
+import { connect, ConnectedProps } from 'react-redux';
+import { Notification as NotificationModel } from '~/api/endpoints';
 import Text from '~/components/Text';
-import {GlobalStyles} from '~/config/styles';
-import {RootState} from '~/stores';
-import {styles} from './styles';
-import {Header} from './components/Header';
-import {NotificationItem} from './components/NotificationItem';
+import { GlobalStyles } from '~/config/styles';
+import { RootState } from '~/stores';
+import { styles } from './styles';
+import { Header } from './components/Header';
+import { NotificationItem } from './components/NotificationItem';
 import React from 'react';
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import moment from 'moment';
-import {getPushNotifications} from '~/api/helpers';
-import {useNotificationContext} from '~/providers/NotificationProvider';
+import { getPushNotifications } from '~/api/helpers';
+import { useNotificationContext } from '~/providers/NotificationProvider';
 
 const connector = connect((state: RootState) => {
   const sortedNotifications = [...state.app.notifications].sort((a, b) => {
@@ -38,7 +41,7 @@ const Notification: React.FC<ConnectedProps<typeof connector>> = ({
     <View style={GlobalStyles.screenContainer}>
       <FlatList
         data={notifications}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <NotificationItem
             item={item}
             onClick={notificationContext.handleNotification}

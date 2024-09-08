@@ -1,12 +1,12 @@
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import Alert from '~/components/Alert';
 import Button from '~/components/Button';
 import Text from '~/components/Text';
-import {config} from '~/config/config';
-import {t} from '~/providers/TranslationProvider';
-import {ConfirmAlert} from './ConfirmAlert';
-import {requestAccountDeletion} from '~/api/endpoints';
+import { config } from '~/config/config';
+import { t } from '~/providers/TranslationProvider';
+import { ConfirmAlert } from './ConfirmAlert';
+import { requestAccountDeletion } from '~/api/endpoints';
 
 export const RemoveAccount = () => {
   const [alert, setAlert] = React.useState<boolean>(false);
@@ -25,7 +25,7 @@ export const RemoveAccount = () => {
           show={alert}
           position="Center"
           onRequestClose={() => setAlert(false)}>
-          <View style={{rowGap: 20}}>
+          <View style={{ rowGap: 20 }}>
             <View>
               <Text
                 style={{
@@ -45,15 +45,15 @@ export const RemoveAccount = () => {
                 {t('profile.deleteAccount.prompt')}
               </Text>
             </View>
-            <View style={{flexDirection: 'column', rowGap: 8}}>
+            <View style={{ flexDirection: 'column', rowGap: 8 }}>
               <Button
                 color={config.color.neutral[900]}
                 title={t('profile.deleteAccount.yes')}
                 onPress={confirmRemoval}
               />
               <Button
-                style={{borderWidth: 1}}
-                textStyle={{color: config.color.neutral[900]}}
+                style={{ borderWidth: 1 }}
+                textStyle={{ color: config.color.neutral[900] }}
                 color={config.color.neutral[50]}
                 title={t('profile.deleteAccount.cancel')}
                 onPress={() => setAlert(false)}

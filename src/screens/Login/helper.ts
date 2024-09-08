@@ -1,7 +1,7 @@
-import {InAppBrowser} from 'react-native-inappbrowser-reborn';
-import {Linking} from 'react-native';
-import {GlobalStyles} from '~/config/styles';
-import {AuthToken} from '~/api/endpoints';
+import { InAppBrowser } from 'react-native-inappbrowser-reborn';
+import { Linking } from 'react-native';
+import { GlobalStyles } from '~/config/styles';
+import { AuthToken } from '~/api/endpoints';
 
 export function urlWithLocale(url: string, language?: string): string {
   const locale = language;

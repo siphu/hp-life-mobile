@@ -1,14 +1,14 @@
-import {TouchableOpacity, View} from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import Text from '~/components/Text';
-import {Notification as NotificationModel} from '~/api/endpoints';
-import {MaterialIcons} from '~/components/MaterialIcons';
-import {config} from '~/config/config';
+import { Notification as NotificationModel } from '~/api/endpoints';
+import { MaterialIcons } from '~/components/MaterialIcons';
+import { config } from '~/config/config';
 import FastImage from '@d11/react-native-fast-image';
-import {styles} from '../styles';
-import {GlobalStyles} from '~/config/styles';
-import {friendlyDate} from '~/utils';
+import { styles } from '../styles';
+import { GlobalStyles } from '~/config/styles';
+import { friendlyDate } from '~/utils';
 import moment from 'moment';
-import {t} from '~/providers/TranslationProvider';
+import { t } from '~/providers/TranslationProvider';
 import Images from '~/res/images';
 import React from 'react';
 
@@ -42,8 +42,8 @@ export const NotificationItem = React.memo(
               }}>
               {(item.imageUrl && (
                 <FastImage
-                  source={{uri: item.imageUrl}}
-                  style={[styles.remoteImage, {borderRadius: 40}]}
+                  source={{ uri: item.imageUrl }}
+                  style={[styles.remoteImage, { borderRadius: 40 }]}
                 />
               )) ||
                 (item.type === 'CourseCertificateEarned' && (

@@ -2,24 +2,27 @@ import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
 } from '@react-navigation/drawer';
-import {ScrollView, StatusBar, TouchableOpacity, View} from 'react-native';
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useSelector} from 'react-redux';
+import { ScrollView, StatusBar, TouchableOpacity, View } from 'react-native';
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 import Text from '~/components//Text';
-import {config} from '~/config/config';
-import {GlobalStyles} from '~/config/styles';
-import {RootState} from '~/stores';
-import {styles} from './styles';
+import { config } from '~/config/config';
+import { GlobalStyles } from '~/config/styles';
+import { RootState } from '~/stores';
+import { styles } from './styles';
 import Images from '~/res/images';
-import {ProfileItem} from './components/ProfileItem';
-import {AuthenticatedScreens} from '~/navigation/screens';
-import MenuItem, {MenuItemProps} from './components/MenuItem';
-import {MaterialIcons} from '~/components/MaterialIcons';
+import { ProfileItem } from './components/ProfileItem';
+import { AuthenticatedScreens } from '~/navigation/screens';
+import MenuItem, { MenuItemProps } from './components/MenuItem';
+import { MaterialIcons } from '~/components/MaterialIcons';
 import React from 'react';
-import {t} from '~/providers/TranslationProvider';
-import {Logout} from './components/Logout';
+import { t } from '~/providers/TranslationProvider';
+import { Logout } from './components/Logout';
 
-const SideMenuDrawer = ({state, navigation}: DrawerContentComponentProps) => {
+const SideMenuDrawer = ({ state, navigation }: DrawerContentComponentProps) => {
   const userState = useSelector((root: RootState) => root.user);
   const appState = useSelector((root: RootState) => root.app);
 
@@ -121,7 +124,7 @@ const SideMenuDrawer = ({state, navigation}: DrawerContentComponentProps) => {
       <View style={styles.hpFoundationContainer}>
         <Images.logo.foundation
           height={60}
-          style={{aspectRatio: 125 / 59}}
+          style={{ aspectRatio: 125 / 59 }}
           fill={config.color.neutral[50]}
         />
         <View>

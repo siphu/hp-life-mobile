@@ -25,9 +25,9 @@ import {
   downloadCertificate as remoteDownloadCertificate,
   downloadTranscript as remoteDownloadTransaction,
 } from '~/api/endpoints';
-import {stores} from '~/stores';
-import {StoreAppState} from '~/stores/app/state';
-import {CourseAction} from '~/stores/course/reducers';
+import { stores } from '~/stores';
+import { StoreAppState } from '~/stores/app/state';
+import { CourseAction } from '~/stores/course/reducers';
 import {
   setAlerts,
   setBadges,
@@ -35,20 +35,20 @@ import {
   setPushRegistered,
   setToken,
 } from '~/stores/user/actions';
-import {UserAction} from '~/stores/user/reducers';
-import {StoreUserState} from '~/stores/user/state';
+import { UserAction } from '~/stores/user/reducers';
+import { StoreUserState } from '~/stores/user/state';
 import notifee from '@notifee/react-native';
 import {
   removeNotification,
   setNotificationRead,
   setNotifications,
 } from '~/stores/app/actions';
-import messaging, {firebase} from '@react-native-firebase/messaging';
-import {jwtDecode} from 'jwt-decode';
+import messaging, { firebase } from '@react-native-firebase/messaging';
+import { jwtDecode } from 'jwt-decode';
 import moment from 'moment';
 import Share from 'react-native-share';
-import {config} from '~/config/config';
-import {clearCacheTimer} from '.';
+import { config } from '~/config/config';
+import { clearCacheTimer } from '.';
 
 let lastRemoteMessageCalled: number | null = null;
 
@@ -141,9 +141,9 @@ export const updateUserProfile = (userProfile: UserProfile) => {
 
 export const signOut = async () => {
   await unRegisterDeviceForMessaging().catch(() => {});
-  stores.dispatch({type: CourseAction.RESET_COURSE_STORE});
+  stores.dispatch({ type: CourseAction.RESET_COURSE_STORE });
   stores.dispatch(setNotifications([]));
-  stores.dispatch({type: UserAction.SIGN_OUT});
+  stores.dispatch({ type: UserAction.SIGN_OUT });
   clearCacheTimer();
 };
 

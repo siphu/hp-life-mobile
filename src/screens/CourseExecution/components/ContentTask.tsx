@@ -1,20 +1,20 @@
-import {TaskDetail} from '~/api/endpoints';
+import { TaskDetail } from '~/api/endpoints';
 import WebView from '~/components/Webview';
-import {config} from '~/config/config';
-import {contentParser} from '../helper';
+import { config } from '~/config/config';
+import { contentParser } from '../helper';
 import Loader from '~/components/Loader';
 import React from 'react';
-import {disableBaseUrlLink} from '~/utils/WebViewJavascript';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {GlobalStyles} from '~/config/styles';
-import Orientation, {OrientationType} from 'react-native-orientation-locker';
-import {Dimensions} from 'react-native';
-import {connect} from 'react-redux';
-import {RootState} from '~/stores';
+import { disableBaseUrlLink } from '~/utils/WebViewJavascript';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { GlobalStyles } from '~/config/styles';
+import Orientation, { OrientationType } from 'react-native-orientation-locker';
+import { Dimensions } from 'react-native';
+import { connect } from 'react-redux';
+import { RootState } from '~/stores';
 
 const mapStateToProps = (
   state: RootState,
-  ownProps: {taskDetail: TaskDetail},
+  ownProps: { taskDetail: TaskDetail },
 ) => {
   return {
     ...ownProps,
@@ -36,7 +36,7 @@ export const ContentTask = connect(mapStateToProps)(({
       style={GlobalStyles.screenContainer}>
       <WebView
         ref={webViewRef}
-        style={{flexGrow: 1, backgroundColor: config.color.neutral[50]}}
+        style={{ flexGrow: 1, backgroundColor: config.color.neutral[50] }}
         scalesPageToFit={true}
         mediaPlaybackRequiresUserAction={false}
         originWhitelist={['*']}

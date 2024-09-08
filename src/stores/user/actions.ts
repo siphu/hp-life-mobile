@@ -1,4 +1,4 @@
-import {UserAction} from './reducers';
+import { UserAction } from './reducers';
 import {
   AuthToken,
   CurrentAlertApiModel,

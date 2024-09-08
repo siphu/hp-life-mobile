@@ -1,12 +1,12 @@
-import React, {createContext, ReactNode} from 'react';
-import {connect} from 'react-redux';
-import {RootState, stores} from '~/stores';
-import {setLanguage} from '~/stores/app/actions';
-import i18n, {rtlLanguages, TranslationsPaths} from '~/translations';
-import {I18nManager} from 'react-native';
+import React, { createContext, ReactNode } from 'react';
+import { connect } from 'react-redux';
+import { RootState, stores } from '~/stores';
+import { setLanguage } from '~/stores/app/actions';
+import i18n, { rtlLanguages, TranslationsPaths } from '~/translations';
+import { I18nManager } from 'react-native';
 import RNRestart from 'react-native-restart';
 import _ from 'lodash';
-import {t as i18nextTranslation} from 'i18next';
+import { t as i18nextTranslation } from 'i18next';
 
 export const t = (name: TranslationsPaths) =>
   i18nextTranslation(name as string);
@@ -42,9 +42,9 @@ class TranslationProvider extends React.Component<
   };
 
   async componentDidMount() {
-    const {userLanguage, locale} = this.props;
+    const { userLanguage, locale } = this.props;
     await this.setLanguage(userLanguage || locale);
-    this.setState({initialized: true});
+    this.setState({ initialized: true });
   }
 
   componentDidUpdate(prevProps: LocaleProviderProps) {
@@ -79,15 +79,15 @@ class TranslationProvider extends React.Component<
   };
 
   render() {
-    const {children} = this.props;
-    const {initialized} = this.state;
+    const { children } = this.props;
+    const { initialized } = this.state;
 
     if (!initialized) {
       return null;
     }
 
     return (
-      <LocaleContext.Provider value={{changeLocale: this.changeLocale}}>
+      <LocaleContext.Provider value={{ changeLocale: this.changeLocale }}>
         {children}
       </LocaleContext.Provider>
     );

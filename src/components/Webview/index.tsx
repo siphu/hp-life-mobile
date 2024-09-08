@@ -1,5 +1,5 @@
-import React, {Component, createRef} from 'react';
-import {StyleProp, ViewStyle} from 'react-native';
+import React, { Component, createRef } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import {
   WebView as RNWebView,
   WebViewMessageEvent,
@@ -36,7 +36,7 @@ class WebView extends Component<WebViewProps, WebViewState> {
       if (messageData.type === 'webviewAutoHeightAdjustment') {
         const newHeight = Number(messageData.payload);
         if (!isNaN(newHeight) && newHeight !== this.state.webViewHeight) {
-          this.setState({webViewHeight: newHeight});
+          this.setState({ webViewHeight: newHeight });
         }
       }
     } catch (e) {
@@ -73,7 +73,7 @@ class WebView extends Component<WebViewProps, WebViewState> {
       onNavigationStateChange,
       ...webViewProps
     } = this.props;
-    const {webViewHeight} = this.state;
+    const { webViewHeight } = this.state;
     const autoExpandJavaScript = autoExpand ? webviewAutoHeightJavascript : '';
     const combinedJavaScript = `${autoExpandJavaScript}\n${webViewProps.injectedJavaScript || ''}`;
 
@@ -82,7 +82,7 @@ class WebView extends Component<WebViewProps, WebViewState> {
         ref={this.webViewRef}
         injectedJavaScript={combinedJavaScript}
         onMessage={this.onWebViewMessage}
-        style={[autoExpand ? {height: webViewHeight} : {}, style]}
+        style={[autoExpand ? { height: webViewHeight } : {}, style]}
         javaScriptEnabled={true}
         scrollEnabled={!autoExpand}
         onNavigationStateChange={this.onNavigationStateChange}

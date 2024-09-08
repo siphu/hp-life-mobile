@@ -1,6 +1,6 @@
 import AlertBanner from '../AlertBanner';
 import Text from '../Text';
-import {t} from '~/providers/TranslationProvider';
+import { t } from '~/providers/TranslationProvider';
 import styles from './styles';
 
 export default () => (

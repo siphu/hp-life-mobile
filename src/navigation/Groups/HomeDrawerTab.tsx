@@ -1,19 +1,22 @@
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {GlobalStyles} from '~/config/styles';
-import {AuthenticatedScreens} from '../screens';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { GlobalStyles } from '~/config/styles';
+import { AuthenticatedScreens } from '../screens';
 import Home from '~/screens/Home';
 import {
   BottomTabBarButtonProps,
   BottomTabNavigationEventMap,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {HeaderLogo} from '../components/HeaderLogo';
+import { HeaderLogo } from '../components/HeaderLogo';
 import Dashboard from '~/screens/Dashboard';
 import Explore from '~/screens/Explore';
-import {MaterialIcons, MaterialIconsOutlined} from '~/components/MaterialIcons';
-import {config} from '~/config/config';
-import {HeaderMenuIcon} from '../components/HeaderMenuIcon';
+import {
+  MaterialIcons,
+  MaterialIconsOutlined,
+} from '~/components/MaterialIcons';
+import { config } from '~/config/config';
+import { HeaderMenuIcon } from '../components/HeaderMenuIcon';
 import {
   DrawerActions,
   EventArg,
@@ -23,17 +26,22 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import {DrawerContentWrapper} from '../components/DrawerContentWrapper';
+import { DrawerContentWrapper } from '../components/DrawerContentWrapper';
 import React from 'react';
-import {connect, ConnectedProps, shallowEqual, useSelector} from 'react-redux';
-import {RootState} from '~/stores';
-import {getRemoteMessages} from '~/api/helpers';
-import {t} from '~/providers/TranslationProvider';
+import {
+  connect,
+  ConnectedProps,
+  shallowEqual,
+  useSelector,
+} from 'react-redux';
+import { RootState } from '~/stores';
+import { getRemoteMessages } from '~/api/helpers';
+import { t } from '~/providers/TranslationProvider';
 import OfflineBanner from '~/components/OfflineBanner';
 import RemoteAlertBanner from '~/components/RemoteAlertBanner';
-import {TouchableOpacity} from 'react-native';
-import {HeaderNotificationIcon} from '../components/HeaderNotificationIcon';
-import {RootStackParamList} from '..';
+import { TouchableOpacity } from 'react-native';
+import { HeaderNotificationIcon } from '../components/HeaderNotificationIcon';
+import { RootStackParamList } from '..';
 
 const HomeDrawerNavigation = createDrawerNavigator<RootStackParamList>();
 const HomeBottomTabs = createBottomTabNavigator<RootStackParamList>();
@@ -97,7 +105,7 @@ export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({
   );
 
   const screenOptions = React.useCallback(
-    ({route}: {route: RouteProp<ParamListBase, string>}) => ({
+    ({ route }: { route: RouteProp<ParamListBase, string> }) => ({
       gestureDirection: 'horizontal-inverted',
       headerShown: Boolean((alerts && alerts.length > 0) || offline),
       header: () =>
@@ -164,17 +172,17 @@ export const BottomTabs: React.FC<ConnectedProps<typeof connector>> = ({
       <HomeBottomTabs.Screen
         name={AuthenticatedScreens.Home}
         component={Home}
-        options={{tabBarLabel: t('menu.home')}}
+        options={{ tabBarLabel: t('menu.home') }}
       />
       <HomeBottomTabs.Screen
         name={AuthenticatedScreens.Dashboard}
         component={Dashboard}
-        options={{tabBarLabel: t('menu.myCourse')}}
+        options={{ tabBarLabel: t('menu.myCourse') }}
       />
       <HomeBottomTabs.Screen
         name={AuthenticatedScreens.Explore}
         component={Explore}
-        options={{tabBarLabel: t('menu.explore')}}
+        options={{ tabBarLabel: t('menu.explore') }}
       />
     </HomeBottomTabs.Navigator>
   );
@@ -186,7 +194,7 @@ export const HomeDrawer = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
 
-  const {online, notifications} = useSelector(
+  const { online, notifications } = useSelector(
     (root: RootState) => ({
       online: root.app.online,
       notifications: root.app.notifications,

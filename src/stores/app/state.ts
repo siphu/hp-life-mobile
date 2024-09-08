@@ -1,5 +1,5 @@
-import {Dimensions} from 'react-native';
-import {Notification} from '~/api/endpoints';
+import { Dimensions } from 'react-native';
+import { Notification } from '~/api/endpoints';
 
 export interface StoreAppState {
   language: string;

@@ -1,4 +1,4 @@
-import {Dimensions, StyleSheet} from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 const radius = 20;
 const padding = 20;
@@ -60,4 +60,4 @@ export const styles = StyleSheet.create({
   },
 });
 
-export {padding, radius};
+export { padding, radius };

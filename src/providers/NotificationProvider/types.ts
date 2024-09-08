@@ -1,11 +1,11 @@
-import {NavigationProp, NavigationState} from '@react-navigation/native';
-import {ReactNode} from 'react';
-import {Notification as NotificationModel} from '~/api/endpoints';
+import { NavigationProp, NavigationState } from '@react-navigation/native';
+import { ReactNode } from 'react';
+import { Notification as NotificationModel } from '~/api/endpoints';
 
 export type RNNavigationProp = Omit<
   NavigationProp<ReactNavigation.RootParamList>,
   'getState'
-> & {getState(): NavigationState | undefined};
+> & { getState(): NavigationState | undefined };
 
 export interface NotificationContextProps {
   hasPermission?: boolean;

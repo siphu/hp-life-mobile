@@ -1,19 +1,19 @@
-import {Image, ScrollView, View} from 'react-native';
-import {styles} from './styles';
+import { Image, ScrollView, View } from 'react-native';
+import { styles } from './styles';
 import images from '~/res/images';
-import {useSelector} from 'react-redux';
-import {RootState} from '~/stores';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/stores';
 import React from 'react';
-import {useNavigation} from '@react-navigation/native';
-import {UnAuthenticatedScreens} from '~/navigation/screens';
+import { useNavigation } from '@react-navigation/native';
+import { UnAuthenticatedScreens } from '~/navigation/screens';
 import Text from '~/components/Text';
 import _ from 'lodash';
 import Button from '~/components/Button';
-import {extractToken, openBrowser, urlWithLocale} from './helper';
-import {config} from '~/config/config';
-import {ScrollViewBackgroundLayer} from '~/components/ScrollViewBackgroundLayer';
-import {GlobalStyles} from '~/config/styles';
-import {t} from '~/providers/TranslationProvider';
+import { extractToken, openBrowser, urlWithLocale } from './helper';
+import { config } from '~/config/config';
+import { ScrollViewBackgroundLayer } from '~/components/ScrollViewBackgroundLayer';
+import { GlobalStyles } from '~/config/styles';
+import { t } from '~/providers/TranslationProvider';
 import {
   getEnrolledCourses,
   getPushNotifications,
@@ -80,8 +80,8 @@ const Login = () => {
                 onPress={signIn}
               />
               <Button
-                style={{borderWidth: 1}}
-                textStyle={{color: config.color.neutral[900]}}
+                style={{ borderWidth: 1 }}
+                textStyle={{ color: config.color.neutral[900] }}
                 color={config.color.neutral[50]}
                 title={t('login.join')}
                 onPress={join}

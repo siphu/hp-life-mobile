@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {config} from './config';
+import { StyleSheet } from 'react-native';
+import { config } from './config';
 
 export const GlobalStyles = StyleSheet.create({
   screenContainer: {

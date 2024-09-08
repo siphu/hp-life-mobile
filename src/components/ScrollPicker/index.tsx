@@ -64,10 +64,10 @@ export type ScrollPickerHandle = {
 
 const ScrollPicker: {
   <ItemT extends string | number>(
-    props: ScrollPickerProps<ItemT> & {ref?: Ref<ScrollPickerHandle>},
+    props: ScrollPickerProps<ItemT> & { ref?: Ref<ScrollPickerHandle> },
   ): ReactNode;
 } = React.forwardRef((propsState, ref) => {
-  const {itemHeight = 30, style, scrollViewComponent, ...props} = propsState;
+  const { itemHeight = 30, style, scrollViewComponent, ...props } = propsState;
   const [initialized, setInitialized] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(
     props.selectedIndex && props.selectedIndex >= 0 ? props.selectedIndex : 0,
@@ -81,7 +81,7 @@ const ScrollPicker: {
   useImperativeHandle(ref, () => ({
     scrollToTargetIndex: (val: number) => {
       setSelectedIndex(val);
-      sView?.current?.scrollTo({y: val * itemHeight});
+      sView?.current?.scrollTo({ y: val * itemHeight });
     },
   }));
 
@@ -99,7 +99,7 @@ const ScrollPicker: {
 
       setTimeout(() => {
         const y = itemHeight * selectedIndex;
-        sView?.current?.scrollTo({y: y});
+        sView?.current?.scrollTo({ y: y });
       }, 0);
 
       return () => {
@@ -111,9 +111,9 @@ const ScrollPicker: {
 
   const renderPlaceHolder = () => {
     const h = (wrapperHeight - itemHeight) / 2;
-    const header = <View style={{height: h, flex: 1}} />;
-    const footer = <View style={{height: h, flex: 1}} />;
-    return {header, footer};
+    const header = <View style={{ height: h, flex: 1 }} />;
+    const footer = <View style={{ height: h, flex: 1 }} />;
+    return { header, footer };
   };
 
   const renderItem = (data: (typeof props.dataSource)[0], index: number) => {
@@ -136,7 +136,7 @@ const ScrollPicker: {
     );
 
     return (
-      <View style={[styles.itemWrapper, {height: itemHeight}]} key={index}>
+      <View style={[styles.itemWrapper, { height: itemHeight }]} key={index}>
         {item}
       </View>
     );
@@ -156,7 +156,7 @@ const ScrollPicker: {
         if (Platform.OS === 'ios') {
           setIsScrollTo(true);
         }
-        sView?.current?.scrollTo({y: _y});
+        sView?.current?.scrollTo({ y: _y });
       }
       if (selectedIndex === _selectedIndex) {
         return;
@@ -184,7 +184,7 @@ const ScrollPicker: {
     setDragStarted(false);
 
     // if not used, event will be garbaged
-    const _e: NativeSyntheticEvent<NativeScrollEvent> = {...e};
+    const _e: NativeSyntheticEvent<NativeScrollEvent> = { ...e };
     timer && clearTimeout(timer);
     setTimer(
       setTimeout(() => {
@@ -207,7 +207,7 @@ const ScrollPicker: {
     }
   };
 
-  const {header, footer} = renderPlaceHolder();
+  const { header, footer } = renderPlaceHolder();
   const highlightWidth = (isViewStyle(style) ? style.width : 0) || deviceWidth;
   const highlightColor = props.highlightColor || '#333';
   const highlightBorderWidth =

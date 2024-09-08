@@ -5,16 +5,16 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import * as React from 'react';
-import {BackHandler, Linking, Platform, View} from 'react-native';
+import { BackHandler, Linking, Platform, View } from 'react-native';
 import WebView from 'react-native-webview';
-import {URL} from 'react-native-url-polyfill';
-import {styles} from './styles';
-import {config} from '~/config/config';
-import {HeaderBackIcon} from '~/navigation/components/HeaderBackIcon';
-import {AuthenticatedScreens} from '~/navigation/screens';
-import {RootStackParamList} from '~/navigation';
-import {StackScreenProps} from '@react-navigation/stack';
-import {isBaseUrl} from '~/utils';
+import { URL } from 'react-native-url-polyfill';
+import { styles } from './styles';
+import { config } from '~/config/config';
+import { HeaderBackIcon } from '~/navigation/components/HeaderBackIcon';
+import { AuthenticatedScreens } from '~/navigation/screens';
+import { RootStackParamList } from '~/navigation';
+import { StackScreenProps } from '@react-navigation/stack';
+import { isBaseUrl } from '~/utils';
 import {
   appendViewport,
   disableBaseUrlLink,
@@ -35,7 +35,7 @@ const InAppBrowser = ({
   const navigation = useNavigation();
   const [canGoBack, setCanGoBack] = React.useState<boolean>(false);
   const webViewRef = React.useRef<WebView>(null);
-  const {title, locale} = route.params;
+  const { title, locale } = route.params;
   const url = locale
     ? urlWithLocale(route.params?.url!, locale)
     : route.params?.url;
@@ -75,7 +75,7 @@ const InAppBrowser = ({
       <WebView
         ref={webViewRef}
         key={url!}
-        source={{uri: url!}}
+        source={{ uri: url! }}
         scalesPageToFit={true}
         mediaPlaybackRequiresUserAction={false}
         originWhitelist={['*']}
@@ -103,14 +103,14 @@ const InAppBrowser = ({
             e.url.toLowerCase().startsWith(config.api.webUrl.toLowerCase())
           ) {
             const UrlObject = new URL(e.url);
-            const {pathname} = UrlObject;
+            const { pathname } = UrlObject;
             const match = /^(?:\/[^\/]+)?\/course\/(\d+)(?:-.*)?$/gm.exec(
               pathname.toLowerCase(),
             );
             if (match && match.length > 1) {
               navigation.navigate(AuthenticatedScreens.CourseDrawer, {
                 screen: AuthenticatedScreens.CourseInformation,
-                params: {courseId: parseInt(match[1], 10)},
+                params: { courseId: parseInt(match[1], 10) },
               });
               return false;
             }

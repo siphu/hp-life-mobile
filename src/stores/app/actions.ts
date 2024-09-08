@@ -1,6 +1,6 @@
-import {Notification} from '~/api/endpoints';
-import {AppAction} from './reducers';
-import {Dispatch} from 'redux';
+import { Notification } from '~/api/endpoints';
+import { AppAction } from './reducers';
+import { Dispatch } from 'redux';
 
 export const setLanguage = (locale: string) => {
   return async (dispatch: Dispatch) => {

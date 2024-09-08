@@ -3,14 +3,14 @@ import {
   NavigationState,
   RouteProp,
 } from '@react-navigation/native';
-import {Course, Task, TaskDetail, TraineeCourse} from '~/api/endpoints';
-import {RootStackParamList} from '~/navigation';
-import {AuthenticatedScreens} from '~/navigation/screens';
+import { Course, Task, TaskDetail, TraineeCourse } from '~/api/endpoints';
+import { RootStackParamList } from '~/navigation';
+import { AuthenticatedScreens } from '~/navigation/screens';
 
 export type RNNavigationProp = Omit<
   NavigationProp<ReactNavigation.RootParamList>,
   'getState'
-> & {getState(): NavigationState | undefined};
+> & { getState(): NavigationState | undefined };
 
 export interface CourseContextType {
   course?: Course;

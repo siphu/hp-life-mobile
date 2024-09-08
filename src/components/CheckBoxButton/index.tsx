@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleProp, TouchableOpacity, View, ViewStyle} from 'react-native';
-import {Text} from '~/components/Text';
-import {ColorValue} from 'react-native';
-import {config} from '~/config/config';
+import { StyleProp, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Text } from '~/components/Text';
+import { ColorValue } from 'react-native';
+import { config } from '~/config/config';
 import styles from './style';
-import {MaterialIcons} from '~/components/MaterialIcons';
+import { MaterialIcons } from '~/components/MaterialIcons';
 
 export interface RadioButtonProps {
   selected?: boolean;
@@ -30,7 +30,7 @@ export const CheckBoxButton = (props: RadioButtonProps) => {
       <View
         style={[
           styles.radioCircle,
-          {borderColor: props.color ?? config.color.neutral[900]},
+          { borderColor: props.color ?? config.color.neutral[900] },
         ]}>
         {props.selected && (
           <MaterialIcons

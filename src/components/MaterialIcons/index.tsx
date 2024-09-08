@@ -1,7 +1,7 @@
 import glyphMaps from './map.json';
 import glyphMapsOutlined from './outlined.json';
-import {ColorValue, Platform, StyleProp, Text, TextStyle} from 'react-native';
-import {PureComponent} from 'react';
+import { ColorValue, Platform, StyleProp, Text, TextStyle } from 'react-native';
+import { PureComponent } from 'react';
 
 interface IconProps {
   name: string;
@@ -28,7 +28,7 @@ const createFontIcons = (
 
   class Icon extends PureComponent<IconProps> {
     render() {
-      const {name, size, color, style} = this.props;
+      const { name, size, color, style } = this.props;
       let glyph = name ? glyphMap[name] || '?' : '';
       if (typeof glyph === 'number') {
         glyph = String.fromCodePoint(glyph);

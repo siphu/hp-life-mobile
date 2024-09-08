@@ -1,15 +1,15 @@
-import {RouteProp} from '@react-navigation/native';
-import {StackNavigationProp, StackScreenProps} from '@react-navigation/stack';
-import {ScrollView} from 'react-native';
-import {GlobalStyles} from '~/config/styles';
-import {RootStackParamList} from '~/navigation';
-import {AuthenticatedScreens} from '~/navigation/screens';
-import {useCourseProviderContext} from '~/providers/CourseProvider';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
+import { ScrollView } from 'react-native';
+import { GlobalStyles } from '~/config/styles';
+import { RootStackParamList } from '~/navigation';
+import { AuthenticatedScreens } from '~/navigation/screens';
+import { useCourseProviderContext } from '~/providers/CourseProvider';
 import React from 'react';
-import {OrientationLocker} from 'react-native-orientation-locker';
-import {ContentTask} from './components/ContentTask';
-import {Task, TaskDetail, TaskType} from '~/api/endpoints';
-import {SurveyTask} from './components/SurveyTask';
+import { OrientationLocker } from 'react-native-orientation-locker';
+import { ContentTask } from './components/ContentTask';
+import { Task, TaskDetail, TaskType } from '~/api/endpoints';
+import { SurveyTask } from './components/SurveyTask';
 
 interface Props {
   route: RouteProp<RootStackParamList, AuthenticatedScreens.CourseExecution>;
@@ -20,7 +20,13 @@ interface Props {
   >;
 }
 
-const ContentSwitcher = ({task, detail}: {task: Task; detail: TaskDetail}) => {
+const ContentSwitcher = ({
+  task,
+  detail,
+}: {
+  task: Task;
+  detail: TaskDetail;
+}) => {
   switch (task.type) {
     case TaskType.Content:
       return React.useMemo(
@@ -41,7 +47,7 @@ const ContentSwitcher = ({task, detail}: {task: Task; detail: TaskDetail}) => {
 };
 
 const CourseExecution = (_: Props) => {
-  const {course, task, taskDetail, fetching} = useCourseProviderContext();
+  const { course, task, taskDetail, fetching } = useCourseProviderContext();
   return (
     <ScrollView
       style={GlobalStyles.screenContainer}

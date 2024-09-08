@@ -1,21 +1,21 @@
 import React from 'react';
-import {Course} from '~/api/endpoints';
-import {styles} from '../styles';
-import {Image, TouchableOpacity, View} from 'react-native';
+import { Course } from '~/api/endpoints';
+import { styles } from '../styles';
+import { Image, TouchableOpacity, View } from 'react-native';
 import Text from '~/components/Text';
 import FastImage from '@d11/react-native-fast-image';
-import {t} from '~/providers/TranslationProvider';
+import { t } from '~/providers/TranslationProvider';
 import moment from 'moment';
 import * as Progress from 'react-native-progress';
-import {config} from '~/config/config';
-import {friendlyDate} from '~/utils';
+import { config } from '~/config/config';
+import { friendlyDate } from '~/utils';
 
 export class CourseItem extends React.PureComponent<{
   item: Course;
   onClick: () => void;
 }> {
   render() {
-    const {item, onClick} = this.props;
+    const { item, onClick } = this.props;
 
     const extraTextInProgress =
       t('courseInformation.startedDate') +
@@ -46,7 +46,7 @@ export class CourseItem extends React.PureComponent<{
             alignItems: 'center',
             paddingHorizontal: 5,
           }}>
-          <View style={{paddingVertical: 5}}>
+          <View style={{ paddingVertical: 5 }}>
             <FastImage
               accessibilityElementsHidden={true}
               importantForAccessibility="no-hide-descendants"
@@ -54,7 +54,7 @@ export class CourseItem extends React.PureComponent<{
               accessibilityLabel={''}
               accessibilityHint={''}
               accessibilityRole={'none'}
-              source={{uri: item.imageUrl}}
+              source={{ uri: item.imageUrl }}
               style={styles.image}
               resizeMode={FastImage.resizeMode.cover}
             />
@@ -73,7 +73,7 @@ export class CourseItem extends React.PureComponent<{
                 : extraTextInProgress}
             </Text>
             <View style={styles.progressBarContainer}>
-              <View style={{flex: 1}}>
+              <View style={{ flex: 1 }}>
                 <Progress.Bar
                   progress={item.progress || 0}
                   color={config.color.neutral[900]}

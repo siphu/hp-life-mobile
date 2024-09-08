@@ -1,10 +1,10 @@
-import {View} from 'react-native';
+import { View } from 'react-native';
 import Text from '~/components/Text';
 import Images from '~/res/images';
-import {styles} from '../styles';
-import {config} from '~/config/config';
-import {t} from '~/providers/TranslationProvider';
-import {MaterialIcons} from '~/components/MaterialIcons';
+import { styles } from '../styles';
+import { config } from '~/config/config';
+import { t } from '~/providers/TranslationProvider';
+import { MaterialIcons } from '~/components/MaterialIcons';
 
 export const AvailableOffline = () => {
   return (

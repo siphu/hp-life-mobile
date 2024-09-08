@@ -1,7 +1,7 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
-import {MaterialIcons} from '~/components/MaterialIcons';
-import {GlobalStyles} from '~/config/styles';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '~/components/MaterialIcons';
+import { GlobalStyles } from '~/config/styles';
 
 const styles = StyleSheet.create({
   touchableArea: {

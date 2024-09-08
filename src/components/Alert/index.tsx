@@ -1,9 +1,9 @@
-import {View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {styles, padding} from './styles';
-import {GlobalStyles} from '~/config/styles';
+import { View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { styles, padding } from './styles';
+import { GlobalStyles } from '~/config/styles';
 import Modal from 'react-native-modal';
-import {config} from '~/config/config';
+import { config } from '~/config/config';
 
 interface AlertProps {
   position?: 'Top' | 'Bottom' | 'Center';
@@ -12,7 +12,7 @@ interface AlertProps {
   children?: React.ReactElement;
 }
 
-const Alert = ({position, children, show, onRequestClose}: AlertProps) => {
+const Alert = ({ position, children, show, onRequestClose }: AlertProps) => {
   const inset = useSafeAreaInsets();
 
   const overlay =
@@ -43,7 +43,7 @@ const Alert = ({position, children, show, onRequestClose}: AlertProps) => {
       coverScreen={true}
       isVisible={show}
       backdropOpacity={0.1}
-      style={{flex: 1, margin: 0, padding: 0}}
+      style={{ flex: 1, margin: 0, padding: 0 }}
       onBackdropPress={onRequestClose}
       onBackButtonPress={onRequestClose}>
       <View style={overlay}>

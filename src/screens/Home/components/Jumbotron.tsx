@@ -1,17 +1,17 @@
 import React from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
-import {Course} from '~/api/endpoints';
+import { Image, TouchableOpacity, View } from 'react-native';
+import { Course } from '~/api/endpoints';
 import Text from '~/components/Text';
-import {styles} from '../styles';
-import {AvailableOffline} from './AvailableOffline';
-import {RootState} from '~/stores';
-import {Completed} from './Completed';
-import {InProgress} from './InProgress';
-import {AuthenticatedScreens} from '~/navigation/screens';
-import {connect} from 'react-redux';
-import {NavigationProp} from '@react-navigation/native';
+import { styles } from '../styles';
+import { AvailableOffline } from './AvailableOffline';
+import { RootState } from '~/stores';
+import { Completed } from './Completed';
+import { InProgress } from './InProgress';
+import { AuthenticatedScreens } from '~/navigation/screens';
+import { connect } from 'react-redux';
+import { NavigationProp } from '@react-navigation/native';
 import FastImage from '@d11/react-native-fast-image';
-import {t, useTranslationContext} from '~/providers/TranslationProvider';
+import { t, useTranslationContext } from '~/providers/TranslationProvider';
 
 interface JumbotronProps {
   course: Course;
@@ -23,7 +23,7 @@ interface JumbotronProps {
 
 class Jumbotron extends React.PureComponent<JumbotronProps> {
   render() {
-    const {course, language, categories, navigation} = this.props;
+    const { course, language, categories, navigation } = this.props;
 
     const category = categories[language].find(
       c => c.id === course.categoryId,
@@ -56,7 +56,7 @@ class Jumbotron extends React.PureComponent<JumbotronProps> {
         onPress={() => {
           navigation.navigate(AuthenticatedScreens.CourseDrawer, {
             screen: AuthenticatedScreens.CourseInformation,
-            params: {courseId: course.id},
+            params: { courseId: course.id },
           });
         }}>
         <View accessible={false}>

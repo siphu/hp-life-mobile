@@ -8,9 +8,9 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from 'react-native';
-import {Text} from '~/components/Text';
-import {config} from '~/config/config';
-import {styles} from './style';
+import { Text } from '~/components/Text';
+import { config } from '~/config/config';
+import { styles } from './style';
 
 export interface TabIndicatorProps {
   tabs: string[];
@@ -27,7 +27,13 @@ export interface TabIndicatorProps {
 }
 
 export default React.memo((props: TabIndicatorProps) => {
-  const TabHeader = ({name, selected}: {name: string; selected: boolean}) => {
+  const TabHeader = ({
+    name,
+    selected,
+  }: {
+    name: string;
+    selected: boolean;
+  }) => {
     return (
       <View
         style={[

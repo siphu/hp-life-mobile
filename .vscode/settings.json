@@ -14,5 +14,13 @@
     ".yarn": true,
     "vendor": true
   },
-  "CodeGPT.apiKey": "OpenAI"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "prettier.configPath": "./.prettierrc.js",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

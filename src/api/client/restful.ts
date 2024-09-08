@@ -1,4 +1,4 @@
-import axios, {AxiosHeaders, AxiosResponse} from 'axios';
+import axios, { AxiosHeaders, AxiosResponse } from 'axios';
 import moment from 'moment';
 export interface RequestError extends Error {
   status: number | undefined;
@@ -74,7 +74,7 @@ export async function get<T>(
   url: string,
   payload?: Record<string, unknown>,
 ): Promise<T> {
-  return processResponse<T>(axios.get(url, {params: payload}));
+  return processResponse<T>(axios.get(url, { params: payload }));
 }
 export async function post<T>(
   url: string,
@@ -89,7 +89,7 @@ export async function post<T>(
       'Content-Type': 'application/x-www-form-urlencoded',
     };
   return processResponse<T>(
-    axios.post(url, payload, {headers: configHeader as AxiosHeaders}),
+    axios.post(url, payload, { headers: configHeader as AxiosHeaders }),
   );
 }
 export async function patch<T>(
@@ -114,7 +114,7 @@ export async function postBody<T>(
 ): Promise<T> {
   return processResponse<T>(
     axios.post(url, payload, {
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
     }),
   );
 }

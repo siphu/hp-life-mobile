@@ -1,19 +1,19 @@
 import React from 'react';
-import {LogBox} from 'react-native';
-import {StatusBar} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {NavigationStacks} from './navigation';
-import {OrientationLocker} from 'react-native-orientation-locker';
-import {Provider} from 'react-redux';
-import {stores, persistor} from './stores';
-import {PersistGate} from 'redux-persist/integration/react';
+import { LogBox } from 'react-native';
+import { StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationStacks } from './navigation';
+import { OrientationLocker } from 'react-native-orientation-locker';
+import { Provider } from 'react-redux';
+import { stores, persistor } from './stores';
+import { PersistGate } from 'redux-persist/integration/react';
 import './translations';
 import '~/api/client/interceptor';
 import TranslationProvider from './providers/TranslationProvider';
 import BootSplash from 'react-native-bootsplash';
 import NetworkListener from './listeners/NetworkListener';
-import {OrientationListener} from './listeners/OrientationListener';
+import { OrientationListener } from './listeners/OrientationListener';
 
 export const App = () => {
   return (
@@ -23,7 +23,8 @@ export const App = () => {
           <NetworkListener />
           <OrientationListener />
           <TranslationProvider>
-            <NavigationContainer onReady={() => BootSplash.hide({fade: true})}>
+            <NavigationContainer
+              onReady={() => BootSplash.hide({ fade: true })}>
               <OrientationLocker orientation="PORTRAIT" />
               <StatusBar
                 animated={true}

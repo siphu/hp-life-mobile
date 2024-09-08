@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
-import {MaterialIcons} from '~/components/MaterialIcons';
-import {GlobalStyles} from '~/config/styles';
-import {config} from '~/config/config';
-import {I18nManager} from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '~/components/MaterialIcons';
+import { GlobalStyles } from '~/config/styles';
+import { config } from '~/config/config';
+import { I18nManager } from 'react-native';
 const styles = StyleSheet.create({
   touchableArea: {
     ...GlobalStyles.touchablePadding,

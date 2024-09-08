@@ -1,5 +1,5 @@
-import {Dimensions, StyleSheet} from 'react-native';
-import {config} from '~/config/config';
+import { Dimensions, StyleSheet } from 'react-native';
+import { config } from '~/config/config';
 
 const screenWidth = Dimensions.get('window').width;
 const ITEM_HEIGHT = Math.floor(screenWidth * 0.3);
@@ -7,7 +7,7 @@ const ITEM_HEIGHT = Math.floor(screenWidth * 0.3);
 const PADDING_HORIZONTAL = 20;
 const ITEM_SPACING = 10;
 
-export {screenWidth, ITEM_HEIGHT, PADDING_HORIZONTAL, ITEM_SPACING};
+export { screenWidth, ITEM_HEIGHT, PADDING_HORIZONTAL, ITEM_SPACING };
 
 export const styles = StyleSheet.create({
   container: {

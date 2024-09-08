@@ -1,14 +1,14 @@
-import {TouchableOpacity, View} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {styles} from '../styles';
-import {MaterialIcons} from '~/components/MaterialIcons';
-import {config} from '~/config/config';
+import { TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { styles } from '../styles';
+import { MaterialIcons } from '~/components/MaterialIcons';
+import { config } from '~/config/config';
 import Text from '~/components/Text';
 import * as Progress from 'react-native-progress';
-import {CourseSideMenuProps} from '..';
-import {t} from '~/providers/TranslationProvider';
-import {Course} from '~/api/endpoints';
-import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
+import { CourseSideMenuProps } from '..';
+import { t } from '~/providers/TranslationProvider';
+import { Course } from '~/api/endpoints';
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 
 export interface CourseSideMenuHeaderProps {
   course: Course;

@@ -1,9 +1,9 @@
 import AlertBanner from '../AlertBanner';
 import Text from '../Text';
-import {CurrentAlertApiModel} from '~/api/endpoints';
+import { CurrentAlertApiModel } from '~/api/endpoints';
 import React from 'react';
 
-export default ({alerts}: {alerts: CurrentAlertApiModel[]}) => {
+export default ({ alerts }: { alerts: CurrentAlertApiModel[] }) => {
   return (
     <>
       {alerts.map(alert => {
@@ -15,7 +15,7 @@ export default ({alerts}: {alerts: CurrentAlertApiModel[]}) => {
           <AlertBanner
             backgroundColor={backgroundColor}
             key={alert.id.toString()}>
-            <Text style={{color: '#00000099'}}>{alert.message}</Text>
+            <Text style={{ color: '#00000099' }}>{alert.message}</Text>
           </AlertBanner>
         );
       })}

@@ -1,8 +1,8 @@
-import {TextStyle, View, ViewStyle} from 'react-native';
-import {Dropdown as DropdownSelector} from '~/components/react-native-element-dropdown';
+import { TextStyle, View, ViewStyle } from 'react-native';
+import { Dropdown as DropdownSelector } from '~/components/react-native-element-dropdown';
 import Text from '~/components/Text';
-import {styles} from '../styles';
-import {t} from '~/providers/TranslationProvider';
+import { styles } from '../styles';
+import { t } from '~/providers/TranslationProvider';
 
 interface DropdownProp<T extends object> {
   title: string;

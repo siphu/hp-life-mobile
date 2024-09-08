@@ -1,9 +1,9 @@
-import {View} from 'react-native';
+import { View } from 'react-native';
 import Text from '~/components/Text';
-import {styles} from '../styles';
-import {t} from 'i18next';
-import {MaterialIcons} from '~/components/MaterialIcons';
-import {config} from '~/config/config';
+import { styles } from '../styles';
+import { t } from 'i18next';
+import { MaterialIcons } from '~/components/MaterialIcons';
+import { config } from '~/config/config';
 
 export const AvailableOffline = () => {
   return (

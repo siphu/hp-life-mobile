@@ -1,4 +1,4 @@
-import {getAvailableLanguages} from '~/translations';
+import { getAvailableLanguages } from '~/translations';
 /**
  * This checks to see if a given URL is a base URL with or without the locale
  * @param baseUrl base url

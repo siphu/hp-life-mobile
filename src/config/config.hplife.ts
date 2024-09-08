@@ -1,4 +1,4 @@
-import {development as base} from './config.hplife.endpoint';
+import { development as base } from './config.hplife.endpoint';
 
 export default {
   api: {

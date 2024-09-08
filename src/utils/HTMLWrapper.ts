@@ -1,5 +1,5 @@
-import {config} from '~/config/config';
-import {I18nManager, Platform} from 'react-native';
+import { config } from '~/config/config';
+import { I18nManager, Platform } from 'react-native';
 
 export const HTMLWrapper = (
   html?: string,

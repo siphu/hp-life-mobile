@@ -1,4 +1,4 @@
-import {StoreUserState, state as defaultState} from './state';
+import { StoreUserState, state as defaultState } from './state';
 
 export enum UserAction {
   SIGN_OUT = 'SIGN_OUT',

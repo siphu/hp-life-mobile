@@ -1,15 +1,15 @@
 import React from 'react';
-import {View, FlatList, ListRenderItem} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {DrawerContentComponentProps} from '@react-navigation/drawer';
-import {GlobalStyles} from '~/config/styles';
-import {config} from '~/config/config';
-import {Course, Task, Lesson as LessonModel} from '~/api/endpoints';
-import {Lesson} from './components/Lesson';
-import {Header} from './components/Header';
-import {Information} from './components/Information';
-import {DrawerNavigationHelpers} from '@react-navigation/drawer/lib/typescript/src/types';
-import {useCourseProviderContext} from '~/providers/CourseProvider';
+import { View, FlatList, ListRenderItem } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { DrawerContentComponentProps } from '@react-navigation/drawer';
+import { GlobalStyles } from '~/config/styles';
+import { config } from '~/config/config';
+import { Course, Task, Lesson as LessonModel } from '~/api/endpoints';
+import { Lesson } from './components/Lesson';
+import { Header } from './components/Header';
+import { Information } from './components/Information';
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
+import { useCourseProviderContext } from '~/providers/CourseProvider';
 
 export interface CourseSideMenuProps {
   navigation: DrawerNavigationHelpers;
@@ -18,10 +18,10 @@ export interface CourseSideMenuProps {
 type CourseSideMenuDrawerProps = CourseSideMenuProps &
   DrawerContentComponentProps;
 
-const CourseSideMenuDrawer = ({navigation}: CourseSideMenuDrawerProps) => {
+const CourseSideMenuDrawer = ({ navigation }: CourseSideMenuDrawerProps) => {
   const courseContextProvider = useCourseProviderContext();
 
-  const renderLesson = ({item}: {item: LessonModel}) => (
+  const renderLesson = ({ item }: { item: LessonModel }) => (
     <Lesson
       course={courseContextProvider.course!}
       lesson={item}
@@ -33,7 +33,10 @@ const CourseSideMenuDrawer = ({navigation}: CourseSideMenuDrawerProps) => {
 
   const renderSeparator = () => (
     <View
-      style={{borderBottomWidth: 1, borderColor: config.color.misc.borderDark}}
+      style={{
+        borderBottomWidth: 1,
+        borderColor: config.color.misc.borderDark,
+      }}
     />
   );
 

@@ -1,20 +1,20 @@
-import React, {createContext, ReactNode} from 'react';
-import {connect} from 'react-redux';
-import {RootState, stores} from '~/stores';
+import React, { createContext, ReactNode } from 'react';
+import { connect } from 'react-redux';
+import { RootState, stores } from '~/stores';
 import messaging from '@react-native-firebase/messaging';
 import notifee from '@notifee/react-native';
-import {Notification as NotificationModel} from '~/api/endpoints';
-import {AuthenticatedScreens} from '~/navigation/screens';
-import {config} from '~/config/config';
-import {t} from '../TranslationProvider';
+import { Notification as NotificationModel } from '~/api/endpoints';
+import { AuthenticatedScreens } from '~/navigation/screens';
+import { config } from '~/config/config';
+import { t } from '../TranslationProvider';
 import {
   clearNotifications,
   deleteNotification,
   markNotificationsRead,
   registerDeviceForMessaging,
 } from '~/api/helpers';
-import {Prompt} from './components/Prompt';
-import {setPushNotificationPreferences} from '~/stores/user/actions';
+import { Prompt } from './components/Prompt';
+import { setPushNotificationPreferences } from '~/stores/user/actions';
 import {
   NotificationContextProps,
   NotificationProviderProps,
@@ -44,7 +44,7 @@ class NotificationHandler extends React.Component<
       this.handleIncomingNotification,
     );
     await this.hasPermission();
-    this.setState({initialized: true});
+    this.setState({ initialized: true });
   }
 
   componentWillUnmount() {
@@ -83,7 +83,7 @@ class NotificationHandler extends React.Component<
           AuthenticatedScreens.CourseDrawer,
           {
             screen: AuthenticatedScreens.CourseInformation,
-            params: {courseId: Number.parseInt(notification.resourceId, 10)},
+            params: { courseId: Number.parseInt(notification.resourceId, 10) },
           },
         );
       case 'NewArticleAvailable':
@@ -155,8 +155,8 @@ class NotificationHandler extends React.Component<
   };
 
   render() {
-    const {children} = this.props;
-    const {initialized} = this.state;
+    const { children } = this.props;
+    const { initialized } = this.state;
 
     if (!initialized) {
       return null;
@@ -184,7 +184,7 @@ class NotificationHandler extends React.Component<
 
 const mapStateToProps = (
   state: RootState,
-  ownProps: {navigation: RNNavigationProp},
+  ownProps: { navigation: RNNavigationProp },
 ) => ({
   notifications: state.app.notifications,
   preferencePushNotification: state.user.preferencePushNotification,

@@ -1,16 +1,16 @@
 import _ from 'lodash';
 import React from 'react';
-import {connect, ConnectedProps} from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import {
   getPushNotifications,
   getUserProfile,
   refreshToken,
 } from '~/api/helpers';
-import {RootState, stores} from '~/stores';
-import {setOnlineStatus} from '~/stores/app/actions';
-import NetInfo, {NetInfoState} from '@react-native-community/netinfo';
-import {config} from '~/config/config';
-import {AuthToken} from '~/api/endpoints';
+import { RootState, stores } from '~/stores';
+import { setOnlineStatus } from '~/stores/app/actions';
+import NetInfo, { NetInfoState } from '@react-native-community/netinfo';
+import { config } from '~/config/config';
+import { AuthToken } from '~/api/endpoints';
 
 NetInfo.configure({
   reachabilityUrl: config.api.learning,

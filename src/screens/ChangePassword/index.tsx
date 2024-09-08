@@ -1,16 +1,16 @@
-import {ScrollView, View} from 'react-native';
-import {GlobalStyles} from '~/config/styles';
-import {t} from '~/providers/TranslationProvider';
+import { ScrollView, View } from 'react-native';
+import { GlobalStyles } from '~/config/styles';
+import { t } from '~/providers/TranslationProvider';
 import Input from './components/Input';
-import {styles} from './styles';
+import { styles } from './styles';
 import Button from '~/components/Button';
-import {config} from '~/config/config';
+import { config } from '~/config/config';
 import Text from '~/components/Text';
 import React from 'react';
-import {RootStackParamList} from '~/navigation';
-import {AuthenticatedScreens} from '~/navigation/screens';
-import {StackScreenProps} from '@react-navigation/stack';
-import {postChangePassword} from '~/api/endpoints';
+import { RootStackParamList } from '~/navigation';
+import { AuthenticatedScreens } from '~/navigation/screens';
+import { StackScreenProps } from '@react-navigation/stack';
+import { postChangePassword } from '~/api/endpoints';
 
 const errorCode = (error: string) => {
   switch (error) {
@@ -101,7 +101,7 @@ const ChangePassword = ({
         disabled={false}
         title={t('profile.password.updatePassword')}
         color={config.color.neutral[900]}
-        textStyle={{color: config.color.neutral[50]}}
+        textStyle={{ color: config.color.neutral[50] }}
         onPress={onUpdate}
       />
     </ScrollView>

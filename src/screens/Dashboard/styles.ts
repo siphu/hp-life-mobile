@@ -1,5 +1,5 @@
-import {Dimensions, StyleSheet} from 'react-native';
-import {config} from '~/config/config';
+import { Dimensions, StyleSheet } from 'react-native';
+import { config } from '~/config/config';
 
 const screenWidth = Dimensions.get('window').width;
 const ITEM_HEIGHT = Math.floor(screenWidth * 0.3);

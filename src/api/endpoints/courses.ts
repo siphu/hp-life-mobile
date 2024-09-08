@@ -12,11 +12,11 @@ import {
   TraineeCourse,
   TraineeCourseResult,
 } from './model';
-import {config} from '~/config/config';
-import {get, RequestError} from '../client/restful';
+import { config } from '~/config/config';
+import { get, RequestError } from '../client/restful';
 import RNFetchBlob from 'rn-fetch-blob';
-import {Platform} from 'react-native';
-import {stores} from '~/stores';
+import { Platform } from 'react-native';
+import { stores } from '~/stores';
 
 const PAGE_LIMIT = 500;
 
@@ -95,7 +95,7 @@ export async function downloadCertificate(
   mime: string,
 ): Promise<string> {
   const url = `${config.api.learning}/api/certificates/${certificateId}`;
-  const {dirs} = RNFetchBlob.fs;
+  const { dirs } = RNFetchBlob.fs;
 
   const DownloadDir = Platform.select({
     ios: dirs.DocumentDir,
@@ -128,7 +128,7 @@ export async function downloadTranscript(
   mime: string,
 ): Promise<string> {
   const url = `${config.api.learning}/api/Trainee/transcript`;
-  const {dirs} = RNFetchBlob.fs;
+  const { dirs } = RNFetchBlob.fs;
 
   const DownloadDir = Platform.select({
     ios: dirs.DocumentDir,

@@ -1,4 +1,4 @@
-import {config} from '~/config/config';
+import { config } from '~/config/config';
 import {
   AuthToken,
   CurrentAlertApiModel,
@@ -8,9 +8,9 @@ import {
   NotificationsResults,
   UserProfile,
 } from './model';
-import {stores} from '~/stores';
-import {get, post, put, remove} from '../client/restful';
-import {StoreUserState} from '~/stores/user/state';
+import { stores } from '~/stores';
+import { get, post, put, remove } from '../client/restful';
+import { StoreUserState } from '~/stores/user/state';
 import axios from 'axios';
 
 const PAGE_LIMIT = 500;
@@ -144,7 +144,7 @@ export async function requestAccountDeletion(): Promise<void> {
     `${config.api.identity}/api/Account/accountDeletionRequest`,
     undefined,
     {
-      headers: {'Client-Id': config.api.client_id},
+      headers: { 'Client-Id': config.api.client_id },
     },
   );
 }

@@ -1,14 +1,14 @@
 import React from 'react';
-import {Course, MyBadge} from '~/api/endpoints';
-import {styles} from '../styles';
-import {Dimensions, Image, TouchableOpacity, View} from 'react-native';
+import { Course, MyBadge } from '~/api/endpoints';
+import { styles } from '../styles';
+import { Dimensions, Image, TouchableOpacity, View } from 'react-native';
 import Text from '~/components/Text';
 import FastImage from '@d11/react-native-fast-image';
-import {t} from '~/providers/TranslationProvider';
+import { t } from '~/providers/TranslationProvider';
 import moment from 'moment';
 import * as Progress from 'react-native-progress';
-import {config} from '~/config/config';
-import {friendlyDate} from '~/utils';
+import { config } from '~/config/config';
+import { friendlyDate } from '~/utils';
 import {
   ColorMatrix,
   grayscale,
@@ -17,7 +17,7 @@ import {
 } from 'react-native-color-matrix-image-filters';
 import Button from '~/components/Button';
 
-const BadgeImage = ({item}: {item: MyBadge}) => {
+const BadgeImage = ({ item }: { item: MyBadge }) => {
   const isEarned = !!item.issueDate;
 
   return (
@@ -31,12 +31,12 @@ const BadgeImage = ({item}: {item: MyBadge}) => {
         <ColorMatrix
           matrix={concatColorMatrices(grayscale(1), brightness(0.7))}>
           <FastImage
-            source={{uri: item.imageUrl}}
-            style={[{opacity: 0.4}, styles.remoteImage]}
+            source={{ uri: item.imageUrl }}
+            style={[{ opacity: 0.4 }, styles.remoteImage]}
           />
         </ColorMatrix>
       )) || (
-        <Image source={{uri: item.imageUrl}} style={[styles.remoteImage]} />
+        <Image source={{ uri: item.imageUrl }} style={[styles.remoteImage]} />
       )}
     </View>
   );
@@ -47,7 +47,7 @@ export class BadgeItem extends React.PureComponent<{
   onShare: () => void;
 }> {
   render() {
-    const {item, onShare} = this.props;
+    const { item, onShare } = this.props;
     const isEarned = !!item.issueDate;
     return (
       <View style={styles.badgeContainer}>

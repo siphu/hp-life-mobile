@@ -1,5 +1,5 @@
-import {View} from 'react-native';
-import {GlobalStyles} from '~/config/styles';
+import { View } from 'react-native';
+import { GlobalStyles } from '~/config/styles';
 
 interface IScrollViewBackgroundLayer {
   topBounceColor?: string;
@@ -25,6 +25,6 @@ export const ScrollViewBackgroundLayer = ({
         backgroundColor: topBounceColor || GlobalStyles.header.backgroundColor,
       }}
     />
-    <View style={{flex: 1, backgroundColor: bottomBounceColor || 'white'}} />
+    <View style={{ flex: 1, backgroundColor: bottomBounceColor || 'white' }} />
   </View>
 );

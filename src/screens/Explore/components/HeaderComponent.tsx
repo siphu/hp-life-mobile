@@ -6,12 +6,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {Dropdown} from '~/components/react-native-element-dropdown';
+import { Dropdown } from '~/components/react-native-element-dropdown';
 import React from 'react';
-import {config} from '~/config/config';
+import { config } from '~/config/config';
 import TabIndicator from '~/components/TabIndicator';
-import {Category} from '~/api/endpoints';
-import {t} from '~/providers/TranslationProvider';
+import { Category } from '~/api/endpoints';
+import { t } from '~/providers/TranslationProvider';
 
 export interface FilterSelectionProps {
   categories: Category[];
@@ -29,7 +29,7 @@ const HeaderComponent = ({
   onTabSelect,
 }: FilterSelectionProps) => {
   const data = React.useMemo(() => {
-    let map = categories.map(c => ({label: c.name, value: c.id.toString()}));
+    let map = categories.map(c => ({ label: c.name, value: c.id.toString() }));
     map.splice(0, 0, {
       label: t('explore.viewAll'),
       value: '',
@@ -48,7 +48,7 @@ const HeaderComponent = ({
 
   return (
     <View>
-      <View style={{height: 50}}>
+      <View style={{ height: 50 }}>
         <Dropdown
           accessibilityLabel={
             (selectedCategory
@@ -83,7 +83,7 @@ const HeaderComponent = ({
           }}
         />
       </View>
-      <View style={{height: 55}}>
+      <View style={{ height: 55 }}>
         <TabIndicator
           tabs={[t('explore.newest'), t('explore.popular')]}
           style={styles.pagerTabIndicatorRow}

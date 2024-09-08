@@ -1,4 +1,4 @@
-import {HTMLWrapper} from '~/utils';
+import { HTMLWrapper } from '~/utils';
 
 export const contentParser = (body: string) => {
   const iFrameReg = /<iframe\s?.*?src=["'](.*?)["']/ims;
@@ -38,7 +38,7 @@ export const contentParser = (body: string) => {
   }
 
   const source = uri
-    ? {uri: uri}
+    ? { uri: uri }
     : {
         baseUrl: '',
         html: HTMLWrapper(body),

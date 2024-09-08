@@ -1,14 +1,14 @@
-import {TraineeCourse} from '~/api/endpoints';
+import { TraineeCourse } from '~/api/endpoints';
 import * as Progress from 'react-native-progress';
-import {config} from '~/config/config';
-import {View} from 'react-native';
+import { config } from '~/config/config';
+import { View } from 'react-native';
 import Text from '~/components/Text';
-import {styles} from '../styles';
-import {t} from '~/providers/TranslationProvider';
-import {friendlyDate} from '~/utils';
+import { styles } from '../styles';
+import { t } from '~/providers/TranslationProvider';
+import { friendlyDate } from '~/utils';
 import moment from 'moment';
 
-export default ({course}: {course: TraineeCourse}) => {
+export default ({ course }: { course: TraineeCourse }) => {
   return (
     <View style={styles.rowGap}>
       <Progress.Bar

@@ -1,4 +1,4 @@
-import {ColorValue, View} from 'react-native';
+import { ColorValue, View } from 'react-native';
 import styles from './styles';
 
 interface AlertBannerProp {
@@ -6,9 +6,9 @@ interface AlertBannerProp {
   children: React.ReactNode;
 }
 
-const AlertBanner = ({backgroundColor, children}: AlertBannerProp) => {
+const AlertBanner = ({ backgroundColor, children }: AlertBannerProp) => {
   return (
-    <View style={[styles.container, {backgroundColor: backgroundColor}]}>
+    <View style={[styles.container, { backgroundColor: backgroundColor }]}>
       {children}
     </View>
   );

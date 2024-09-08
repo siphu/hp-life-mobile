@@ -1,5 +1,5 @@
-import {stores} from '~/stores';
-import {setLoader} from '~/stores/app/actions';
+import { stores } from '~/stores';
+import { setLoader } from '~/stores/app/actions';
 
 export const loaderWrapper = async (fn: () => Promise<any>) => {
   stores.dispatch(setLoader(true));

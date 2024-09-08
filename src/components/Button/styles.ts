@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {config} from '~/config/config';
-import {GlobalStyles} from '~/config/styles';
+import { StyleSheet } from 'react-native';
+import { config } from '~/config/config';
+import { GlobalStyles } from '~/config/styles';
 
 const styles = StyleSheet.create({
   ...GlobalStyles,

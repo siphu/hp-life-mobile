@@ -15,7 +15,6 @@ import { styles } from './styles';
 
 const ic_close = require('../../assets/close.png');
 
-
 const TextInputComponent: CTextInput = ({
   style = {},
   value = '',
@@ -27,7 +26,7 @@ const TextInputComponent: CTextInput = ({
   placeholder = '',
   inputStyle,
   iconStyle,
-  onChangeText = (_value: string) => { },
+  onChangeText = (_value: string) => {},
   renderLeftIcon,
   renderRightIcon,
   ...props
