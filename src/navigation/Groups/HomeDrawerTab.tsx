@@ -142,6 +142,7 @@ export const HomeDrawer = () => {
 
     return (
         <HomeDrawerNavigation.Navigator
+            useLegacyImplementation={false}
             initialRouteName={AuthenticatedScreens.HomeTabs}
             drawerContent={DrawerContentWrapper}
             screenOptions={{

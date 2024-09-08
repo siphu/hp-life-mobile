@@ -17,7 +17,7 @@ export const HeaderLanguageIcon = () => {
     const navigate = useNavigation();
 
     return (
-        <TouchableOpacity onPress={() => navigate.navigate(UnAuthenticatedScreens.Language)} style={styles.touchableArea}>
+        <TouchableOpacity testID="language-icon" onPress={() => navigate.navigate(UnAuthenticatedScreens.Language)} style={styles.touchableArea}>
             <MaterialIcons name='language' size={30} color={'black'} />
         </TouchableOpacity>
     );

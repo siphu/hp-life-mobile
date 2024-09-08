@@ -15,6 +15,7 @@ export const CourseDrawer = ({ route, navigation }: CourseDrawerProps) => {
     return (
         <CourseProvider route={route} navigation={navigation}>
             <CourseDrawerNavigation.Navigator
+                useLegacyImplementation={false}
                 initialRouteName={AuthenticatedScreens.CourseScreenStack}
                 drawerContent={(props) => <CourseSideMenuDrawer {...props} />}
                 screenOptions={{
