@@ -25,7 +25,7 @@ const connector = connect(
     },
   ) => ({
     data:
-      (state.course.available[state.app.language] || [])
+      [...(state.course.available[state.app.language] || [])]
         .sort(
           (a, b) =>
             new Date(b.publishDate!).getTime() -

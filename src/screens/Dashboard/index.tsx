@@ -37,12 +37,12 @@ const RENDER_PER_PAGE = 8;
 
 const connector = connect((state: RootState) => ({
   online: state.app.online,
-  data: state.course.enrolled.sort(
+  data: [...state.course.enrolled].sort(
     (a, b) =>
       new Date(b.lastAccessDate).getTime() -
       new Date(a.lastAccessDate).getTime(),
   ),
-  badges: state.user.badges.sort((a, b) => {
+  badges: [...state.user.badges].sort((a, b) => {
     if (a.issueDate && !b.issueDate) return -1;
     if (!a.issueDate && b.issueDate) return 1;
     if (!a.issueDate && !b.issueDate) return a.name.localeCompare(b.name);

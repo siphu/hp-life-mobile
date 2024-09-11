@@ -18,7 +18,6 @@ export interface CourseContextType {
   taskDetail?: TaskDetail;
   enrolled: boolean;
   update: (force?: boolean) => Promise<void>;
-  fetching: boolean;
 }
 
 export interface CourseProviderProps {
@@ -36,5 +35,4 @@ export interface CourseProviderState {
   task?: Task;
   taskDetail?: TaskDetail;
   enrolled: boolean;
-  fetching: boolean;
 }

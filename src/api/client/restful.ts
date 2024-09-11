@@ -43,7 +43,6 @@ export const processResponse = async function <R>(
       }
     })
     .catch(result => {
-      console.error('r', result);
       const timerEnd = moment();
       if (Object.prototype.hasOwnProperty.call(result, 'config'))
         console.error(

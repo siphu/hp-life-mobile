@@ -233,5 +233,16 @@
       "message": "You have reached the end of this course. To earn your Certificate of Completion, please complete the course survey.",
       "surveyButton": "Complete the survey"
     }
+  },
+  "contactSupport": {
+    "title": "Contact Support",
+    "messagePlaceholder": "Write your message here",
+    "buttons": {
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "close": "Close"
+    },
+    "finishedTitle": "Thank you for your message!\nWe'll be in touch soon!",
+    "finishedMessage": "Please check your email in the next couple of days for your answer."
   }
 }

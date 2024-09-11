@@ -12,6 +12,7 @@ export const config = {
       border: '#e8e8e8',
       borderLight: '#00000061',
       borderDark: '#9DA5B1',
+      darkGrey: '#5A5A5A',
       danger: '#ff4400',
       selected: '#EEF6FE',
       text: '#142341',

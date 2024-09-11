@@ -14,7 +14,6 @@ import { AuthenticatedScreens } from '~/navigation/screens';
 import { getAvailableCourses, getEnrolledCourses } from '~/api/helpers';
 import {
   getParticipantCourse,
-  getParticipantLessons,
   getTraineeCourse,
   getTraineeTaskById,
   Task,
@@ -34,21 +33,18 @@ export class CourseProvider extends React.Component<
       ?.courseId as number;
 
     this.state = {
-      fetching: false,
       enrolled: !!this.props.enrolled.find(e => e.id === courseId),
     };
     this.fetchData = this.fetchData.bind(this);
     this.updateTask = this.updateTask.bind(this);
   }
 
-  async updateTask(task: Task, disableFetching?: boolean) {
-    if (!disableFetching) this.setState({ fetching: true });
+  async updateTask(task: Task) {
     const detail = await getTraineeTaskById(task).catch(() => undefined);
     const payload: any = {
       task: task,
       taskDetail: detail,
     };
-    if (!disableFetching) payload['fetching'] = false;
 
     this.setState(payload);
   }
@@ -64,7 +60,6 @@ export class CourseProvider extends React.Component<
     const enrolled = !!this.props.enrolled.find(e => e.id === courseId);
     let isEnrolled = enrolled;
 
-    this.setState({ fetching: true });
     if (force) {
       const newEnrolledCourses = await getEnrolledCourses(true);
       isEnrolled = newEnrolledCourses.some(c => c.id === courseId);
@@ -75,34 +70,34 @@ export class CourseProvider extends React.Component<
     }
 
     if (isEnrolled) {
-      const course = await getTraineeCourse(courseId);
-      const allTasks = course.lessons?.flatMap(lesson => lesson.tasks) || [];
+      try {
+        const course = await getTraineeCourse(courseId);
+        const allTasks = course.lessons?.flatMap(lesson => lesson.tasks) || [];
 
-      /* attempts to find the task if the id exists, or find the first unfinished task */
-      const foundTask = taskId
-        ? allTasks.find(t => t.id === taskId)
-        : allTasks.find(t => !t.finishDate);
+        /* attempts to find the task if the id exists, or find the first unfinished task */
+        const foundTask = taskId
+          ? allTasks.find(t => t.id === taskId)
+          : allTasks.find(t => !t.finishDate);
 
+        this.setState({
+          course: course,
+          task: foundTask,
+          enrolled: true,
+        });
+      } catch (e) {
+        isEnrolled = false;
+      }
+    }
+
+    // not an else if (edge case where user was un-enrolled)
+    if (!isEnrolled) {
+      const course = await getParticipantCourse(courseId);
       this.setState({
         course: course,
-        task: foundTask,
-        enrolled: true,
-      });
-
-      //this just prefetches it
-      //if (foundTask) this.updateTask(foundTask, true);
-    } else {
-      const [c, l] = await Promise.all([
-        getParticipantCourse(courseId),
-        getParticipantLessons(courseId),
-      ]);
-      this.setState({
-        course: { ...c, lessons: l },
         task: undefined,
         enrolled: false,
       });
     }
-    this.setState({ fetching: false });
   }
 
   componentDidMount(): void {
@@ -113,9 +108,6 @@ export class CourseProvider extends React.Component<
     nextProps: Readonly<CourseProviderProps>,
     nextState: Readonly<CourseProviderState>,
   ): boolean {
-    const justFetchingUpdated = this.state.fetching !== nextState.fetching;
-    if (justFetchingUpdated) return true;
-
     const shouldUpdate =
       this.state.course !== nextState.course ||
       this.state.task !== nextState.task ||
@@ -162,7 +154,6 @@ export class CourseProvider extends React.Component<
           taskDetail: this.state.taskDetail,
           enrolled: this.state.enrolled,
           update: this.fetchData,
-          fetching: this.state.fetching,
         }}>
         {children}
       </CourseContext.Provider>

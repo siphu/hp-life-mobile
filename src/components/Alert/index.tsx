@@ -10,6 +10,7 @@ interface AlertProps {
   show: boolean;
   onRequestClose?: () => void;
   children?: React.ReactElement;
+  animationIn?: 'slideInDown' | 'slideInUp';
 }
 
 export const loaderWrapper = async (fn: () => Promise<unknown>) => {
@@ -18,7 +19,13 @@ export const loaderWrapper = async (fn: () => Promise<unknown>) => {
   stores.dispatch(setLoader(false));
 };
 
-const Alert = ({ position, children, show, onRequestClose }: AlertProps) => {
+const Alert = ({
+  position,
+  children,
+  show,
+  onRequestClose,
+  animationIn,
+}: AlertProps) => {
   const inset = useSafeAreaInsets();
 
   const overlay =
@@ -38,11 +45,19 @@ const Alert = ({ position, children, show, onRequestClose }: AlertProps) => {
   return (
     <Modal
       animationIn={
-        position === 'Top'
+        animationIn ||
+        (position === 'Top'
           ? 'slideInDown'
           : position === 'Bottom'
             ? 'slideInUp'
-            : 'bounceIn'
+            : 'bounceIn')
+      }
+      animationOut={
+        animationIn === 'slideInDown'
+          ? 'slideOutUp'
+          : animationIn === 'slideInUp'
+            ? 'slideOutDown'
+            : undefined
       }
       presentationStyle="overFullScreen"
       statusBarTranslucent={true}

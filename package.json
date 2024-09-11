@@ -15,7 +15,7 @@
     "pods": "cd ios && pod install && cd ..",
     "postinstall": "patch-package && yarn pods",
     "audit-fix": "npx yarn-audit-fix",
-    "outdated": "npm outdated",
+    "outdated": "npm outdated | grep -v 'eslint'",
     "android:bundleRelease": "cd android && ./gradlew bundleRelease",
     "android:apkRelease": "cd android && ./gradlew assembleRelease",
     "firebase:ipa": "bundle exec fastlane buildIOSOnly",
@@ -23,7 +23,7 @@
     "bump": "bundle exec fastlane bumpVersion"
   },
   "dependencies": {
-    "@d11/react-native-fast-image": "^8.6.10",
+    "@d11/react-native-fast-image": "^8.6.12",
     "@notifee/react-native": "^7.8.2",
     "@react-native-async-storage/async-storage": "^2.0.0",
     "@react-native-community/netinfo": "^11.3.1",
@@ -38,7 +38,7 @@
     "@reduxjs/toolkit": "^2.2.5",
     "@types/react-native-i18n": "^2.0.2",
     "axios": "^1.7.2",
-    "i18next": "^23.14.0",
+    "i18next": "^23.15.1",
     "intl-pluralrules": "^2.0.1",
     "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
@@ -66,7 +66,7 @@
     "react-native-svg": "^15.3.0",
     "react-native-svg-transformer": "^1.4.0",
     "react-native-url-polyfill": "^2.0.0",
-    "react-native-webview": "^13.12.1",
+    "react-native-webview": "^13.12.2",
     "react-redux": "^9.1.2",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
@@ -104,12 +104,13 @@
     "prettier": "^3.3.3",
     "react-native-dotenv": "^3.4.11",
     "react-test-renderer": "18.3.1",
-    "typescript": "^5.5.4",
+    "typescript": "^5.6.2",
     "yarn-audit-fix": "^10.0.9"
   },
   "resolutions": {
     "ajv": "^6.12.5",
-    "whatwg-url": "^14.0.0"
+    "whatwg-url": "^14.0.0",
+    "eslint": "^8.0.0"
   },
   "engines": {
     "node": ">=18"
