@@ -1,3 +1,4 @@
+import { MyBadge } from '~/api/endpoints';
 import { StoreUserState, state as defaultState } from './state';
 
 export enum UserAction {
@@ -41,7 +42,19 @@ export const reducers = (
     case UserAction.SET_BADGES:
       return {
         ...state,
-        badges: action.payload,
+        badges: [...action.payload].sort((a: MyBadge, b: MyBadge) => {
+          if (a.issueDate && !b.issueDate) return -1;
+          if (!a.issueDate && b.issueDate) return 1;
+          if (!a.issueDate && !b.issueDate) return a.name.localeCompare(b.name);
+
+          // Both have issueDate, compare them
+          if (a.issueDate !== b.issueDate) {
+            return a.issueDate! < b.issueDate! ? -1 : 1;
+          }
+
+          // issueDate is the same, compare by name
+          return a.name.localeCompare(b.name);
+        }),
       };
     case UserAction.SET_PUSH_NOTIFICATION_PREFERENCES:
       return {

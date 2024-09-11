@@ -42,19 +42,7 @@ const connector = connect((state: RootState) => ({
       new Date(b.lastAccessDate).getTime() -
       new Date(a.lastAccessDate).getTime(),
   ),
-  badges: [...state.user.badges].sort((a, b) => {
-    if (a.issueDate && !b.issueDate) return -1;
-    if (!a.issueDate && b.issueDate) return 1;
-    if (!a.issueDate && !b.issueDate) return a.name.localeCompare(b.name);
-
-    // Both have issueDate, compare them
-    if (a.issueDate !== b.issueDate) {
-      return a.issueDate! < b.issueDate! ? -1 : 1;
-    }
-
-    // issueDate is the same, compare by name
-    return a.name.localeCompare(b.name);
-  }),
+  badges: state.user.badges,
   options: !state.app.online
     ? ['myCourse.ebook']
     : state.course.enrolled.some(C => C.status === CourseStatus.Archived)
