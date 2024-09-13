@@ -161,6 +161,7 @@ export const unRegisterDeviceForMessaging = async () => {
 export const registerDeviceForMessaging = async () => {
   await firebase.messaging().registerDeviceForRemoteMessages();
   const fcmToken = await messaging().getToken();
+  console.log('fcmToken', fcmToken);
   await registerFCM(fcmToken).catch(() => null);
   stores.dispatch(setPushRegistered(true));
 };
