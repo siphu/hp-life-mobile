@@ -43,7 +43,7 @@ import {
   setNotificationRead,
   setNotifications,
 } from '~/stores/app/actions';
-import messaging, { firebase } from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging';
 import { jwtDecode } from 'jwt-decode';
 import moment from 'moment';
 import Share from 'react-native-share';
@@ -159,7 +159,9 @@ export const unRegisterDeviceForMessaging = async () => {
 };
 
 export const registerDeviceForMessaging = async () => {
-  await firebase.messaging().registerDeviceForRemoteMessages();
+  if (!messaging().isDeviceRegisteredForRemoteMessages)
+    await messaging().registerDeviceForRemoteMessages();
+
   const fcmToken = await messaging().getToken();
   console.log('fcmToken', fcmToken);
   await registerFCM(fcmToken).catch(() => null);

@@ -14,6 +14,7 @@ import TranslationProvider from './providers/TranslationProvider';
 import BootSplash from 'react-native-bootsplash';
 import NetworkListener from './listeners/NetworkListener';
 import { OrientationListener } from './listeners/OrientationListener';
+import messaging from '@react-native-firebase/messaging';
 
 export const App = () => {
   return (
@@ -24,7 +25,11 @@ export const App = () => {
           <OrientationListener />
           <TranslationProvider>
             <NavigationContainer
-              onReady={() => BootSplash.hide({ fade: true })}>
+              onReady={async () => {
+                if (!messaging().isDeviceRegisteredForRemoteMessages)
+                  await messaging().registerDeviceForRemoteMessages();
+                BootSplash.hide({ fade: true });
+              }}>
               <OrientationLocker orientation="PORTRAIT" />
               <StatusBar
                 animated={true}
@@ -42,7 +47,5 @@ export const App = () => {
   );
 };
 
-LogBox.ignoreLogs([
-  "Usage of \"messaging().registerDeviceForRemoteMessages()\" is not required. You only need to register if auto-registration is disabled in your 'firebase.json' configuration file via the 'messaging_ios_auto_register_for_remote_messages' property.",
-]);
+LogBox.ignoreLogs([]);
 LogBox.ignoreAllLogs();
