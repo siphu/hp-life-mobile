@@ -53,13 +53,8 @@ const Login = () => {
       )
       .then(getUserProfile)
       .then(() =>
-        getEnrolledCourses().catch(() =>
-          console.error('Unable to fetch enrolled courses'),
-        ),
-      )
-      .then(() =>
-        getPushNotifications().catch(e =>
-          console.error('Error getting push notifications:', e),
+        Promise.all([getEnrolledCourses(), getPushNotifications()]).catch(
+          () => {},
         ),
       )
       .catch(e => console.error('Sign-in error:', e));

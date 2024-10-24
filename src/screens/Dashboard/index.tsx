@@ -197,6 +197,12 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({
     [selectedOptions],
   );
 
+  const ids = displayedData.map(item => item.id);
+  const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
+  if (duplicates.length > 0) {
+    console.log('Duplicate IDs found:', duplicates);
+  }
+
   return (
     <View style={GlobalStyles.screenContainer}>
       <FlatList

@@ -18,7 +18,7 @@ interface WebViewState {
 }
 
 class WebView extends Component<WebViewProps, WebViewState> {
-  private webViewRef = createRef<RNWebView>();
+  webViewRef = createRef<RNWebView>();
   static defaultProps: Partial<WebViewProps> = {
     autoExpand: false,
   };
