@@ -54,7 +54,8 @@ export const openBrowser = async (
       }
     } else {
       await Linking.openURL(url);
-      return url;
+      InAppBrowser.closeAuth();
+      throw new Error(`No built-in browser support. Opening External`);
     }
   } catch (e) {
     InAppBrowser.closeAuth();

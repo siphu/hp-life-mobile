@@ -9,6 +9,7 @@ import com.zoontek.rnbootsplash.RNBootSplash  //react-native-bootsplash
 import android.content.Intent //react-native-orientation-locker
 import android.content.res.Configuration //react-native-orientation-locker
 import org.wonday.orientation.OrientationActivityLifecycle // react-native-orientation-locker
+import android.os.Build // react-native-orientation-locker
 
 class MainActivity : ReactActivity() {
 
@@ -28,7 +29,10 @@ class MainActivity : ReactActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     RNBootSplash.init(this, R.style.BootTheme) // ⬅️ initialize the splash screen
     super.onCreate(null) // super.onCreate(null) with react-native-screens
-    registerActivityLifecycleCallbacks(OrientationActivityLifecycle.getInstance()) // react-native-orientation-locker
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+      registerActivityLifecycleCallbacks(OrientationActivityLifecycle.getInstance()) // react-native-orientation-locker
+    }
 
   }
 

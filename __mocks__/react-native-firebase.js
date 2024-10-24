@@ -13,12 +13,16 @@ jest.mock('@react-native-firebase/analytics', () => ({
   setCurrentScreen: jest.fn(() => Promise.resolve()),
 }));
 
-jest.mock('@react-native-firebase/messaging', () => ({
-  getToken: jest.fn(() => Promise.resolve('mockToken')),
-  onMessage: jest.fn(() => jest.fn()), // Mock the event listener
-  onTokenRefresh: jest.fn(() => jest.fn()), // Mock the token refresh listener
-  requestPermission: jest.fn(() => Promise.resolve(true)),
-  hasPermission: jest.fn(() => Promise.resolve(true)),
-  subscribeToTopic: jest.fn(() => Promise.resolve()),
-  unsubscribeFromTopic: jest.fn(() => Promise.resolve()),
-}));
+jest.mock('@react-native-firebase/messaging', () => {
+  return () => ({
+    getToken: jest.fn(() => Promise.resolve('mockToken')),
+    onMessage: jest.fn(() => jest.fn()), // Mock the event listener
+    onTokenRefresh: jest.fn(() => jest.fn()), // Mock the token refresh listener
+    requestPermission: jest.fn(() => Promise.resolve(true)),
+    hasPermission: jest.fn(() => Promise.resolve(true)),
+    isDeviceRegisteredForRemoteMessages: true,
+    registerDeviceForRemoteMessages: jest.fn(() => Promise.resolve()),
+    subscribeToTopic: jest.fn(() => Promise.resolve()),
+    unsubscribeFromTopic: jest.fn(() => Promise.resolve()),
+  });
+});

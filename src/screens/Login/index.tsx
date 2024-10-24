@@ -42,6 +42,8 @@ const Login = () => {
     const url =
       urlWithLocale(config.api.signIn, appState.language) + `?ts=${ts}`;
 
+    console.log('opening url', url);
+
     openBrowser(url)
       .then(extractToken)
       .then(token =>

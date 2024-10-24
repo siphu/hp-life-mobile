@@ -32,6 +32,6 @@ module.exports = {
     '__tests__/',
     'vendor/',
     'typings/',
-    '.*.js',
+    '*.*.js',
   ],
 };

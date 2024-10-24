@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: ['@react-native/babel-preset'],
   compact: false,
   plugins: [
     '@babel/plugin-transform-private-methods',
