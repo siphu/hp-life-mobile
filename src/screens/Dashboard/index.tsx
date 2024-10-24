@@ -197,17 +197,25 @@ const Dashboard: React.FC<ConnectedProps<typeof connector>> = ({
     [selectedOptions],
   );
 
-  const ids = displayedData.map(item => item.id);
-  const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
-  if (duplicates.length > 0) {
-    console.log('Duplicate IDs found:', duplicates);
-  }
+  const deDupedData = React.useMemo(() => {
+    const uniqueItems = new Map();
+
+    displayedData.forEach(item => {
+      const uniqueId = item.id ? item.id.toString() : item.name;
+      if (!uniqueItems.has(uniqueId)) {
+        uniqueItems.set(uniqueId, item);
+      }
+    });
+
+    // Return the array of unique items
+    return Array.from(uniqueItems.values());
+  }, [displayedData]);
 
   return (
     <View style={GlobalStyles.screenContainer}>
       <FlatList
         style={GlobalStyles.flex}
-        data={displayedData}
+        data={deDupedData}
         renderItem={renderItem}
         ListHeaderComponent={
           <HeaderComponent
