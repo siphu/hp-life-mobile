@@ -1491,7 +1491,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-webview (13.8.4):
+  - react-native-webview (13.12.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1862,7 +1862,7 @@ PODS:
     - FirebaseCoreExtension (<= 11.4.0)
     - React-Core
     - RNFBApp
-  - RNGestureHandler (2.20.1):
+  - RNGestureHandler (2.20.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2471,7 +2471,7 @@ SPEC CHECKSUMS:
   react-native-orientation-locker: 5819fd23ca89cbac0d736fb4314745f62716d517
   react-native-restart: 7595693413fe3ca15893702f2c8306c62a708162
   react-native-safe-area-context: 2279fe040bc93af8624f7d034806180fdbe5fa02
-  react-native-webview: ca7631960b3f4fa4af168285fbdad749690c0c3d
+  react-native-webview: 06f91954784dde28e1210f381c791f0c5f9bd9a2
   React-nativeconfig: 72c10ff34863148ef90df9c9c8eacba99d2faaaa
   React-NativeModulesApple: 5ec49182fa000b2215ee1bed03e2867f8323ccf5
   React-perflogger: 073c7a8a436b3fe724f1df34e9d1f3db1d25fe74
@@ -2508,7 +2508,7 @@ SPEC CHECKSUMS:
   RNFBAnalytics: 3525575a1f9b2914e940354e54cee87fd4424785
   RNFBApp: 91c5eba32f43787a66f4c00cf7625f472cd3e0fb
   RNFBMessaging: a45ffab6c9de1942b8ed351896f6304b349d1eea
-  RNGestureHandler: 364e6862a112045bb5c5d35601f0bdb0304af979
+  RNGestureHandler: fc5ce5bf284640d3af6431c3a5c3bc121e98d045
   RNInAppBrowser: e36d6935517101ccba0e875bac8ad7b0cb655364
   RNLocalize: e71144345f68c167d4cc4b41c8b0a6650f88e789
   RNNotifee: bc20a5e3d581f629db988075944fdd944d363dfe
